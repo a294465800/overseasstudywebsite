@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="/public/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/public/css/main_index.css">
     <script src="/public/js/jquery-3.2.0.min.js"></script>
-    <script src="/public/js/npm.js"></script>
     <script src="/public/js/bootstrap.min.js"></script>
+    <script src="/public/js/index.js"></script>
 </head>
 <body>
 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top affix-top">
@@ -19,20 +19,48 @@
                     <a class="page-scroll" href="/features">特色</a>
                 </li>
                 <li>
-                    <a href="#">注册</a>
+                    <a href="javascript:;" id="register">注册</a>
                 </li>
                 <li>
-                    <a href="#">登录</a>
+                    <a href="javascript:;" id="login">登录</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-<div class="login">
-    <h3>登录海外网</h3>
-    <input type="text" placeholder="手机号/邮箱">
-    <input type="text" placeholder="密码">
-    <button>登录</button>
+<div class="shade" style="display: none" id="loginBox">
+    <div class="login">
+        <span></span>
+        <h3>登录海外留学网</h3>
+        <label for="inputEmail" class="sr-only"></label>
+        <input type="text" class="form-control" id="inputEmail" name="username" placeholder="手机号/邮箱">
+        <label for="password" class="sr-only"></label>
+        <input type="password" id="password" class="form-control" name="password" placeholder="密码">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+        <ul class="zhuce">
+            <li><a href="javascript:;">新用户注册</a></li>
+        </ul>
+    </div>
+</div>
+<div class="shade" style="display: none" id="registerBox">
+    <div class="register">
+        <span></span>
+        <h3>注册海外留学网帐号</h3>
+        <label for="inputEmail2" class="sr-only"></label>
+        <input type="text" class="form-control" id="inputEmail2" name="username">
+        <p class="colWarning textCenter phone">请填写手机号码或者邮箱</p>
+        <label for="password2" class="sr-only"></label>
+        <input type="password" id="password2" class="form-control" name="password">
+        <p class="colWarning textCenter password">密码6~16个字符，区分大小写</p>
+        <label for="repassword2" class="sr-only"></label>
+        <input type="password" id="repassword2" class="form-control" name="repassword">
+        <p class="colWarning textCenter repassword">请再次填写密码</p>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">免费注册</button>
+        <p class="tips"><a href="javascript:;"></a></p>
+        <ul class="denglu">
+            <li><a href="javascript:;">已有帐号登录</a></li>
+        </ul>
+    </div>
 </div>
 <div class="wrap">
 

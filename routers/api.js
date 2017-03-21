@@ -8,7 +8,123 @@
 var express = require('express'),
     router = express.Router();
 
+//数据库
+var User = require('../models/User');
 
+//返回统一格式
+var responseData;
+
+//定下初始格式
+router.use(function (req, res, next) {
+    responseData = {
+        code: 0,
+        message: ''
+    };
+    next();
+});
+
+
+/*
+* 用户注册
+*   注册逻辑
+*
+*   1.用户名不能为空
+*   2.密码不能为空
+*   3.两次输入密码必须一致
+*
+*   2.用户名是否已经被注册
+* */
+router.post('/user/register',function (req, res) {
+
+    var username = req.body.username,
+        password = req.body.password;
+
+    new User({
+        username: username,
+        password: password
+    }).save().then(function (rs) {
+    responseData.message = '注册成功';
+    res.json(responseData);
+});
+
+});
+
+/*
+* 实时检测帐号的正确性
+* */
+router.post('/user/register/namecheck',function (req, res) {
+    var username = req.body.username,
+        news = req.body.news;
+
+    if(news == '1'){
+        responseData.code = 2;
+        responseData.message = '手机号码或者邮箱不正确！';
+        res.json(responseData);
+    }else if(news == '2'){
+        responseData.code = 4;
+        responseData.message = '请填写手机号码或者邮箱';
+        res.json(responseData);
+    }else{
+        User.findOne({
+            username: username   //返回的是一个promise对象
+        }).then(function (userInfo) {
+            //表示数据库有该记录
+            if (userInfo) {
+                responseData.code = 1;
+                responseData.message = '用户名已经被注册';
+                res.json(responseData);
+            }else{
+                responseData.code = 3;
+                responseData.message = '用户名可用';
+                res.json(responseData);
+            }
+        });
+    }
+});
+
+/*
+* 实时验证密码的正确性
+* */
+router.post('/user/register/passwordcheck',function (req, res) {
+    var password = req.body.password,
+        news2 = req.body.news2;
+
+    if(news2 == '1'){
+        responseData.code = 5;
+        responseData.message = '密码位数请控制在6~16个字符！';
+        res.json(responseData);
+    }else if(news2 == '0'){
+        responseData.code = 6;
+        responseData.message = '密码可用';
+        res.json(responseData);
+    }else{
+        responseData.code = 7;
+        responseData.message = '密码6~16个字符，区分大小写';
+        res.json(responseData);
+    }
+});
+
+/*
+* 实时验证二次密码的正确性
+* */
+router.post('/user/register/repasswordcheck',function (req, res) {
+    var repassword = req.body.repassword,
+        news3 = req.body.news3;
+
+    if(news3 == '1'){
+        responseData.code = 8;
+        responseData.message = '两次输入的密码不一致';
+        res.json(responseData);
+    }else if(news3 == '0'){
+        responseData.code = 9;
+        responseData.message = '密码正确';
+        res.json(responseData);
+    }else{
+        responseData.code = 10;
+        responseData.message = '请再次填写密码';
+        res.json(responseData);
+    }
+});
 
 //返回出去给app.js
 module.exports = router;

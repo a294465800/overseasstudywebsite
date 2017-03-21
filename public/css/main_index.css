@@ -1,5 +1,74 @@
-.login{
+.shade{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 99999;
+}
+.login,.register{
     width: 404px;
-    height: 340px;
     background-color: white;
+    border: 1px solid darkgray;
+    padding: 50px;
+    position: relative;
+    top: 50%;
+}
+.register{
+    margin: -210px auto 0;
+    height: 420px;
+}
+.login{
+    margin: -180px auto 0;
+    height: 360px;
+}
+.login span,.register span{
+    width: 21px;
+    height: 21px;
+    display: block;
+    background: url("../images/closeicon.png") no-repeat center top;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.login span:hover,.register span:hover{
+    cursor: pointer;
+}
+.login h3,.register h3{
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 30px;
+}
+.login input{
+    margin-bottom: 20px;
+}
+.login .zhuce,.register .denglu{
+    list-style: none;
+    margin: 30px 0 0 0;
+    padding: 0;
+}
+.register .denglu{
+    margin: 0;
+}
+.login .zhuce li,.register .denglu li{
+    float: right;
+}
+.login button{
+    margin-top: 40px;
+}
+.colWarning{
+    color: #999;
+    margin: 0;
+    line-height: 35px;
+    text-indent: .2em;
+}
+.tips{
+    width: 100%;
+    display: inline-block;
+    color: #3c763d;
+    margin: 0;
+    text-align: center;
+}
+.tips a{
+    margin: 0;
+    line-height: 25px;
 }
