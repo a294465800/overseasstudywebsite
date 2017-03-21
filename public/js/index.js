@@ -5,14 +5,19 @@ $(function () {
     var $login = $('#login'),
         $loginBox = $('#loginBox'),
         $register = $('#register'),
+        $username = $('#username'),
+        $logout = $('#logout'),
         $registerBox = $('#registerBox'),
+        $inputEmail = $('#inputEmail'),
         $inputEmail2 = $('#inputEmail2'),
         $phone = $('#registerBox .phone'),
+        $password1 = $('#password'),
         $password2 = $('#password2'),
         $password = $('#registerBox .password'),
         $repassword2 = $('#repassword2'),
         $repassword = $('#registerBox .repassword'),
         $tips = $('#registerBox .tips a'),
+        $tips2 = $('#loginBox .tips2'),
         news = '',  //用户名  0代表success   1代表出错    2代表默认
         news2 = '',  //密码
         news3 = '';   //二次密码
@@ -231,5 +236,66 @@ $(function () {
                 }
             });
         }
+    });
+
+    $inputEmail.on('input propertychange',function () {
+        if(!$(this).val() && !$password1.val()){
+            $tips2.html('');
+            $tips2.css('color','#a94442');
+        }
+    });
+    $password1.on('input propertychange',function (){
+        if(!$(this).val() && !$inputEmail.val()){
+            $tips2.html('');
+            $tips2.css('color','#a94442');
+        }
+    });
+
+    //登录模块
+    $loginBox.find('button').on('click',function () {
+        //通过ajax提交请求
+        $.ajax({
+            type: 'post',
+            url: '/api/user/login',
+            data:{
+                username: $loginBox.find('[name = "username"]').val(),
+                password: $loginBox.find('[name = "password"]').val()
+            },
+            dataType: 'json',
+            success: function (data) {
+                if(data.code == 11){
+                    $tips2.html('二次密码不能为空！');
+                }else if(data.code == 12){
+                    $tips2.html('用户名不存在！');
+                }else if(data.code == 13){
+                    $tips2.html('密码不正确！');
+                }else{
+                    $tips2.html('登录成功！');
+                    $tips2.css('color','#3c763d');
+                    window.location.reload(); //重载页面
+                }
+            }
+        });
+    });
+
+    //退出
+    $logout.on('click',function () {
+        $.ajax({
+            url: '/api/user/logout',
+            success: function (data) {
+                if(!data.code){
+                    window.location.reload();
+                }
+            }
+        });
+    });
+
+
+    //登录后的悬浮列表
+    $username.mouseover(function () {
+        $username.find('#banlist').show();
+    });
+    $username.mouseout(function () {
+        $username.find('#banlist').hide();
     });
 });

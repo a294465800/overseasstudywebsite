@@ -44,8 +44,33 @@ app.use( bodyParser.urlencoded({extended: true}));
 //在开发过程当中，需要取消模版缓存，但在上线后这个缓存还是有必要的，可以让用户快速加载
 swig.setDefaults({cache:false});
 
+//读取数据模型，用于检测是否是管理员
+var User = require('./models/User');
 
+/*
+* 设置cookie
+* */
+app.use(function (req, res, next) {
+    req.cookies = new Cookies(req, res);
+    req.userInfo = {};
 
+    if(req.cookies.get('userInfo')){
+        try{
+            //如果存在cookies信息，尝试去以json方式解释它
+            req.userInfo = JSON.parse(req.cookies.get('userInfo'));
+
+            //获取当前登录用户的类型，是否是管理员
+            User.findById(req.userInfo.id).then(function (rs) {
+                req.userInfo.isAdmin = Boolean(rs.isAdmin);
+                next();
+            });
+        }catch (e){
+            next();
+        }
+    }else {
+        next();
+    }
+});
 
 
 /*

@@ -108,8 +108,7 @@ router.post('/user/register/passwordcheck',function (req, res) {
 * 实时验证二次密码的正确性
 * */
 router.post('/user/register/repasswordcheck',function (req, res) {
-    var repassword = req.body.repassword,
-        news3 = req.body.news3;
+    var news3 = req.body.news3;
 
     if(news3 == '1'){
         responseData.code = 8;
@@ -125,6 +124,66 @@ router.post('/user/register/repasswordcheck',function (req, res) {
         res.json(responseData);
     }
 });
+
+/*
+* 登录模块的操作
+* */
+router.post('/user/login',function (req, res) {
+    var username = req.body.username,
+        password = req.body.password;
+
+    if(username == '' || password == ''){
+        responseData.code = 11;
+        responseData.message = '用户名或者密码不能为空！';
+        res.json(responseData);
+    }else{
+        User.findOne({
+            username: username
+        }).then(function (rs) {
+            if(!rs){
+                responseData.code = 12;
+                responseData.message = '用户名不存在！';
+                res.json(responseData);
+                return Promise.reject();
+            }else{
+                User.findOne({
+                    username: rs.username,
+                    password: password
+                }).then(function (rs) {
+                    if(!rs){
+                        responseData.code = 13;
+                        responseData.message = '密码不正确！';
+                        res.json(responseData);
+                        return Promise.reject();
+                    }
+                    responseData.code = 14;
+                    responseData.message = '登录成功！';
+                    responseData.userInfo = {
+                        id: rs._id,
+                        username: rs.username
+                    };
+                    //发送一个信息到浏览器,通过头信息的方式发送给服务端
+                    req.cookies.set('userInfo',JSON.stringify({  //保存成字符串，存在userInfo里面
+                        id: rs._id,
+                        username: rs.username
+                    }));
+                    res.json(responseData);
+
+                });
+            }
+
+        })
+    }
+});
+
+/*
+ * 退出
+ * */
+router.get('/user/logout',function (req, res) {
+    req.cookies.set('userInfo', null);
+    res.json(responseData);
+});
+
 
 //返回出去给app.js
 module.exports = router;

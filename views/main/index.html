@@ -6,24 +6,46 @@
     <link rel="stylesheet" href="/public/css/bootstrap.min.css">
     <link rel="stylesheet" href="/public/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/public/css/main_index.css">
+    <link rel="stylesheet" href="/public/css/reset.css">
     <script src="/public/js/jquery-3.2.0.min.js"></script>
     <script src="/public/js/bootstrap.min.js"></script>
     <script src="/public/js/index.js"></script>
 </head>
 <body>
-<nav id="mainNav" class="navbar navbar-default navbar-fixed-top affix-top">
+<div class="big"></div>
+<nav id="mainNav" class="navbar hold">
     <div class="container">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="ban">
+                <li id="logo">
+                    <img src="/public/images/logo.png" alt="海外留学网">
+                    <span>海外留学网</span>
+                </li>
                 <li>
                     <a class="page-scroll" href="/features">特色</a>
                 </li>
-                <li>
-                    <a href="javascript:;" id="register">注册</a>
-                </li>
-                <li>
-                    <a href="javascript:;" id="login">登录</a>
-                </li>
+                {% if userInfo.id %}
+                    <li id="success">
+                        <div id="username">欢迎！{{userInfo.username}}
+                        <ul class="banlist" id="banlist" style="display: none">
+                            <li><a href="javascript:">个人中心</a></li>
+                            <li><a href="javascript:">学习中心</a></li>
+                            {% if userInfo.isAdmin %}
+                            <li><a href="/admin">进入管理</a></li>
+                            {% else %}
+                            {% endif %}
+                            <li><a href="javascript:" id="logout">退出</a></li>
+                        </ul>
+                        </div>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="javascript:" id="register">注册</a>
+                    </li>
+                    <li>
+                        <a href="javascript:" id="login">登录</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
@@ -37,8 +59,9 @@
         <label for="password" class="sr-only"></label>
         <input type="password" id="password" class="form-control" name="password" placeholder="密码">
         <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+        <p class="colWarning textCenter tips2"></p>
         <ul class="zhuce">
-            <li><a href="javascript:;">新用户注册</a></li>
+            <li><a href="javascript:">新用户注册</a></li>
         </ul>
     </div>
 </div>
@@ -56,9 +79,9 @@
         <input type="password" id="repassword2" class="form-control" name="repassword">
         <p class="colWarning textCenter repassword">请再次填写密码</p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">免费注册</button>
-        <p class="tips"><a href="javascript:;"></a></p>
+        <p class="tips"><a href="javascript:"></a></p>
         <ul class="denglu">
-            <li><a href="javascript:;">已有帐号登录</a></li>
+            <li><a href="javascript:">已有帐号登录</a></li>
         </ul>
     </div>
 </div>

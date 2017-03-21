@@ -1,3 +1,88 @@
+.big{
+    background: url("../images/banner.png") no-repeat top center;
+    width: 100%;
+    background-size: cover;
+    height: 180px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+.hold{
+    width: 100%;
+    margin: auto;
+    position: relative;
+    z-index: 900;
+    background-color: rgba(0,0,0,.3);
+}
+.container{
+    width: 1000px;
+}
+.container .ban{
+    text-shadow:0 1px 0 rgba(255,255,255,.25);
+    list-style: none;
+    margin: 0;
+    padding: 15px 0;
+    float: right;
+}
+.container .ban li{
+    line-height: 25px;
+    height: 25px;
+    font-size: 14px;
+    float: left;
+    margin-left: 20px;
+}
+#logo{
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
+    position: absolute;
+    left: 200px;
+    top: 10px;
+    cursor: pointer;
+}
+#logo img{
+    width:20%;
+}
+#logo span{
+    width: 120px;
+    padding: 5px 10px;
+    display: block;
+    margin: -38px 0 0 74px;
+    color: #0099FF;
+    background-color: rgba(255,255,204,.5);
+    border-radius: 5px;
+}
+.container .ban li a{
+    color: #fff;
+    text-decoration: none;
+}
+#success{
+}
+#username{
+    color: #fff;
+    font-size: 14px;
+    position: relative;
+}
+#username .banlist{
+    list-style: none;
+    margin: 0 0 0 -60px;
+    padding: 10px 15px 0;
+    background-color: rgba(0,0,0,.6);
+    width: 120px;
+    position: absolute;
+    top: 25px;
+    left: 50%;
+}
+.container .ban .banlist li{
+    margin-left: 0;
+    margin-bottom: 20px;
+    line-height: 20px;
+    height: 20px;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
 .shade{
     width: 100%;
     height: 100%;
@@ -34,6 +119,7 @@
     cursor: pointer;
 }
 .login h3,.register h3{
+    font-size: 24px;
     text-align: center;
     margin-top: -10px;
     margin-bottom: 30px;
@@ -43,11 +129,8 @@
 }
 .login .zhuce,.register .denglu{
     list-style: none;
-    margin: 30px 0 0 0;
+    margin: 0 0 0 0;
     padding: 0;
-}
-.register .denglu{
-    margin: 0;
 }
 .login .zhuce li,.register .denglu li{
     float: right;
@@ -60,6 +143,15 @@
     margin: 0;
     line-height: 35px;
     text-indent: .2em;
+    font-size: 14px;
+    width: 100%;
+    height: 35px;
+    display: inline-block;
+}
+.tips2{
+    text-align: center;
+    color: #a94442;
+    font-size: 14px;
 }
 .tips{
     width: 100%;
@@ -67,6 +159,8 @@
     color: #3c763d;
     margin: 0;
     text-align: center;
+    height: 25px;
+    font-size: 14px;
 }
 .tips a{
     margin: 0;
