@@ -1,22 +1,22 @@
+/*
+    顶头图片，含导航、登录、注册
+*/
 .big{
     background: url("../images/banner.png") no-repeat top center;
     width: 100%;
     background-size: cover;
     height: 180px;
-    position: absolute;
     top: 0;
     left: 0;
-    z-index: 1;
 }
 .hold{
     width: 100%;
     margin: auto;
-    position: relative;
-    z-index: 900;
     background-color: rgba(0,0,0,.3);
 }
 .container{
-    width: 1000px;
+    width: 1140px;
+    position: relative;
 }
 .container .ban{
     text-shadow:0 1px 0 rgba(255,255,255,.25);
@@ -37,32 +37,35 @@
     margin: 0;
     font-size: 20px;
     position: absolute;
-    left: 200px;
+    left: 0px;
     top: 10px;
-    cursor: pointer;
 }
 #logo img{
     width:20%;
+    display: block;
+    float: left;
+    cursor: pointer;
+    margin-top: -3px;
 }
 #logo span{
+    cursor: pointer;
+    float: left;
     width: 120px;
     padding: 5px 10px;
     display: block;
-    margin: -38px 0 0 74px;
     color: #0099FF;
     background-color: rgba(255,255,204,.5);
-    border-radius: 5px;
+    border-radius: 8px;
 }
 .container .ban li a{
     color: #fff;
     text-decoration: none;
 }
-#success{
-}
 #username{
     color: #fff;
     font-size: 14px;
     position: relative;
+    z-index: 1;
 }
 #username .banlist{
     list-style: none;
@@ -83,10 +86,17 @@
     display: inline-block;
     text-align: center;
 }
+
+
+/*
+    登录、注册的遮罩层
+*/
 .shade{
     width: 100%;
     height: 100%;
     position: fixed;
+    top:0;
+    left: 0;
     background-color: rgba(0,0,0,0.3);
     z-index: 99999;
 }
@@ -165,4 +175,354 @@
 .tips a{
     margin: 0;
     line-height: 25px;
+}
+
+/*
+    导航栏、图片轮转区
+*/
+.outer{
+    width: 100%;
+    margin-top: 20px;
+}
+.menu{
+    width: 1140px;
+    margin: 0 auto;
+    height: 41px;
+    position: relative;
+}
+.menu .server{
+    background-color: rgba(0,0,0,.3);
+    width: 230px;
+    height: 460px;
+    position: absolute;
+    z-index: 1;
+    overflow: hidden;
+}
+.menu .server h3{
+    line-height: 40px;
+    text-align: center;
+    background-color: #ffe314;
+    border-bottom: 1px solid #ffe314;
+    color: #000;
+}
+.menu .server ul{
+    padding: 0 10px;
+    list-style: none;
+    margin: 0;
+}
+.menu .server .server_part{
+    padding: 20px 10px 10px;
+    border-bottom: 1px solid #222;
+    display: block;
+}
+.menu .server .server_part a:hover{
+    color: #CC6600;
+}
+.menu .server .server_list{
+    padding: 0;
+    margin: 15px 0 0;
+}
+.menu .server .server_list li{
+    float: left;
+    margin: 0 8px 10px 0;
+}
+.menu .server .server_list li a{
+    font-size: 13px;
+    color: white;
+}
+.menu .server .server_head{
+    color: #fff;
+    font-size: 16px;
+}
+.menu .navigation{
+    list-style: none;
+    padding: 0 0 0 230px;
+    height: 41px;
+    overflow: hidden;
+}
+.menu .navigation .nav_head{
+    background-color: white;
+    float: left;
+    margin: 0;
+    border-bottom: 1px solid #ffe314;
+}
+.menu .navigation .nav_head a{
+    padding: 0 18px;
+    line-height: 40px;
+    color: #000;
+}
+.menu .navigation .nav_head:hover{
+    background-color: #ffe314;
+}
+.menu .navigation .nav_content{
+    position: absolute;
+    width: 770px;
+    top: 41px;
+    left:230px;
+    background-color: white;
+    padding: 15px;
+    display: none;
+}
+.menu .navigation .nav_content .nav_part{
+    width:100%;
+    float: left;
+    margin-bottom: 10px;
+}
+.menu .navigation h4{
+    font-size: 14px;
+    font-weight: bold;
+    float: left;
+    line-height: 28px;
+    color: #000;
+}
+.menu .navigation .nav_list{
+    padding: 0 30px 10px;
+    width: 510px;
+    margin: 0 0 0 40px;
+    list-style: none;
+    float: left;
+    border-bottom: 1px solid #ccc;
+}
+.menu .navigation .nav_list li{
+    margin-right: 15px;
+    float: left;
+}
+.menu .navigation .nav_list li a{
+    padding: 0;
+    line-height: 28px;
+    font-size: 13px;
+    color: #444;
+}
+.menu .navigation .nav_list li a:hover{
+    color: #cc6600;
+}
+
+/*
+    图片轮转区域加按钮
+*/
+.ban_bg{
+    position: relative;
+}
+.ban_bg .bg_part li a{
+    margin-top: -16px;
+    padding: 0;
+    display: block;
+    width: 100%;
+    height: 420px;
+    background: url("http://liuxue.zmnedu.com/static/index/images/ban_c.jpg") no-repeat top center;
+}
+.ban_bg .bg_btn{
+    position: absolute;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0 -100px;
+    width: 200px;
+    height: 10px;
+    left: 50%;
+    bottom: 20px;
+    overflow: hidden;
+}
+.ban_bg .bg_btn li{
+    width:40px;
+    height: 10px;
+    float: left;
+    background-color: white;
+    margin-right: 10px;
+}
+.ban_bg .bg_btn li:hover{
+    background-color: #cc6600;
+    cursor: pointer;
+}
+
+
+/*
+    下部补充指导栏
+*/
+.ban_foot{
+    width:100%;
+    height:75px;
+    background-color: #f4f4f8;
+    position: relative;
+}
+.ban_foot .ban_item{
+    position: relative;
+    left: 50%;
+    float: left;
+}
+.ban_foot .ban_item ul{
+    position: relative;
+    left: -50%;
+    list-style: none;
+    padding: 20px 0;
+}
+.ban_foot .ban_item ul li{
+    float: left;
+    padding: 0 40px 0 30px;
+    border-right: 1px solid #ccc;
+    cursor: pointer;
+}
+.ban_foot .ban_item ul li p{
+    margin-right: 30px;
+    float: left;
+    display: block;
+    width: 42px;
+    height: 35px;
+}
+.ban_foot .ban_item ul li div{
+    line-height: 20px;
+    padding-top: 2px;
+    float: left;
+}
+.ban_foot .ban_item ul li h3{
+    font-size: 14px;
+    color: #262626;
+ }
+.ban_foot .ban_item ul li span{
+    font-size: 12px;
+    color: #828282;
+}
+
+
+/*
+    学校搜索栏
+*/
+.school{
+    width:1140px;
+    margin: 30px auto 0;
+    height: 320px;
+    border: 1px solid brown;
+}
+.school .school_search{
+    float: left;
+    width: 320px;
+}
+.school .school_search h3{
+    font-size: 16px;
+    color: #197ae5;
+    padding-bottom: 10px;
+}
+.school .school_search .school_search_content{
+    width: 100%;
+    height: 300px;
+    border: 1px solid #ccc;
+    padding: 25px 30px 15px;
+}
+.school .school_search .search_icon{
+    float: left;
+    border: 1px solid #43a0ff;
+    width: 200px;
+    height: 34px;
+    padding-left: 35px;
+    background: url("/public/images/search_icon.png") no-repeat -25px -52px;
+}
+#school_name{
+    width: 100%;
+    height: 32px;
+    border: none;
+    outline: medium;
+    padding: 3px 5px 3px 1px;
+    font-size: 15px;
+    font-weight: normal;
+}
+.school .school_search_content .search{
+    float: left;
+    display: block;
+    height: 34px;
+    width: 58px;
+    background-color: #43a0ff;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+.school .school_search_content p{
+    margin-top: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #818181;
+}
+.school .school_search_content .school_img{
+    width: 100%;
+    height: 176px;
+}
+#uk,#au,#usa,#nz,#jpn,#sg{
+    display: block;
+    float: left;
+}
+#uk div,#au div,#usa div,#nz div,#jpn div,#sg div{
+    float: left;
+    border: 1px solid #d9e8ff;
+    position: relative;
+    height: 36px;
+    width: 113px;
+    margin: 22px 0 10px 10px;
+}
+#uk div:hover,#au div:hover,#usa div:hover,#nz div:hover,#jpn div:hover,#sg div:hover{
+    border: 2px solid #43a0ff;
+    padding: 0;
+}
+#uk i,#au i,#usa i,#nz i,#jpn i,#sg i{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    float: left;
+    display: block;
+    width: 60px;
+    height: 53px;
+}
+#uk span,#au span,#usa span,#nz span,#jpn span,#sg span{
+    float: left;
+    display: block;
+    text-align: center;
+    line-height: 36px;
+    margin-left: 60px;
+}
+.school_news{
+    float: right;
+    width: 310px;
+    overflow: hidden;
+}
+.school_news .school_news_title{
+    border-bottom: 1px solid #ccc;
+    margin: 0 0 0 0 ;
+}
+.school_news .school_news_title p{
+    float: left;
+    margin: 0 10px;
+}
+.school_news .school_news_title a{
+    font-size: 16px;
+    color: #818181;
+    display: block;
+    float: left;
+    text-align: center;
+    padding-bottom: 11px;
+}
+.school_news .school_strategy{
+    padding: 20px 0 0 ;
+}
+.school_news .school_strategy .strategy_img{
+    width: 310px;
+    height: 100px;
+    display: block;
+    margin: 0 0 15px 0;
+}
+.school_news .school_strategy ul{
+    list-style: square;
+}
+.school_news .school_strategy ul li{
+    list-style-position: inside;
+    margin: 0 0 18px 0;
+}
+.school_news .school_strategy ul a{
+    margin: -14px 0 0 13px;
+    display: block;
+    font-size: 13px;
+    color: #555;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.school_news .school_strategy ul a:hover{
+    color: #259;
 }

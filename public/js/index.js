@@ -1,6 +1,10 @@
 /**
  * Created by SHINING on 2017/3/20.
  */
+/*
+* 登录模块的js代码
+* */
+
 $(function () {
     var $login = $('#login'),
         $loginBox = $('#loginBox'),

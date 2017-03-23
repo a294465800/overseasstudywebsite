@@ -12,8 +12,8 @@
     <script src="/public/js/index.js"></script>
 </head>
 <body>
-<div class="big"></div>
-<nav id="mainNav" class="navbar hold">
+<div class="big">
+    <nav id="mainNav" class="navbar hold">
     <div class="container">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="ban">
@@ -25,31 +25,33 @@
                     <a class="page-scroll" href="/features">特色</a>
                 </li>
                 {% if userInfo.id %}
-                    <li id="success">
-                        <div id="username">欢迎！{{userInfo.username}}
+                <li id="success">
+                    <div id="username">欢迎！{{userInfo.username}}
                         <ul class="banlist" id="banlist" style="display: none">
                             <li><a href="javascript:">个人中心</a></li>
                             <li><a href="javascript:">学习中心</a></li>
                             {% if userInfo.isAdmin %}
-                            <li><a href="/admin">进入管理</a></li>
+                            <li><a href="/admin" target="_blank">进入管理</a></li>
                             {% else %}
                             {% endif %}
                             <li><a href="javascript:" id="logout">退出</a></li>
                         </ul>
-                        </div>
-                    </li>
+                    </div>
+                </li>
                 {% else %}
-                    <li>
-                        <a href="javascript:" id="register">注册</a>
-                    </li>
-                    <li>
-                        <a href="javascript:" id="login">登录</a>
-                    </li>
+                <li>
+                    <a href="javascript:" id="register">注册</a>
+                </li>
+                <li>
+                    <a href="javascript:" id="login">登录</a>
+                </li>
                 {% endif %}
             </ul>
         </div>
     </div>
 </nav>
+</div>
+
 <div class="shade" style="display: none" id="loginBox">
     <div class="login">
         <span></span>
@@ -85,8 +87,206 @@
         </ul>
     </div>
 </div>
-<div class="wrap">
-
+<div class="outer clearfix">
+    <div class="menu clearfix">
+        <div class="server clearfix">
+            <h3>留学服务</h3>
+            <ul>
+                <li class="server_part clearfix">
+                    <a class="server_head clearfix" href="">考试培训</a>
+                    <ul class="server_list clearfix">
+                        <li><a href="">一对一课程</a></li>
+                        <li><a href="">学习规划</a></li>
+                        <li><a href="">封闭保分班</a></li>
+                        <li><a href="">美国sat封闭保分班</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <ul class="navigation">
+            <li class="nav_head">
+                <a href="">首页</a>
+            </li>
+            <li class="nav_head">
+                <a href="">本科留学</a>
+                <div class="nav_content">
+                    <div class="nav_part">
+                        <h4>留学申请</h4>
+                        <ul class="nav_list clearfix">
+                            <li><a href="">美本申请官方指南</a></li>
+                            <li><a href="">英本申请官方指南</a></li>
+                            <li><a href="">美国留学评估</a></li>
+                            <li><a href="">美本申请官方指南</a></li>
+                            <li><a href="">英本申请官方指南</a></li>
+                            <li><a href="">美国留学评估</a></li>
+                            <li><a href="">美本申请官方指南</a></li>
+                            <li><a href="">英本申请官方指南</a></li>
+                            <li><a href="">美国留学评估</a></li>
+                            <li><a href="">美本申请官方指南</a></li>
+                            <li><a href="">英本申请官方指南</a></li>
+                            <li><a href="">美国留学评估</a></li>
+                        </ul>
+                    </div>
+                    <div class="nav_part">
+                        <h4>背景提升</h4>
+                        <ul class="nav_list clearfix">
+                            <li><a href="">本科活动规划</a></li>
+                            <li><a href="">常春藤名校夏季课程</a></li>
+                        </ul>
+                    </div>
+                    <div class="nav_part">
+                        <h4>留学方案</h4>
+                        <ul class="nav_list clearfix">
+                            <li><a href="">本科精英计划</a></li>
+                            <li><a href="">美本保录取TOP30计划</a></li>
+                            <li><a href="">英本保录取TOP50计划</a></li>
+                            <li><a href="">澳洲留学计划</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="nav_head">
+                <a href="">研究生留学</a>
+            </li>
+            <li class="nav_head">
+                <a href="">中学留学</a>
+            </li>
+            <li class="nav_head">
+                <a href="">本科转学</a>
+            </li>
+            <li class="nav_head">
+                <a href="">出国语言培训</a>
+            </li>
+            <li class="nav_head">
+                <a href="">成功案例</a>
+            </li>
+            <li class="nav_head">
+                <a href="">关于我们</a>
+            </li>
+        </ul>
+    </div>
 </div>
+<div class="ban_bg">
+    <ul class="bg_part">
+        <li><a href="#"></a></li>
+    </ul>
+    <ul class="bg_btn">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<div class="ban_foot clearfix">
+    <div class="ban_item">
+        <ul class="clearfix">
+            <li>
+                <p style="background: url('/public/images/iconban_foot.png') no-repeat 0 0"></p>
+                <div>
+                    <h3>名校招生官方指导</h3>
+                    <span>权威指导留学申请</span>
+                </div>
+            </li>
+            <li>
+                <p style="background: url('/public/images/iconban_foot.png') no-repeat -42px 0"></p>
+                <div>
+                    <h3>独家活动规划</h3>
+                    <span>稀缺活动/顶尖科研实习</span>
+                </div>
+            </li>
+            <li>
+                <p style="background: url('/public/images/iconban_foot.png') no-repeat -84px 0"></p>
+                <div>
+                    <h3>高效辅导培训</h3>
+                    <span>阶梯教程/内部教材</span>
+                </div>
+            </li>
+            <li style="border: none">
+                <p style="background: url('/public/images/iconban_foot.png') no-repeat -126px 0"></p>
+                <div>
+                    <h3>经典名校案例</h3>
+                    <span>80%学生进入TOP50名校</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="school">
+    <div class="school_search">
+        <h3>学校搜索</h3>
+        <div class="school_search_content">
+            <label for="school_name" class="search_icon">
+                <input type="text" id="school_name" placeholder="搜索你感兴趣的学校">
+            </label>
+            <a href="javascript:" class="search">搜索</a>
+            <p>根据国家查找学校：</p>
+            <div class="school_img">
+                <a href="" id="uk">
+                    <div>
+                        <i style="background: url('/public/images/search_icon.png') no-repeat"></i>
+                        <span>英国</span>
+                    </div>
+                </a>
+                <a href="" id="au">
+                    <div>
+                        <i style="background: url('/public/images/search_icon.png') no-repeat -60px top"></i>
+                        <span>澳洲</span>
+                    </div>
+                </a>
+                <a href="" id="usa">
+                    <div>
+                        <i style="background: url('/public/images/search_icon.png') no-repeat -120px top"></i>
+                        <span>美国</span>
+                    </div>
+                </a>
+                <a href="" id="nz">
+                    <div>
+                        <i style="background: url('/public/images/search_icon.png') no-repeat -180px top"></i>
+                        <span>新西兰</span>
+                    </div>
+                </a>
+                <a href="" id="jpn">
+                    <div>
+                        <i style="background: url('/public/images/search_icon.png') no-repeat -240px top"></i>
+                        <span>日本</span>
+                    </div>
+                </a>
+                <a href="" id="sg">
+                    <div>
+                        <i style="background: url('/public/images/search_icon.png') no-repeat -300px top"></i>
+                        <span>新加坡</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="school_news">
+        <div class="school_news_title clearfix">
+            <a href="" id="strategy">留学攻略</a>
+            <p>|</p>
+            <a href="" id="consult">留学咨询</a>
+        </div>
+        <div class="school_strategy">
+            <a href="" class="strategy_img"><img src="/public/images/school_strategy1.jpg" style="width: 310px;height: 100px;" alt=""></a>
+            <ul>
+                <li><a href="">名校本科生节 申请时间节点在这里！sssssssssssssssssssssssssssssssssssss</a></li>
+                <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
+                <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
+                <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
+                <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
+            </ul>
+        </div>
+        <div class="school_strategy" style="display: none">
+            <ul>
+                <li><a href="">名校本科生节 申请时间节点在这里！sssssssssssssssssssssssssssssssssssss</a></li>
+                <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
+                <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
+                <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
+                <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </body>
 </html>
