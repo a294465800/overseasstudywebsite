@@ -1,3 +1,6 @@
+body{
+    overflow-x: hidden;
+}
 /*
     顶头图片，含导航、登录、注册
 */
@@ -201,8 +204,8 @@
 .menu .server h3{
     line-height: 40px;
     text-align: center;
-    background-color: #ffe314;
-    border-bottom: 1px solid #ffe314;
+    background-color: #3399FF;
+    border-bottom: 1px solid #3399FF;
     color: #000;
 }
 .menu .server ul{
@@ -244,7 +247,7 @@
     background-color: white;
     float: left;
     margin: 0;
-    border-bottom: 1px solid #ffe314;
+    border-bottom: 1px solid #3399FF;
 }
 .menu .navigation .nav_head a{
     padding: 0 18px;
@@ -252,7 +255,7 @@
     color: #000;
 }
 .menu .navigation .nav_head:hover{
-    background-color: #ffe314;
+    background-color: #3399FF;
 }
 .menu .navigation .nav_content{
     position: absolute;
@@ -343,6 +346,7 @@
     height:75px;
     background-color: #f4f4f8;
     position: relative;
+    overflow: hidden;
 }
 .ban_foot .ban_item{
     position: relative;
@@ -388,9 +392,9 @@
 */
 .school{
     width:1140px;
-    margin: 30px auto 0;
-    height: 320px;
-    border: 1px solid brown;
+    margin: 30px auto 20px;
+    height: 330px;
+    overflow: hidden;
 }
 .school .school_search{
     float: left;
@@ -477,6 +481,10 @@
     line-height: 36px;
     margin-left: 60px;
 }
+
+/*
+    学校攻略资讯信息
+*/
 .school_news{
     float: right;
     width: 310px;
@@ -525,4 +533,243 @@
 }
 .school_news .school_strategy ul a:hover{
     color: #259;
+}
+
+
+/*
+    热门学校
+*/
+.popular_school{
+    width: 450px;
+    float: left;
+    margin: 0 30px;
+}
+.popular_school .popular_school_title{
+    border-bottom: 1px solid #ccc;
+}
+.popular_school .popular_school_title h3{
+    color: #197ae5;
+    font-size: 16px;
+    float: left;
+    padding-bottom: 10px;
+}
+.popular_school .popular_school_title a{
+    float: right;
+    font-size: 13px;
+    padding-top: 10px;
+}
+.popular_school .school_logo{
+    border-bottom: 1px dotted #ccc;
+    padding-bottom: 6px;
+}
+.popular_school .school_logo ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.popular_school .school_logo ul li{
+    height: 120px;
+    width: 130px;
+    margin: 22px 0 0 0 ;
+    float: left;
+}
+.popular_school .school_logo ul .mid_logo{
+    margin: 22px 30px 0;
+}
+.popular_school .school_logo .logo_img{
+    width: 130px;
+    height: 50px;
+    display: block;
+    margin:  0 0 10px 0;
+}
+.popular_school .school_logo .logo_cn{
+    color: #555;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 24px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.popular_school .school_logo .logo_en{
+    color: #b7b7b7;
+    font-size: 12px;
+}
+.popular_school .school_logo a:hover{
+    color: #259;
+}
+
+/*
+    留学流程
+*/
+/*通用标题样式*/
+.section_title{
+    border-bottom: 1px solid #0099FF;
+}
+.section_title p{
+    font-size: 22px;
+    line-height: 50px;
+    color: #333;
+}
+
+/*单一*/
+.study_procedure{
+    width:1140px;
+    margin: 0 auto;
+}
+.study_procedure .procedure{
+    padding: 30px 0;
+}
+.study_procedure .procedure .procedure_part{
+    float: left;
+    display: block;
+    border: 1px solid #333;
+    padding: 25px 30px;
+    margin-right: 28px;
+}
+.study_procedure .procedure .procedure_last{
+    margin: 0;
+    float: right;
+}
+.study_procedure .procedure .procedure_part:hover{
+    background-color: #0099FF;
+    border: 1px solid #0099FF;
+}
+.study_procedure .procedure i{
+    display: block;
+    width: 50px;
+    height: 43px;
+    margin: 0 auto 20px;
+}
+.study_procedure .procedure p{
+    font-size: 14px;
+    color: #333;
+}
+
+/*
+    留学板块通用样式
+*/
+.study_abroad{
+    width: 1140px;
+    margin: 0 auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+    底部信息footer
+*/
+.footer{
+    width:100%;
+    background-color: #323232;
+}
+.footer .catalog{
+    width: 1140px;
+    margin: 0 auto;
+    padding: 80px 0 50px;
+    border-bottom: 1px solid #4d4d4d;
+}
+.footer .catalog ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.footer .catalog .footer_part{
+    float: left;
+    margin: 0 110px 0 0;
+}
+.footer .catalog .footer_part .footer_title{
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 15px 0;
+}
+.footer .catalog .footer_part li a{
+    font-size: 14px;
+    color: #fff;
+    line-height: 30px;
+}
+.footer .catalog .footer_part li a:hover{
+    color: #cc6600;
+}
+.footer .catalog .last_part{
+    float: right;
+    margin: 0;
+}
+/*
+    公司栏
+*/
+.footer .catalog .company{
+    width: 380px;
+    margin: 0;
+}
+.footer .catalog .company li a{
+    margin-right: 5px;
+}
+.footer .catalog .company li a:hover{
+    color: #cc6600;
+}
+
+/*
+    版权
+*/
+.footer .copyright{
+    width: 1140px;
+    margin: 0 auto;
+    border-top: 1px solid #000;
+    padding: 20px 0;
+}
+.footer .copyright p{
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+/*
+    友情链接
+*/
+.friend_link{
+    width: 100%;
+    background-color: #000;
+    position: relative;
+}
+.friend_link .links{
+    width: 1140px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+.friend_link .links span{
+    float: left;
+    font-size: 14px;
+    line-height: 20px;
+    color: #fff;
+    margin-right: 10px;
+}
+.friend_link .links ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.friend_link .links ul li{
+    float: left;
+    margin-right: 15px;
+}
+.friend_link .links ul li a{
+    color: #fff;
+    font-size: 14px;
+    line-height: 20px;
+}
+.friend_link .links ul li a:hover{
+    color: #cc6600;
 }
