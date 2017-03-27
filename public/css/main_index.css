@@ -1,5 +1,4 @@
 body{
-    overflow-x: hidden;
 }
 /*
     顶头图片，含导航、登录、注册
@@ -56,7 +55,7 @@ body{
     width: 120px;
     padding: 5px 10px;
     display: block;
-    color: #0099FF;
+    color: #337ab7;
     background-color: rgba(255,255,204,.5);
     border-radius: 8px;
 }
@@ -204,8 +203,8 @@ body{
 .menu .server h3{
     line-height: 40px;
     text-align: center;
-    background-color: #3399FF;
-    border-bottom: 1px solid #3399FF;
+    background-color: #337ab7;
+    border-bottom: 1px solid #337ab7;
     color: #000;
 }
 .menu .server ul{
@@ -247,7 +246,7 @@ body{
     background-color: white;
     float: left;
     margin: 0;
-    border-bottom: 1px solid #3399FF;
+    border-bottom: 1px solid #337ab7;
 }
 .menu .navigation .nav_head a{
     padding: 0 18px;
@@ -255,7 +254,8 @@ body{
     color: #000;
 }
 .menu .navigation .nav_head:hover{
-    background-color: #3399FF;
+    background-color: #337ab7;
+    cursor: pointer;
 }
 .menu .navigation .nav_content{
     position: absolute;
@@ -402,7 +402,7 @@ body{
 }
 .school .school_search h3{
     font-size: 16px;
-    color: #197ae5;
+    color: #337ab7;
     padding-bottom: 10px;
 }
 .school .school_search .school_search_content{
@@ -413,7 +413,7 @@ body{
 }
 .school .school_search .search_icon{
     float: left;
-    border: 1px solid #43a0ff;
+    border: 1px solid #337ab7;
     width: 200px;
     height: 34px;
     padding-left: 35px;
@@ -433,7 +433,7 @@ body{
     display: block;
     height: 34px;
     width: 58px;
-    background-color: #43a0ff;
+    background-color: #337ab7;
     padding: 10px;
     text-align: center;
     color: #fff;
@@ -462,7 +462,7 @@ body{
     margin: 22px 0 10px 10px;
 }
 #uk div:hover,#au div:hover,#usa div:hover,#nz div:hover,#jpn div:hover,#sg div:hover{
-    border: 2px solid #43a0ff;
+    border: 2px solid #337ab7;
     padding: 0;
 }
 #uk i,#au i,#usa i,#nz i,#jpn i,#sg i{
@@ -548,7 +548,7 @@ body{
     border-bottom: 1px solid #ccc;
 }
 .popular_school .popular_school_title h3{
-    color: #197ae5;
+    color: #337ab7;
     font-size: 16px;
     float: left;
     padding-bottom: 10px;
@@ -605,12 +605,13 @@ body{
 */
 /*通用标题样式*/
 .section_title{
-    border-bottom: 1px solid #0099FF;
+    border-bottom: 1px solid #337ab7;
 }
 .section_title p{
     font-size: 22px;
     line-height: 50px;
     color: #333;
+    font-weight: normal;
 }
 
 /*单一*/
@@ -633,8 +634,8 @@ body{
     float: right;
 }
 .study_procedure .procedure .procedure_part:hover{
-    background-color: #0099FF;
-    border: 1px solid #0099FF;
+    background-color: #337ab7;
+    border: 1px solid #337ab7;
 }
 .study_procedure .procedure i{
     display: block;
@@ -652,18 +653,366 @@ body{
 */
 .study_abroad{
     width: 1140px;
-    margin: 0 auto;
+    margin: 0 auto 10px;
+}
+
+/*
+    留学分栏
+*/
+.study_abroad .study_abroad_content{
+    width: 79%;
+    height: 252px;
+    margin: 20px 0;
+    border: 1px solid #FFCC33;
+    float: left;
+    overflow: hidden;
+}
+.study_abroad .study_abroad_nav{
+    float: left;
+    width: 15%;
+    background: #FFCC33;
+}
+.study_abroad .study_abroad_nav ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.study_abroad .study_abroad_nav ul li{
+    text-align: center;
+}
+.study_abroad .study_abroad_nav ul a:hover{
+    background-color: #fff;
+    color: #FFCC33;
+}
+
+/*留给onmousemove*/
+.study_abroad .study_abroad_nav ul a{
+    display: inline-block;
+    font-size: 20px;
+    line-height: 50px;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+}
+
+/*留学---中部*/
+.study_abroad_content .study_abroad_mid{
+    margin: 0 22px;
+    width: 80%;
+    height: 100%;
+    float: left;
+}
+.study_abroad_content .study_abroad_mid .mid_article{
+    border-bottom: 1px dashed #ccc;
+    height: 48%;
+    overflow: hidden;
+    margin-top: 10px;
+}
+.study_abroad_content .mid_article ul{
+    width: 45%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.study_abroad_content .mid_article ul li{
+    margin-bottom: 10px;
+}
+.study_abroad_content .mid_article ul li a{
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+    color: #555;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.study_abroad_content .mid_article ul li a:hover{
+    color: #FFCC33;
+    font-size: 15px;
+}
+
+.study_abroad .mid_img{
+    position: relative;
+    clear: both;
+    width: 692px;
+    height: 131px;
+    margin: 4px 10px 0;
+    background: url("/public/images/study_bg.png");
+}
+.study_abroad .mid_img p{
+    width: 81px;
+    height: 48px;
+    float: left;
+    text-align: center;
+    position: absolute;
+    top:58px;
+    cursor: pointer;
+}
+.study_abroad .mid_img p a{
+    line-height: 48px;
+    font-size: 14px;
+    color: #333;
+}
+.study_abroad .mid_img p:nth-child(1) a:hover{
+    color: rgb(246,113,8);
+}
+.study_abroad .mid_img p:nth-child(2){
+    left: 153px;
+    padding-top: 4px;
+}
+.study_abroad .mid_img p:nth-child(2) a{
+    display: block;
+    line-height: 20px;
+}
+.study_abroad .mid_img p:nth-child(2) a:hover{
+    color: rgb(204,74,162);
+}
+.study_abroad .mid_img p:nth-child(3){
+    left: 305px;
+}
+.study_abroad .mid_img p:nth-child(3) a:hover{
+    color: rgb(154,201,69);
+}
+.study_abroad .mid_img p:nth-child(4){
+    left: 458px;
+}
+.study_abroad .mid_img p:nth-child(4) a:hover{
+    color: rgb(4,150,187);
+}
+.study_abroad .mid_img p:nth-child(5){
+    left: 610px;
+}
+.study_abroad .mid_img p:nth-child(5) a:hover{
+    color: rgb(50,154,153);
+}
+/*留学---案例部分*/
+.study_abroad .study_abroad_case{
+    width: 20%;
+    height: 263px;
+    float: right;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin: 13px 0;
+    overflow: hidden;
+}
+.study_abroad .case_title a{
+    display: inline-block;
+    font-size: 16px;
+    line-height: 24px;
+    float: left;
+    padding: 5px;
+    width: 50%;
+    text-align: center;
+    color: #333;
+}
+.study_abroad .case_title a:hover{
+    background-color: #337ab7;
+}
+.study_abroad .case_content p{
+    color: #333;
+    font-size: 12px;
+    background-color: #e7e7e7;
+    text-indent: 1em;
+    line-height: 34px;
+    margin-bottom: 2px;
+    cursor: pointer;
+}
+.study_abroad .case_content ul{
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 5px 0;
+}
+.study_abroad .case_content ul li{
+    color: #777;
+    font-size: 12px;
+    text-indent: 1em;
+    line-height: 20px;
+}
+
+/*
+    研究留学样式修改
+*/
+.postgraduate .study_abroad_content{
+    border: 1px solid #66CCCC;
+}
+.postgraduate .study_abroad_nav{
+    background: #66CCCC;
+}
+.postgraduate .study_abroad_nav ul a:hover{
+    color: #66CCCC;
+}
+.postgraduate .study_abroad_content .mid_article ul li a:hover{
+    color: #66CCCC;
+}
+
+/*
+    中学留学样式修改
+*/
+.middle_school .study_abroad_content{
+    border: 1px solid #993333
+}
+.middle_school .study_abroad_nav{
+    background: #993333;
+}
+.middle_school .study_abroad_nav ul a:hover{
+    color: #993333;
+}
+.middle_school .study_abroad_content .mid_article ul li a:hover{
+    color: #993333;
+}
+.middle_school .mid_img{
+    position: relative;
+    clear: both;
+    width: 692px;
+    height: 131px;
+    margin: -10px 10px 0;
+    background: url("/public/images/study_bg2.png");
+}
+.middle_school .mid_img p{
+    width: 94px;
+    height: 45px;
+    float: left;
+    text-align: center;
+    position: absolute;
+    top:43px;
+}
+.middle_school .mid_img p a{
+    line-height: 48px;
+    font-size: 14px;
+    color: #333;
+}
+.middle_school .mid_img p:nth-child(2){
+    top:15px;
+    left: 153px;
+}
+.middle_school .mid_img p:nth-child(2) a{
+    display: block;
+    line-height:48px;
+}
+.middle_school .mid_img p:nth-child(3){
+    left: 302px;
+}
+.middle_school .mid_img p:nth-child(4){
+    left: 453px;
+}
+.middle_school .mid_img p:nth-child(5){
+    left: 602px;
+}
+.middle_school .mid_img p a:hover{
+    color: #fff !important;
 }
 
 
+/*
+    能力培训样式
+*/
+.training{
+    width: 1140px;
+    margin: 0 auto;
+}
+.training .training_list{
+    list-style: none;
+    margin: 30px 19px 0 20px;
+    padding: 0;
+}
+.training .training_list li{
+    float: left;
+    width: 147px;
+    text-align: center;
+    background-color: #136cbf;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 12px;
+}
+.training .training_list li:nth-child(2){
+    background-color: #bf3e5a;
+}
+.training .training_list li:nth-child(3){
+    background-color: #c8a53a;
+}
+.training .training_list li:nth-child(4){
+    background-color: #9170a6;
+}
+.training .training_list li:nth-child(5){
+    background-color: #c05958;
+}
+.training .training_list li:nth-child(6){
+    background-color: #5597a1;
+}
+.training .training_list li:nth-child(7){
+    background-color: #575186;
+}
+.training .training_list li a{
+    font-size: 20px;
+    line-height: 55px;
+    font-weight: bold;
+    color: #fff;
+}
+.training .training_list li a:hover{
+    color: #333;
+}
+.training .training_block{
+    margin: 30px 0 0;
+    width: 100%;
+}
 
-
-
-
-
-
-
-
+/*培训板块通用样式*/
+.training_part{
+    width: 371px;
+    border-left: 1px solid #c8a53a;
+    background-color: #fafafa;
+    float: left;
+    margin: 0 13px 25px 0;
+    overflow: hidden;
+}
+.training_part .training_img{
+    width: 100px;
+    height: 120px;
+    padding: 19px 0;
+    float: left;
+}
+.training_part .training_img i{
+    margin: 0 auto;
+    display: block;
+    width:46px;
+    height: 46px;
+    background: url("/public/images/traning_icon.png") -3px -55px;
+}
+.training_part .training_img p{
+    text-align: center;
+}
+.training_part .training_img p a{
+    color: #c8a53a;
+    font-size: 16px;
+    line-height: 20px;
+}
+.training_part .training_content{
+    float: right;
+    width: 270px;
+}
+.training_part .training_content ul{
+    list-style: none;
+    margin: 0;
+    padding: 20px 0;
+}
+.training_part .training_content ul span{
+    color: #666;
+}
+.training_part .training_content ul a{
+    display: block;
+    font-size: 14px;
+    color: #666;
+    line-height: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: -16px;
+    padding-left: 12px;
+}
+.training_part .training_content ul a:hover{
+    color: #990033;
+}
 
 
 /*
@@ -701,10 +1050,6 @@ body{
 }
 .footer .catalog .footer_part li a:hover{
     color: #cc6600;
-}
-.footer .catalog .last_part{
-    float: right;
-    margin: 0;
 }
 /*
     公司栏

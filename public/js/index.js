@@ -40,9 +40,22 @@ $(function () {
     //关闭面板
     $loginBox.find('span').on('click',function () {
         $loginBox.hide();
+        $inputEmail.val('');
+        $password1.val('');
+        $tips2.html('');
     });
     $registerBox.find('span').on('click',function () {
         $registerBox.hide();
+        $inputEmail2.val('');
+        $password2.val('');
+        $repassword2.val('');
+        $tips.html('');
+        $phone.html('请填写手机号码或者邮箱');
+        $phone.css('color','#999');
+        $password.html('密码6~16个字符，区分大小写');
+        $password.css('color','#999');
+        $repassword.html('请再次填写密码');
+        $repassword.css('color','#999');
     });
 
     //新用户注册和已有帐号
@@ -268,7 +281,7 @@ $(function () {
             dataType: 'json',
             success: function (data) {
                 if(data.code == 11){
-                    $tips2.html('二次密码不能为空！');
+                    $tips2.html('用户名或者密码不能为空！');
                 }else if(data.code == 12){
                     $tips2.html('用户名不存在！');
                 }else if(data.code == 13){

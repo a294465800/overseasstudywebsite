@@ -14,6 +14,7 @@ audio, video {
     vertical-align:baseline;
     background:transparent;
     outline-style:none;/*FF*/
+    font-family: 微软雅黑;
 }
 
 body {
@@ -56,4 +57,14 @@ input, select {
 .clearfix:after{clear:both;}
 .clearfix{
     *zoom:1;/*IE/7/6*/
+}
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+.last_part{
+    margin: 0 !important;
+    float: right !important;
 }
