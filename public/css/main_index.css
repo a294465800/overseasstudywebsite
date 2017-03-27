@@ -100,7 +100,7 @@ body{
     top:0;
     left: 0;
     background-color: rgba(0,0,0,0.3);
-    z-index: 99999;
+    z-index: 3;
 }
 .login,.register{
     width: 404px;
@@ -953,7 +953,7 @@ body{
     color: #333;
 }
 .training .training_block{
-    margin: 30px 0 0;
+    margin: 30px 0 70px;
     width: 100%;
 }
 
@@ -1012,6 +1012,97 @@ body{
 }
 .training_part .training_content ul a:hover{
     color: #990033;
+}
+
+/*培训模版样式修改*/
+.training_part .skill i{
+    background: url("/public/images/traning_icon.png") -61px -55px;
+}
+.training_part .experience i{
+    background: url("/public/images/traning_icon.png") -126px -58px;
+}
+.training_part .direct i{
+    background: url("/public/images/traning_icon.png") -249px -63px;
+}
+.training_part .guide i{
+    background: url("/public/images/traning_icon.png") -366px -55px;
+}
+.training_part .learn i{
+    background: url("/public/images/traning_icon.png") -416px -67px;
+}
+
+
+/*
+    教师阵容通用样式
+*/
+.teacher{
+    width:1140px;
+    margin: 0 auto 40px;
+}
+.teacher h1{
+    text-align: center;
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+.teacher p{
+    text-align: center;
+    font-size: 22px;
+    color: #44637d;
+}
+.teacher ul{
+    list-style: none;
+    margin: 40px 0 0;
+    padding: 0 84px;
+}
+.teacher ul li{
+    float: left;
+    margin-right: 36px;
+    width: 132px;
+    height: 149px;
+}
+.teacher .teacher_part a{
+    display: block;
+}
+.teacher .teacher_part .teacher_img{
+    display: block;
+    margin: 0 auto 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    background: url("/public/images/teacher1.png") 50% no-repeat;
+    background-size: cover;
+}
+.teacher ul h3{
+    font-size: 16px;
+    text-align: center;
+    color: #333;
+    line-height: 35px;
+}
+.teacher ul p{
+    font-size: 14px;
+    color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.teacher .teacher_part a:hover h3{
+    color: #337ab7;
+}
+.teacher .teacher_more{
+    display: block;
+    margin: 40px auto 0;
+    width: 180px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #337ab7;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+    line-height: 40px;
+}
+
+/*教师阵容样式修改*/
+.teacher .line_2{
+    padding: 0;
 }
 
 
@@ -1117,4 +1208,100 @@ body{
 }
 .friend_link .links ul li a:hover{
     color: #cc6600;
+}
+
+
+/*
+    电话咨询栏
+*/
+.tel_call{
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top:40%;
+    width: 136px;
+    height: 220px;
+    border: 2px solid #337ab7;
+    border-left: none;
+    background-color: #fff;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.tel_call em{
+    display: block;
+    position: relative;
+    left: 116px;
+    top: 0;
+    width: 20px;
+    height:20px;
+    background: url("/public/images/tel_close.png");
+    background-size: cover;
+    cursor: pointer;
+}
+.tel_call p{
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    font-weight: bold;
+    margin: 5px 0;
+}
+.tel_call i{
+    display: block;
+    margin: 5px auto;
+    width:120px;
+    height: 90px;
+    background: url("/public/images/tel.png");
+    background-size: cover;
+}
+.tel_call input{
+    width: 120px;
+    margin: 0 0 0 6px;
+    font-size: 12px;
+    border: 1px solid #337ab7;
+}
+.tel_call input:focus{
+    outline: none;
+    border: 1px solid #259;
+}
+.tel_call .tel_on{
+    width: 100px;
+    height:25px;
+    margin: 10px auto;
+    background-color: #337ab7;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 25px;
+    text-align: center;
+    cursor: pointer;
+}
+
+/*
+    电话图标栏
+*/
+.tel_logo{
+    position: fixed;
+    left:0;
+    top: 40%;
+    width: 40px;
+    height: 100px;
+    background-color: #337ab7;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    cursor: pointer;
+}
+.tel_logo .tel_title{
+    margin: 5px 0 0;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    line-height: 18px;
+}
+.tel_logo i{
+    display: block;
+    width: 30px;
+    height: 36px;
+    background: url("/public/images/tel_logo.png") no-repeat;
+    background-size: cover;
+    margin: 10px auto;
 }
