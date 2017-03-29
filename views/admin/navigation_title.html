@@ -13,6 +13,7 @@
         <th>ID</th>
         <th>导航名称</th>
         <th>内容标题</th>
+        <th>内容标题顺序</th>
         <th>操作</th>
     </tr>
     {% for nav_title in Nav_titles %}
@@ -20,6 +21,7 @@
         <td>{{nav_title._id.toString()}}</td>
         <td>{{nav_title.navigation.Nav_name}}</td>
         <td>{{nav_title.Nav_title}}</td>
+        <td>{{nav_title.Nav_title_order}}</td>
         <td>
             <a href="/admin/navigation/title/edit?id={{nav_title._id.toString()}}">修改</a>
              | <a href="/admin/navigation/title/delete?id={{nav_title._id.toString()}}">删除</a>

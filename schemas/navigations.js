@@ -15,5 +15,9 @@ module.exports = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    Nav_url: String
+    Nav_url: String,
+    Nav_count:{
+        type:Number,
+        default:0
+    }
 });

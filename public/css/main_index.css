@@ -78,6 +78,7 @@ body{
     position: absolute;
     top: 25px;
     left: 50%;
+    white-space: nowrap;
 }
 .container .ban .banlist li{
     margin-left: 0;
@@ -240,6 +241,7 @@ body{
     list-style: none;
     padding: 0 0 0 230px;
     height: 41px;
+    float: left;
     overflow: hidden;
 }
 .menu .navigation .nav_head{
@@ -259,12 +261,12 @@ body{
 }
 .menu .navigation .nav_content{
     position: absolute;
-    width: 770px;
     top: 41px;
-    left:230px;
+    left: 230px;
     background-color: white;
     padding: 15px;
     display: none;
+    z-index: 1;
 }
 .menu .navigation .nav_content .nav_part{
     width:100%;
@@ -280,7 +282,7 @@ body{
 }
 .menu .navigation .nav_list{
     padding: 0 30px 10px;
-    width: 510px;
+    width: 650px;
     margin: 0 0 0 40px;
     list-style: none;
     float: left;
@@ -1346,6 +1348,7 @@ body{
     border-top-right-radius: 5px;
     overflow: hidden;
     cursor: pointer;
+    z-index: 1;
 }
 .tel_logo .tel_title{
     margin: 5px 0 0;

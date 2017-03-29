@@ -118,6 +118,19 @@
             {% for navigation in navigations %}
             <li class="nav_head">
                 <a href="{{navigation.Nav_url}}">{{navigation.Nav_name}}</a>
+                {% if navigation.Nav_count %}
+                <div class="nav_content">
+                {% for nav_title in nav_titles %}
+                    {% if nav_title.navigation._id.toString() == navigation._id.toString() %}
+                        <div class="nav_part">
+                            <h4>{{nav_title.Nav_title}}</h4>
+                        </div>
+                    {%else%}
+                    {%endif%}
+                {% endfor %}
+                </div>
+                {% else %}
+                {% endif %}
             </li>
             {% endfor %}
 <!--

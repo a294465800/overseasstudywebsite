@@ -17,5 +17,13 @@ module.exports = new mongoose.Schema({
     },
 
     //导航内容标题
-    Nav_title: String
+    Nav_title: String,
+    Nav_title_order: {
+        type: Number,
+        default: 0
+    },
+    Nav_title_count:{
+        type: Number,
+        default: 0
+    }
 });

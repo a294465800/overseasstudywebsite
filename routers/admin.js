@@ -446,7 +446,7 @@ router.get('/navigation/delete',function (req, res) {
 });
 
 /*
-* 导航内容列表
+* 导航内容标题列表
 * */
 router.get('/navigation/title',function (req, res) {
 
@@ -471,7 +471,7 @@ router.get('/navigation/title',function (req, res) {
         /*
          * 从数据库中读取所有用户数据
          * */
-        Nav_title.find().sort({navigation:1}).limit(limit).skip(skip).populate('navigation').then(function (Nav_titles) {
+        Nav_title.find().sort({navigation:1,Nav_title_order:1}).limit(limit).skip(skip).populate('navigation').then(function (Nav_titles) {
 
             res.render('admin/navigation_title', {
                 userInfo: req.userInfo,
@@ -503,16 +503,18 @@ router.get('/navigation/title/add',function (req, res) {
 * 导航内容标题保存页面
 * */
 router.post('/navigation/title/add',function (req, res) {
+    var navigation = req.body.navigation || '',
+        title = req.body.Nav_title || '',
+        order = Number(req.body.Nav_title_order);
 
-    console.log(req.body);
-    if(req.body.navigation == ''){
+    if(navigation == ''){
         res.render('admin/error',{
             userInfo: req.userInfo,
             message: '导航分类不能为空！'
         });
         return ;
     }
-    if(req.body.Nav_title == ''){
+    if(title == ''){
         res.render('admin/error',{
             userInfo: req.userInfo,
             message: '导航内容标题不能为空！'
@@ -520,16 +522,40 @@ router.post('/navigation/title/add',function (req, res) {
         return ;
     }
 
-    //保存
-    new Nav_title({
-        navigation: req.body.navigation,
-        Nav_title: req.body.Nav_title
-    }).save().then(function (rs) {
-        res.render('admin/success',{
-            userInfo: req.userInfo,
-            message: '导航内容标题保存成功！',
-            url: '/admin/navigation/title'
-        });
+
+    Nav_title.findOne({
+        navigation: navigation,
+        Nav_title: title
+    }).then(function (sameTitle) {
+        if(sameTitle){
+            res.render('admin/error',{
+                userInfo: req.userInfo,
+                message: '导航内容标题不能重复！'
+            });
+            return Promise.reject();
+        }else{
+            new Nav_title({
+                navigation: navigation,
+                Nav_title: title,
+                Nav_title_order: order
+            }).save().then(function () {
+                Nav_title.find({
+                    navigation: navigation
+                }).count().then(function (rs) {
+                    Navigation.update({
+                        _id: navigation
+                    },{
+                        Nav_count: rs
+                    }).then(function () {
+                        res.render('admin/success',{
+                            userInfo: req.userInfo,
+                            message: '导航内容标题保存成功！',
+                            url: '/admin/navigation/title'
+                        });
+                    });
+                });
+            })
+        }
     });
 });
 
@@ -570,9 +596,8 @@ router.get('/navigation/title/edit',function (req, res) {
 * */
 router.post('/navigation/title/edit',function (req, res) {
     var id = req.query.id || '',
-        title = req.body.Nav_title || '';
-
-    // console.log(req.body);
+        title = req.body.Nav_title || '',
+        order = Number(req.body.Nav_title_order);
 
     Nav_title.findOne({
         _id: id
@@ -609,7 +634,8 @@ router.post('/navigation/title/edit',function (req, res) {
                 _id: id
             },{
                 navigation: req.body.navigation,
-                Nav_title: title
+                Nav_title: title,
+                Nav_title_order: order
             });
         }
     }).then(function (rs) {
@@ -621,7 +647,39 @@ router.post('/navigation/title/edit',function (req, res) {
     });
 });
 
+/*
+* 删除导航内容标题
+* */
+router.get('/navigation/title/delete',function (req, res) {
+    //获取要删除的分类的id
+    var id = req.query.id || '',
+        navigation_id;
 
+    Nav_title.findById({
+        _id: id
+    }).then(function (rs) {
+        navigation_id = rs.navigation;
+        Nav_title.remove({
+            _id: id
+        }).then(function () {
+            Nav_title.find({
+                navigation: navigation_id
+            }).count().then(function (rs) {
+                Navigation.update({
+                    _id: navigation_id
+                }, {
+                    Nav_count: rs
+                }).then(function () {
+                    res.render('admin/success', {
+                        userInfo: req.userInfo,
+                        message: '删除成功!',
+                        url: '/admin/navigation/title'
+                    });
+                });
+            });
+        });
+    });
+});
 
 
 //返回出去给app.js
