@@ -9,7 +9,19 @@ var express = require('express'),
     router = express.Router(),
     User = require('../models/User'),
     Navigation = require('../models/Navigation'),
-    Nav_title = require('../models/Nav_title');
+    Nav_title = require('../models/Nav_title'),
+    Nav_content = require('../models/Nav_content'),
+    data;
+
+/*
+* 通用数据
+* */
+router.use(function (req, res, next) {
+    data = {
+        userInfo: req.userInfo
+    };
+    next();
+});
 
 /*
 * 首页
@@ -506,8 +518,8 @@ router.post('/navigation/title/add',function (req, res) {
     var navigation = req.body.navigation || '',
         title = req.body.Nav_title || '',
         order = Number(req.body.Nav_title_order);
-
-    if(navigation == ''){
+    console.log(navigation);
+    /*if(navigation == ''){
         res.render('admin/error',{
             userInfo: req.userInfo,
             message: '导航分类不能为空！'
@@ -556,7 +568,7 @@ router.post('/navigation/title/add',function (req, res) {
                 });
             })
         }
-    });
+    });*/
 });
 
 
@@ -681,6 +693,59 @@ router.get('/navigation/title/delete',function (req, res) {
     });
 });
 
+
+/*
+* 标题内容列表
+* */
+router.get('/navigation/title/content',function (req, res) {
+
+    data.page = Number(req.query.page || 1);   //在实际开发可能还要对page进行判断，是否为数字之类
+    data.limit = 10;
+    data.pages = 0;
+
+    //获取数据库中的条数
+    Nav_content.count().then(function (count) {
+
+        data.count = count;
+        //计算总页数
+        data.pages = Math.ceil(count / data.limit);
+
+        //取值不能超过pages
+        data.page = Math.min(data.page, data.pages);
+
+        //取值不能小于1
+        data.page = Math.max(data.page, 1);
+
+        data.skip = (data.page - 1) * data.limit;
+
+        /*
+         * 从数据库中读取所有用户数据
+         * */
+        Nav_content.find().sort({navigation:1,nav_title:1,Nav_content_order:1}).limit(data.limit).skip(data.skip).populate(['navigation','nav_title']).then(function (Nav_contents) {
+            data.Nav_contents = Nav_contents;
+            data.forPage = 'navigation/title/content';
+            res.render('admin/navigation_title_content', data);
+        });
+    });
+});
+
+
+/*
+* 标题内容添加
+* */
+router.get('/navigation/title/content/add',function (req, res) {
+
+    Nav_title.find().populate('navigation').sort({navigation:1,Nav_title_order:1}).then(function (nav_titles) {
+        data.nav_titles = nav_titles;
+    }).then(function () {
+        res.render('admin/navigation_title_content_add',data);
+    });
+/*    Navigation.find().sort({Nav_order:1}).then(function (navigations) {
+        data.navigations = navigations;
+    }).then(function () {
+
+    });*/
+});
 
 //返回出去给app.js
 module.exports = router;
