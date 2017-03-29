@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+<ol class="breadcrumb">
+    <li><a href="/">官网首页</a></li>
+    <li><span>导航添加</span></li>
+</ol>
+
+<h3 style="font-size: 24px;font-weight: bold; line-height: 50px;margin-bottom: 20px;border-bottom: 1px solid #ccc">导航添加</h3>
+
+<form role="form" method="post">
+    <div class="form-group">
+        <label for="Nav_name">导航名称：</label>
+        <input style="margin: 5px 0 20px" type="text" class="form-control" id="Nav_name" placeholder="请输入导航名称" name="Nav_name">
+        <label for="Nav_order">导航顺序：</label>
+        <input style="margin: 5px 0 20px" type="text" class="form-control" id="Nav_order" placeholder="填数字，数字小的导航展示在前，首页数字为0，默认为0" name="Nav_order">
+        <label for="Nav_url">导航链接：</label>
+        <input style="margin: 5px 0 20px" type="text" class="form-control" id="Nav_url" placeholder="导航要跳转的页面，首页的是'/',默认跳转首页" name="Nav_url">
+    </div>
+    <button type="submit" class="btn btn-default">提交</button>
+</form>
+
+{% endblock %}

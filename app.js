@@ -84,6 +84,7 @@ app.use('/',require('./routers/main'));
 mongoose.connect('mongodb://localhost:27019/overseasstudywebsite',function (err) {
     if(err){
         console.log('数据库连接失败');
+        console.log(err);
     }else{
         console.log('数据库连接成功');
         //监听http请求

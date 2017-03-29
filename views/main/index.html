@@ -10,6 +10,7 @@
     <script src="/public/js/jquery-3.2.0.min.js"></script>
     <script src="/public/js/bootstrap.min.js"></script>
     <script src="/public/js/index.js"></script>
+    <script src="/public/js/action.js"></script>
 </head>
 <body>
 
@@ -114,9 +115,12 @@
             </ul>
         </div>
         <ul class="navigation">
+            {% for navigation in navigations %}
             <li class="nav_head">
-                <a href="">首页</a>
+                <a href="{{navigation.Nav_url}}">{{navigation.Nav_name}}</a>
             </li>
+            {% endfor %}
+<!--
             <li class="nav_head">
                 <a href="">英国本科留学</a>
                 <div class="nav_content">
@@ -173,6 +177,7 @@
             <li class="nav_head">
                 <a href="">关于我们</a>
             </li>
+-->
         </ul>
     </div>
 </nav>
@@ -883,6 +888,29 @@
     <a href="" class="teacher_more">查看更多</a>
 </section>
 <!--教师阵容结束-->
+
+<!--联系方式开始-->
+<section class="connect">
+    <div class="section_title">
+        <p>联系我们</p>
+        <span>咨询电话：000-000-0000</span>
+    </div>
+    <div class="connect_content clearfix">
+        <i class="company_img"></i>
+        <div class="connect_right">
+            <h3>海外留学</h3>
+            <div class="address">
+                <div class="left">
+                    <p>地址：北京市xx区xx广场3层</p>
+                    <p>电话：000-00000000</p>
+                    <p>邮件咨询：jack7770126@126.com</p>
+                </div>
+                <i></i><i></i>
+            </div>
+        </div>
+    </div>
+</section>
+<!--联系方式结束-->
 
 <!--底部版权开始-->
 <footer class="footer">

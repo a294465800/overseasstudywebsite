@@ -6,12 +6,16 @@
 * */
 
 var express = require('express'),
-    router = express.Router();
+    router = express.Router(),
+    Navigation = require('../models/Navigation');
 
 router.get('/',function (req, res) {
-    res.render('main/index',{
-        //传入数据给模版
-        userInfo: req.userInfo
+    Navigation.find().sort({Nav_order:1}).then(function (rs) {
+        res.render('main/index',{
+            //传入数据给模版
+            userInfo: req.userInfo,
+            navigations: rs
+        });
     });
 });
 
