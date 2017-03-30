@@ -9,7 +9,10 @@ var express = require('express'),
     router = express.Router();
 
 //数据库
-var User = require('../models/User');
+var User = require('../models/User'),
+    Navigation = require('../models/Navigation'),
+    Nav_title = require('../models/Nav_title'),
+    Nav_content = require('../models/Nav_content');
 
 //返回统一格式
 var responseData;
@@ -184,6 +187,47 @@ router.get('/user/logout',function (req, res) {
     res.json(responseData);
 });
 
+/*
+* 标题内容二级联动菜单
+* */
+router.post('/navigation/title/content/add',function (req, res) {
+    var navigation = req.body.navigation;
+    if(navigation == ''){
+    }else{
+        Nav_title.find({
+            navigation: navigation
+        }).sort({Nav_title_order:1}).then(function (rs) {
+            responseData.nav_titles = rs;
+            res.json(responseData);
+        })
+    }
+});
+
+/*
+* 标题内容修改二级联动菜单
+* */
+router.post('/navigation/title/content/edit',function (req, res) {
+    var navigation = req.body.navigation,
+        id = req.headers.referer,
+        re = /.*id=([^&]*).*/;
+        id = id.replace(re,"$1");
+
+    if(navigation == ''){
+    }else{
+        Nav_title.find({
+            navigation: navigation
+        }).populate('navigation').sort({Nav_title_order:1}).then(function (rs) {
+            responseData.nav_titles = rs;
+        }).then(function () {
+            Nav_content.findOne({
+                _id: id
+            }).populate('nav_title').then(function (nav_content) {
+                responseData.nav_content = nav_content;
+                res.json(responseData);
+            });
+        });
+    }
+});
 
 //返回出去给app.js
 module.exports = router;

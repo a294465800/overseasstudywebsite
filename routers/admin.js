@@ -518,8 +518,7 @@ router.post('/navigation/title/add',function (req, res) {
     var navigation = req.body.navigation || '',
         title = req.body.Nav_title || '',
         order = Number(req.body.Nav_title_order);
-    console.log(navigation);
-    /*if(navigation == ''){
+    if(navigation == ''){
         res.render('admin/error',{
             userInfo: req.userInfo,
             message: '导航分类不能为空！'
@@ -533,7 +532,6 @@ router.post('/navigation/title/add',function (req, res) {
         });
         return ;
     }
-
 
     Nav_title.findOne({
         navigation: navigation,
@@ -568,7 +566,7 @@ router.post('/navigation/title/add',function (req, res) {
                 });
             })
         }
-    });*/
+    });
 });
 
 
@@ -721,7 +719,7 @@ router.get('/navigation/title/content',function (req, res) {
         /*
          * 从数据库中读取所有用户数据
          * */
-        Nav_content.find().sort({navigation:1,nav_title:1,Nav_content_order:1}).limit(data.limit).skip(data.skip).populate(['navigation','nav_title']).then(function (Nav_contents) {
+        Nav_content.find().populate(['navigation','nav_title']).sort({navigation:1,nav_title:1,Nav_content_order:1}).limit(data.limit).skip(data.skip).then(function (Nav_contents) {
             data.Nav_contents = Nav_contents;
             data.forPage = 'navigation/title/content';
             res.render('admin/navigation_title_content', data);
@@ -735,16 +733,108 @@ router.get('/navigation/title/content',function (req, res) {
 * */
 router.get('/navigation/title/content/add',function (req, res) {
 
-    Nav_title.find().populate('navigation').sort({navigation:1,Nav_title_order:1}).then(function (nav_titles) {
-        data.nav_titles = nav_titles;
-    }).then(function () {
-        res.render('admin/navigation_title_content_add',data);
-    });
-/*    Navigation.find().sort({Nav_order:1}).then(function (navigations) {
+    Navigation.find().sort({Nav_order:1}).then(function (navigations) {
         data.navigations = navigations;
-    }).then(function () {
+        res.render('admin/navigation_title_content_add',data);
+   /* }).then(function () {
+        Nav_title.find().populate('navigation').sort({navigation:1,Nav_title_order:1}).then(function (nav_titles) {
+            data.nav_titles = nav_titles;
+        }).then(function () {
+            res.render('admin/navigation_title_content_add',data);
+        });*/
+    });
+});
 
-    });*/
+/*
+* 标题内容添加保存
+* */
+router.post('/navigation/title/content/add',function (req, res) {
+    var navigation = req.body.navigation || '',
+        nav_title = req.body.nav_title || '',
+        Nav_content_name = req.body.Nav_content_name || '',
+        Nav_content_url = req.body.Nav_content_url || '/',
+        Nav_content_order = Number(req.body.Nav_content_order);
+
+    if(navigation == '' || nav_title == ''){
+        data.message = '导航名称或者导航标题不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    if(Nav_content_name == ''){
+        data.message = '标题内容不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    Nav_content.findOne({
+        navigation: navigation,
+        nav_title: nav_title,
+        Nav_content_name: Nav_content_name
+    }).then(function (sameName) {
+        if(sameName){
+            data.message = '标题内容不能重复！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else{
+            new Nav_content({
+                navigation: navigation,
+                nav_title: nav_title,
+                Nav_content_name: Nav_content_name,
+                Nav_content_order: Nav_content_order,
+                Nav_content_url: Nav_content_url
+            }).save().then(function () {
+                Nav_content.find({
+                    navigation: navigation,
+                    nav_title: nav_title
+                }).count().then(function (count) {
+                    Nav_title.update({
+                        _id: nav_title
+                    },{
+                        Nav_title_count: count
+                    }).then(function () {
+                        data.message = '标题内容保存成功！';
+                        data.url = '/admin/navigation/title/content';
+                        res.render('admin/success',data);
+                    });
+                });
+            });
+        }
+    });
+/*
+    console.log(navigation);
+    console.log(nav_title);
+*/
+});
+
+/*
+* 标题内容修改
+* */
+router.get('/navigation/title/content/edit',function (req, res) {
+    var id = req.query.id || '';
+
+    Navigation.find().sort({Nav_order:1}).then(function (rs) {
+        data.navigations = rs;
+        return Nav_content.findOne({
+            _id:id
+        }).populate(['navigation','nav_title']);
+    }).then(function (nav_content) {
+        if(!nav_content){
+            data.message = '导航内容标题不存在！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else {
+            data.nav_content = nav_content;
+            Nav_content.findById(id).populate(['navigation','nav_title']).then(function (rs) {
+                Nav_title.find({
+                    navigation: rs.navigation._id
+                }).populate(['navigation','nav_title']).sort({Nav_title_order: 1}).then(function (rs) {
+                    data.nav_titles = rs;
+                    res.render('admin/navigation_title_content_edit',data);
+                });
+            });
+        }
+    });
 });
 
 //返回出去给app.js

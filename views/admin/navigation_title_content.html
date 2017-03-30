@@ -13,14 +13,16 @@
         <th>导航名称</th>
         <th>标题</th>
         <th>标题内容</th>
+        <th>标题url</th>
         <th>标题内容顺序</th>
         <th>操作</th>
     </tr>
     {% for nav_content in Nav_contents %}
     <tr>
         <td>{{nav_content.navigation.Nav_name}}</td>
-        <td>{{nav_content.Nav_title}}</td>
-        <td>{{nav_content.Nav_title_name}}</td>
+        <td>{{nav_content.nav_title.Nav_title}}</td>
+        <td>{{nav_content.Nav_content_name}}</td>
+        <td>{{nav_content.Nav_content_url}}</td>
         <td>{{nav_content.Nav_content_order}}</td>
         <td>
             <a href="/admin/navigation/title/content/edit?id={{nav_content._id.toString()}}">修改</a>

@@ -22,10 +22,13 @@ module.exports = new mongoose.Schema({
     },
 
     //标题内容名称
-    Nav_title_name: String,
+    Nav_content_name: String,
     Nav_content_order: {
         type: Number,
         default: 0
     },
-    Nav_content_url: String
+    Nav_content_url: {
+        type: String,
+        default: '/'
+    }
 });

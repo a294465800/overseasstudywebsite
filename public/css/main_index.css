@@ -6,10 +6,10 @@ body{
 .big{
     background: url("../images/banner.png") no-repeat top center;
     width: 100%;
+    min-width: 1140px;
+    margin: 0 auto;
     background-size: cover;
     height: 180px;
-    top: 0;
-    left: 0;
 }
 .hold{
     width: 100%;
@@ -39,7 +39,7 @@ body{
     margin: 0;
     font-size: 20px;
     position: absolute;
-    left: 0px;
+    left: 0;
     top: 10px;
 }
 #logo img{
@@ -185,7 +185,8 @@ body{
 */
 .outer{
     width: 100%;
-    margin-top: 20px;
+    min-width: 1140px;
+    margin: 20px auto 0;
 }
 .menu{
     width: 1140px;
@@ -199,7 +200,6 @@ body{
     height: 460px;
     position: absolute;
     z-index: 1;
-    overflow: hidden;
 }
 .menu .server h3{
     line-height: 40px;
@@ -309,10 +309,11 @@ body{
     position: relative;
 }
 .ban_bg .bg_part li a{
-    margin-top: -16px;
+    margin: -16px auto 0;
     padding: 0;
     display: block;
     width: 100%;
+    min-width: 1140px;
     height: 420px;
     background: url("http://liuxue.zmnedu.com/static/index/images/ban_c.jpg") no-repeat top center;
 }
@@ -345,21 +346,24 @@ body{
 */
 .ban_foot{
     width:100%;
+    min-width: 1140px;
+    margin: 0 auto;
     height:75px;
     background-color: #f4f4f8;
-    position: relative;
     overflow: hidden;
 }
 .ban_foot .ban_item{
-    position: relative;
-    left: 50%;
-    float: left;
+    width: 1140px;
+    margin:  0 auto;
+    overflow: hidden;
 }
 .ban_foot .ban_item ul{
-    position: relative;
-    left: -50%;
     list-style: none;
     padding: 20px 0;
+    overflow: hidden;
+    height: 78px;
+    width: 1045px;
+    margin: 0 auto;
 }
 .ban_foot .ban_item ul li{
     float: left;
@@ -1167,6 +1171,8 @@ body{
 */
 .footer{
     width:100%;
+    min-width: 1140px;
+    margin: 0 auto;
     background-color: #323232;
 }
 .footer .catalog{
@@ -1233,6 +1239,8 @@ body{
 */
 .friend_link{
     width: 100%;
+    min-width: 1140px;
+    margin: 0 auto;
     background-color: #000;
     position: relative;
 }
