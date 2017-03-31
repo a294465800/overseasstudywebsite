@@ -124,6 +124,17 @@
                     {% if nav_title.navigation._id.toString() == navigation._id.toString() %}
                         <div class="nav_part">
                             <h4>{{nav_title.Nav_title}}</h4>
+                            {% if nav_title.Nav_title_count %}
+                            <ul class="nav_list clearfix">
+                                {% for nav_content in nav_contents %}
+                                    {% if nav_content.nav_title._id.toString() == nav_title._id.toString() %}
+                                        <li><a href="{{nav_content.Nav_content_url}}">{{nav_content.Nav_content_name}}</a></li>
+                                    {% else %}
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                            {% endif %}
                         </div>
                     {%else%}
                     {%endif%}
@@ -201,12 +212,14 @@
     <ul class="bg_part">
         <li><a href="#"></a></li>
     </ul>
-    <ul class="bg_btn">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
+    <div class="extra">
+        <ul class="bg_btn">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
 </div>
 <!--图片轮转结束-->
 

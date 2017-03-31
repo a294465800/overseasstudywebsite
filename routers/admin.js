@@ -60,7 +60,7 @@ router.get('/user',function (req, res) {
      * */
 
     var page = Number(req.query.page || 1),   //在实际开发可能还要对page进行判断，是否为数字之类
-        limit = 10,
+        limit = 20,
         pages = 0;
 
     //获取数据库中的条数
@@ -463,7 +463,7 @@ router.get('/navigation/delete',function (req, res) {
 router.get('/navigation/title',function (req, res) {
 
     var page = Number(req.query.page || 1),   //在实际开发可能还要对page进行判断，是否为数字之类
-        limit = 10,
+        limit = 20,
         pages = 0;
 
     //获取数据库中的条数
@@ -698,7 +698,7 @@ router.get('/navigation/title/delete',function (req, res) {
 router.get('/navigation/title/content',function (req, res) {
 
     data.page = Number(req.query.page || 1);   //在实际开发可能还要对page进行判断，是否为数字之类
-    data.limit = 10;
+    data.limit = 20;
     data.pages = 0;
 
     //获取数据库中的条数
@@ -836,6 +836,88 @@ router.get('/navigation/title/content/edit',function (req, res) {
         }
     });
 });
+
+/*
+* 标题内容修改保存
+* */
+router.post('/navigation/title/content/edit',function (req, res) {
+    var id = req.query.id || '',
+        navigation = req.body.navigation || '',
+        nav_title = req.body.nav_title || '',
+        Nav_content_name = req.body.Nav_content_name,
+        Nav_content_url = req.body.Nav_content_url,
+        Nav_content_order = Number(req.body.Nav_content_order);
+
+    if(navigation == '' || nav_title == ''){
+        data.message = '导航或者导航标题不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    if(Nav_content_name == ''){
+        data.message = '标题内容不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    Nav_content.findOne({
+        _id: {$ne:id},
+        navigation: navigation,
+        nav_title: nav_title,
+        Nav_content_name: Nav_content_name
+    }).populate(['navigation','nav_title']).then(function (rs) {
+        if(rs){
+            data.message = '标题内容不能重复！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else{
+            return Nav_content.update({
+                _id: id
+            },{
+                navigation: navigation,
+                nav_title: nav_title,
+                Nav_content_name: Nav_content_name,
+                Nav_content_order: Nav_content_order,
+                Nav_content_url: Nav_content_url
+            });
+        }
+    }).then(function () {
+        data.message = '修改成功！';
+        data.url = '/admin/navigation/title/content';
+        res.render('admin/success',data);
+    });
+});
+
+/*
+* 标题内容删除
+* */
+router.get('/navigation/title/content/delete',function (req, res) {
+    var id = req.query.id,
+        nav_title_id;
+
+    Nav_content.findById({
+        _id: id
+    }).then(function (rs) {
+        nav_title_id = rs.nav_title;
+        Nav_content.remove({
+            _id: id
+        }).then(function () {
+            Nav_content.find({
+                nav_title: nav_title_id
+            }).count().then(function (rs) {
+                Nav_title.update({
+                    _id: nav_title_id
+                }, {
+                    Nav_title_count: rs
+                }).then(function () {
+                    data.message = '删除成功！';
+                    data.url = '/admin/navigation/title/content';
+                    res.render('admin/success',data);
+                });
+            });
+        });
+    });
+});
+
 
 //返回出去给app.js
 module.exports = router;

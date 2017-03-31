@@ -219,7 +219,7 @@ body{
     display: block;
 }
 .menu .server .server_part a:hover{
-    color: #CC6600;
+    color: #0066FF;
 }
 .menu .server .server_list{
     padding: 0;
@@ -263,29 +263,35 @@ body{
     position: absolute;
     top: 41px;
     left: 230px;
-    background-color: white;
-    padding: 15px;
+    background-color: rgba(255,255,255,.95);
+    padding: 0 15px;
+    border: 1px solid #337ab7;
     display: none;
     z-index: 1;
 }
 .menu .navigation .nav_content .nav_part{
     width:100%;
     float: left;
-    margin-bottom: 10px;
+    padding-top: 10px;
+    cursor: default;
 }
 .menu .navigation h4{
     font-size: 14px;
     font-weight: bold;
     float: left;
+    width: 8%;
     line-height: 28px;
     color: #000;
+    cursor: text;
 }
 .menu .navigation .nav_list{
-    padding: 0 30px 10px;
-    width: 650px;
+    padding: 0 25px 15px;
+    max-width: 680px;
+    width: 85%;
     margin: 0 0 0 40px;
     list-style: none;
     float: left;
+    cursor: default;
     border-bottom: 1px solid #ccc;
 }
 .menu .navigation .nav_list li{
@@ -299,7 +305,7 @@ body{
     color: #444;
 }
 .menu .navigation .nav_list li a:hover{
-    color: #cc6600;
+    color: #0066FF;
 }
 
 /*
@@ -308,14 +314,24 @@ body{
 .ban_bg{
     position: relative;
 }
+.ban_bg .bg_part{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
 .ban_bg .bg_part li a{
-    margin: -16px auto 0;
+    margin: 0 auto;
     padding: 0;
     display: block;
     width: 100%;
     min-width: 1140px;
     height: 420px;
     background: url("http://liuxue.zmnedu.com/static/index/images/ban_c.jpg") no-repeat top center;
+}
+.ban_bg .extra{
+    position: relative;
+    width: 1140px;
+    margin: 0 auto;
 }
 .ban_bg .bg_btn{
     position: absolute;
@@ -336,7 +352,7 @@ body{
     margin-right: 10px;
 }
 .ban_bg .bg_btn li:hover{
-    background-color: #cc6600;
+    background-color: #337ab7;
     cursor: pointer;
 }
 
