@@ -10,13 +10,18 @@
     <script src="/public/js/jquery-3.2.0.min.js"></script>
     <script src="/public/js/bootstrap.min.js"></script>
     <script src="/public/js/index.js"></script>
-    <script src="/public/js/action.js"></script>
+    <script src="/public/js/main_action.js"></script>
 </head>
 <body>
 
 <!--顶部logo加登录位置开始-->
 <div class="big">
-    <nav id="mainNav" class="navbar hold">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+<nav id="mainNav" class="navbar hold">
     <div class="container">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="ban">
@@ -53,7 +58,6 @@
         </div>
     </div>
 </nav>
-</div>
 <!--顶部结束-->
 
 <!--登录开始-->
@@ -110,6 +114,30 @@
                         <li><a href="">学习规划</a></li>
                         <li><a href="">封闭保分班</a></li>
                         <li><a href="">美国sat封闭保分班</a></li>
+                    </ul>
+                </li>
+                <li class="server_part clearfix">
+                    <a class="server_head clearfix" href="">背景提升</a>
+                    <ul class="server_list clearfix">
+                        <li><a href="">活动规划</a></li>
+                        <li><a href="">科研/实习项目</a></li>
+                        <li><a href="">名校夏季课程</a></li>
+                        <li><a href="">精英夏令营</a></li>
+                    </ul>
+                </li>
+                <li class="server_part clearfix">
+                    <a class="server_head clearfix" href="">留学申请</a>
+                    <ul class="server_list clearfix">
+                        <li><a href="">英国本科留学</a></li>
+                        <li><a href="">英国研究生留学</a></li>
+                        <li><a href="">英国中学留学</a></li>
+                        <li><a href="">英国本科转学</a></li>
+                    </ul>
+                </li>
+                <li class="server_part clearfix">
+                    <a class="server_head clearfix" href="">一站式服务</a>
+                    <ul class="server_list clearfix">
+                        <li><a href="">精英计划</a></li>
                     </ul>
                 </li>
             </ul>
@@ -210,7 +238,10 @@
 <!--图片轮转开始-->
 <div class="ban_bg">
     <ul class="bg_part">
-        <li><a href="#"></a></li>
+        <li><a href="/"></a></li>
+        <li><a href="/"></a></li>
+        <li><a href="/"></a></li>
+        <li><a href="/"></a></li>
     </ul>
     <div class="extra">
         <ul class="bg_btn">
@@ -228,28 +259,28 @@
     <div class="ban_item">
         <ul class="clearfix">
             <li>
-                <p style="background: url('/public/images/iconban_foot.png') no-repeat 0 0"></p>
+                <p style="background: url('/public/images/icon/iconban_foot.png') no-repeat 0 0"></p>
                 <div>
                     <h3>名校招生官方指导</h3>
                     <span>权威指导留学申请</span>
                 </div>
             </li>
             <li>
-                <p style="background: url('/public/images/iconban_foot.png') no-repeat -42px 0"></p>
+                <p style="background: url('/public/images/icon/iconban_foot.png') no-repeat -42px 0"></p>
                 <div>
                     <h3>独家活动规划</h3>
                     <span>稀缺活动/顶尖科研实习</span>
                 </div>
             </li>
             <li>
-                <p style="background: url('/public/images/iconban_foot.png') no-repeat -84px 0"></p>
+                <p style="background: url('/public/images/icon/iconban_foot.png') no-repeat -84px 0"></p>
                 <div>
                     <h3>高效辅导培训</h3>
                     <span>阶梯教程/内部教材</span>
                 </div>
             </li>
             <li style="border: none">
-                <p style="background: url('/public/images/iconban_foot.png') no-repeat -126px 0"></p>
+                <p style="background: url('/public/images/icon/iconban_foot.png') no-repeat -126px 0"></p>
                 <div>
                     <h3>经典名校案例</h3>
                     <span>80%学生进入TOP50名校</span>
@@ -266,47 +297,16 @@
         <h3>学校搜索</h3>
         <div class="school_search_content">
             <label for="school_name" class="search_icon">
-                <input type="text" id="school_name" placeholder="搜索你感兴趣的学校">
+                <input type="text" id="school_name" placeholder="搜索你感兴趣的学校" name="school_name">
             </label>
-            <a href="javascript:" class="search">搜索</a>
-            <p>根据国家查找学校：</p>
-            <div class="school_img">
-                <a href="" id="uk">
-                    <div>
-                        <i style="background: url('/public/images/search_icon.png') no-repeat"></i>
-                        <span>英国</span>
-                    </div>
-                </a>
-                <a href="" id="au">
-                    <div>
-                        <i style="background: url('/public/images/search_icon.png') no-repeat -60px top"></i>
-                        <span>澳洲</span>
-                    </div>
-                </a>
-                <a href="" id="usa">
-                    <div>
-                        <i style="background: url('/public/images/search_icon.png') no-repeat -120px top"></i>
-                        <span>美国</span>
-                    </div>
-                </a>
-                <a href="" id="nz">
-                    <div>
-                        <i style="background: url('/public/images/search_icon.png') no-repeat -180px top"></i>
-                        <span>新西兰</span>
-                    </div>
-                </a>
-                <a href="" id="jpn">
-                    <div>
-                        <i style="background: url('/public/images/search_icon.png') no-repeat -240px top"></i>
-                        <span>日本</span>
-                    </div>
-                </a>
-                <a href="" id="sg">
-                    <div>
-                        <i style="background: url('/public/images/search_icon.png') no-repeat -300px top"></i>
-                        <span>新加坡</span>
-                    </div>
-                </a>
+            <input type="button" class="search" value="搜索">
+            <p>根据地区查找学校：</p>
+            <div class="school_area">
+                <a href="">英格兰</a>
+                <a href="">苏格兰</a>
+                <a href="">威尔士</a>
+                <a href="">北爱尔兰</a>
+                <a href="">英格兰伦敦</a>
             </div>
         </div>
     </div>
@@ -318,66 +318,68 @@
         <div class="school_logo clearfix">
             <ul>
                 <li>
-                    <a href="" class="logo_img" style="background: url('/public/images/popularSchool.png') no-repeat left top"></a>
-                    <p><a href="" class="logo_cn">雷丁大学</a></p>
-                    <a href="" class="logo_en">University of Reading</a>
+                    <a href="" class="logo_img" style="background: url('/public/images/school/Cambridge.jpg') no-repeat left top"></a>
+                    <p><a href="" class="logo_cn">剑桥大学</a></p>
+                    <a href="" class="logo_en">University of Cambridge</a>
                 </li>
                 <li class="mid_logo">
-                    <a href="" class="logo_img" style="background: url('/public/images/popularSchool.png') no-repeat -130px top"></a>
-                    <p><a href="" class="logo_cn">贝尔法斯特女王大学</a></p>
-                    <a href="" class="logo_en">Queen's University Belfast</a>
+                    <a href="" class="logo_img" style="background: url('/public/images/school/Oxford.jpg') no-repeat left top"></a>
+                    <p><a href="" class="logo_cn">牛津大学</a></p>
+                    <a href="" class="logo_en">University of Oxford</a>
                 </li>
                 <li>
-                    <a href="" class="logo_img" style="background: url('/public/images/popularSchool.png') no-repeat -260px top"></a>
-                    <p><a href="" class="logo_cn">范德堡大学</a></p>
-                    <a href="" class="logo_en">Vanderbilt University</a>
+                    <a href="" class="logo_img" style="background: url('/public/images/school/St Andrews.jpg') no-repeat left top"></a>
+                    <p><a href="" class="logo_cn">圣安德鲁斯大学</a></p>
+                    <a href="" class="logo_en">The University of St Andrews</a>
                 </li>
             </ul>
         </div>
         <div class="school_logo clearfix">
             <ul>
                 <li>
-                    <a href="" class="logo_img" style="background: url('/public/images/popularSchool.png') no-repeat left -50px"></a>
-                    <p><a href="" class="logo_cn">加州大学伯克利分校</a></p>
-                    <a href="" class="logo_en">University of California Berkeley</a>
+                    <a href="" class="logo_img" style="background: url('/public/images/school/Durham.jpg') no-repeat left top"></a>
+                    <p><a href="" class="logo_cn">杜伦大学</a></p>
+                    <a href="" class="logo_en">Durham University</a>
                 </li>
                 <li class="mid_logo">
-                    <a href="" class="logo_img" style="background: url('/public/images/popularSchool.png') no-repeat -130px -50px"></a>
-                    <p><a href="" class="logo_cn">纽卡斯尔大学（澳大利亚）</a></p>
-                    <a href="" class="logo_en">University of Newcastle Australia</a>
+                    <a href="" class="logo_img" style="background: url('/public/images/school/Imperial.jpg') no-repeat left top"></a>
+                    <p><a href="" class="logo_cn">帝国理工学院</a></p>
+                    <a href="" class="logo_en">Imperial College London</a>
                 </li>
                 <li>
-                    <a href="" class="logo_img" style="background: url('/public/images/popularSchool.png') no-repeat -260px -50px"></a>
-                    <p><a href="" class="logo_cn">塔斯马尼亚大学</a></p>
-                    <a href="" class="logo_en">University of Tasmania</a>
+                    <a href="" class="logo_img" style="background: url('/public/images/school/London.jpg') no-repeat left top"></a>
+                    <p><a href="" class="logo_cn">伦敦大学学院</a></p>
+                    <a href="" class="logo_en">University College London</a>
                 </li>
             </ul>
         </div>
     </div>
     <div class="school_news">
         <div class="school_news_title clearfix">
-            <a href="" id="strategy">留学攻略</a>
+            <a href="">留学攻略</a>
             <p>|</p>
-            <a href="" id="consult">留学咨询</a>
+            <a href="">留学咨询</a>
         </div>
-        <div class="school_strategy">
-            <a href="" class="strategy_img"><img src="/public/images/school_strategy1.jpg" style="width: 310px;height: 100px;" alt=""></a>
-            <ul>
-                <li><a href="">名校本科生节 申请时间节点在这里！sssssssssssssssssssssssssssssssssssss</a></li>
-                <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
-                <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
-                <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
-                <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
-            </ul>
-        </div>
-        <div class="school_strategy" style="display: none">
-            <ul>
-                <li><a href="">名校本科生节 申请时间节点在这里！sssssssssssssssssssssssssssssssssssss</a></li>
-                <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
-                <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
-                <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
-                <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
-            </ul>
+        <div class="school_news_move">
+            <div class="school_strategy">
+                <a href="" class="strategy_img"><img src="/public/images/school_strategy1.jpg" style="width: 310px;height: 100px;" alt=""></a>
+                <ul>
+                    <li><a href="">名校本科生节 申请时间节点在这里！sssssssssssssssssssssssssssssssssssss</a></li>
+                    <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
+                    <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
+                    <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
+                    <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
+                </ul>
+            </div>
+            <div class="school_strategy" style="display: none">
+                <ul>
+                    <li><a href="">名校本科生节 申请时间节点在这里！sssssssssssssssssssssssssssssssssssss</a></li>
+                    <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
+                    <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
+                    <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
+                    <li><a href="">名校本科生节 申请时间节点在这里！</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>

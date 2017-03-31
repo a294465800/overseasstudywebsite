@@ -20,16 +20,14 @@ $(function () {
 
 
     /*
-    * 导航展示
+    * 导航展示宽度修改
     * */
-    var $nav_head = $('.nav_head');
-    $nav_head.on('mouseover',function () {
-        var width = $('.navigation').css('width');
-        width = parseInt(width) - 230;
-        $(this).find('.nav_content').css('width',width + 'px');
-        $(this).find('.nav_content').show();
-    });
-    $nav_head.on('mouseout',function () {
-        $(this).find('.nav_content').hide();
-    })
+    var $nav_head = $('.nav_head'),
+        width = $('.navigation').css('width'),
+        margin = - parseInt(width) / 2;
+    $nav_head.find('.nav_content').css('width',width);
+    $nav_head.find('.nav_content').css('margin-left',margin);
+
+
+
 });

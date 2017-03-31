@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}{% endblock %}
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/public/css/main_layout_index.css">
+    <link rel="stylesheet" href="/public/css/reset.css">
+    <script src="/public/js/jquery-3.2.0.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="/public/js/index.js"></script>
+    <script src="/public/js/school_action.js"></script>
+</head>
+<body>
+<!--顶部logo加登录位置开始-->
+<nav id="mainNav" class="navbar hold">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="ban">
+                <li id="logo">
+                    <img src="/public/images/logo.png" alt="海外留学网">
+                    <span>海外留学网</span>
+                </li>
+                <li>
+                    <a class="page-scroll" href="/features">特色</a>
+                </li>
+                {% if userInfo.id %}
+                <li id="success">
+                    <div id="username">欢迎！{{userInfo.username}}
+                        <ul class="banlist" id="banlist" style="display: none">
+                            <li><a href="javascript:">个人中心</a></li>
+                            <li><a href="javascript:">学习中心</a></li>
+                            {% if userInfo.isAdmin %}
+                            <li><a href="/admin" target="_blank">进入管理</a></li>
+                            {% else %}
+                            {% endif %}
+                            <li><a href="javascript:" id="logout">退出</a></li>
+                        </ul>
+                    </div>
+                </li>
+                {% else %}
+                <li>
+                    <a href="javascript:" id="register">注册</a>
+                </li>
+                <li>
+                    <a href="javascript:" id="login">登录</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--顶部结束-->
+
+<!--登录开始-->
+<div class="shade" style="display: none" id="loginBox">
+    <div class="login">
+        <span></span>
+        <h3>登录海外留学网</h3>
+        <label for="inputEmail" class="sr-only"></label>
+        <input type="text" class="form-control" id="inputEmail" name="username" placeholder="手机号/邮箱">
+        <label for="password" class="sr-only"></label>
+        <input type="password" id="password" class="form-control" name="password" placeholder="密码">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+        <p class="colWarning textCenter tips2"></p>
+        <ul class="zhuce">
+            <li><a href="javascript:">新用户注册</a></li>
+        </ul>
+    </div>
+</div>
+<!--登录结束-->
+
+<!--注册开始-->
+<div class="shade" style="display: none" id="registerBox">
+    <div class="register">
+        <span></span>
+        <h3>注册海外留学网帐号</h3>
+        <label for="inputEmail2" class="sr-only"></label>
+        <input type="text" class="form-control" id="inputEmail2" name="username">
+        <p class="colWarning textCenter phone">请填写手机号码或者邮箱</p>
+        <label for="password2" class="sr-only"></label>
+        <input type="password" id="password2" class="form-control" name="password">
+        <p class="colWarning textCenter password">密码6~16个字符，区分大小写</p>
+        <label for="repassword2" class="sr-only"></label>
+        <input type="password" id="repassword2" class="form-control" name="repassword">
+        <p class="colWarning textCenter repassword">请再次填写密码</p>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">免费注册</button>
+        <p class="tips"><a href="javascript:"></a></p>
+        <ul class="denglu">
+            <li><a href="javascript:">已有帐号登录</a></li>
+        </ul>
+    </div>
+</div>
+<!--注册结束-->
+
+<!--导航部分开始-->
+<nav class="outer clearfix">
+    <div class="menu clearfix">
+        <ul class="navigation">
+            {% for navigation in navigations %}
+            <li class="nav_head">
+                <a href="{{navigation.Nav_url}}">{{navigation.Nav_name}}</a>
+                {% if navigation.Nav_count %}
+                <div class="nav_content">
+                    {% for nav_title in nav_titles %}
+                    {% if nav_title.navigation._id.toString() == navigation._id.toString() %}
+                    <div class="nav_part">
+                        <h4>{{nav_title.Nav_title}}</h4>
+                        {% if nav_title.Nav_title_count %}
+                        <ul class="nav_list clearfix">
+                            {% for nav_content in nav_contents %}
+                            {% if nav_content.nav_title._id.toString() == nav_title._id.toString() %}
+                            <li><a href="{{nav_content.Nav_content_url}}">{{nav_content.Nav_content_name}}</a></li>
+                            {% else %}
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                    {%else%}
+                    {%endif%}
+                    {% endfor %}
+                </div>
+                {% else %}
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>
+<!--导航部分结束-->
+
+<div class="big_bg">
+    {% block big_bg %}{% endblock %}
+</div>
+
+{% block prepare %}{%endblock%}
+
+<!--底部版权开始-->
+<footer class="footer">
+    <div class="catalog">
+        <ul class="clearfix">
+            <li class="footer_part">
+                <p class="footer_title">留学服务</p>
+                <ul>
+                    <li><a href="">本科留学申请</a></li>
+                    <li><a href="">研究生留学申请</a></li>
+                    <li><a href="">高中留学申请</a></li>
+                    <li><a href="">本科转学申请</a></li>
+                </ul>
+            </li>
+            <li class="footer_part">
+                <p class="footer_title">考试培训</p>
+                <ul>
+                    <li><a href="">托福</a></li>
+                    <li><a href="">SAT</a></li>
+                    <li><a href="">SSAT</a></li>
+                    <li><a href="">ACT</a></li>
+                    <li><a href="">GRE</a></li>
+                </ul>
+            </li>
+            <li class="footer_part">
+                <p class="footer_title">培训课程</p>
+                <ul>
+                    <li><a href="">提分班课</a></li>
+                    <li><a href="">封闭班</a></li>
+                    <li><a href="">学习规划</a></li>
+                    <li><a href="">精英计划</a></li>
+                </ul>
+            </li>
+            <li class="footer_part company">
+                <p class="footer_title">各地分公司</p>
+                <ul>
+                    <li>
+                        <a href="">北京</a>
+                        <a href="">上海</a>
+                        <a href="">广州(广东)</a>
+                        <a href="">深圳(广东)</a>
+                    </li>
+                    <li>
+                        <a href="">沈阳(辽宁)</a>
+                        <a href="">武汉(湖北)</a>
+                        <a href="">西安(陕西)</a>
+                        <a href="">南京(江苏)</a>
+                        <a href="">郑州(河南)</a>
+                    </li>
+                    <li>
+                        <a href="">太原(山西)</a>
+                        <a href="">大连(辽宁)</a>
+                        <a href="">成都(四川)</a>
+                        <a href="">昆明(云南)</a>
+                        <a href="">青岛(山东)</a>
+                    </li>
+                    <li>
+                        <a href="">长春(吉林)</a>
+                        <a href="">杭州(浙江)</a>
+                        <a href="">重庆</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="footer_part last_part">
+                <p class="footer_title">社交媒体</p>
+                <ul>
+                    <li><a href="">海外留学官网微信</a></li>
+                    <li><a href="">海外留学官网微博</a></li>
+                    <li><a href="">海外留学移动官网</a></li>
+                    <li><a href="">关于我们</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="copyright clearfix">
+        <p>海外留学网&nbsp;&nbsp;版权所有</p>
+        <p>京ICP备00000000&nbsp;&nbsp;京公安备0000000000&nbsp;&nbsp;电话：010-00000000</p>
+        <p>Copyright&copy;2017&nbsp;hwlxue.com 海外留学网 All Rights Reserved</p>
+    </div>
+</footer>
+<!--底部版权结束-->
+
+<!--友情链接开始-->
+<div class="friend_link">
+    <div class="links clearfix">
+        <span>友情链接：</span>
+        <ul>
+            <li><a href="http://jquery.cuishifeng.cn/" target="_blank">jQuery API 中文文档</a></li>
+            <li><a href="http://nodejs.cn/api/" target="_blank">Node.js 中文文档</a></li>
+            <li><a href="http://www.bootcss.com/" target="_blank">Bootstrap 中文网</a></li>
+            <li><a href="http://glyphicons.com/" target="_blank">Glyphicon Halflings</a></li>
+            <li><a href="http://www.iqianduan.net/blog/how_to_use_swig" target="_blank">Swig 使用指南</a></li>
+            <li><a href="https://developer.mozilla.org/zh-CN/" target="_blank">Mozilla 开发者网络</a></li>
+        </ul>
+    </div>
+</div>
+<!--友情链接结束-->
+
+<!--电话咨询栏开始-->
+<div class="tel_call" style="display: none">
+    <em></em>
+    <p>免费电话咨询</p>
+    <i></i>
+    <input type="text" name="number" placeholder="请输入你的电话号码">
+    <div class="tel_on">立即免费通话</div>
+</div>
+<div class="tel_logo">
+    <div class="tel_title">免费通话</div>
+    <i></i>
+</div>
+<!--电话咨询栏结束-->
+
+</body>
+</html>

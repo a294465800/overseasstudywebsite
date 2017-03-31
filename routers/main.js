@@ -37,8 +37,19 @@ router.use(function (req, res, next) {
     });
 });
 
+/*
+* 首页
+* */
 router.get('/',function (req, res) {
     res.render('main/index',data);
+});
+
+
+/*
+* 学校搜索
+* */
+router.get('/school',function (req, res) {
+    res.render('main/school_index',data);
 });
 
 //返回出去给app.js
