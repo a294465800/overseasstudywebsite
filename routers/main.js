@@ -10,6 +10,8 @@ var express = require('express'),
     Navigation = require('../models/Navigation'),
     Nav_title = require('../models/Nav_title'),
     Nav_content = require('../models/Nav_content'),
+    Area = require('../models/Area'),
+    School = require('../models/School'),
     data;
 
 /*
@@ -17,24 +19,10 @@ var express = require('express'),
 * */
 router.use(function (req, res, next) {
     data = {
-        userInfo: req.userInfo,
-        navigations: [],
-        nav_titles: []
+        userInfo: req.userInfo
     };
 
-    Navigation.find().sort({Nav_order:1}).then(function (rs) {
-        data.navigations = rs;
-    }).then(function () {
-        Nav_title.find().populate('navigation').sort({navigation:1,Nav_title_order:1}).then(function (rs) {
-            data.nav_titles = rs;
-        }).then(function () {
-            Nav_content.find().populate(['navigation','nav_title']).sort({navigation:1,nav_title:1,Nav_content_order:1}).then(function (rs) {
-                data.nav_contents = rs;
-            }).then(function () {
-                next();
-            })
-        });
-    });
+    next();
 });
 
 /*
@@ -44,12 +32,22 @@ router.get('/',function (req, res) {
     res.render('main/index',data);
 });
 
+/*
+* 首页学校搜索
+* */
+router.post('/',function (req, res) {
+    res.render('main/school_index',data);
+});
 
 /*
-* 学校搜索
+* 全部学校
 * */
 router.get('/school',function (req, res) {
-    res.render('main/school_index',data);
+
+    School.find().populate('area').sort({School_rank:1}).then(function (schools) {
+        data.schools = schools;
+        res.render('main/school_index',data);
+    });
 });
 
 //返回出去给app.js

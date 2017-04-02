@@ -46,86 +46,18 @@
 
 <section class="school_bar clearfix">
     <ul>
+        {% for school in schools %}
         <li class="clearfix">
-            <a href="#" class="school_img"></a>
+            <a href="#" class="school_img" style="background: url('/public/images/school/{{school.School_url}}') no-repeat;"></a>
             <p title="综合排名" class="rank">
-                <span>综</span><span class="rank_num">2222</span>
+                <span>综</span><span class="rank_num">{{school.School_rank}}</span>
             </p>
-            <a href="#" class="school_zn">剑桥大学</a>
-            <a href="#" class="school_en">University of Cambridge</a>
-            <p class="area"><span>所在地:</span><span class="school_area">英格兰</span></p>
-            <p class="love">1</p>
+            <a href="#" class="school_zn">{{school.School_zn}}</a>
+            <a href="#" class="school_en">{{school.School_en}}</a>
+            <p class="area"><span>所在地:</span><span class="school_area">{{school.area.Area_name}}</span></p>
+            <p class="love">{{school.School_love}}</p>
         </li>
-        <li class="clearfix">
-            <a href="#" class="school_img"></a>
-            <p title="综合排名" class="rank">
-                <span>综</span><span class="rank_num">2222</span>
-            </p>
-            <a href="#" class="school_zn">剑桥大学</a>
-            <a href="#" class="school_en">University of Cambridge</a>
-            <p class="area"><span>所在地:</span><span class="school_area">英格兰</span></p>
-            <p class="love">222</p>
-        </li>
-        <li class="clearfix">
-            <a href="#" class="school_img"></a>
-            <p title="综合排名" class="rank">
-                <span>综</span><span class="rank_num">2222</span>
-            </p>
-            <a href="#" class="school_zn">剑桥大学</a>
-            <a href="#" class="school_en">University of Cambridge</a>
-            <p class="area"><span>所在地:</span><span class="school_area">英格兰</span></p>
-            <p class="love">3612</p>
-        </li>
-        <li class="clearfix">
-            <a href="#" class="school_img"></a>
-            <p title="综合排名" class="rank">
-                <span>综</span><span class="rank_num">2222</span>
-            </p>
-            <a href="#" class="school_zn">剑桥大学</a>
-            <a href="#" class="school_en">University of Cambridge</a>
-            <p class="area"><span>所在地:</span><span class="school_area">英格兰</span></p>
-            <p class="love">3612</p>
-        </li>
-        <li class="clearfix">
-            <a href="#" class="school_img"></a>
-            <p title="综合排名" class="rank">
-                <span>综</span><span class="rank_num">2222</span>
-            </p>
-            <a href="#" class="school_zn">剑桥大学</a>
-            <a href="#" class="school_en">University of Cambridge</a>
-            <p class="area"><span>所在地:</span><span class="school_area">英格兰</span></p>
-            <p class="love">3612</p>
-        </li>
-        <li class="clearfix">
-            <a href="#" class="school_img"></a>
-            <p title="综合排名" class="rank">
-                <span>综</span><span class="rank_num">2222</span>
-            </p>
-            <a href="#" class="school_zn">剑桥大学</a>
-            <a href="#" class="school_en">University of Cambridge</a>
-            <p class="area"><span>所在地:</span><span class="school_area">英格兰</span></p>
-            <p class="love">3612</p>
-        </li>
-        <li class="clearfix">
-            <a href="#" class="school_img"></a>
-            <p title="综合排名" class="rank">
-                <span>综</span><span class="rank_num">2222</span>
-            </p>
-            <a href="#" class="school_zn">剑桥大学</a>
-            <a href="#" class="school_en">University of Cambridge</a>
-            <p class="area"><span>所在地:</span><span class="school_area">英格兰</span></p>
-            <p class="love">3612</p>
-        </li>
-        <li class="clearfix">
-            <a href="#" class="school_img"></a>
-            <p title="综合排名" class="rank">
-                <span>综</span><span class="rank_num">2222</span>
-            </p>
-            <a href="#" class="school_zn">剑桥大学</a>
-            <a href="#" class="school_en">University of Cambridge</a>
-            <p class="area"><span>所在地:</span><span class="school_area">英格兰</span></p>
-            <p class="love">3612</p>
-        </li>
+        {% endfor %}
     </ul>
 </section>
 {%endblock%}

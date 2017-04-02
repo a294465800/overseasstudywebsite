@@ -3,6 +3,7 @@
 */
 .hold{
     width: 100%;
+    min-width: 1140px;
     margin: auto;
     background-color: rgba(0,0,0,.3);
     position: relative;

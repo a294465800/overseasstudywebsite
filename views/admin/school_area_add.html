@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+<ol class="breadcrumb">
+    <li><a href="/">官网首页</a></li>
+    <li><span>地区添加</span></li>
+</ol>
+
+<h3 style="font-size: 24px;font-weight: bold; line-height: 50px;margin-bottom: 20px;border-bottom: 1px solid #ccc">地区添加</h3>
+
+<form role="form" method="post">
+    <div class="form-group">
+        <label for="area_name">地区名称：</label>
+        <input style="margin: 5px 0 20px" type="text" class="form-control" id="area_name" placeholder="请输入地区名称" name="area_name">
+        <label for="area_order">地区顺序：</label>
+        <input style="margin: 5px 0 20px" type="text" class="form-control" id="area_order" placeholder="请输入地区顺序，顺序小的排前，默认为0" name="area_order">
+    </div>
+    <button type="submit" class="btn btn-default">提交</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+<ol class="breadcrumb">
+    <li><a href="/">官网首页</a></li>
+    <li><span>学校列表</span></li>
+</ol>
+
+<h3 style="font-size: 24px;font-weight: bold; line-height: 50px">学校列表</h3>
+
+<table class="table table-hover table-striped">
+    <tr>
+        <th>学校中文名称</th>
+        <th>学校英文名称</th>
+        <th>学校地区</th>
+        <th>学校排名</th>
+        <th>学校图片名称</th>
+        <th>操作</th>
+    </tr>
+    {% for school in schools %}
+    <tr>
+        <td>{{school.School_zn}}</td>
+        <td>{{school.School_en}}</td>
+        <td>{{school.area.Area_name}}</td>
+        <td>{{school.School_rank}}</td>
+        <td>{{school.School_url}}</td>
+        <td>
+            <a href="/admin/school/edit?id={{school._id.toString()}}">修改</a>
+             | <a href="/admin/school/delete?id={{school._id.toString()}}">删除</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{%include 'page.html'%}
+
+{% endblock %}

@@ -11,6 +11,8 @@ var express = require('express'),
     Navigation = require('../models/Navigation'),
     Nav_title = require('../models/Nav_title'),
     Nav_content = require('../models/Nav_content'),
+    Area = require('../models/Area'),
+    School = require('../models/School'),
     data;
 
 /*
@@ -41,7 +43,6 @@ router.get('/',function (req, res) {
         userInfo: req.userInfo
     });
 });
-
 
 /*
 * 用户管理
@@ -569,7 +570,6 @@ router.post('/navigation/title/add',function (req, res) {
     });
 });
 
-
 /*
 * 修改导航内容标题
 * */
@@ -691,7 +691,6 @@ router.get('/navigation/title/delete',function (req, res) {
     });
 });
 
-
 /*
 * 标题内容列表
 * */
@@ -727,7 +726,6 @@ router.get('/navigation/title/content',function (req, res) {
     });
 });
 
-
 /*
 * 标题内容添加
 * */
@@ -736,12 +734,6 @@ router.get('/navigation/title/content/add',function (req, res) {
     Navigation.find().sort({Nav_order:1}).then(function (navigations) {
         data.navigations = navigations;
         res.render('admin/navigation_title_content_add',data);
-   /* }).then(function () {
-        Nav_title.find().populate('navigation').sort({navigation:1,Nav_title_order:1}).then(function (nav_titles) {
-            data.nav_titles = nav_titles;
-        }).then(function () {
-            res.render('admin/navigation_title_content_add',data);
-        });*/
     });
 });
 
@@ -801,10 +793,6 @@ router.post('/navigation/title/content/add',function (req, res) {
             });
         }
     });
-/*
-    console.log(navigation);
-    console.log(nav_title);
-*/
 });
 
 /*
@@ -918,6 +906,256 @@ router.get('/navigation/title/content/delete',function (req, res) {
     });
 });
 
+/*
+* 地区列表
+* */
+router.get('/area',function (req, res) {
+    Area.find().sort({Area_order:1}).then(function (rs) {
+        data.areas = rs;
+        res.render('admin/school_area',data);
+    });
+});
+
+/*
+* 地区添加列表
+* */
+router.get('/area/add',function (req, res) {
+    res.render('admin/school_area_add',data);
+});
+
+/*
+* 地区添加列表保存
+* */
+router.post('/area/add',function (req, res) {
+    var area_name = req.body.area_name,
+        area_order = req.body.area_order;
+    if(area_name == ''){
+        data.message = '地区名称不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    new Area({
+        Area_name: area_name,
+        Area_order: area_order
+    }).save().then(function () {
+        data.message = '地区保存成功!';
+        data.url = '/admin/area';
+        res.render('admin/success',data);
+    });
+});
+
+/*
+* 学校信息列表
+* */
+router.get('/school',function (req, res) {
+
+    data.page = Number(req.query.page || 1);   //在实际开发可能还要对page进行判断，是否为数字之类
+    data.limit = 20;
+    data.pages = 0;
+
+    //获取数据库中的条数
+    School.count().then(function (count) {
+
+        data.count = count;
+        //计算总页数
+        data.pages = Math.ceil(count / data.limit);
+
+        //取值不能超过pages
+        data.page = Math.min(data.page, data.pages);
+
+        //取值不能小于1
+        data.page = Math.max(data.page, 1);
+
+        data.skip = (data.page - 1) * data.limit;
+
+        /*
+         * 从数据库中读取所有用户数据
+         * */
+        School.find().populate('area').sort({School_rank:1}).limit(data.limit).skip(data.skip).then(function (schools) {
+            data.schools = schools;
+            data.forPage = 'school';
+            res.render('admin/school_index', data);
+        });
+    });
+});
+
+/*
+* 学校添加
+* */
+router.get('/school/add',function (req, res) {
+
+    Area.find().sort({Area_order:1}).then(function (rs) {
+        data.areas = rs;
+        res.render('admin/school_add',data);
+    });
+});
+
+/*
+* 学校添加保存
+* */
+router.post('/school/add',function (req, res) {
+    var area_name = req.body.area_name || '',
+        school_zn = req.body.school_zn || '',
+        school_en = req.body.school_en || '',
+        school_rank = Number(req.body.school_rank),
+        school_url = req.body.school_url;
+
+    if(area_name == ''){
+        data.message = '学校地区不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    if(school_zn == '' || school_en == ''){
+        data.message = '学校名称不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    School.findOne({
+        School_zn: school_zn
+    }).then(function (rs) {
+        if(rs){
+            data.message = '学校中文名称不能重复！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else{
+            return School.findOne({
+                School_en: school_en
+            });
+        }
+    }).then(function (rs) {
+        if(rs){
+            data.message = '学校英文名称不能重复！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else{
+            return new School({
+                area: area_name,
+                School_zn: school_zn,
+                School_en: school_en,
+                School_rank: school_rank,
+                School_url: school_url
+            }).save();
+        }
+    }).then(function () {
+        return School.find({area:area_name}).count();
+    }).then(function (count) {
+        return Area.update({
+            _id:area_name
+        },{
+            Area_count: count
+        });
+    }).then(function (rs) {
+        data.message = '学校保存成功！';
+        data.url = '/admin/school';
+        res.render('admin/success',data);
+    });
+});
+
+/*
+* 学校修改
+* */
+router.get('/school/edit',function (req, res) {
+    var id = req.query.id || '';
+
+    Area.find().sort({Area_order:1}).then(function (rs) {
+        data.areas = rs;
+    }).then(function () {
+        return School.findById(id).populate('area');
+    }).then(function (rs) {
+        data.school = rs;
+        res.render('admin/school_edit',data);
+    });
+});
+
+/*
+* 学校修改保存
+* */
+router.post('/school/edit',function (req, res) {
+    var id = req.query.id || '',
+        area_name = req.body.area_name || '',
+        school_zn = req.body.school_zn || '',
+        school_en = req.body.school_en || '',
+        school_rank = Number(req.body.school_rank),
+        school_url = req.body.school_url;
+
+    if(area_name == ''){
+        data.message = '学校地区不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    if(school_zn == '' || school_en == ''){
+        data.message = '学校名称不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    School.findOne({_id: {$ne:id},School_zn: school_zn}).then(function (rs) {
+        if(rs){
+            data.message = '学校中文名称不能重复！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else{
+            return School.findOne({_id: {$ne:id},School_en: school_en});
+        }
+    }).then(function (rs) {
+        if(rs){
+            data.message = '学校英文名称不能重复！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else {
+            return School.update({
+                _id: id
+            },{
+                area: area_name,
+                School_zn: school_zn,
+                School_en: school_en,
+                School_rank: school_rank,
+                School_url: school_url
+            });
+        }
+    }).then(function () {
+        data.message = '学校修改成功！';
+        data.url = '/admin/school';
+        res.render('admin/success',data);
+    });
+});
+
+/*
+* 学校删除
+* */
+router.get('/school/delete',function (req, res) {
+    var id = req.query.id || '',
+        area;
+
+    School.findById(id).then(function (rs) {
+        if(!rs){
+            data.message = '要删除的学校不存在！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else{
+            area = rs.area;
+            return School.remove({
+                _id: id
+            });
+        }
+    }).then(function () {
+        return School.find({
+            area: area
+        }).count();
+    }).then(function (count) {
+        return Area.update({
+            _id: area
+        },{
+            Area_count: count
+        });
+    }).then(function () {
+        data.message = '学校删除成功！';
+        data.url = '/admin/school';
+        res.render('admin/success',data);
+    })
+});
 
 //返回出去给app.js
 module.exports = router;
