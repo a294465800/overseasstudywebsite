@@ -6,3 +6,14 @@
 .pagination li a{
     margin-right: 10px;
 }
+.pagination li a:hover{
+    border-color: #337ab7;
+    background-color: #fff;
+}
+.pagination li .none{
+    border: none;
+}
+.pagination li .none:hover{
+    background-color: #fff;
+    border-color: #fff;
+}

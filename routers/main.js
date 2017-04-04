@@ -15,12 +15,33 @@ var express = require('express'),
     data;
 
 /*
+* 处理分页的函数
+* */
+function setArrFont(sum) {
+    var arr = [];
+    for(var i = 0;i<sum;i++){
+        arr[i] = i+1;
+    }
+    return arr;
+}
+
+function setArrEnd(sum) {
+    var arr = [],
+        a = sum;
+    for(var i = 0;i<5;i++){
+        arr[i] = a;
+        a--;
+    }
+    return arr.reverse();
+}
+
+/*
 * 处理通用数据，用于前台展示的数据
 * */
 router.use(function (req, res, next) {
     data = {
         userInfo: req.userInfo,
-        limit: 2,       //每页显示的数量
+        limit: 20,       //每页显示的数量
         pages: 0
     };
     Navigation.find().sort({Nav_order:1}).then(function (navigations) {
@@ -51,7 +72,6 @@ router.get('/',function (req, res) {
 router.post('/',function (req, res) {
     var school_name = req.body.school_name || '';
     data.page = Number(req.query.page || 1);
-    // console.log(data.page);
 
     if(school_name){
         School.find({School_zn:school_name}).count().then(function (count) {
@@ -59,7 +79,8 @@ router.post('/',function (req, res) {
             data.count = count;
             //计算总页数
             data.pages = Math.ceil(count / data.limit);
-
+            data.pagesFont = setArrFont(data.pages);
+            data.pagesEnd  = setArrEnd(data.pages);
             //取值不能超过pages
             data.page = Math.min(data.page, data.pages);
 
@@ -78,7 +99,8 @@ router.post('/',function (req, res) {
             data.count = count;
             //计算总页数
             data.pages = Math.ceil(count / data.limit);
-
+            data.pagesFont = setArrFont(data.pages);
+            data.pagesEnd  = setArrEnd(data.pages);
             //取值不能超过pages
             data.page = Math.min(data.page, data.pages);
 
@@ -111,7 +133,6 @@ router.get('/school',function (req, res) {
     data.call = call;
     data.call2 = call2;
     data.rank = rank;
-    console.log(data.page);
 
     switch(rank){
         case 0:
@@ -137,7 +158,8 @@ router.get('/school',function (req, res) {
                 data.count = count;
                 //计算总页数
                 data.pages = Math.ceil(count / data.limit);
-
+                data.pagesFont = setArrFont(data.pages);
+                data.pagesEnd  = setArrEnd(data.pages);
                 //取值不能超过pages
                 data.page = Math.min(data.page, data.pages);
 
@@ -159,7 +181,8 @@ router.get('/school',function (req, res) {
                 data.count = count;
                 //计算总页数
                 data.pages = Math.ceil(count / data.limit);
-
+                data.pagesFont = setArrFont(data.pages);
+                data.pagesEnd  = setArrEnd(data.pages);
                 //取值不能超过pages
                 data.page = Math.min(data.page, data.pages);
 
@@ -180,7 +203,8 @@ router.get('/school',function (req, res) {
             data.count = count;
             //计算总页数
             data.pages = Math.ceil(count / data.limit);
-
+            data.pagesFont = setArrFont(data.pages);
+            data.pagesEnd  = setArrEnd(data.pages);
             //取值不能超过pages
             data.page = Math.min(data.page, data.pages);
 
@@ -196,11 +220,11 @@ router.get('/school',function (req, res) {
         });
     }else{
         School.find().count().then(function (count) {
-            console.log(count);
             data.count = count;
             //计算总页数
             data.pages = Math.ceil(count / data.limit);
-
+            data.pagesFont = setArrFont(data.pages);
+            data.pagesEnd  = setArrEnd(data.pages);
             //取值不能超过pages
             data.page = Math.min(data.page, data.pages);
 
@@ -222,18 +246,51 @@ router.get('/school',function (req, res) {
 * */
 router.post('/school',function (req, res) {
     var school_name = req.body.school_name || '';
+    data.page = Number(req.query.page || 1);
 
     if(school_name){
-        School.find({School_zn:school_name}).then(function (rs) {
-            data.schools = rs;
-            res.render('main/school_index',data);
+        School.find({School_zn:school_name}).count().then(function (count) {
+
+            data.count = count;
+            //计算总页数
+            data.pages = Math.ceil(count / data.limit);
+            data.pagesFont = setArrFont(data.pages);
+            data.pagesEnd  = setArrEnd(data.pages);
+            //取值不能超过pages
+            data.page = Math.min(data.page, data.pages);
+
+            //取值不能小于1
+            data.page = Math.max(data.page, 1);
+
+            data.skip = (data.page - 1) * data.limit;
+            School.find({School_zn:school_name}).populate('area').limit(data.limit).skip(data.skip).then(function (rs) {
+                data.schools = rs;
+                res.render('main/school_index',data);
+            });
         });
     }else{
-        School.find().then(function (rs) {
-            data.schools = rs;
-            res.render('main/school_index',data);
+        School.find().count().then(function (count) {
+
+            data.count = count;
+            //计算总页数
+            data.pages = Math.ceil(count / data.limit);
+            data.pagesFont = setArrFont(data.pages);
+            data.pagesEnd  = setArrEnd(data.pages);
+            //取值不能超过pages
+            data.page = Math.min(data.page, data.pages);
+
+            //取值不能小于1
+            data.page = Math.max(data.page, 1);
+
+            data.skip = (data.page - 1) * data.limit;
+
+            School.find().populate('area').limit(data.limit).skip(data.skip).then(function (rs) {
+                data.schools = rs;
+                res.render('main/school_index',data);
+            });
         });
     }
+
 });
 
 

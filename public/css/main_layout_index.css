@@ -227,6 +227,7 @@
     float: left;
     padding-top: 10px;
     cursor: default;
+    text-align: left;
 }
 .menu .navigation h4{
     font-size: 14px;
