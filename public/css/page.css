@@ -1,0 +1,8 @@
+.page{
+    width: 1140px;
+    margin: 0 auto;
+    text-align: center;
+}
+.pagination li a{
+    margin-right: 10px;
+}

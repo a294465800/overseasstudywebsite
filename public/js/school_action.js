@@ -29,5 +29,4 @@ $(function () {
     $nav_head.find('.nav_content').css('margin-left',margin);
 
 
-
 });

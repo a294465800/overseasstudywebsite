@@ -85,7 +85,11 @@
     margin-right: 35px;
     padding: 0 5px;
 }
-.search_input a:nth-child(2){
+.search_input .active{
+    color: #fff;
+    background-color: #337ab7;
+}
+.search_input .active2{
     color: #fff;
     background-color: #337ab7;
 }
@@ -182,4 +186,9 @@
 .school_bar ul .area .school_area{
     padding-left: 10px;
     color: #337ab7;
+}
+.school_bar .school_none{
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
 }
