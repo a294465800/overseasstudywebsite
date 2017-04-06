@@ -117,7 +117,6 @@ router.post('/',function (req, res) {
     }
 });
 
-
 /*
 * 全部学校
 * */
@@ -293,6 +292,12 @@ router.post('/school',function (req, res) {
 
 });
 
+/*
+* 首页本科
+* */
+router.get('/undergraduate',function (req, res) {
+    res.render('main/undergraduate_index',data);
+});
 
 //返回出去给app.js
 module.exports = router;

@@ -1,0 +1,18 @@
+.introduction{
+    width: 1140px;
+    height: 60px;
+    margin: 0 auto;
+    clear: both;
+}
+.introduction .left{
+    width: 95px;
+    height: 53px;
+    background: url("/public/images/undergraduate/introduction_bg.png") no-repeat left top;
+}
+.introduction .left p{
+    line-height: 53px;
+    font-size: 20px;
+    text-indent: 18px;
+    font-weight: bold;
+    letter-spacing: 18px;
+}
