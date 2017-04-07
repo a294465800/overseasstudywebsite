@@ -10,12 +10,12 @@ $(function () {
         $tel_call = $('.tel_call');
 
     $tel_logo.on('click',function () {
-        $tel_call.show('100');
+        $tel_call.show();
         $tel_logo.hide();
     });
     $tel_call.find('em').on('click',function () {
         $tel_logo.show();
-        $tel_call.hide('100');
+        $tel_call.hide();
     });
 
 
