@@ -313,7 +313,7 @@
     line-height: 30px;
 }
 .footer .catalog .footer_part li a:hover{
-    color: #cc6600;
+    color: #0066FF;
 }
 /*
     公司栏
@@ -326,7 +326,7 @@
     margin-right: 5px;
 }
 .footer .catalog .company li a:hover{
-    color: #cc6600;
+    color: #0066FF;
 }
 
 /*
@@ -382,7 +382,7 @@
     line-height: 20px;
 }
 .friend_link .links ul li a:hover{
-    color: #cc6600;
+    color: #0066FF;
 }
 
 
