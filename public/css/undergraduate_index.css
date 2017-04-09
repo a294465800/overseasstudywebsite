@@ -3,7 +3,7 @@
 .introduction{
     width: 1140px;
     height: 60px;
-    margin: 0 auto 10px;
+    margin: 0 auto 30px;
     clear: both;
 }
 .introduction .left{
@@ -42,7 +42,7 @@
 /*九宫格样式*/
 .night{
     width: 1140px;
-    margin: 0 auto;
+    margin: 0 auto 20px;
 }
 .night .night_head{
     padding: 40px 0;
@@ -103,7 +103,7 @@
 */
 .famous_school{
     width: 1140px;
-    margin: 0 auto 20px;
+    margin: 0 auto 50px;
     position: relative;
 }
 .famous_school ul{
@@ -281,7 +281,7 @@
     */
 .way{
     width: 1140px;
-    margin: 0 auto 30px;
+    margin: 0 auto 50px;
 }
 .way td{
     width: 20%;
@@ -319,4 +319,205 @@
 }
 .way .table_color td{
     color: #CC6633;
+}
+
+/*
+    申请流程
+*/
+.apply{
+    margin: 0 auto 50px;
+}
+.apply .apply_head{
+    width: 1140px;
+    margin: 0 auto;
+}
+.apply .apply_content{
+    width: 100%;
+    background-color: #f7f7f7;
+}
+.apply .apply_content ul{
+    list-style: none;
+}
+.apply .apply_content .apply_list{
+    width: 1140px;
+    margin: 20px auto 0;
+    padding:80px 30px;
+}
+.apply .apply_content .apply_up{
+    padding: 0 0 25px 200px;
+    border-bottom: 4px dotted #333;
+    width: 1000px;
+    position: relative;
+}
+.apply .apply_content li{
+    border-left: 1px solid #333;
+    padding: 10px 0 5px 20px;
+    width: 310px;
+    height: 170px;
+    float: left;
+    margin-right: 40px;
+}
+.apply .apply_content p{
+    font-size: 14px;
+    line-height: 30px;
+}
+.apply .apply_content p span{
+    color: #FF3300;
+}
+.apply .apply_content .apply_bg{
+    display: block;
+    width: 157px;
+    height: 36px;
+    background: url("/public/images/undergraduate/apply_bg.png") no-repeat;
+    background-size: cover;
+    line-height: 36px;
+    font-size: 18px;
+    text-indent: 1em;
+    color: #0066FF;
+}
+.apply .apply_content .apply_title{
+    color: #0066FF;
+}
+.apply .apply_content .apply_down{
+    padding: 25px 0 0 30px;
+}
+.apply .apply_content .apply_up .apply_btn{
+    position: absolute;
+    left: 0;
+    bottom: -20px;
+    height: 40px;
+}
+.apply .apply_content .apply_up .apply_btn div{
+    width: 40px;
+    height: 40px;
+    border: 2px solid #333;
+    border-radius: 40px;
+    background-color: #fff;
+    float: left;
+    margin-right: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 34px;
+    text-align: center;
+}
+.apply .apply_content .apply_up .apply_btn p{
+    display: block;
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+    background-color: #6699cc;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 60px;
+    text-align: center;
+    color: #fff;
+    float: left;
+    margin: -10px 0 0 170px;
+}
+.apply .apply_content .apply_up .apply_btn .apply_btn_1{
+    margin-left: 10px;
+}
+.apply .apply_content .apply_up .apply_btn .apply_btn_2{
+    margin-left: 110px;
+}
+.apply .apply_content .apply_up .apply_btn .apply_btn_3{
+    margin-left: 120px;
+}
+.apply .apply_content .apply_up .apply_btn .apply_btn_4{
+    margin-left: 110px;
+}
+.apply .apply_content .apply_up .apply_btn .apply_btn_5{
+    margin-left: 120px;
+}
+
+.undergraduate_teacher{
+    width: 1140px;
+    margin: 0 auto 80px;
+}
+.undergraduate_teacher .undergraduate_teacher_part{
+    margin-top: 10px;
+    position: relative;
+}
+.undergraduate_teacher .undergraduate_teacher_part ul{
+    list-style: none;
+    padding-left: 10px;
+}
+.undergraduate_teacher .undergraduate_teacher_part ul li{
+    text-align: center;
+    width: 270px;
+    height: 520px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    float: left;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.undergraduate_teacher .undergraduate_teacher_part ul li:hover{
+    border: 1px solid #6699cc;
+}
+.undergraduate_teacher .undergraduate_teacher_img p{
+    display: block;
+    width: 130px;
+    height: 130px;
+    margin: 0 auto;
+    border: 2px solid #6699cc;
+    border-radius: 130px;
+    background: url("/public/images/undergraduate/teacher1.png")no-repeat;
+    background-size: cover;
+}
+.undergraduate_teacher .undergraduate_teacher_img h3{
+    border-bottom: 2px solid #333;
+    height: 20px;
+    position: relative;
+}
+.undergraduate_teacher .undergraduate_teacher_img span{
+    position: absolute;
+    background-color: #fff;
+    width: 80px;
+    height: 24px;
+    font-size: 20px;
+    line-height: 24px;
+    top: 5px;
+    left: 50%;
+    margin-left: -40px;
+}
+.undergraduate_teacher .undergraduate_teacher_news{
+    margin-top: 20px;
+    padding: 15px;
+}
+.undergraduate_teacher .undergraduate_teacher_news p{
+    text-align: left;
+    font-size: 14px;
+    line-height: 24px;
+}
+.undergraduate_teacher .undergraduate_teacher_news a{
+    display: block;
+    width: 160px;
+    height: 40px;
+    background-color: #6699cc;
+    border-radius: 10px;
+    font-size: 20px;
+    line-height: 40px;
+    color: #fff;
+    margin: 20px auto 0;
+}
+.undergraduate_teacher .undergraduate_teacher_news a:hover{
+     background-color: #3366CC;
+}
+.undergraduate_teacher i{
+    display: block;
+    position: absolute;
+    width: 35px;
+    height: 68px;
+    cursor: pointer;
+}
+.undergraduate_teacher .teacher_arron1{
+    background: url("/public/images/undergraduate/schools_btn.png")no-repeat left top;
+    left: -50px;
+    top:240px;
+}
+.undergraduate_teacher .teacher_arron2{
+    background: url("/public/images/undergraduate/schools_btn.png")no-repeat -35px top;
+    right: -40px;
+    top:240px;
 }
