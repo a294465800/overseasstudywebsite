@@ -451,6 +451,7 @@
     float: left;
     margin-right: 10px;
     cursor: pointer;
+    overflow: hidden;
 }
 .undergraduate_teacher .undergraduate_teacher_part ul li:hover{
     border: 1px solid #6699cc;
