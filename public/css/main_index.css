@@ -1069,6 +1069,7 @@ body{
 }
 .training_part .training_content ul span{
     color: #666;
+    font-size: 14px;
 }
 .training_part .training_content ul a{
     display: block;

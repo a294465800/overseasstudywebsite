@@ -40,9 +40,21 @@
       <file leaf-file-name="main_index.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/css/main_index.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="585" column="15" lean-forward="true" selection-start-line="585" selection-start-column="15" selection-end-line="585" selection-end-column="15" />
+            <state relative-caret-position="336">
+              <caret line="273" column="27" lean-forward="false" selection-start-line="273" selection-start-column="19" selection-end-line="273" selection-end-column="27" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="reset.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/css/reset.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="16" column="21" lean-forward="false" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+              <folding>
+                <marker date="1491892502019" expanded="true" signature="836:860" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -60,7 +72,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>school</find>
       <find>school_img</find>
       <find>login</find>
       <find>logo</find>
@@ -90,6 +101,7 @@
       <find>.search</find>
       <find>school_name</find>
       <find>nav_h</find>
+      <find>training_cont</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -99,7 +111,7 @@
       <GitPushTagMode />
     </option>
     <push-targets>
-      <push-target-info repo="$PROJECT_DIR$" source="master" target-remote="origin" target-branch="master" />
+      <push-target-info repo="$PROJECT_DIR$" source="master" target-remote="gitosc" target-branch="master" />
     </push-targets>
   </component>
   <component name="IdeDocumentHistory">
@@ -154,8 +166,8 @@
         <option value="$PROJECT_DIR$/public/css/school_index.css" />
         <option value="$PROJECT_DIR$/views/main/layout.html" />
         <option value="$PROJECT_DIR$/views/main/index.html" />
-        <option value="$PROJECT_DIR$/public/css/reset.css" />
         <option value="$PROJECT_DIR$/public/css/main_index.css" />
+        <option value="$PROJECT_DIR$/public/css/reset.css" />
       </list>
     </option>
   </component>
@@ -442,7 +454,7 @@
       <workItem from="1491829630765" duration="85000" />
       <workItem from="1491829728211" duration="1101000" />
       <workItem from="1491841610112" duration="1025000" />
-      <workItem from="1491877624291" duration="8551000" />
+      <workItem from="1491877624291" duration="8997000" />
     </task>
     <task id="LOCAL-00001" summary="new">
       <created>1491880725732</created>
@@ -465,11 +477,18 @@
       <option name="project" value="LOCAL" />
       <updated>1491890437272</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="new">
+      <created>1491892156978</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1491892156978</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="428025000" />
+    <option name="totallyTimeSpent" value="428471000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -859,16 +878,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/reset.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="29" lean-forward="true" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
-          <folding>
-            <marker date="1491891917528" expanded="true" signature="847:871" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/main/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="632">
@@ -880,10 +889,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/reset.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" column="21" lean-forward="false" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+          <folding>
+            <marker date="1491892502019" expanded="true" signature="836:860" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/main_index.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="585" column="15" lean-forward="true" selection-start-line="585" selection-start-column="15" selection-end-line="585" selection-end-column="15" />
+        <state relative-caret-position="336">
+          <caret line="273" column="27" lean-forward="false" selection-start-line="273" selection-start-column="19" selection-end-line="273" selection-end-column="27" />
           <folding />
         </state>
       </provider>
