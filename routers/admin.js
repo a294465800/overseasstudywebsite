@@ -13,6 +13,8 @@ var express = require('express'),
     Nav_content = require('../models/Nav_content'),
     Area = require('../models/Area'),
     School = require('../models/School'),
+    Abroad = require('../models/Abroad'),
+    Abroad_nav = require('../models/Abroad_nav'),
     data;
 
 /*
@@ -934,11 +936,90 @@ router.post('/area/add',function (req, res) {
         res.render('admin/error',data);
         return ;
     }
-    new Area({
-        Area_name: area_name,
-        Area_order: area_order
-    }).save().then(function () {
-        data.message = '地区保存成功!';
+    Area.findOne({Area_name:area_name}).then(function (rs) {
+        if(rs){
+            data.message = '地区名称不能重复！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else {
+            new Area({
+                Area_name: area_name,
+                Area_order: area_order
+            }).save().then(function () {
+                data.message = '地区保存成功!';
+                data.url = '/admin/area';
+                res.render('admin/success',data);
+            });
+        }
+    });
+});
+
+/*
+* 地区修改
+* */
+router.get('/area/edit',function (req, res) {
+    var id = req.query.id || '';
+    Area.findById(id).then(function (rs) {
+        if(!rs){
+            data.message = '所要删除的地区不存在！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }
+        data.area = rs;
+        res.render('admin/school_area_edit',data);
+    });
+});
+
+/*
+* 地区修改保存
+* */
+router.post('/area/edit',function (req, res) {
+    var area_name = req.body.area_name || '',
+        area_order = Number(req.body.area_order),
+        id = req.query.id || '';
+
+    if(!area_name){
+        data.message = '地区名称不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    Area.findOne({Area_name: area_name,_id: {$ne:id}}).then(function (rs) {
+        if(rs){
+            data.message = '地区名称不能重复！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else{
+            return Area.update({
+                _id: id
+            },{
+                Area_name: area_name,
+                Area_order: area_order
+            });
+        }
+    }).then(function () {
+        data.message = '地区修改成功！';
+        data.url = '/admin/area';
+        res.render('admin/success',data);
+    });
+});
+
+/*
+* 地区删除
+* */
+router.get('/area/delete',function (req, res) {
+    var id = req.query.id || '';
+
+    if(!id){
+        data.message = '所要删除的地区不存在！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    Area.remove({
+        _id:id
+    }).then(function () {
+        data.message = '地区删除成功！';
         data.url = '/admin/area';
         res.render('admin/success',data);
     });
@@ -1156,6 +1237,257 @@ router.get('/school/delete',function (req, res) {
         res.render('admin/success',data);
     })
 });
+
+/*
+* 留学列表
+* */
+router.get('/study_abroad',function (req, res) {
+    Abroad.find().sort({_id:-1}).then(function (abroads) {
+        data.abroads = abroads;
+        res.render('admin/abroad_index',data);
+    });
+});
+
+/*
+* 留学添加
+* */
+router.get('/study_abroad/add',function (req, res) {
+    res.render('admin/abroad_add',data);
+});
+
+/*
+* 留学添加保存
+* */
+router.post('/study_abroad/add',function (req, res) {
+    var abroad_name = req.body.abroad_name || '';
+    if(!abroad_name){
+        data.message = '留学名称不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    Abroad.findOne({Abroad_name:abroad_name}).then(function (rs) {
+        if(rs){
+            data.message = '留学名称不能重复！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else{
+            new Abroad({
+                Abroad_name:abroad_name
+            }).save().then(function () {
+                data.message = '留学保存成功!';
+                data.url = '/admin/study_abroad';
+                res.render('admin/success',data);
+            });
+        }
+    });
+});
+
+/*
+* 留学修改
+* */
+router.get('/study_abroad/edit',function (req, res) {
+    var id = req.query.id || '';
+
+    Abroad.findById(id).then(function (rs) {
+        if(!rs){
+            data.message = '留学项目不存在！';
+            res.render('admin/error',data);
+            return ;
+        }
+        data.abroad = rs;
+        res.render('admin/abroad_edit',data);
+    });
+});
+
+/*
+* 留学修改保存
+* */
+router.post('/study_abroad/edit',function (req,res) {
+    var abroad_name = req.body.abroad_name || '',
+        id = req.query.id || '';
+
+    if(!abroad_name){
+        data.message = '留学名称不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    Abroad.findOne({Abroad_name:abroad_name,_id:{$ne:id}}).then(function (rs) {
+        if(rs){
+            data.message = '留学名称不能重复！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else{
+            return Abroad.update({
+                _id: id
+            },{
+                Abroad_name: abroad_name
+            });
+        }
+    }).then(function () {
+        data.message = '留学修改成功！';
+        data.url = '/admin/study_abroad';
+        res.render('admin/success',data);
+    });
+});
+
+/*
+* 留学删除
+* */
+router.get('/study_abroad/delete',function (req,res) {
+    var id = req.query.id || '';
+
+    Abroad.findById(id).then(function (rs) {
+        if(!rs){
+            data.message = '所要删除的留学不存在！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else{
+            return Abroad.remove({_id:id});
+        }
+    }).then(function () {
+        data.message = '留学删除成功！';
+        data.url = '/admin/study_abroad';
+        res.render('admin/success',data);
+    });
+});
+
+/*
+* 留学导航列表
+* */
+router.get('/study_abroad/nav',function (req, res) {
+    Abroad_nav.find().sort({abroad:1,Abroad_nav_order:1}).populate('abroad').then(function (rs) {
+        data.abroad_navs = rs;
+        res.render('admin/abroad_nav_index',data);
+    });
+});
+
+/*
+* 留学导航添加
+* */
+router.get('/study_abroad/nav/add',function (req, res) {
+    Abroad.find().sort({_id:-1}).then(function (rs) {
+        data.abroads = rs;
+        res.render('admin/abroad_nav_add',data);
+    });
+});
+
+/*
+* 留学导航添加保存
+* */
+router.post('/study_abroad/nav/add',function (req, res) {
+    var abroad = req.body.abroad,
+        abroad_nav_name = req.body.abroad_nav_name || '',
+        abroad_nav_order = Number(req.body.abroad_nav_order);
+
+    if(!abroad_nav_name){
+        data.message = '留学导航名称不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    if(!abroad){
+        data.message = '请选择留学项目！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    Abroad_nav.findOne({abroad: abroad,Abroad_nav_name:abroad_nav_name}).then(function (rs) {
+        if(rs){
+            data.message = '留学导航不能重复！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }
+        new Abroad_nav({
+            abroad: abroad,
+            Abroad_nav_name: abroad_nav_name,
+            Abroad_nav_order: abroad_nav_order
+        }).save().then(function () {
+            data.message = '留学导航添加成功！';
+            data.url = '/admin/study_abroad/nav';
+            res.render('admin/success',data);
+        });
+    })
+});
+
+/*
+* 留学导航修改
+* */
+router.get('/study_abroad/nav/edit',function (req, res) {
+    var id = req.query.id;
+
+    Abroad_nav.findById(id).populate('abroad').then(function (rs) {
+        data.abroad_nav = rs;
+    }).then(function () {
+        Abroad.find().sort({_id:-1}).then(function (rs) {
+            data.abroads = rs;
+            res.render('admin/abroad_nav_edit',data);
+        })
+    });
+});
+
+/*
+* 留学导航修改保存
+* */
+router.post('/study_abroad/nav/edit',function (req, res) {
+    var id = req.query.id,
+        abroad = req.body.abroad || '',
+        abroad_nav_name = req.body.abroad_nav_name || '',
+        abroad_nav_order = Number(req.body.abroad_nav_order);
+
+    if(!abroad){
+        data.message = '请选择留学项目！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    if(!abroad_nav_name){
+        data.message = '留学导航名称不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    Abroad_nav.findOne({abroad:abroad,Abroad_nav_name:abroad_nav_name,_id:{$ne:id}}).then(function (rs) {
+        if(rs){
+            data.message = '留学导航不能重复！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }
+
+        Abroad_nav.update({
+            _id: id
+        },{
+            abroad: abroad,
+            Abroad_nav_name: abroad_nav_name,
+            Abroad_nav_order: abroad_nav_order
+        }).then(function () {
+            data.message = '修改保存成功！';
+            data.url = '/admin/study_abroad/nav';
+            res.render('admin/success',data);
+        });
+    });
+});
+
+/*
+* 留学导航删除
+* */
+router.get('/study_abroad/nav/delete',function (req, res) {
+    var id = req.query.id;
+
+    Abroad_nav.findById(id).then(function (rs) {
+        if(!rs){
+            data.message = '要删除的留学导航不存在！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }
+
+        Abroad_nav.remove({_id:id}).then(function () {
+            data.message = '留学导航删除成功！';
+            data.url = '/admin/study_abroad/nav';
+            res.render('admin/success',data);
+        })
+    })
+});
+
 
 //返回出去给app.js
 module.exports = router;
