@@ -257,7 +257,7 @@ body{
 }
 .menu .server .server_list li a{
     font-size: 13px;
-    font-family: 微软雅黑 sans serif;
+    font-family: 微软雅黑 sans-serif;
     color: white;
 }
 .menu .server .server_head{
@@ -583,18 +583,21 @@ body{
 }
 .school_news .school_strategy ul{
     list-style: square;
+    padding: 0;
+    margin: 0;
 }
 .school_news .school_strategy ul li{
     list-style-position: inside;
     margin: 0 0 18px 0;
-}
-.school_news .school_strategy ul a{
-    display: block;
-    font-size: 13px;
-    color: #555;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+.school_news .school_strategy ul a{
+    font-size: 13px;
+    color: #555;
+    /*margin-left: -10px;*/
+    margin-left: -5px;
 }
 .school_news .school_strategy ul a:hover{
     color: #259;
