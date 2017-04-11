@@ -257,6 +257,7 @@ body{
 }
 .menu .server .server_list li a{
     font-size: 13px;
+    font-family: 微软雅黑 sans serif;
     color: white;
 }
 .menu .server .server_head{
@@ -497,6 +498,7 @@ body{
 #school_name{
     width: 100%;
     height: 32px;
+    line-height: 32px;
     border: none;
     outline: medium;
     padding: 3px 5px 3px 1px;
@@ -510,6 +512,7 @@ body{
     width: 58px;
     background-color: #337ab7;
     padding: 10px;
+    font-size: 16px;
     text-align: center;
     color: #fff;
     font-weight: bold;
@@ -586,7 +589,6 @@ body{
     margin: 0 0 18px 0;
 }
 .school_news .school_strategy ul a{
-    margin: -14px 0 0 13px;
     display: block;
     font-size: 13px;
     color: #555;
