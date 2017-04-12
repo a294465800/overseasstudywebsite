@@ -52,4 +52,31 @@ $(function () {
             }
         });
     });
+
+
+    var $abroad = $('#abroad'),
+        $abroad_nav = $('#abroad_nav');
+
+    //留学文章添加二级联动菜单
+    $abroad.on('change',function () {
+        $.ajax({
+            type: 'post',
+            url: '/api/study_abroad/nav/content/add',
+            data:{
+                abroad: $abroad.val()
+            },
+            dataType:'json',
+            success: function (data) {
+                if(data.abroad_navs == ''){
+                    $abroad_nav.html('<option value="">该留学项目下没有导航</option>');
+                    return ;
+                }
+                $abroad_nav.html('<option value="">请选择留学导航</option>');
+                for(var abroad_nav in data.abroad_navs){
+                    $abroad_nav.append('<option value="'+ data.abroad_navs[abroad_nav]._id +'">'+ data.abroad_navs[abroad_nav].Abroad_nav_name +'</option>');
+                }
+            }
+        });
+    });
+
 });

@@ -15,6 +15,7 @@ var express = require('express'),
     School = require('../models/School'),
     Abroad = require('../models/Abroad'),
     Abroad_nav = require('../models/Abroad_nav'),
+    Abroad_content = require('../models/Abroad_content'),
     data;
 
 /*
@@ -1401,11 +1402,20 @@ router.post('/study_abroad/nav/add',function (req, res) {
             Abroad_nav_name: abroad_nav_name,
             Abroad_nav_order: abroad_nav_order
         }).save().then(function () {
-            data.message = '留学导航添加成功！';
-            data.url = '/admin/study_abroad/nav';
-            res.render('admin/success',data);
+            Abroad_nav.find({abroad:abroad}).count().then(function (count) {
+                Abroad.update({
+                    _id:abroad
+                },{
+                    Abroad_count: count
+                }).then(function () {
+                    data.message = '留学导航添加成功！';
+                    data.url = '/admin/study_abroad/nav';
+                    res.render('admin/success',data);
+                });
+            });
         });
-    })
+    });
+
 });
 
 /*
@@ -1478,15 +1488,197 @@ router.get('/study_abroad/nav/delete',function (req, res) {
             res.render('admin/error',data);
             return Promise.reject();
         }
-
+        data.abroadC = rs.abroad;
         Abroad_nav.remove({_id:id}).then(function () {
-            data.message = '留学导航删除成功！';
-            data.url = '/admin/study_abroad/nav';
-            res.render('admin/success',data);
-        })
-    })
+            Abroad_nav.find({abroad:data.abroadC}).count().then(function (count) {
+                Abroad.update({
+                    _id: data.abroadC
+                },{
+                    Abroad_count: count
+                }).then(function () {
+                    data.message = '留学导航删除成功！';
+                    data.url = '/admin/study_abroad/nav';
+                    res.render('admin/success',data);
+                });
+            });
+        });
+    });
 });
 
+/*
+* 留学导航文章列表
+* */
+router.get('/study_abroad/nav/content',function (req, res) {
+    Abroad_content.find().populate(['abroad','abroad_nav']).sort({abroad:1,abroad_nav:1,Abroad_content_order:-1}).then(function (rs) {
+        data.abroad_contents = rs;
+        res.render('admin/abroad/abroad_nav_content_index',data);
+    });
+});
+
+/*
+* 留学导航文章添加
+* */
+router.get('/study_abroad/nav/content/add',function (req, res) {
+    Abroad.find().sort({_id:-1}).then(function (rs) {
+        data.abroads = rs;
+        res.render('admin/abroad/abroad_nav_content_add',data);
+    });
+});
+
+/*
+* 留学导航文章添加保存
+* */
+router.post('/study_abroad/nav/content/add',function (req, res) {
+    var abroad = req.body.abroad,
+        abroad_nav = req.body.abroad_nav,
+        abroad_content_name = req.body.abroad_content_name,
+        abroad_content_url = req.body.abroad_content_url,
+        abroad_content_order = Number(req.body.abroad_content_order);
+
+    if(!abroad || !abroad_nav){
+        data.message = '留学项目或者导航名称不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    if(!abroad_content_name){
+        data.message = '文章标题不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    if(!abroad_content_url){
+        data.message = '文章url不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    Abroad_content.findOne({abroad:abroad,abroad_nav:abroad_nav,Abroad_content_name:abroad_content_name}).then(function (rs) {
+        if(rs){
+            data.message = '文章标题不能重复！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }
+        new Abroad_content({
+            abroad: abroad,
+            abroad_nav: abroad_nav,
+            Abroad_content_name: abroad_content_name,
+            Abroad_content_url: abroad_content_url,
+            Abroad_content_order: abroad_content_order
+        }).save().then(function () {
+            Abroad_content.find({abroad_nav: abroad_nav}).count().then(function (count) {
+                Abroad_nav.update({
+                    _id: abroad_nav
+                },{
+                    Abroad_nav_count: count
+                }).then(function () {
+                    data.message = '文章标题保存成功！';
+                    data.url = '/admin/study_abroad/nav/content';
+                    res.render('admin/success',data);
+                });
+            });
+        });
+    });
+});
+
+/*
+* 留学导航文章修改
+* */
+router.get('/study_abroad/nav/content/edit',function (req, res) {
+    var id = req.query.id;
+
+    if(!id){
+        data.message = '所要修改的文章不存在！';
+        res.render('admin/error',data);
+        return ;
+    }
+    Abroad.find().sort({_id:-1}).then(function (rs) {
+        data.abroads = rs;
+        Abroad_nav.find().sort({abroad: 1}).then(function (rs) {
+            data.abroad_navs = rs;
+            Abroad_content.findById(id).populate(['abroad','abroad_nav']).then(function (rs) {
+                data.abroad_content = rs;
+                res.render('admin/abroad/abroad_nav_content_edit',data);
+            });
+        });
+    });
+});
+
+/*
+* 留学导航文章修改保存
+* */
+router.post('/study_abroad/nav/content/edit',function (req, res) {
+    var id = req.query.id,
+        abroad = req.body.abroad,
+        abroad_nav = req.body.abroad_nav,
+        abroad_content_name = req.body.abroad_content_name,
+        abroad_content_url = req.body.abroad_content_url,
+        abroad_content_order = Number(req.body.abroad_content_order);
+    if(!abroad || !abroad_nav){
+        data.message = '留学项目或者留学导航不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    if(!abroad_content_name){
+        data.message = '文章标题不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    if(!abroad_content_url){
+        data.message = '文章url不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    Abroad_content.findOne({abroad:abroad,abroad_nav:abroad_nav,_id:{$ne: id}}).then(function (rs) {
+        if(rs){
+            data.message = '文章标题不能重复！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }
+
+        Abroad_content.update({
+            _id:id
+        },{
+            abroad: abroad,
+            abroad_nav: abroad_nav,
+            Abroad_content_name: abroad_content_name,
+            Abroad_content_url: abroad_content_url,
+            Abroad_content_order: abroad_content_order
+        }).then(function () {
+            data.message = '文章标题修改成功！';
+            data.url = '/admin/study_abroad/nav/content';
+            res.render('admin/success',data);
+        });
+    });
+});
+
+/*
+* 留学导航文章删除
+* */
+router.get('/study_abroad/nav/content/delete',function (req, res) {
+    var id = req.query.id;
+
+    Abroad_content.findById(id).then(function (rs) {
+        if(!rs){
+            data.message = '要删除的文章标题不存在！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }
+        data.abroadC = rs.abroad_nav;
+        Abroad_content.remove({_id:id}).then(function () {
+            Abroad_content.find({abroad_nav:data.abroadC}).count().then(function (count) {
+                Abroad_nav.update({
+                    _id: data.abroadC
+                },{
+                    Abroad_nav_count: count
+                }).then(function () {
+                    data.message = '文章标题删除成功！';
+                    data.url = '/admin/study_abroad/nav/content';
+                    res.render('admin/success',data);
+                });
+            });
+        });
+    });
+});
 
 //返回出去给app.js
 module.exports = router;

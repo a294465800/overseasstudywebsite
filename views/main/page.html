@@ -1,6 +1,8 @@
 <nav aria-label="Page navigation" class="page">
     <ul class="pagination pagination-lg">
         <!--上一页的处理-->
+        {% if pages == 0 %}
+        {% else %}
         {% if page == 1 %}
         {% else %}
         <li>
@@ -55,6 +57,7 @@
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>
+        {% endif %}
         {% endif %}
     </ul>
 </nav>

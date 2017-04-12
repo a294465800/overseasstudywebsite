@@ -12,7 +12,10 @@ var express = require('express'),
 var User = require('../models/User'),
     Navigation = require('../models/Navigation'),
     Nav_title = require('../models/Nav_title'),
-    Nav_content = require('../models/Nav_content');
+    Nav_content = require('../models/Nav_content'),
+    Abroad = require('../models/Abroad'),
+    Abroad_nav = require('../models/Abroad_nav'),
+    Abroad_content = require('../models/Abroad_content');
 
 //返回统一格式
 var responseData;
@@ -188,7 +191,7 @@ router.get('/user/logout',function (req, res) {
 });
 
 /*
-* 标题内容二级联动菜单
+* 导航标题内容二级联动菜单
 * */
 router.post('/navigation/title/content/add',function (req, res) {
     var navigation = req.body.navigation;
@@ -204,7 +207,7 @@ router.post('/navigation/title/content/add',function (req, res) {
 });
 
 /*
-* 标题内容修改二级联动菜单
+* 导航标题内容修改二级联动菜单      （经验证，该菜单不需要设置！多余！）
 * */
 router.post('/navigation/title/content/edit',function (req, res) {
     var navigation = req.body.navigation,
@@ -225,6 +228,22 @@ router.post('/navigation/title/content/edit',function (req, res) {
                 responseData.nav_content = nav_content;
                 res.json(responseData);
             });
+        });
+    }
+});
+
+/*
+* 留学文章标题添加、修改二级联动菜单
+* */
+router.post('/study_abroad/nav/content/add',function (req, res) {
+    var abroad = req.body.abroad;
+    if(abroad == ''){
+    }else{
+        Abroad_nav.find({
+            abroad: abroad
+        }).populate('abroad').sort({_id:-1}).then(function (rs) {
+            responseData.abroad_navs = rs;
+            res.json(responseData);
         });
     }
 });
