@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends '../layout.html' %}
 
 {% block main %}
 <ol class="breadcrumb">
@@ -33,6 +33,6 @@
 </table>
 
 <!--引用模版，相当于引用文件，在这里引用page.html里面的内容，不一定是html文件，其他都可以-->
-{%include 'page.html'%}
+{%include '../page.html'%}
 
 {% endblock %}

@@ -84,7 +84,7 @@ router.get('/user',function (req, res) {
          * 从数据库中读取所有用户数据
          * */
         User.find().sort({_id:-1}).limit(limit).skip(skip).then(function (users) {
-            res.render('admin/user_index', {
+            res.render('admin/user/user_index', {
                 userInfo: req.userInfo,
                 users: users,
                 count: count,
@@ -101,7 +101,7 @@ router.get('/user',function (req, res) {
 * 用户添加
 * */
 router.get('/user/add',function (req, res) {
-    res.render('admin/user_add',{
+    res.render('admin/user/user_add',{
         userInfo: req.userInfo
     });
 });
@@ -167,7 +167,7 @@ router.get('/user/edit',function (req, res) {
             });
             return Promise.reject();
         }else{
-            res.render('admin/user_edit',{
+            res.render('admin/user/user_edit',{
                 userInfo: req.userInfo,
                 user: rs
             });
@@ -273,13 +273,12 @@ router.get('/user/delete',function (req, res) {
     });
 });
 
-
 /*
 * 导航管理首页
 * */
 router.get('/navigation',function (req, res) {
     Navigation.find().sort({Nav_order:1}).then(function (navigations) {
-        res.render('admin/navigation_index', {
+        res.render('admin/navigation/navigation_index', {
             userInfo: req.userInfo,
             navigations: navigations
         });
@@ -290,7 +289,7 @@ router.get('/navigation',function (req, res) {
 * 导航添加
 * */
 router.get('/navigation/add',function (req, res) {
-    res.render('admin/navigation_add',{
+    res.render('admin/navigation/navigation_add',{
         userInfo: req.userInfo
     });
 });
@@ -355,7 +354,7 @@ router.get('/navigation/edit',function (req, res) {
             });
             return Promise.reject();
         }else{
-            res.render('admin/navigation_edit',{
+            res.render('admin/navigation/navigation_edit',{
                 userInfo: req.userInfo,
                 navigation: rs
             });
@@ -488,7 +487,7 @@ router.get('/navigation/title',function (req, res) {
          * */
         Nav_title.find().sort({navigation:1,Nav_title_order:1}).limit(limit).skip(skip).populate('navigation').then(function (Nav_titles) {
 
-            res.render('admin/navigation_title', {
+            res.render('admin/navigation/navigation_title', {
                 userInfo: req.userInfo,
                 Nav_titles: Nav_titles,
                 count: count,
@@ -507,7 +506,7 @@ router.get('/navigation/title',function (req, res) {
 router.get('/navigation/title/add',function (req, res) {
 
     Navigation.find().sort({Nav_order:1}).then(function (navigations) {
-        res.render('admin/navigation_title_add',{
+        res.render('admin/navigation/navigation_title_add',{
             userInfo: req.userInfo,
             navigations:navigations
         });
@@ -594,7 +593,7 @@ router.get('/navigation/title/edit',function (req, res) {
             });
             return Promise.reject();
         }else {
-            res.render('admin/navigation_title_edit',{
+            res.render('admin/navigation/navigation_title_edit',{
                 userInfo: req.userInfo,
                 navigations: navigations,
                 nav_title: nav_title
@@ -723,7 +722,7 @@ router.get('/navigation/title/content',function (req, res) {
         Nav_content.find().populate(['navigation','nav_title']).sort({navigation:1,nav_title:1,Nav_content_order:1}).limit(data.limit).skip(data.skip).then(function (Nav_contents) {
             data.Nav_contents = Nav_contents;
             data.forPage = 'navigation/title/content';
-            res.render('admin/navigation_title_content', data);
+            res.render('admin/navigation/navigation_title_content', data);
         });
     });
 });
@@ -735,7 +734,7 @@ router.get('/navigation/title/content/add',function (req, res) {
 
     Navigation.find().sort({Nav_order:1}).then(function (navigations) {
         data.navigations = navigations;
-        res.render('admin/navigation_title_content_add',data);
+        res.render('admin/navigation/navigation_title_content_add',data);
     });
 });
 
@@ -820,7 +819,7 @@ router.get('/navigation/title/content/edit',function (req, res) {
                     navigation: rs.navigation._id
                 }).populate(['navigation','nav_title']).sort({Nav_title_order: 1}).then(function (rs) {
                     data.nav_titles = rs;
-                    res.render('admin/navigation_title_content_edit',data);
+                    res.render('admin/navigation/navigation_title_content_edit',data);
                 });
             });
         }
@@ -914,7 +913,7 @@ router.get('/navigation/title/content/delete',function (req, res) {
 router.get('/area',function (req, res) {
     Area.find().sort({Area_order:1}).then(function (rs) {
         data.areas = rs;
-        res.render('admin/school_area',data);
+        res.render('admin/school/school_area',data);
     });
 });
 
@@ -922,7 +921,7 @@ router.get('/area',function (req, res) {
 * 地区添加列表
 * */
 router.get('/area/add',function (req, res) {
-    res.render('admin/school_area_add',data);
+    res.render('admin/school/school_area_add',data);
 });
 
 /*
@@ -966,7 +965,7 @@ router.get('/area/edit',function (req, res) {
             return Promise.reject();
         }
         data.area = rs;
-        res.render('admin/school_area_edit',data);
+        res.render('admin/school/school_area_edit',data);
     });
 });
 
@@ -1055,7 +1054,7 @@ router.get('/school',function (req, res) {
         School.find().populate('area').sort({School_rank:1}).limit(data.limit).skip(data.skip).then(function (schools) {
             data.schools = schools;
             data.forPage = 'school';
-            res.render('admin/school_index', data);
+            res.render('admin/school/school_index', data);
         });
     });
 });
@@ -1067,7 +1066,7 @@ router.get('/school/add',function (req, res) {
 
     Area.find().sort({Area_order:1}).then(function (rs) {
         data.areas = rs;
-        res.render('admin/school_add',data);
+        res.render('admin/school/school_add',data);
     });
 });
 
@@ -1145,7 +1144,7 @@ router.get('/school/edit',function (req, res) {
         return School.findById(id).populate('area');
     }).then(function (rs) {
         data.school = rs;
-        res.render('admin/school_edit',data);
+        res.render('admin/school/school_edit',data);
     });
 });
 
@@ -1244,7 +1243,7 @@ router.get('/school/delete',function (req, res) {
 router.get('/study_abroad',function (req, res) {
     Abroad.find().sort({_id:-1}).then(function (abroads) {
         data.abroads = abroads;
-        res.render('admin/abroad_index',data);
+        res.render('admin/abroad/abroad_index',data);
     });
 });
 
@@ -1252,7 +1251,7 @@ router.get('/study_abroad',function (req, res) {
 * 留学添加
 * */
 router.get('/study_abroad/add',function (req, res) {
-    res.render('admin/abroad_add',data);
+    res.render('admin/abroad/abroad_add',data);
 });
 
 /*
@@ -1295,7 +1294,7 @@ router.get('/study_abroad/edit',function (req, res) {
             return ;
         }
         data.abroad = rs;
-        res.render('admin/abroad_edit',data);
+        res.render('admin/abroad/abroad_edit',data);
     });
 });
 
@@ -1358,7 +1357,7 @@ router.get('/study_abroad/delete',function (req,res) {
 router.get('/study_abroad/nav',function (req, res) {
     Abroad_nav.find().sort({abroad:1,Abroad_nav_order:1}).populate('abroad').then(function (rs) {
         data.abroad_navs = rs;
-        res.render('admin/abroad_nav_index',data);
+        res.render('admin/abroad/abroad_nav_index',data);
     });
 });
 
@@ -1368,7 +1367,7 @@ router.get('/study_abroad/nav',function (req, res) {
 router.get('/study_abroad/nav/add',function (req, res) {
     Abroad.find().sort({_id:-1}).then(function (rs) {
         data.abroads = rs;
-        res.render('admin/abroad_nav_add',data);
+        res.render('admin/abroad/abroad_nav_add',data);
     });
 });
 
@@ -1420,7 +1419,7 @@ router.get('/study_abroad/nav/edit',function (req, res) {
     }).then(function () {
         Abroad.find().sort({_id:-1}).then(function (rs) {
             data.abroads = rs;
-            res.render('admin/abroad_nav_edit',data);
+            res.render('admin/abroad/abroad_nav_edit',data);
         })
     });
 });
