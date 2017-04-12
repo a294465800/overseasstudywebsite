@@ -1,0 +1,38 @@
+{% extends '../layout.html' %}
+
+{% block main %}
+<ol class="breadcrumb">
+    <li><a href="/" target="_blank">官网首页</a></li>
+    <li><span>导航文章添加</span></li>
+</ol>
+
+<h3 style="font-size: 24px;font-weight: bold; line-height: 50px;margin-bottom: 20px;border-bottom: 1px solid #ccc">导航文章添加</h3>
+
+<form role="form" method="post">
+    <div class="form-group">
+        <label for="abroad">留学项目：</label>
+        <select name="abroad" id="abroad" class="form-control" style="margin: 10px 0">
+            <option value="">请选择留学项目</option>
+            {% for abroad in abroads %}
+            <option value="{{abroad.id}}">{{abroad.Abroad_name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="abroad_nav">导航名称：</label>
+        <select name="abroad_nav" id="abroad_nav" class="form-control" style="margin: 10px 0">
+            <option value="">请选择导航标题</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="abroad_content_name">文章标题：</label>
+        <input style="margin: 5px 0 20px" type="text" class="form-control" id="abroad_content_name" placeholder="请输入导航文章标题" name="abroad_content_name">
+        <label for="abroad_content_url">文章url：</label>
+        <input style="margin: 5px 0 20px" type="text" class="form-control" id="abroad_content_url" placeholder="请输入文章跳转链接,系统会自动在链接后加.html，所以这里填文章页面的英文名称" name="abroad_content_url">
+        <label for="abroad_content_order">文章标题顺序：</label>
+        <input style="margin: 5px 0 20px" type="text" class="form-control" id="abroad_content_order" placeholder="请输入文章标题顺序，小数字排前面，默认0" name="abroad_content_order">
+    </div>
+    <button type="submit" class="btn btn-default">提交</button>
+</form>
+<script src="/public/js/system.js"></script>
+{% endblock %}

@@ -2,44 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98561f5a-277a-481e-ac84-dd129fcc71fb" name="默认" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/WiredTiger.wt" afterPath="$PROJECT_DIR$/db/WiredTiger.wt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/_mdb_catalog.wt" afterPath="$PROJECT_DIR$/db/_mdb_catalog.wt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/collection-0--5814255751078655962.wt" afterPath="$PROJECT_DIR$/db/collection-0--5814255751078655962.wt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/collection-0-1507078577311214158.wt" afterPath="$PROJECT_DIR$/db/collection-0-1507078577311214158.wt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/collection-2--5814255751078655962.wt" afterPath="$PROJECT_DIR$/db/collection-2--5814255751078655962.wt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/index-1-1507078577311214158.wt" afterPath="$PROJECT_DIR$/db/index-1-1507078577311214158.wt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/index-3--5814255751078655962.wt" afterPath="$PROJECT_DIR$/db/index-3--5814255751078655962.wt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/mongod.lock" afterPath="$PROJECT_DIR$/db/mongod.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/sizeStorer.wt" afterPath="$PROJECT_DIR$/db/sizeStorer.wt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/WiredTiger.turtle" afterPath="$PROJECT_DIR$/db/WiredTiger.turtle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/system.js" afterPath="$PROJECT_DIR$/public/js/system.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routers/admin.js" afterPath="$PROJECT_DIR$/routers/admin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routers/api.js" afterPath="$PROJECT_DIR$/routers/api.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/abroad/abroad_add.html" afterPath="$PROJECT_DIR$/views/admin/abroad/abroad_add.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/abroad/abroad_edit.html" afterPath="$PROJECT_DIR$/views/admin/abroad/abroad_edit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/abroad/abroad_index.html" afterPath="$PROJECT_DIR$/views/admin/abroad/abroad_index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/abroad/abroad_nav_add.html" afterPath="$PROJECT_DIR$/views/admin/abroad/abroad_nav_add.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/abroad/abroad_nav_edit.html" afterPath="$PROJECT_DIR$/views/admin/abroad/abroad_nav_edit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/abroad/abroad_nav_index.html" afterPath="$PROJECT_DIR$/views/admin/abroad/abroad_nav_index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/error.html" afterPath="$PROJECT_DIR$/views/admin/error.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/layout.html" afterPath="$PROJECT_DIR$/views/admin/layout.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/navigation/navigation_add.html" afterPath="$PROJECT_DIR$/views/admin/navigation/navigation_add.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/navigation/navigation_edit.html" afterPath="$PROJECT_DIR$/views/admin/navigation/navigation_edit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/navigation/navigation_index.html" afterPath="$PROJECT_DIR$/views/admin/navigation/navigation_index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/navigation/navigation_title.html" afterPath="$PROJECT_DIR$/views/admin/navigation/navigation_title.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/navigation/navigation_title_add.html" afterPath="$PROJECT_DIR$/views/admin/navigation/navigation_title_add.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/navigation/navigation_title_content.html" afterPath="$PROJECT_DIR$/views/admin/navigation/navigation_title_content.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/navigation/navigation_title_content_add.html" afterPath="$PROJECT_DIR$/views/admin/navigation/navigation_title_content_add.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/navigation/navigation_title_content_edit.html" afterPath="$PROJECT_DIR$/views/admin/navigation/navigation_title_content_edit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/navigation/navigation_title_edit.html" afterPath="$PROJECT_DIR$/views/admin/navigation/navigation_title_edit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/school/school_add.html" afterPath="$PROJECT_DIR$/views/admin/school/school_add.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/school/school_area.html" afterPath="$PROJECT_DIR$/views/admin/school/school_area.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/school/school_area_add.html" afterPath="$PROJECT_DIR$/views/admin/school/school_area_add.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/school/school_area_edit.html" afterPath="$PROJECT_DIR$/views/admin/school/school_area_edit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/school/school_edit.html" afterPath="$PROJECT_DIR$/views/admin/school/school_edit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/school/school_index.html" afterPath="$PROJECT_DIR$/views/admin/school/school_index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/main/page.html" afterPath="$PROJECT_DIR$/views/main/page.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -54,76 +17,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="admin.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/routers/admin.js">
+      <file leaf-file-name="abroad_contents.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/schemas/abroad_contents.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="1664" column="9" lean-forward="true" selection-start-line="1664" selection-start-column="9" selection-end-line="1664" selection-end-column="9" />
-              <folding>
-                <element signature="e#606#672#0" expanded="false" />
-                <element signature="e#726#925#0" expanded="false" />
-                <element signature="e#964#1037#0" expanded="false" />
-                <element signature="e#1095#2115#0" expanded="false" />
-                <element signature="e#2177#2258#0" expanded="false" />
-                <element signature="e#2323#3316#0" expanded="false" />
-                <element signature="e#3379#3874#0" expanded="false" />
-                <element signature="e#3940#6073#0" expanded="false" />
-                <element signature="e#6138#6407#0" expanded="false" />
-                <element signature="e#6473#6699#0" expanded="false" />
-                <element signature="e#6767#6860#0" expanded="false" />
-                <element signature="e#6932#7904#0" expanded="false" />
-                <element signature="e#7973#8492#0" expanded="false" />
-                <element signature="e#8564#10651#0" expanded="false" />
-                <element signature="e#10722#11003#0" expanded="false" />
-                <element signature="e#11077#12003#0" expanded="false" />
-                <element signature="e#12083#12312#0" expanded="false" />
-                <element signature="e#12393#14000#0" expanded="false" />
-                <element signature="e#14079#14786#0" expanded="false" />
-                <element signature="e#14868#16368#0" expanded="false" />
-                <element signature="e#16449#17270#0" expanded="false" />
-                <element signature="e#17350#18252#0" expanded="false" />
-                <element signature="e#18336#18534#0" expanded="false" />
-                <element signature="e#18621#20432#0" expanded="false" />
-                <element signature="e#20517#21463#0" expanded="false" />
-                <element signature="e#21551#23004#0" expanded="false" />
-                <element signature="e#23091#23838#0" expanded="false" />
-                <element signature="e#23896#24043#0" expanded="false" />
-                <element signature="e#24107#24163#0" expanded="false" />
-                <element signature="e#24230#24962#0" expanded="false" />
-                <element signature="e#25025#25344#0" expanded="false" />
-                <element signature="e#25410#26211#0" expanded="false" />
-                <element signature="e#26276#26605#0" expanded="false" />
-                <element signature="e#26667#27459#0" expanded="false" />
-                <element signature="e#27523#27670#0" expanded="false" />
-                <element signature="e#27737#29377#0" expanded="false" />
-                <element signature="e#29442#29756#0" expanded="false" />
-                <element signature="e#29824#31297#0" expanded="false" />
-                <element signature="e#31364#32106#0" expanded="false" />
-                <element signature="e#32172#32328#0" expanded="false" />
-                <element signature="e#32398#32449#0" expanded="false" />
-                <element signature="e#32522#33197#0" expanded="false" />
-                <element signature="e#33268#33568#0" expanded="false" />
-                <element signature="e#33641#34376#0" expanded="false" />
-                <element signature="e#34448#34891#0" expanded="false" />
-                <element signature="e#34963#35161#0" expanded="false" />
-                <element signature="e#35237#35385#0" expanded="false" />
-                <element signature="e#35464#36744#0" expanded="false" />
-                <element signature="e#36821#37145#0" expanded="false" />
-                <element signature="e#37225#38279#0" expanded="false" />
-                <element signature="e#39227#39474#0" expanded="false" />
-                <element signature="e#39560#39716#0" expanded="false" />
-                <element signature="e#39805#41522#0" expanded="false" />
-                <element signature="e#41609#42181#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="abroad_nav_content_edit.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/admin/abroad/abroad_nav_content_edit.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
-              <caret line="17" column="2" lean-forward="true" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
+            <state relative-caret-position="576">
+              <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -637,7 +535,7 @@
       <workItem from="1491829728211" duration="1101000" />
       <workItem from="1491841610112" duration="1025000" />
       <workItem from="1491877624291" duration="22815000" />
-      <workItem from="1491981081460" duration="14042000" />
+      <workItem from="1491981081460" duration="14083000" />
     </task>
     <task id="LOCAL-00001" summary="new">
       <created>1491880725732</created>
@@ -688,11 +586,18 @@
       <option name="project" value="LOCAL" />
       <updated>1491984229790</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="new">
+      <created>1491998635220</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1491998635220</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="456331000" />
+    <option name="totallyTimeSpent" value="456372000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1146,14 +1051,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/schemas/abroad_contents.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/admin/abroad/abroad_nav_content_edit.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="106">
@@ -1164,7 +1061,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routers/admin.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
+        <state relative-caret-position="319">
           <caret line="1664" column="9" lean-forward="true" selection-start-line="1664" selection-start-column="9" selection-end-line="1664" selection-end-column="9" />
           <folding>
             <element signature="e#606#672#0" expanded="false" />
@@ -1222,6 +1119,14 @@
             <element signature="e#39805#41522#0" expanded="false" />
             <element signature="e#41609#42181#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/schemas/abroad_contents.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
