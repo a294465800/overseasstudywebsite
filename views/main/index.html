@@ -372,7 +372,6 @@
 </section>
 <!--留学流程结束-->
 
-{% for abroad in abroads %}
 <!--本科留学开始-->
 <section class="study_abroad undergraduate clearfix">
     <div class="section_title">
@@ -390,18 +389,61 @@
             </ul>
         </div>
         <div class="study_abroad_mid">
+    {% for abroad_nav in abroad_navs %}
+        {% if abroad_nav.abroad.Abroad_name == '英国本科留学' %}
+            {% if abroad_nav.Abroad_nav_name == '申请规划表' %}
+            <div class="study_abroad_list">
+                <div class="study_abroad_top">
+                    <ul class="clearfix">
+                        <li>
+                            <i>10月-11月</i>
+                            <p>冲刺雅思考试，入学申请表</p>
+                            <b>&gt;</b>
+                        </li>
+                        <li>
+                            <i>12月-1月</i>
+                            <p>准备其他有助于申请的材料，如各种获奖证书、展示特长的录相或磁带等。</p>
+                            <b>&gt;</b>
+                        </li>
+                        <li>
+                            <i>5月-8月</i>
+                            <p>申请签证、准备机票，换汇，体检，赴英国留学。</p>
+                            <b>&gt;</b>
+                        </li>
+                    </ul>
+                </div>
+                <div class="study_abroad_top study_abroad_bom">
+                    <ul class="clearfix">
+                        <li>
+                            <i>8月-9月</i>
+                            <p>加入我们，确定最终留学方案</p>
+                            <b>&gt;</b>
+                        </li>
+                        <li>
+                            <i>12月</i>
+                            <p>准备简历和个人陈述，老师或校长推荐信</p>
+                            <b>&gt;</b>
+                        </li>
+                        <li>
+                            <i>2月-4月</i>
+                            <p>申请宿舍，如需搭配语言递交语言课申请。</p>
+                            <b>&gt;</b>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {% else %}
             <div class="study_abroad_num">
                 <div class="mid_article">
                     <ul class="clearfix">
-                        <li><a href="">英国留学个人陈述如何写才会让人眼前一亮</a></li>
-                        <li><a href="">英国本科预料申请方案</a></li>
-                        <li><a href="">英国本科申请方案</a></li>
-                        <li><a href="">英国留学取得diploma毕业和degree毕业回国后境遇大不同</a></li>
-                        <li><a href="">英国大学offer发放率低的高校，获得高学位较容易</a></li>
-                        <li><a href="">留学英国就业7条途径送给即将毕业学生们</a></li>
-                        <li><a href="">留学在英国的日常礼仪</a></li>
-                        <li><a href="">盘点2017年开放春季预科入学的英国大学</a></li>
+                        {% for abroad_content in abroad_contents %}
+                        {% if abroad_content.abroad_nav._id.toString() == abroad_nav._id.toString() %}
+                        <li><a href="{{abroad_content.Abroad_content_url}}" target="_blank">{{abroad_content.Abroad_content_name}}</a></li>
+                        {% else %}
+                        {% endif %}
+                        {% endfor %}
                     </ul>
+                    <a href="{{abroad_nav.Abroad_nav_url}}" class="study_abroad_more" target="_blank">&gt;&gt;</a>
                 </div>
                 <div class="mid_img">
                     <p><a href="">留学评估</a></p>
@@ -414,30 +456,10 @@
                     <p><a href="">签证服务</a></p>
                 </div>
             </div>
-            <div class="study_abroad_num">
-                <div class="mid_article">
-                    <ul class="clearfix">
-                        <li><a href="">2</a></li>
-                        <li><a href="">3</a></li>
-                        <li><a href="">英国本科申请方案</a></li>
-                        <li><a href="">1</a></li>
-                        <li><a href="">英国大学offer发放率低的高校，获得高学位较容易</a></li>
-                        <li><a href="">留学英国就业7条途径送给即将毕业学生们</a></li>
-                        <li><a href="">留学在英国的日常礼仪</a></li>
-                        <li><a href="">盘点2017年开放春季预科入学的英国大学</a></li>
-                    </ul>
-                </div>
-                <div class="mid_img">
-                    <p><a href="">留学评估</a></p>
-                    <p>
-                        <a href="">背景提升</a>
-                        <a href="">考试培训</a>
-                    </p>
-                    <p><a href="">留学申请</a></p>
-                    <p><a href="">面试指导</a></p>
-                    <p><a href="">签证服务</a></p>
-                </div>
-            </div>
+            {% endif %}
+        {% else %}
+        {% endif %}
+    {% endfor %}
         </div>
     </div>
     <div class="study_abroad_case clearfix">
@@ -472,6 +494,33 @@
                 <li>提分后成绩：SAT2400</li>
             </ul>
         </div>
+        <div class="case_content" style="display: none">
+            <p>SAT的完23规划 2400满分经验</p>
+            <ul>
+                <li>基本成绩：SAT1540 提分860</li>
+                <li>提分后成绩：SAT2400</li>
+            </ul>
+            <p>SAT快速提分 个性化方案</p>
+            <ul style="display: block">
+                <li>基本成绩：SAT1540 提分860</li>
+                <li>提分后成绩：SAT2400</li>
+            </ul>
+            <p>SAT精42 轻松提升</p>
+            <ul>
+                <li>基本成绩：SAT1540 提分860</li>
+                <li>提分后成绩：SAT2400</li>
+            </ul>
+            <p>SAT突破111我 从1840到2240</p>
+            <ul>
+                <li>基本成绩：SAT1540 提分860</li>
+                <li>提分后成绩：SAT2400</li>
+            </ul>
+            <p>SAT的完2划 2400满分经验</p>
+            <ul>
+                <li>基本成绩：SAT1540 提分860</li>
+                <li>提分后成绩：SAT2400</li>
+            </ul>
+        </div>
     </div>
 </section>
 <!--本科留学结束-->
@@ -483,26 +532,70 @@
     <div class="study_abroad_content clearfix">
         <div class="study_abroad_nav">
             <ul>
-                <li><a href="">留学规划</a></li>
-                <li><a href="">专业推荐</a></li>
-                <li><a href="">院校申请</a></li>
-                <li><a href="">签证指南</a></li>
-                <li><a href="">申请规划表</a></li>
+                {% for abroad_nav in abroad_navs %}
+                {% if abroad_nav.abroad.Abroad_name == '英国研究生留学' %}
+                <li><a href="{{abroad_nav.Abroad_nav_url}}" target="_blank">{{abroad_nav.Abroad_nav_name}}</a></li>
+                {% else %}
+                {% endif %}
+                {% endfor %}
             </ul>
         </div>
         <div class="study_abroad_mid">
+    {% for abroad_nav in abroad_navs %}
+        {% if abroad_nav.abroad.Abroad_name == '英国研究生留学' %}
+            {% if abroad_nav.Abroad_nav_name == '申请规划表' %}
+            <div class="study_abroad_list">
+                <div class="study_abroad_top">
+                    <ul class="clearfix">
+                        <li>
+                            <i>9月-11月</i>
+                            <p>冲刺雅思考试,确定既定目标院校和专业。</p>
+                            <b>&gt;</b>
+                        </li>
+                        <li>
+                            <i>12月-4月</i>
+                            <p>院校回函，跟进，等待Offer。</p>
+                            <b>&gt;</b>
+                        </li>
+                        <li>
+                            <i>6月-9月</i>
+                            <p>申请宿舍、行前准备，获得签证、踏上英国留学之路。</p>
+                            <b>&gt;</b>
+                        </li>
+                    </ul>
+                </div>
+                <div class="study_abroad_top study_abroad_bom">
+                    <ul class="clearfix">
+                        <li>
+                            <i>8月-9月</i>
+                            <p>加入我们，确定最终留学方案。</p>
+                            <b>&gt;</b>
+                        </li>
+                        <li>
+                            <i>11月</i>
+                            <p>准备个人陈述和推荐信、递交材料申请。</p>
+                            <b>&gt;</b>
+                        </li>
+                        <li>
+                            <i>5月</i>
+                            <p>收到offer，根据个人情况确定最终要去的院校及专业。</p>
+                            <b>&gt;</b>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {% else %}
             <div class="study_abroad_num">
                 <div class="mid_article">
                     <ul class="clearfix">
-                        <li><a href="">英国毕业生就业率或创十年来最高</a></li>
-                        <li><a href="">留学十年寒窗苦 近四千中国学生获英国永居</a></li>
-                        <li><a href="">英国留学生毕业后，都干嘛去了呢？</a></li>
-                        <li><a href="">英国大学毕业生调查 最好和最难找工作的十大城市</a></li>
-                        <li><a href="">英国硕士预科申请方案</a></li>
-                        <li><a href="">英国院校提供带薪实习 为留学生未来就业加分</a></li>
-                        <li><a href="">2018年如何申请到世界排名前50的学校</a></li>
-                        <li><a href="">英国名校申请中需知的七大热点问题</a></li>
+                        {% for abroad_content in abroad_contents %}
+                        {% if abroad_content.abroad_nav._id.toString() == abroad_nav._id.toString() %}
+                        <li><a href="{{abroad_content.Abroad_content_url}}" target="_blank">{{abroad_content.Abroad_content_name}}</a></li>
+                        {% else %}
+                        {% endif %}
+                        {% endfor %}
                     </ul>
+                    <a href="{{abroad_nav.Abroad_nav_url}}" class="study_abroad_more" target="_blank">&gt;&gt;</a>
                 </div>
                 <div class="mid_img">
                     <p><a href="">留学评估</a></p>
@@ -514,6 +607,11 @@
                     <p><a href="">面试指导</a></p>
                     <p><a href="">签证服务</a></p>
                 </div>
+            </div>
+            {% endif %}
+        {% else %}
+        {% endif %}
+    {% endfor %}
             </div>
         </div>
     </div>
@@ -560,26 +658,70 @@
     <div class="study_abroad_content clearfix">
         <div class="study_abroad_nav">
             <ul>
-                <li><a href="">留学规划</a></li>
-                <li><a href="">行程准备</a></li>
-                <li><a href="">院校申请</a></li>
-                <li><a href="">中学留学</a></li>
-                <li><a href="">申请规划表</a></li>
+                {% for abroad_nav in abroad_navs %}
+                {% if abroad_nav.abroad.Abroad_name == '英国中学留学' %}
+                <li><a href="{{abroad_nav.Abroad_nav_url}}" target="_blank">{{abroad_nav.Abroad_nav_name}}</a></li>
+                {% else %}
+                {% endif %}
+                {% endfor %}
             </ul>
         </div>
         <div class="study_abroad_mid">
+    {% for abroad_nav in abroad_navs %}
+        {% if abroad_nav.abroad.Abroad_name == '英国中学留学' %}
+            {% if abroad_nav.Abroad_nav_name == '申请规划表' %}
+            <div class="study_abroad_list">
+                <div class="study_abroad_top">
+                    <ul class="clearfix">
+                        <li>
+                            <i>9月-11月</i>
+                            <p>选择理想院校，雅思成绩（如有）。</p>
+                            <b>&gt;</b>
+                        </li>
+                        <li>
+                            <i>12月-1月</i>
+                            <p>准备其他有助于申请的材料，如各种获奖证书、展示特长的录相或磁带等。</p>
+                            <b>&gt;</b>
+                        </li>
+                        <li>
+                            <i>2月-6月</i>
+                            <p>申请宿舍、申请签证、准备机票，准备担保金，赴英国留学。</p>
+                            <b>&gt;</b>
+                        </li>
+                    </ul>
+                </div>
+                <div class="study_abroad_top study_abroad_bom">
+                    <ul class="clearfix">
+                        <li>
+                            <i>8月-9月</i>
+                            <p>加入我们，确定最终留学方案。</p>
+                            <b>&gt;</b>
+                        </li>
+                        <li>
+                            <i>12月</i>
+                            <p>准备简历和个人陈述，老师或校长推荐信。</p>
+                            <b>&gt;</b>
+                        </li>
+                        <li>
+                            <i>1月-2月</i>
+                            <p>等待学校发放录取通知书。</p>
+                            <b>&gt;</b>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {% else %}
             <div class="study_abroad_num">
                 <div class="mid_article">
                     <ul class="clearfix">
-                        <li><a href="">高考后英国留学也不晚</a></li>
-                        <li><a href="">英国中学申请方案</a></li>
-                        <li><a href="">英国寄宿中学逐年升温 年龄越小融入越佳</a></li>
-                        <li><a href="">英国高中留学需要什么申请材料</a></li>
-                        <li><a href="">高中生英国留学面试问题与技巧</a></li>
-                        <li><a href="">最适合中国学生的“世界高考”A-Level</a></li>
-                        <li><a href="">英国留学 私立中学学制你了解吗?</a></li>
-                        <li><a href="">留英低龄化 寄宿中学受青睐</a></li>
+                        {% for abroad_content in abroad_contents %}
+                        {% if abroad_content.abroad_nav._id.toString() == abroad_nav._id.toString() %}
+                        <li><a href="{{abroad_content.Abroad_content_url}}" target="_blank">{{abroad_content.Abroad_content_name}}</a></li>
+                        {% else %}
+                        {% endif %}
+                        {% endfor %}
                     </ul>
+                    <a href="{{abroad_nav.Abroad_nav_url}}" class="study_abroad_more" target="_blank">&gt;&gt;</a>
                 </div>
                 <div class="mid_img">
                     <p><a href="">留学评估</a></p>
@@ -592,6 +734,10 @@
                     <p><a href="">签证服务</a></p>
                 </div>
             </div>
+            {% endif %}
+        {% else %}
+        {% endif %}
+    {% endfor %}
         </div>
     </div>
     <div class="study_abroad_case clearfix">
@@ -629,7 +775,6 @@
     </div>
 </section>
 <!--中学留学结束-->
-{% endfor %}
 
 <!--能力培训开始-->
 <section class="training clearfix">
