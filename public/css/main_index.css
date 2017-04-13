@@ -739,7 +739,6 @@ body{
 .study_abroad .study_abroad_nav{
     float: left;
     width: 15%;
-    background: #FFCC33;
 }
 .study_abroad .study_abroad_nav ul{
     list-style: none;
@@ -748,9 +747,12 @@ body{
 }
 .study_abroad .study_abroad_nav ul li{
     text-align: center;
+    background: #FFCC33;
 }
-.study_abroad .study_abroad_nav ul a:hover{
+.study_abroad .study_abroad_nav ul li:nth-child(1){
     background-color: #fff;
+}
+.study_abroad .study_abroad_nav ul li:nth-child(1) a{
     color: #FFCC33;
 }
 
@@ -777,14 +779,27 @@ body{
     overflow: hidden;
     margin-top: 10px;
 }
+.study_abroad_content .study_abroad_mid .study_abroad_num{
+    display: none;
+}
+.study_abroad_content .study_abroad_mid .study_abroad_num:nth-child(1){
+    display: block;
+}
 .study_abroad_content .mid_article ul{
-    width: 45%;
+    width: 100%;
     list-style: none;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 .study_abroad_content .mid_article ul li{
+    width: 45%;
     margin-bottom: 10px;
+    float: left;
+}
+.study_abroad_content .mid_article ul li:nth-child(odd){
+    margin-right: 40px;
+    margin-left: 10px;
 }
 .study_abroad_content .mid_article ul li a{
     display: block;
@@ -822,6 +837,9 @@ body{
     font-size: 14px;
     color: #333;
 }
+/*
+    留学图片部分
+*/
 .study_abroad .mid_img p:nth-child(1) a:hover{
     color: rgb(246,113,8);
 }
@@ -874,7 +892,7 @@ body{
     text-align: center;
     color: #333;
 }
-.study_abroad .case_title a:hover{
+.study_abroad .case_title a:nth-child(1){
     background-color: #337ab7;
 }
 .study_abroad .case_content p{
@@ -905,29 +923,30 @@ body{
 .postgraduate .study_abroad_content{
     border: 1px solid #66CCCC;
 }
-.postgraduate .study_abroad_nav{
+.postgraduate .study_abroad_nav ul li{
     background: #66CCCC;
-}
-.postgraduate .study_abroad_nav ul a:hover{
-    color: #66CCCC;
 }
 .postgraduate .study_abroad_content .mid_article ul li a:hover{
     color: #66CCCC;
+    font-size: 15px;
 }
-
+.postgraduate .study_abroad_nav ul li:nth-child(1) a{
+    color: #66CCCC;
+}
 /*
     中学留学样式修改
 */
 .middle_school .study_abroad_content{
     border: 1px solid #993333
 }
-.middle_school .study_abroad_nav{
+.middle_school .study_abroad_nav ul li{
     background: #993333;
 }
-.middle_school .study_abroad_nav ul a:hover{
-    color: #993333;
-}
 .middle_school .study_abroad_content .mid_article ul li a:hover{
+    color: #993333;
+    font-size: 15px;
+}
+.middle_school .study_abroad_nav ul li:nth-child(1) a{
     color: #993333;
 }
 .middle_school .mid_img{

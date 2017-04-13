@@ -12,6 +12,9 @@ var express = require('express'),
     Nav_content = require('../models/Nav_content'),
     Area = require('../models/Area'),
     School = require('../models/School'),
+    Abroad = require('../models/Abroad'),
+    Abroad_nav = require('../models/Abroad_nav'),
+    Abroad_content = require('../models/Abroad_content'),
     data;
 
 /*
@@ -55,6 +58,17 @@ router.use(function (req, res, next) {
     }).then(function (rs) {
         data.nav_contents = rs;
     }).then(function () {
+        return Abroad.find().sort({_id:-1});
+    }).then(function (rs) {
+        data.abroads = rs;
+    }).then(function () {
+        return Abroad_nav.find().populate('abroad').sort({abroad:-1,Abroad_nav_order:1});
+    }).then(function (rs) {
+        data.abroad_navs = rs;
+    }).then(function () {
+        return Abroad_content.find().populate(['abroad','abroad_nav']).sort({abroad:-1,abroad_nav:-1,Abroad_content_order:1});
+    }).then(function (rs) {
+        data.abroad_contents = rs;
         next();
     });
 });

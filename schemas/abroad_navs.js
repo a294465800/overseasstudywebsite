@@ -18,6 +18,10 @@ module.exports = new mongoose.Schema({
 
     //导航内容标题
     Abroad_nav_name: String,
+    Abroad_nav_url: {
+        type: String,
+        default: '/'
+    },
     Abroad_nav_order: {
         type: Number,
         default: 0

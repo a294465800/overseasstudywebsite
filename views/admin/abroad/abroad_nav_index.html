@@ -13,6 +13,7 @@
         <th>ID</th>
         <th>留学名称</th>
         <th>导航名称</th>
+        <th>导航url</th>
         <th>标题顺序</th>
         <th>操作</th>
     </tr>
@@ -21,6 +22,7 @@
         <td>{{abroad_nav._id.toString()}}</td>
         <td>{{abroad_nav.abroad.Abroad_name}}</td>
         <td>{{abroad_nav.Abroad_nav_name}}</td>
+        <td>{{abroad_nav.Abroad_nav_url}}</td>
         <td>{{abroad_nav.Abroad_nav_order}}</td>
         <td>
             <a href="/admin/study_abroad/nav/edit?id={{abroad_nav._id.toString()}}">修改</a>

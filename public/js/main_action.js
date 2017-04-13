@@ -99,4 +99,71 @@ $(function () {
         temp.css('display','block');
     });
 
+
+    /*
+    * 各留学的mouseover事件
+    * */
+    var $study_abroad_nav_li = $('.study_abroad_nav ul li');
+
+    $study_abroad_nav_li.on('mouseover',function () {
+        var $parent = $(this).closest('.study_abroad_nav'),
+            $parent2 = $(this).closest('.study_abroad_content').find('.study_abroad_num'),
+            backColor = $(this).css('background-color'),
+            index = $parent.find('li').index(this),
+            temp = $parent2.eq(index);
+        if(backColor == 'rgb(255, 255, 255)'){
+        }else{
+            $parent.find('li').css('background-color',backColor);
+            $parent.find('a').css('color','#fff');
+            $(this).css('background-color','#fff');
+            $(this).find('a').css('color',backColor);
+            $parent2.animate({opacity: 0},50);
+            $parent2.css('display','none');
+            temp.css('display','block');
+            temp.animate({opacity: 1},50);
+        }
+    });
+
+
+    /*
+    * 高分案例mouseover事件
+    * */
+    var $case_title_a = $('.case_title a');
+
+    $case_title_a.on('mouseover',function () {
+        var $parent = $(this).closest('.case_title').find('a'),
+            index = $parent.index(this),
+            $parent2 = $(this).closest('.study_abroad_case').find('.case_content'),
+            temp = $parent2.eq(index);
+        if(temp.css('display') == 'block'){
+        }else{
+            $parent.css('background-color','#fff');
+            $(this).css('background-color','#337ab7');
+            $parent2.animate({opacity: 0},100);
+            $parent2.css('display','none');
+            temp.css('display','block');
+            temp.animate({opacity: 1},100);
+        }
+    });
+
+    /*
+    * 案例下的mouseover事件
+    * */
+    var $case_content_p = $('.case_content p');
+
+    $case_content_p.on('mouseover',function () {
+        var $parent = $(this).closest('.case_content'),
+            index = $parent.find('p').index(this),
+            $parent2 = $parent.find('ul'),
+            temp = $parent2.eq(index);
+        if(temp.css('display') == 'block'){
+        }else{
+            $parent2.animate({opacity: 0},50);
+            $parent2.css('display','none');
+            temp.css('display','block');
+            temp.animate({opacity: 1},300);
+        }
+    });
+
+
 });

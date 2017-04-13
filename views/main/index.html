@@ -372,6 +372,7 @@
 </section>
 <!--留学流程结束-->
 
+{% for abroad in abroads %}
 <!--本科留学开始-->
 <section class="study_abroad undergraduate clearfix">
     <div class="section_title">
@@ -380,23 +381,46 @@
     <div class="study_abroad_content clearfix">
         <div class="study_abroad_nav">
             <ul>
-                <li><a href="">留学规划</a></li>
-                <li><a href="">专业推荐</a></li>
-                <li><a href="">院校申请</a></li>
-                <li><a href="">签证指南</a></li>
-                <li><a href="">申请规划表</a></li>
+                {% for abroad_nav in abroad_navs %}
+                {% if abroad_nav.abroad.Abroad_name == '英国本科留学' %}
+                <li><a href="{{abroad_nav.Abroad_nav_url}}" target="_blank">{{abroad_nav.Abroad_nav_name}}</a></li>
+                {% else %}
+                {% endif %}
+                {% endfor %}
             </ul>
         </div>
         <div class="study_abroad_mid">
             <div class="study_abroad_num">
                 <div class="mid_article">
-                    <ul class="left">
+                    <ul class="clearfix">
                         <li><a href="">英国留学个人陈述如何写才会让人眼前一亮</a></li>
                         <li><a href="">英国本科预料申请方案</a></li>
                         <li><a href="">英国本科申请方案</a></li>
                         <li><a href="">英国留学取得diploma毕业和degree毕业回国后境遇大不同</a></li>
+                        <li><a href="">英国大学offer发放率低的高校，获得高学位较容易</a></li>
+                        <li><a href="">留学英国就业7条途径送给即将毕业学生们</a></li>
+                        <li><a href="">留学在英国的日常礼仪</a></li>
+                        <li><a href="">盘点2017年开放春季预科入学的英国大学</a></li>
                     </ul>
-                    <ul class="right">
+                </div>
+                <div class="mid_img">
+                    <p><a href="">留学评估</a></p>
+                    <p>
+                        <a href="">背景提升</a>
+                        <a href="">考试培训</a>
+                    </p>
+                    <p><a href="">留学申请</a></p>
+                    <p><a href="">面试指导</a></p>
+                    <p><a href="">签证服务</a></p>
+                </div>
+            </div>
+            <div class="study_abroad_num">
+                <div class="mid_article">
+                    <ul class="clearfix">
+                        <li><a href="">2</a></li>
+                        <li><a href="">3</a></li>
+                        <li><a href="">英国本科申请方案</a></li>
+                        <li><a href="">1</a></li>
                         <li><a href="">英国大学offer发放率低的高校，获得高学位较容易</a></li>
                         <li><a href="">留学英国就业7条途径送给即将毕业学生们</a></li>
                         <li><a href="">留学在英国的日常礼仪</a></li>
@@ -451,7 +475,6 @@
     </div>
 </section>
 <!--本科留学结束-->
-
 <!--研究生留学开始-->
 <section class="study_abroad postgraduate clearfix">
     <div class="section_title">
@@ -468,29 +491,29 @@
             </ul>
         </div>
         <div class="study_abroad_mid">
-            <div class="mid_article">
-                <ul class="left">
-                    <li><a href="">英国毕业生就业率或创十年来最高</a></li>
-                    <li><a href="">留学十年寒窗苦 近四千中国学生获英国永居</a></li>
-                    <li><a href="">英国留学生毕业后，都干嘛去了呢？</a></li>
-                    <li><a href="">英国大学毕业生调查 最好和最难找工作的十大城市</a></li>
-                </ul>
-                <ul class="right">
-                    <li><a href="">英国硕士预科申请方案</a></li>
-                    <li><a href="">英国院校提供带薪实习 为留学生未来就业加分</a></li>
-                    <li><a href="">2018年如何申请到世界排名前50的学校</a></li>
-                    <li><a href="">英国名校申请中需知的七大热点问题</a></li>
-                </ul>
-            </div>
-            <div class="mid_img">
-                <p><a href="">留学评估</a></p>
-                <p>
-                    <a href="">背景提升</a>
-                    <a href="">考试培训</a>
-                </p>
-                <p><a href="">留学申请</a></p>
-                <p><a href="">面试指导</a></p>
-                <p><a href="">签证服务</a></p>
+            <div class="study_abroad_num">
+                <div class="mid_article">
+                    <ul class="clearfix">
+                        <li><a href="">英国毕业生就业率或创十年来最高</a></li>
+                        <li><a href="">留学十年寒窗苦 近四千中国学生获英国永居</a></li>
+                        <li><a href="">英国留学生毕业后，都干嘛去了呢？</a></li>
+                        <li><a href="">英国大学毕业生调查 最好和最难找工作的十大城市</a></li>
+                        <li><a href="">英国硕士预科申请方案</a></li>
+                        <li><a href="">英国院校提供带薪实习 为留学生未来就业加分</a></li>
+                        <li><a href="">2018年如何申请到世界排名前50的学校</a></li>
+                        <li><a href="">英国名校申请中需知的七大热点问题</a></li>
+                    </ul>
+                </div>
+                <div class="mid_img">
+                    <p><a href="">留学评估</a></p>
+                    <p>
+                        <a href="">背景提升</a>
+                        <a href="">考试培训</a>
+                    </p>
+                    <p><a href="">留学申请</a></p>
+                    <p><a href="">面试指导</a></p>
+                    <p><a href="">签证服务</a></p>
+                </div>
             </div>
         </div>
     </div>
@@ -529,7 +552,6 @@
     </div>
 </section>
 <!--研究生留学结束-->
-
 <!--中学留学开始-->
 <section class="study_abroad middle_school clearfix">
     <div class="section_title">
@@ -546,29 +568,29 @@
             </ul>
         </div>
         <div class="study_abroad_mid">
-            <div class="mid_article">
-                <ul class="left">
-                    <li><a href="">高考后英国留学也不晚</a></li>
-                    <li><a href="">英国中学申请方案</a></li>
-                    <li><a href="">英国寄宿中学逐年升温 年龄越小融入越佳</a></li>
-                    <li><a href="">英国高中留学需要什么申请材料</a></li>
-                </ul>
-                <ul class="right">
-                    <li><a href="">高中生英国留学面试问题与技巧</a></li>
-                    <li><a href="">最适合中国学生的“世界高考”A-Level</a></li>
-                    <li><a href="">英国留学 私立中学学制你了解吗?</a></li>
-                    <li><a href="">留英低龄化 寄宿中学受青睐</a></li>
-                </ul>
-            </div>
-            <div class="mid_img">
-                <p><a href="">留学评估</a></p>
-                <p>
-                    <a href="">背景提升</a>
-                    <a href="">考试培训</a>
-                </p>
-                <p><a href="">留学申请</a></p>
-                <p><a href="">面试指导</a></p>
-                <p><a href="">签证服务</a></p>
+            <div class="study_abroad_num">
+                <div class="mid_article">
+                    <ul class="clearfix">
+                        <li><a href="">高考后英国留学也不晚</a></li>
+                        <li><a href="">英国中学申请方案</a></li>
+                        <li><a href="">英国寄宿中学逐年升温 年龄越小融入越佳</a></li>
+                        <li><a href="">英国高中留学需要什么申请材料</a></li>
+                        <li><a href="">高中生英国留学面试问题与技巧</a></li>
+                        <li><a href="">最适合中国学生的“世界高考”A-Level</a></li>
+                        <li><a href="">英国留学 私立中学学制你了解吗?</a></li>
+                        <li><a href="">留英低龄化 寄宿中学受青睐</a></li>
+                    </ul>
+                </div>
+                <div class="mid_img">
+                    <p><a href="">留学评估</a></p>
+                    <p>
+                        <a href="">背景提升</a>
+                        <a href="">考试培训</a>
+                    </p>
+                    <p><a href="">留学申请</a></p>
+                    <p><a href="">面试指导</a></p>
+                    <p><a href="">签证服务</a></p>
+                </div>
             </div>
         </div>
     </div>
@@ -607,6 +629,7 @@
     </div>
 </section>
 <!--中学留学结束-->
+{% endfor %}
 
 <!--能力培训开始-->
 <section class="training clearfix">

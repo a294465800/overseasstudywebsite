@@ -241,7 +241,7 @@ router.post('/study_abroad/nav/content/add',function (req, res) {
     }else{
         Abroad_nav.find({
             abroad: abroad
-        }).populate('abroad').sort({_id:-1}).then(function (rs) {
+        }).populate('abroad').sort({Abroad_nav_order:1}).then(function (rs) {
             responseData.abroad_navs = rs;
             res.json(responseData);
         });

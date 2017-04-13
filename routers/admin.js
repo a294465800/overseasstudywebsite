@@ -247,7 +247,7 @@ router.post('/user/edit',function (req, res) {
                 isAdmin: isAdmin
             });
         }
-    }).then(function (rs) {
+    }).then(function () {
         res.render('admin/success',{
             userInfo: req.userInfo,
             message: '用户信息修改成功！',
@@ -1356,9 +1356,33 @@ router.get('/study_abroad/delete',function (req,res) {
 * 留学导航列表
 * */
 router.get('/study_abroad/nav',function (req, res) {
-    Abroad_nav.find().sort({abroad:1,Abroad_nav_order:1}).populate('abroad').then(function (rs) {
-        data.abroad_navs = rs;
-        res.render('admin/abroad/abroad_nav_index',data);
+    data.page = Number(req.query.page || 1);   //在实际开发可能还要对page进行判断，是否为数字之类
+    data.limit = 20;
+    data.pages = 0;
+
+    //获取数据库中的条数
+    Abroad_nav.count().then(function (count) {
+
+        data.count = count;
+        //计算总页数
+        data.pages = Math.ceil(count / data.limit);
+
+        //取值不能超过pages
+        data.page = Math.min(data.page, data.pages);
+
+        //取值不能小于1
+        data.page = Math.max(data.page, 1);
+
+        data.skip = (data.page - 1) * data.limit;
+
+        /*
+         * 从数据库中读取所有用户数据
+         * */
+        Abroad_nav.find().populate('abroad').sort({abroad:1,Abroad_nav_order:1}).limit(data.limit).skip(data.skip).then(function (rs) {
+            data.abroad_navs = rs;
+            data.forPage = 'study_abroad/nav';
+            res.render('admin/abroad/abroad_nav_index',data);
+        });
     });
 });
 
@@ -1378,6 +1402,7 @@ router.get('/study_abroad/nav/add',function (req, res) {
 router.post('/study_abroad/nav/add',function (req, res) {
     var abroad = req.body.abroad,
         abroad_nav_name = req.body.abroad_nav_name || '',
+        abroad_nav_url = req.body.abroad_nav_url,
         abroad_nav_order = Number(req.body.abroad_nav_order);
 
     if(!abroad_nav_name){
@@ -1400,6 +1425,7 @@ router.post('/study_abroad/nav/add',function (req, res) {
         new Abroad_nav({
             abroad: abroad,
             Abroad_nav_name: abroad_nav_name,
+            Abroad_nav_url: abroad_nav_url,
             Abroad_nav_order: abroad_nav_order
         }).save().then(function () {
             Abroad_nav.find({abroad:abroad}).count().then(function (count) {
@@ -1441,6 +1467,7 @@ router.post('/study_abroad/nav/edit',function (req, res) {
     var id = req.query.id,
         abroad = req.body.abroad || '',
         abroad_nav_name = req.body.abroad_nav_name || '',
+        abroad_nav_url = req.body.abroad_nav_url,
         abroad_nav_order = Number(req.body.abroad_nav_order);
 
     if(!abroad){
@@ -1467,6 +1494,7 @@ router.post('/study_abroad/nav/edit',function (req, res) {
         },{
             abroad: abroad,
             Abroad_nav_name: abroad_nav_name,
+            Abroad_nav_url: abroad_nav_url,
             Abroad_nav_order: abroad_nav_order
         }).then(function () {
             data.message = '修改保存成功！';
@@ -1509,9 +1537,33 @@ router.get('/study_abroad/nav/delete',function (req, res) {
 * 留学导航文章列表
 * */
 router.get('/study_abroad/nav/content',function (req, res) {
-    Abroad_content.find().populate(['abroad','abroad_nav']).sort({abroad:1,abroad_nav:1,Abroad_content_order:-1}).then(function (rs) {
-        data.abroad_contents = rs;
-        res.render('admin/abroad/abroad_nav_content_index',data);
+    data.page = Number(req.query.page || 1);   //在实际开发可能还要对page进行判断，是否为数字之类
+    data.limit = 20;
+    data.pages = 0;
+
+    //获取数据库中的条数
+    Abroad_content.count().then(function (count) {
+
+        data.count = count;
+        //计算总页数
+        data.pages = Math.ceil(count / data.limit);
+
+        //取值不能超过pages
+        data.page = Math.min(data.page, data.pages);
+
+        //取值不能小于1
+        data.page = Math.max(data.page, 1);
+
+        data.skip = (data.page - 1) * data.limit;
+
+        /*
+         * 从数据库中读取所有用户数据
+         * */
+        Abroad_content.find().populate(['abroad','abroad_nav']).sort({abroad:1,abroad_nav:1,Abroad_content_order:1}).limit(data.limit).skip(data.skip).then(function (rs) {
+            data.abroad_contents = rs;
+            data.forPage = 'study_abroad/nav/content';
+            res.render('admin/abroad/abroad_nav_content_index',data);
+        });
     });
 });
 
@@ -1628,7 +1680,7 @@ router.post('/study_abroad/nav/content/edit',function (req, res) {
         return ;
     }
 
-    Abroad_content.findOne({abroad:abroad,abroad_nav:abroad_nav,_id:{$ne: id}}).then(function (rs) {
+    Abroad_content.findOne({abroad:abroad,abroad_nav:abroad_nav,Abroad_content_name:abroad_content_name,_id:{$ne: id}}).then(function (rs) {
         if(rs){
             data.message = '文章标题不能重复！';
             res.render('admin/error',data);
