@@ -1,0 +1,21 @@
+{% extends '../layout.html' %}
+
+{% block main %}
+<ol class="breadcrumb">
+    <li><a href="/" target="_blank">官网首页</a></li>
+    <li><span>考试编辑</span></li>
+</ol>
+
+<h3 style="font-size: 24px;font-weight: bold; line-height: 50px;margin-bottom: 20px;border-bottom: 1px solid #ccc">考试编辑 - {{test.Test_name}}</h3>
+
+<form role="form" method="post">
+    <div class="form-group">
+        <label for="test_name">考试名称：</label>
+        <input style="margin: 5px 0 20px" type="text" class="form-control" id="test_name" value="{{test.Test_name}}" name="test_name">
+        <label for="test_order">考试顺序：</label>
+        <input style="margin: 5px 0 20px" type="text" class="form-control" id="test_order" value="{{test.Test_order}}" name="test_order">
+    </div>
+    <button type="submit" class="btn btn-default">提交</button>
+</form>
+
+{% endblock %}

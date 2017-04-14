@@ -19,7 +19,7 @@ module.exports = new mongoose.Schema({
     School_zn:String,
     School_en:String,
 
-    //导航顺序
+    //学校排名顺序
     School_rank:{
         type: Number,
         default: 0
@@ -32,5 +32,10 @@ module.exports = new mongoose.Schema({
     School_love:{
         type:Number,
         default:0
+    },
+    //录取人数
+    School_enroll:{
+        type: Number,
+        default: 0
     }
 });

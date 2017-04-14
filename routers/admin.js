@@ -14,8 +14,10 @@ var express = require('express'),
     Area = require('../models/Area'),
     School = require('../models/School'),
     Abroad = require('../models/Abroad'),
+    Test = require('../models/Test'),
     Abroad_nav = require('../models/Abroad_nav'),
     Abroad_content = require('../models/Abroad_content'),
+    Abroad_enroll = require('../models/Abroad_enroll'),
     data;
 
 /*
@@ -59,14 +61,12 @@ function calculatePages(count) {
 router.use(function (req, res, next) {
     data = {
         userInfo: req.userInfo,
-        limit: 20
+        limit: 20,
+        count:0
     };
     next();
 });
 
-/*
-* 首页
-* */
 router.use(function (req, res, next) {
     if(!req.userInfo.isAdmin){
         //如果当前用户是非管理员
@@ -77,6 +77,9 @@ router.use(function (req, res, next) {
     next();
 });
 
+/*
+ * 首页
+ * */
 router.get('/',function (req, res) {
     res.render('admin/index', data);
 });
@@ -1124,6 +1127,125 @@ router.get('/school/delete',function (req, res) {
 });
 
 /*
+*考试列表
+* */
+router.get('/study_abroad/test',function (req, res) {
+    Test.find().sort({Test_order: 1}).then(function (rs) {
+        data.tests = rs;
+        res.render('admin/abroad/abroad_test_index',data);
+    });
+});
+
+/*
+* 考试添加
+* */
+router.get('/study_abroad/test/add',function (req, res) {
+    res.render('admin/abroad/abroad_test_add',data);
+});
+
+/*
+* 考试添加保存
+* */
+router.post('/study_abroad/test/add',function (req, res) {
+    var test_name = req.body.test_name,
+        test_order = Number(req.body.test_order);
+    if(!test_name){
+        data.message = '考试名称不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    Test.findOne({Test_name: test_name}).then(function (rs) {
+        if(rs){
+            data.message = '考试名称不能重复！';
+            res.render('admin/error',data);
+            return ;
+        }
+        new Test({
+            Test_name: test_name,
+            test_order: test_order
+        }).save().then(function () {
+            data.message = '考试保存成功！';
+            data.url = '/admin/study_abroad/test';
+            res.render('admin/success',data);
+        });
+    });
+});
+
+/*
+* 考试修改
+* */
+router.get('/study_abroad/test/edit',function (req, res) {
+    var id = req.query.id;
+
+    Test.findById({_id:id}).then(function (rs) {
+        if(!rs){
+            data.message = '所要修改的项目不存在！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else{
+            data.test = rs;
+            res.render('admin/abroad/abroad_test_edit',data);
+        }
+    });
+});
+
+/*
+* 考试修改保存
+* */
+router.post('/study_abroad/test/edit',function (req, res) {
+    var id = req.query.id,
+        test_name = req.body.test_name,
+        test_order = Number(req.body.test_order);
+
+    if(!test_name){
+        data.message = '考试名称不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    Test.findOne({Test_name:test_name,_id: {$ne: id}}).then(function (rs) {
+        if(rs){
+            data.message = '考试名称不能重复！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else{
+            return Test.update({
+                _id: id
+            },{
+                Test_name: test_name,
+                Test_order: test_order
+            });
+        }
+    }).then(function () {
+        data.message = '考试名称修改成功！';
+        data.url = '/admin/study_abroad/test';
+        res.render('admin/success',data);
+    });
+});
+
+/*
+* 考试删除
+* */
+router.get('/study_abroad/test/delete',function (req, res) {
+    var id = req.query.id;
+
+    Test.findById({_id:id}).then(function (rs) {
+        if(!rs){
+            data.message = '所要删除的项目不存在！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else{
+            return Test.remove({_id: id});
+        }
+    }).then(function () {
+        data.message = '考试删除成功！';
+        data.url = '/admin/study_abroad/test';
+        res.render('admin/success',data);
+    });
+});
+
+/*
 * 留学列表
 * */
 router.get('/study_abroad',function (req, res) {
@@ -1220,7 +1342,7 @@ router.post('/study_abroad/edit',function (req,res) {
 * 留学删除
 * */
 router.get('/study_abroad/delete',function (req,res) {
-    var id = req.query.id || '';
+    var id = req.query.id;
 
     Abroad.findById(id).then(function (rs) {
         if(!rs){
@@ -1576,6 +1698,257 @@ router.get('/study_abroad/nav/content/delete',function (req, res) {
                     data.url = '/admin/study_abroad/nav/content';
                     res.render('admin/success',data);
                 });
+            });
+        });
+    });
+});
+
+/*
+* 录取案例列表
+* */
+router.get('/study_abroad/nav/enroll',function (req, res) {
+    data.page = Number(req.query.page) || 1;
+    //获取数据库中的条数
+    Abroad_enroll.count().then(function (count) {
+        calculatePages(count);
+        Abroad_enroll.find().populate(['abroad','school','test1','test2']).sort({abroad:1,school:1,_id:-1}).limit(data.limit).skip(data.skip).then(function (rs) {
+            data.abroad_enrolls = rs;
+            data.forPage = 'study_abroad/nav/enroll';
+            res.render('admin/abroad/abroad_nav_enroll_index',data);
+        });
+    });
+});
+
+/*
+* 录取案例添加
+* */
+router.get('/study_abroad/nav/enroll/add',function (req, res) {
+    Abroad.find().sort({_id:-1}).then(function (rs) {
+        data.abroads = rs;
+        Test.find().sort({Test_order: 1}).then(function (rs) {
+            data.tests = rs;
+            res.render('admin/abroad/abroad_nav_enroll_add',data);
+        });
+    });
+});
+
+/*
+* 录取案例添加保存
+* */
+router.post('/study_abroad/nav/enroll/add',function (req, res) {
+    var abroad =req.body.abroad,
+        abroad_enroll_name = req.body.abroad_enroll_name,
+        school_zn = req.body.school,
+        abroad_enroll_subject = req.body.abroad_enroll_subject,
+        abroad_enroll_student = req.body.abroad_enroll_student,
+        abroad_enroll_code = req.body.abroad_enroll_code,
+        test1 = req.body.test1,
+        test2 = req.body.test2,
+        abroad_enroll_score1 = parseFloat(req.body.abroad_enroll_score1).toFixed(2),
+        abroad_enroll_score2 = parseFloat(req.body.abroad_enroll_score2).toFixed(2),
+        abroad_enroll_url = req.body.abroad_enroll_url,
+        school_id;
+
+    if(!abroad){
+        data.message = '留学项目不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    if(!school_zn){
+        data.message = '录取学校不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    if(!abroad_enroll_student){
+        data.message = '录取学生姓名不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    if(!test1 || !test2){
+        data.message = '考试科目不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    if(test1 == test2){
+        data.message = '两个考试科目重复！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    School.findOne({School_zn: school_zn}).then(function (rs) {
+        if(!rs){
+            data.message = '录取的学校不存在！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else{
+            school_id = rs._id;
+            Abroad_enroll.findOne({Abroad_enroll_student: abroad_enroll_student}).then(function (rs) {
+                if(rs){
+                    data.message = '该学生信息已存在！';
+                    res.render('admin/error',data);
+                    return ;
+                }
+                new Abroad_enroll({
+                    abroad: abroad,
+                    school: school_id,
+                    test1: test1,
+                    test2: test2,
+                    Abroad_enroll_score1: abroad_enroll_score1,
+                    Abroad_enroll_score2: abroad_enroll_score2,
+                    Abroad_enroll_name: abroad_enroll_name,
+                    Abroad_enroll_subject: abroad_enroll_subject,
+                    Abroad_enroll_student: abroad_enroll_student,
+                    Abroad_enroll_code: abroad_enroll_code,
+                    Abroad_enroll_url: abroad_enroll_url
+                }).save().then(function () {
+                    Abroad_enroll.find({school: school_id}).count().then(function (count) {
+                        School.update({
+                            _id: school_id
+                        },{
+                            School_enroll: count
+                        }).then(function () {
+                            data.message = '录取案例保存成功！';
+                            data.url = '/admin/study_abroad/nav/enroll';
+                            res.render('admin/success',data);
+                        });
+                    });
+                });
+            });
+        }
+    });
+});
+
+/*
+* 录取案例修改
+* */
+router.get('/study_abroad/nav/enroll/edit',function (req, res) {
+    var id = req.query.id;
+
+    Abroad_enroll.findById(id).populate(['abroad','school','test1','test2']).then(function (rs) {
+        if(!rs){
+            data.message = '要修改的录取案例不存在！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else{
+            data.abroad_enroll = rs;
+            Abroad.find().then(function (rs) {
+                data.abroads = rs;
+            }).then(function () {
+                Test.find().sort({Test_order: 1}).then(function (rs) {
+                    data.tests = rs;
+                    res.render('admin/abroad/abroad_nav_enroll_edit',data);
+                });
+            });
+        }
+    });
+});
+
+/*
+* 录取案例修改保存
+* */
+router.post('/study_abroad/nav/enroll/edit',function (req, res) {
+    var id = req.query.id,
+        abroad =req.body.abroad,
+        abroad_enroll_name = req.body.abroad_enroll_name,
+        school_zn = req.body.school,
+        abroad_enroll_subject = req.body.abroad_enroll_subject,
+        abroad_enroll_student = req.body.abroad_enroll_student,
+        abroad_enroll_code = req.body.abroad_enroll_code,
+        test1 = req.body.test1,
+        test2 = req.body.test2,
+        abroad_enroll_score1 = parseFloat(req.body.abroad_enroll_score1).toFixed(2),
+        abroad_enroll_score2 = parseFloat(req.body.abroad_enroll_score2).toFixed(2),
+        abroad_enroll_url = req.body.abroad_enroll_url,
+        school_id;
+
+    if(!abroad){
+        data.message = '留学项目不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    if(!school_zn){
+        data.message = '录取学校不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    if(!abroad_enroll_student){
+        data.message = '录取学生姓名不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    if(!test1 || !test2){
+        data.message = '考试科目不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    if(test1 == test2){
+        data.message = '两个考试科目重复！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    School.findOne({School_zn: school_zn}).then(function (rs) {
+        if(!rs){
+            data.message = '录取的学校不存在！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else{
+            school_id = rs._id;
+            Abroad_enroll.findOne({Abroad_enroll_student: abroad_enroll_student,_id:{$ne:id}}).then(function (rs) {
+                if(rs){
+                    data.message = '该学生信息已存在！';
+                    res.render('admin/error',data);
+                    return ;
+                }
+                Abroad_enroll.update({
+                    _id: id
+                },{
+                    abroad: abroad,
+                    school: school_id,
+                    test1: test1,
+                    test2: test2,
+                    Abroad_enroll_score1: abroad_enroll_score1,
+                    Abroad_enroll_score2: abroad_enroll_score2,
+                    Abroad_enroll_name: abroad_enroll_name,
+                    Abroad_enroll_subject: abroad_enroll_subject,
+                    Abroad_enroll_student: abroad_enroll_student,
+                    Abroad_enroll_code: abroad_enroll_code,
+                    Abroad_enroll_url: abroad_enroll_url
+                }).then(function () {
+                    data.message = '录取案例保存成功！';
+                    data.url = '/admin/study_abroad/nav/enroll';
+                    res.render('admin/success',data);
+                });
+            });
+        }
+    });
+});
+
+/*
+* 录取案例删除
+* */
+router.get('/study_abroad/nav/enroll/delete',function (req, res) {
+    var id = req.query.id,
+        enroll_school;
+
+    Abroad_enroll.findById(id).populate('school').then(function (rs) {
+        if(!rs){
+            data.message = '要删除的案例不存在！';
+            res.render('admin/error',data);
+        }else{
+            enroll_school = rs.school._id;
+            return Abroad_enroll.remove({_id:id});
+        }
+    }).then(function () {
+        Abroad_enroll.find({school: enroll_school}).count().then(function (count) {
+            School.update({
+                _id: enroll_school
+            },{
+                School_enroll: count
+            }).then(function () {
+                data.message = '案例删除成功！';
+                data.url = '/admin/study_abroad/nav/enroll';
+                res.render('admin/success',data);
             });
         });
     });
