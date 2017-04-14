@@ -19,11 +19,47 @@ var express = require('express'),
     data;
 
 /*
+ * 处理分页的函数
+ * */
+function setArrFont(sum) {
+    var arr = [];
+    for(var i = 0;i<sum;i++){
+        arr[i] = i+1;
+    }
+    return arr;
+}
+
+function setArrEnd(sum) {
+    var arr = [],
+        a = sum;
+    for(var i = 0;i<5;i++){
+        arr[i] = a;
+        a--;
+    }
+    return arr.reverse();
+}
+
+function calculatePages(count) {
+    data.count = count;
+    //计算总页数
+    data.pages = Math.ceil(count / data.limit);
+    data.pagesFont = setArrFont(data.pages);
+    data.pagesEnd  = setArrEnd(data.pages);
+
+    //取值不能超过pages
+    data.page = Math.min(data.page, data.pages);
+    //取值不能小于1
+    data.page = Math.max(data.page, 1);
+    //跳过的条数
+    data.skip = (data.page - 1) * data.limit;
+}
+/*
 * 通用数据
 * */
 router.use(function (req, res, next) {
     data = {
-        userInfo: req.userInfo
+        userInfo: req.userInfo,
+        limit: 20
     };
     next();
 });
@@ -42,58 +78,21 @@ router.use(function (req, res, next) {
 });
 
 router.get('/',function (req, res) {
-    res.render('admin/index',{
-        userInfo: req.userInfo
-    });
+    res.render('admin/index', data);
 });
 
 /*
 * 用户管理
 * */
 router.get('/user',function (req, res) {
-
-    /*
-     * 从数据库当中读取所有的用户数据
-     *
-     * limit(Number)：限制获取的数据条数
-     * skip(Number):忽略数据的条数
-     *
-     * 每页显示2条
-     * 1：1-2 skip(0); ->(当前页-1) * limit
-     * 2: 3-4 skip(2);
-     * */
-
-    var page = Number(req.query.page || 1),   //在实际开发可能还要对page进行判断，是否为数字之类
-        limit = 20,
-        pages = 0;
-
+    data.page = Number(req.query.page) || 1;
     //获取数据库中的条数
     User.count().then(function (count) {
-
-        //计算总页数
-        pages = Math.ceil(count / limit);
-
-        //取值不能超过pages
-        page = Math.min(page, pages);
-
-        //取值不能小于1
-        page = Math.max(page, 1);
-
-        var skip = (page - 1) * limit;
-
-        /*
-         * 从数据库中读取所有用户数据
-         * */
-        User.find().sort({_id:-1}).limit(limit).skip(skip).then(function (users) {
-            res.render('admin/user/user_index', {
-                userInfo: req.userInfo,
-                users: users,
-                count: count,
-                pages: pages,
-                limit: limit,
-                page: page,
-                forPage: 'user'
-            });
+        calculatePages(count);
+        User.find().sort({_id:-1}).limit(data.limit).skip(data.skip).then(function (users) {
+            data.forPage = 'user';
+            data.users = users;
+            res.render('admin/user/user_index', data);
         });
     });
 });
@@ -102,9 +101,7 @@ router.get('/user',function (req, res) {
 * 用户添加
 * */
 router.get('/user/add',function (req, res) {
-    res.render('admin/user/user_add',{
-        userInfo: req.userInfo
-    });
+    res.render('admin/user/user_add', data);
 });
 
 /*
@@ -115,10 +112,8 @@ router.post('/user/add',function (req, res) {
         password = req.body.password || '',
         isAdmin = req.body.isAdmin || false;
     if(username == '' || password == ''){
-        res.render('admin/error',{
-            userInfo:req.userInfo,
-            message: '用户名称或者密码不能为空！'
-        });
+        data.message = '用户名称或者密码不能为空！';
+        res.render('admin/error', data);
         return ;
     }
 
@@ -127,10 +122,8 @@ router.post('/user/add',function (req, res) {
         username: username
     }).then(function (rs) {
         if(rs){
-            res.render('admin/error',{
-                userInfo: req.userInfo,
-                message: '用户已经存在！'
-            });
+            data.message = '用户已经存在！';
+            res.render('admin/error', data);
             return Promise.reject();
         }else{
             //数据库不存在该用户，可以保存
@@ -140,12 +133,10 @@ router.post('/user/add',function (req, res) {
                 isAdmin: isAdmin
             }).save();
         }
-    }).then(function (rs) {
-        res.render('admin/success',{
-            userInfo: req.userInfo,
-            message: '用户保存成功！',
-            url: '/admin/user'
-        });
+    }).then(function () {
+        data.message = '用户保存成功！';
+        data.url = '/admin/user';
+        res.render('admin/success', data);
     });
 });
 
@@ -162,16 +153,12 @@ router.get('/user/edit',function (req, res) {
         _id: id
     }).then(function (rs) {
         if(!rs){
-            res.render('admin/error',{
-                userInfo: req.userInfo,
-                message: '用户信息不存在！'
-            });
+            data.message = '用户信息不存在！';
+            res.render('admin/error', data);
             return Promise.reject();
         }else{
-            res.render('admin/user/user_edit',{
-                userInfo: req.userInfo,
-                user: rs
-            });
+            data.user = rs;
+            res.render('admin/user/user_edit', data);
         }
     })
 });
@@ -189,10 +176,8 @@ router.post('/user/edit',function (req, res) {
         isAdmin = req.body.isAdmin || false;
 
     if(username == '' || password == ''){
-        res.render('admin/error',{
-            userInfo: req.userInfo,
-            message: '用户名称或者密码不能为空！'
-        });
+        data.message = '用户名称或者密码不能为空！';
+        res.render('admin/error', data);
         return ;
     }
 
@@ -200,10 +185,8 @@ router.post('/user/edit',function (req, res) {
         _id: id
     }).then(function (rs) {
         if(!rs){
-            res.render('admin/error',{
-                userInfo: req.userInfo,
-                message: '用户信息不存在！'
-            });
+            data.message = '用户信息不存在！';
+            res.render('admin/error', data);
             return Promise.reject();
         }else{
             //当用户没有修改名称和密码提交的时候
@@ -215,11 +198,9 @@ router.post('/user/edit',function (req, res) {
                     password: password,
                     isAdmin: isAdmin
                 }).then(function () {
-                    res.render('admin/success',{
-                        userInfo: req.userInfo,
-                        message: '用户信息修改成功！',
-                        url: '/admin/user'
-                    });
+                    data.message = '用户信息修改成功！';
+                    data.url = '/admin/user';
+                    res.render('admin/success', data);
                 });
                 return Promise.reject();
             }else {
@@ -232,11 +213,8 @@ router.post('/user/edit',function (req, res) {
         }
     }).then(function (sameNavigation) {
         if(sameNavigation){
-            console.log('1');
-            res.render('admin/error',{
-                userInfo: req.userInfo,
-                message: '数据库中已经存在同名用户！'
-            });
+            data.message = '数据库中已经存在同名用户！';
+            res.render('admin/error', data);
             return Promise.reject();
         }else{
             return User.update({
@@ -248,11 +226,9 @@ router.post('/user/edit',function (req, res) {
             });
         }
     }).then(function () {
-        res.render('admin/success',{
-            userInfo: req.userInfo,
-            message: '用户信息修改成功！',
-            url: '/admin/user'
-        });
+        data.message = '用户信息修改成功！';
+        data.url = '/admin/user';
+        res.render('admin/success', data);
     });
 });
 
@@ -266,11 +242,9 @@ router.get('/user/delete',function (req, res) {
     User.remove({
         _id: id
     }).then(function () {
-        res.render('admin/success',{
-            userInfo: req.userInfo,
-            message: '删除成功!',
-            url: '/admin/user'
-        });
+        data.message = '删除成功!';
+        data.url = '/admin/user';
+        res.render('admin/success', data);
     });
 });
 
@@ -279,10 +253,8 @@ router.get('/user/delete',function (req, res) {
 * */
 router.get('/navigation',function (req, res) {
     Navigation.find().sort({Nav_order:1}).then(function (navigations) {
-        res.render('admin/navigation/navigation_index', {
-            userInfo: req.userInfo,
-            navigations: navigations
-        });
+        data.navigations = navigations;
+        res.render('admin/navigation/navigation_index', data);
     });
 });
 
@@ -290,9 +262,7 @@ router.get('/navigation',function (req, res) {
 * 导航添加
 * */
 router.get('/navigation/add',function (req, res) {
-    res.render('admin/navigation/navigation_add',{
-        userInfo: req.userInfo
-    });
+    res.render('admin/navigation/navigation_add', data);
 });
 
 /*
@@ -464,39 +434,15 @@ router.get('/navigation/delete',function (req, res) {
 * 导航内容标题列表
 * */
 router.get('/navigation/title',function (req, res) {
-
-    var page = Number(req.query.page || 1),   //在实际开发可能还要对page进行判断，是否为数字之类
-        limit = 20,
-        pages = 0;
-
+    data.page = Number(req.query.page) || 1;
     //获取数据库中的条数
     Nav_title.count().then(function (count) {
 
-        //计算总页数
-        pages = Math.ceil(count / limit);
-
-        //取值不能超过pages
-        page = Math.min(page, pages);
-
-        //取值不能小于1
-        page = Math.max(page, 1);
-
-        var skip = (page - 1) * limit;
-
-        /*
-         * 从数据库中读取所有用户数据
-         * */
-        Nav_title.find().sort({navigation:1,Nav_title_order:1}).limit(limit).skip(skip).populate('navigation').then(function (Nav_titles) {
-
-            res.render('admin/navigation/navigation_title', {
-                userInfo: req.userInfo,
-                Nav_titles: Nav_titles,
-                count: count,
-                pages: pages,
-                limit: limit,
-                page: page,
-                forPage: 'navigation/title'
-            });
+        calculatePages(count);
+        Nav_title.find().sort({navigation:1,Nav_title_order:1}).limit(data.limit).skip(data.skip).populate('navigation').then(function (Nav_titles) {
+            data.forPage = 'navigation/title';
+            data.Nav_titles = Nav_titles;
+            res.render('admin/navigation/navigation_title', data);
         });
     });
 });
@@ -522,17 +468,13 @@ router.post('/navigation/title/add',function (req, res) {
         title = req.body.Nav_title || '',
         order = Number(req.body.Nav_title_order);
     if(navigation == ''){
-        res.render('admin/error',{
-            userInfo: req.userInfo,
-            message: '导航分类不能为空！'
-        });
+        data.message = '导航分类不能为空！';
+        res.render('admin/error', data);
         return ;
     }
     if(title == ''){
-        res.render('admin/error',{
-            userInfo: req.userInfo,
-            message: '导航内容标题不能为空！'
-        });
+        data.message = '导航内容标题不能为空！';
+        res.render('admin/error', data);
         return ;
     }
 
@@ -541,10 +483,8 @@ router.post('/navigation/title/add',function (req, res) {
         Nav_title: title
     }).then(function (sameTitle) {
         if(sameTitle){
-            res.render('admin/error',{
-                userInfo: req.userInfo,
-                message: '导航内容标题不能重复！'
-            });
+            data.message = '导航内容标题不能重复！';
+            res.render('admin/error', data);
             return Promise.reject();
         }else{
             new Nav_title({
@@ -560,11 +500,9 @@ router.post('/navigation/title/add',function (req, res) {
                     },{
                         Nav_count: rs
                     }).then(function () {
-                        res.render('admin/success',{
-                            userInfo: req.userInfo,
-                            message: '导航内容标题保存成功！',
-                            url: '/admin/navigation/title'
-                        });
+                        data.message = '导航内容标题保存成功！';
+                        data.url = '/admin/navigation/title';
+                        res.render('admin/success', data);
                     });
                 });
             })
@@ -588,17 +526,13 @@ router.get('/navigation/title/edit',function (req, res) {
         }).populate('navigation');
     }).then(function (nav_title) {
         if(!nav_title){
-            res.render('admin/error',{
-                userInfo: req.userInfo,
-                message: '导航内容标题不存在！'
-            });
+            data.message = '导航内容标题不存在！';
+            res.render('admin/error', data);
             return Promise.reject();
         }else {
-            res.render('admin/navigation/navigation_title_edit',{
-                userInfo: req.userInfo,
-                navigations: navigations,
-                nav_title: nav_title
-            });
+            data.navigations = navigations;
+            data.nav_title = nav_title;
+            res.render('admin/navigation/navigation_title_edit', data);
         }
     });
 });
@@ -615,16 +549,12 @@ router.post('/navigation/title/edit',function (req, res) {
         _id: id
     }).populate('navigation').then(function (rs) {
         if (req.body.navigation == '') {
-            res.render('admin/error', {
-                userInfo: req.userInfo,
-                message: '导航名称不能为空！'
-            });
+            data.message = '导航名称不能为空！';
+            res.render('admin/error', data);
             return Promise.reject();
         } else if (title == '') {
-            res.render('admin/error', {
-                userInfo: req.userInfo,
-                message: '内容标题不能为空！'
-            });
+            data.message = '内容标题不能为空！';
+            res.render('admin/error', data);
             return Promise.reject();
         } else {
             return Nav_title.findOne({
@@ -635,11 +565,8 @@ router.post('/navigation/title/edit',function (req, res) {
         }
     }).then(function (sameTitle) {
         if(sameTitle){
-            res.render('admin/error',{
-                userInfo: req.userInfo,
-                message: '导航内容标题不能重复！'
-            });
-
+            data.message = '导航内容标题不能重复！';
+            res.render('admin/error', data);
             return Promise.reject();
         }else{
             return Nav_title.update({
@@ -650,12 +577,10 @@ router.post('/navigation/title/edit',function (req, res) {
                 Nav_title_order: order
             });
         }
-    }).then(function (rs) {
-        res.render('admin/success', {
-            userInfo: req.userInfo,
-            message: '内容修改保存成功',
-            url: '/admin/navigation/title'
-        });
+    }).then(function () {
+        data.message = '内容修改保存成功';
+        data.url = '/admin/navigation/title';
+        res.render('admin/success', data);
     });
 });
 
@@ -682,11 +607,9 @@ router.get('/navigation/title/delete',function (req, res) {
                 }, {
                     Nav_count: rs
                 }).then(function () {
-                    res.render('admin/success', {
-                        userInfo: req.userInfo,
-                        message: '删除成功!',
-                        url: '/admin/navigation/title'
-                    });
+                    data.message = '删除成功!';
+                    data.url = '/admin/navigation/title';
+                    res.render('admin/success', data);
                 });
             });
         });
@@ -697,29 +620,10 @@ router.get('/navigation/title/delete',function (req, res) {
 * 标题内容列表
 * */
 router.get('/navigation/title/content',function (req, res) {
-
-    data.page = Number(req.query.page || 1);   //在实际开发可能还要对page进行判断，是否为数字之类
-    data.limit = 20;
-    data.pages = 0;
-
+    data.page = Number(req.query.page) || 1;
     //获取数据库中的条数
     Nav_content.count().then(function (count) {
-
-        data.count = count;
-        //计算总页数
-        data.pages = Math.ceil(count / data.limit);
-
-        //取值不能超过pages
-        data.page = Math.min(data.page, data.pages);
-
-        //取值不能小于1
-        data.page = Math.max(data.page, 1);
-
-        data.skip = (data.page - 1) * data.limit;
-
-        /*
-         * 从数据库中读取所有用户数据
-         * */
+        calculatePages(count);
         Nav_content.find().populate(['navigation','nav_title']).sort({navigation:1,nav_title:1,Nav_content_order:1}).limit(data.limit).skip(data.skip).then(function (Nav_contents) {
             data.Nav_contents = Nav_contents;
             data.forPage = 'navigation/title/content';
@@ -1029,29 +933,10 @@ router.get('/area/delete',function (req, res) {
 * 学校信息列表
 * */
 router.get('/school',function (req, res) {
-
-    data.page = Number(req.query.page || 1);   //在实际开发可能还要对page进行判断，是否为数字之类
-    data.limit = 20;
-    data.pages = 0;
-
+    data.page = Number(req.query.page) || 1;
     //获取数据库中的条数
     School.count().then(function (count) {
-
-        data.count = count;
-        //计算总页数
-        data.pages = Math.ceil(count / data.limit);
-
-        //取值不能超过pages
-        data.page = Math.min(data.page, data.pages);
-
-        //取值不能小于1
-        data.page = Math.max(data.page, 1);
-
-        data.skip = (data.page - 1) * data.limit;
-
-        /*
-         * 从数据库中读取所有用户数据
-         * */
+        calculatePages(count);
         School.find().populate('area').sort({School_rank:1}).limit(data.limit).skip(data.skip).then(function (schools) {
             data.schools = schools;
             data.forPage = 'school';
@@ -1126,7 +1011,7 @@ router.post('/school/add',function (req, res) {
         },{
             Area_count: count
         });
-    }).then(function (rs) {
+    }).then(function () {
         data.message = '学校保存成功！';
         data.url = '/admin/school';
         res.render('admin/success',data);
@@ -1356,28 +1241,10 @@ router.get('/study_abroad/delete',function (req,res) {
 * 留学导航列表
 * */
 router.get('/study_abroad/nav',function (req, res) {
-    data.page = Number(req.query.page || 1);   //在实际开发可能还要对page进行判断，是否为数字之类
-    data.limit = 20;
-    data.pages = 0;
-
+    data.page = Number(req.query.page) || 1;
     //获取数据库中的条数
     Abroad_nav.count().then(function (count) {
-
-        data.count = count;
-        //计算总页数
-        data.pages = Math.ceil(count / data.limit);
-
-        //取值不能超过pages
-        data.page = Math.min(data.page, data.pages);
-
-        //取值不能小于1
-        data.page = Math.max(data.page, 1);
-
-        data.skip = (data.page - 1) * data.limit;
-
-        /*
-         * 从数据库中读取所有用户数据
-         * */
+        calculatePages(count);
         Abroad_nav.find().populate('abroad').sort({abroad:1,Abroad_nav_order:1}).limit(data.limit).skip(data.skip).then(function (rs) {
             data.abroad_navs = rs;
             data.forPage = 'study_abroad/nav';
@@ -1537,28 +1404,10 @@ router.get('/study_abroad/nav/delete',function (req, res) {
 * 留学导航文章列表
 * */
 router.get('/study_abroad/nav/content',function (req, res) {
-    data.page = Number(req.query.page || 1);   //在实际开发可能还要对page进行判断，是否为数字之类
-    data.limit = 20;
-    data.pages = 0;
-
+    data.page = Number(req.query.page) || 1;
     //获取数据库中的条数
     Abroad_content.count().then(function (count) {
-
-        data.count = count;
-        //计算总页数
-        data.pages = Math.ceil(count / data.limit);
-
-        //取值不能超过pages
-        data.page = Math.min(data.page, data.pages);
-
-        //取值不能小于1
-        data.page = Math.max(data.page, 1);
-
-        data.skip = (data.page - 1) * data.limit;
-
-        /*
-         * 从数据库中读取所有用户数据
-         * */
+        calculatePages(count);
         Abroad_content.find().populate(['abroad','abroad_nav']).sort({abroad:1,abroad_nav:1,Abroad_content_order:1}).limit(data.limit).skip(data.skip).then(function (rs) {
             data.abroad_contents = rs;
             data.forPage = 'study_abroad/nav/content';

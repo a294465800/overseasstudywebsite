@@ -27,8 +27,25 @@
                 <li><a href="/school?school_area={{area}}&school_rank={{rank}}&&call={{call}}&call2={{call2}}&page={{pages}}">{{pages}}</a></li>
             {% endif %}
             {% endfor %}
+        <!--刚好尾页倒数5，最小分页数-->
+        {% elseif page == pages - 4 %}
+                <li><a href="/admin/{{forPage}}?page=1">1</a></li>
+                <li><a class="none">...</a></li>
+            {% for pa in pagesEnd %}
+                {% if pa == page %}
+                <li><a href="/admin/{{forPage}}?page={{page-1}}">{{page-1}}</a></li>
+                <li class="active"><span style="margin-right: 10px">{{page}}</span></li>
+                {% else %}
+                <li><a href="/admin/{{forPage}}?page={{pa}}">{{pa}}</a></li>
+                {% endif %}
+            {% endfor %}
         <!--分页后面部分的处理函数-->
         {% elseif page > pages - 3 %}
+                {% if pages == 5 %}
+                {% else %}
+                <li><a href="/admin/{{forPage}}?page=1">1</a></li>
+                <li><a class="none">...</a></li>
+                {% endif %}
             {% for pa in pagesEnd %}
                 {% if pa == page %}
                 <li class="active"><span style="margin-right: 10px">{{page}}</span></li>

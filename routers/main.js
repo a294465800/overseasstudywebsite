@@ -38,14 +38,28 @@ function setArrEnd(sum) {
     return arr.reverse();
 }
 
+function calculatePages(count) {
+    data.count = count;
+    //计算总页数
+    data.pages = Math.ceil(count / data.limit);
+    data.pagesFont = setArrFont(data.pages);
+    data.pagesEnd  = setArrEnd(data.pages);
+
+    //取值不能超过pages
+    data.page = Math.min(data.page, data.pages);
+    //取值不能小于1
+    data.page = Math.max(data.page, 1);
+    //跳过的条数
+    data.skip = (data.page - 1) * data.limit;
+}
+
 /*
 * 处理通用数据，用于前台展示的数据
 * */
 router.use(function (req, res, next) {
     data = {
         userInfo: req.userInfo,
-        limit: 20,       //每页显示的数量
-        pages: 0
+        limit: 20       //每页显示的数量
     };
     Navigation.find().sort({Nav_order:1}).then(function (navigations) {
         data.navigations =navigations;
@@ -168,19 +182,7 @@ router.get('/school',function (req, res) {
         //当有区域没有排名的时候
         Area.findOne({Area_name:area}).then(function (rs) {
             School.find({area:rs._id}).count().then(function (count) {
-                data.count = count;
-                //计算总页数
-                data.pages = Math.ceil(count / data.limit);
-                data.pagesFont = setArrFont(data.pages);
-                data.pagesEnd  = setArrEnd(data.pages);
-                //取值不能超过pages
-                data.page = Math.min(data.page, data.pages);
-
-                //取值不能小于1
-                data.page = Math.max(data.page, 1);
-
-                data.skip = (data.page - 1) * data.limit;
-
+                calculatePages(count);
                 School.find({area:rs._id}).populate('area').sort({School_rank:1}).limit(data.limit).skip(data.skip).then(function (rs) {
                     data.schools = rs;
                     res.render('main/school_index',data);
@@ -191,19 +193,7 @@ router.get('/school',function (req, res) {
         //当有区域有排名的时候
         Area.findOne({Area_name:area}).then(function (rs) {
             School.find({area:rs._id,School_rank:{$gte:a,$lte:b}}).count().then(function (count) {
-                data.count = count;
-                //计算总页数
-                data.pages = Math.ceil(count / data.limit);
-                data.pagesFont = setArrFont(data.pages);
-                data.pagesEnd  = setArrEnd(data.pages);
-                //取值不能超过pages
-                data.page = Math.min(data.page, data.pages);
-
-                //取值不能小于1
-                data.page = Math.max(data.page, 1);
-
-                data.skip = (data.page - 1) * data.limit;
-
+                calculatePages(count);
                 School.find({area:rs._id,School_rank:{$gte:a,$lte:b}}).populate('area').sort({School_rank:1}).limit(data.limit).skip(data.skip).then(function (rs) {
                     data.schools = rs;
                     res.render('main/school_index',data);
@@ -213,19 +203,7 @@ router.get('/school',function (req, res) {
     }else if(!area && rank){
         //当没区域有排名的时候
         School.find({School_rank:{$gte:a,$lte:b}}).count().then(function (count) {
-            data.count = count;
-            //计算总页数
-            data.pages = Math.ceil(count / data.limit);
-            data.pagesFont = setArrFont(data.pages);
-            data.pagesEnd  = setArrEnd(data.pages);
-            //取值不能超过pages
-            data.page = Math.min(data.page, data.pages);
-
-            //取值不能小于1
-            data.page = Math.max(data.page, 1);
-
-            data.skip = (data.page - 1) * data.limit;
-
+            calculatePages(count);
             School.find({School_rank:{$gte:a,$lte:b}}).populate('area').sort({School_rank:1}).limit(data.limit).skip(data.skip).then(function (rs) {
                 data.schools = rs;
                 res.render('main/school_index',data);
@@ -233,19 +211,7 @@ router.get('/school',function (req, res) {
         });
     }else{
         School.find().count().then(function (count) {
-            data.count = count;
-            //计算总页数
-            data.pages = Math.ceil(count / data.limit);
-            data.pagesFont = setArrFont(data.pages);
-            data.pagesEnd  = setArrEnd(data.pages);
-            //取值不能超过pages
-            data.page = Math.min(data.page, data.pages);
-
-            //取值不能小于1
-            data.page = Math.max(data.page, 1);
-
-            data.skip = (data.page - 1) * data.limit;
-
+            calculatePages(count);
             School.find().populate('area').limit(data.limit).skip(data.skip).then(function (rs) {
                 data.schools = rs;
                 res.render('main/school_index',data);
@@ -263,19 +229,7 @@ router.post('/school',function (req, res) {
 
     if(school_name){
         School.find({School_zn:school_name}).count().then(function (count) {
-
-            data.count = count;
-            //计算总页数
-            data.pages = Math.ceil(count / data.limit);
-            data.pagesFont = setArrFont(data.pages);
-            data.pagesEnd  = setArrEnd(data.pages);
-            //取值不能超过pages
-            data.page = Math.min(data.page, data.pages);
-
-            //取值不能小于1
-            data.page = Math.max(data.page, 1);
-
-            data.skip = (data.page - 1) * data.limit;
+            calculatePages(count);
             School.find({School_zn:school_name}).populate('area').limit(data.limit).skip(data.skip).then(function (rs) {
                 data.schools = rs;
                 res.render('main/school_index',data);
@@ -283,20 +237,7 @@ router.post('/school',function (req, res) {
         });
     }else{
         School.find().count().then(function (count) {
-
-            data.count = count;
-            //计算总页数
-            data.pages = Math.ceil(count / data.limit);
-            data.pagesFont = setArrFont(data.pages);
-            data.pagesEnd  = setArrEnd(data.pages);
-            //取值不能超过pages
-            data.page = Math.min(data.page, data.pages);
-
-            //取值不能小于1
-            data.page = Math.max(data.page, 1);
-
-            data.skip = (data.page - 1) * data.limit;
-
+            calculatePages(count);
             School.find().populate('area').limit(data.limit).skip(data.skip).then(function (rs) {
                 data.schools = rs;
                 res.render('main/school_index',data);
