@@ -242,6 +242,9 @@
     background-color: #f0f0f0;
     position: relative;
 }
+.major .major_right .major_part{
+    display: none;
+}
 .major .major_right strong{
     font-size: 22px;
     font-weight: bold;
