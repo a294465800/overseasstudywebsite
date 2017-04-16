@@ -1711,7 +1711,7 @@ router.get('/study_abroad/nav/enroll',function (req, res) {
     //获取数据库中的条数
     Abroad_enroll.count().then(function (count) {
         calculatePages(count);
-        Abroad_enroll.find().populate(['abroad','school','test1','test2']).sort({abroad:1,school:1,_id:-1}).limit(data.limit).skip(data.skip).then(function (rs) {
+        Abroad_enroll.find().populate(['abroad','school','test1','test2']).sort({Abroad_enroll_order:1}).limit(data.limit).skip(data.skip).then(function (rs) {
             data.abroad_enrolls = rs;
             data.forPage = 'study_abroad/nav/enroll';
             res.render('admin/abroad/abroad_nav_enroll_index',data);
@@ -1747,6 +1747,7 @@ router.post('/study_abroad/nav/enroll/add',function (req, res) {
         abroad_enroll_score1 = parseFloat(req.body.abroad_enroll_score1).toFixed(2),
         abroad_enroll_score2 = parseFloat(req.body.abroad_enroll_score2).toFixed(2),
         abroad_enroll_url = req.body.abroad_enroll_url,
+        abroad_enroll_order = req.body.abroad_enroll_order,
         school_id;
 
     if(!abroad){
@@ -1799,7 +1800,8 @@ router.post('/study_abroad/nav/enroll/add',function (req, res) {
                     Abroad_enroll_subject: abroad_enroll_subject,
                     Abroad_enroll_student: abroad_enroll_student,
                     Abroad_enroll_code: abroad_enroll_code,
-                    Abroad_enroll_url: abroad_enroll_url
+                    Abroad_enroll_url: abroad_enroll_url,
+                    Abroad_enroll_order: abroad_enroll_order
                 }).save().then(function () {
                     Abroad_enroll.find({school: school_id}).count().then(function (count) {
                         School.update({
@@ -1859,6 +1861,7 @@ router.post('/study_abroad/nav/enroll/edit',function (req, res) {
         abroad_enroll_score1 = parseFloat(req.body.abroad_enroll_score1).toFixed(2),
         abroad_enroll_score2 = parseFloat(req.body.abroad_enroll_score2).toFixed(2),
         abroad_enroll_url = req.body.abroad_enroll_url,
+        abroad_enroll_order = req.body.abroad_enroll_order,
         school_id;
 
     if(!abroad){
@@ -1913,8 +1916,9 @@ router.post('/study_abroad/nav/enroll/edit',function (req, res) {
                     Abroad_enroll_subject: abroad_enroll_subject,
                     Abroad_enroll_student: abroad_enroll_student,
                     Abroad_enroll_code: abroad_enroll_code,
-                    Abroad_enroll_url: abroad_enroll_url
-                }).then(function () {
+                    Abroad_enroll_url: abroad_enroll_url,
+                    Abroad_enroll_order: abroad_enroll_order,
+            }).then(function () {
                     data.message = '录取案例保存成功！';
                     data.url = '/admin/study_abroad/nav/enroll';
                     res.render('admin/success',data);

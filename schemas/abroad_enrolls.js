@@ -49,7 +49,11 @@ module.exports = new mongoose.Schema({
     //学生姓名
     Abroad_enroll_student: String,
     Abroad_enroll_code: String,
-    Abroad_content_url: {
+    Abroad_enroll_order: {
+        type: Number,
+        default: 10
+    },
+    Abroad_enroll_url: {
         type: String,
         default: '/'
     }

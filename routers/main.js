@@ -15,6 +15,7 @@ var express = require('express'),
     Abroad = require('../models/Abroad'),
     Abroad_nav = require('../models/Abroad_nav'),
     Abroad_content = require('../models/Abroad_content'),
+    Abroad_enroll = require('../models/Abroad_enroll'),
     data;
 
 /*
@@ -80,11 +81,16 @@ router.use(function (req, res, next) {
     }).then(function (rs) {
         data.abroad_navs = rs;
     }).then(function () {
-        return Abroad_content.find().populate(['abroad','abroad_nav']).sort({abroad:-1,abroad_nav:-1,Abroad_content_order:1});
+        return Abroad_content.find({Abroad_content_order:{$lt:8}}).populate(['abroad','abroad_nav']).sort({abroad:-1,abroad_nav:-1,Abroad_content_order:1});
     }).then(function (rs) {
         data.abroad_contents = rs;
+    }).then(function () {
+        return Abroad_enroll.find({Abroad_enroll_order:{$lt:5}}).populate(['abroad','school','test1','test2']).sort({abroad:1,_id:-1});
+    }).then(function (rs) {
+        data.abroad_enrolls =rs;
         next();
     });
+
 });
 
 /*

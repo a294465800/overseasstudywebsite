@@ -25,7 +25,7 @@ module.exports = new mongoose.Schema({
     Abroad_content_name: String,
     Abroad_content_order: {
         type: Number,
-        default: 0
+        default: 10
     },
     Abroad_content_url: {
         type: String,

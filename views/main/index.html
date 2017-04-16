@@ -468,31 +468,16 @@
             <a href="">高分案例</a>
         </div>
         <div class="case_content">
-            <p>SAT的完美规划 2400满分经验</p>
-            <ul>
-                <li>基本成绩：SAT1540 提分860</li>
-                <li>提分后成绩：SAT2400</li>
-            </ul>
-            <p>SAT快速提分 个性化方案</p>
-            <ul style="display: block">
-                <li>基本成绩：SAT1540 提分860</li>
-                <li>提分后成绩：SAT2400</li>
-            </ul>
-            <p>SAT精品强化 轻松提升</p>
-            <ul>
-                <li>基本成绩：SAT1540 提分860</li>
-                <li>提分后成绩：SAT2400</li>
-            </ul>
-            <p>SAT突破自我 从1840到2240</p>
-            <ul>
-                <li>基本成绩：SAT1540 提分860</li>
-                <li>提分后成绩：SAT2400</li>
-            </ul>
-            <p>SAT的完美规划 2400满分经验</p>
-            <ul>
-                <li>基本成绩：SAT1540 提分860</li>
-                <li>提分后成绩：SAT2400</li>
-            </ul>
+            {% for abroad_enroll in abroad_enrolls %}
+                {% if abroad_enroll.abroad.Abroad_name == '英国本科留学' %}
+                <p>{{abroad_enroll.Abroad_enroll_name}}</p>
+                <ul>
+                    <li>成绩：{{abroad_enroll.test1.Test_name}}{{abroad_enroll.Abroad_enroll_score1}} {{abroad_enroll.test2.Test_name}}{{abroad_enroll.Abroad_enroll_score2}}</li>
+                    <li>录取学校：{{abroad_enroll.school.School_zn}}</li>
+                </ul>
+                {% else %}
+                {% endif %}
+            {% endfor %}
         </div>
         <div class="case_content" style="display: none">
             <p>SAT的完23规划 2400满分经验</p>
@@ -627,7 +612,7 @@
                 <li>提分后成绩：SAT2400</li>
             </ul>
             <p>SAT快速提分 个性化方案</p>
-            <ul style="display: block">
+            <ul>
                 <li>基本成绩：SAT1540 提分860</li>
                 <li>提分后成绩：SAT2400</li>
             </ul>
@@ -752,7 +737,7 @@
                 <li>提分后成绩：SAT2400</li>
             </ul>
             <p>SAT快速提分 个性化方案</p>
-            <ul style="display: block">
+            <ul>
                 <li>基本成绩：SAT1540 提分860</li>
                 <li>提分后成绩：SAT2400</li>
             </ul>

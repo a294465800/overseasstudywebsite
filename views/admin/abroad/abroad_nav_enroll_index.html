@@ -17,6 +17,7 @@
         <th>录取学生姓名</th>
         <th>学生成绩</th>
         <th>案例url</th>
+        <th>案例顺序</th>
         <th>操作</th>
     </tr>
     {% for abroad_enroll in abroad_enrolls %}
@@ -27,7 +28,8 @@
         <td>{{abroad_enroll.Abroad_enroll_subject}}</td>
         <td>{{abroad_enroll.Abroad_enroll_student}}</td>
         <td>{{abroad_enroll.test1.Test_name}}：{{abroad_enroll.Abroad_enroll_score1}} <b>|</b> {{abroad_enroll.test2.Test_name}}：{{abroad_enroll.Abroad_enroll_score2}}</td>
-        <td>{{abroad_enroll.Abroad_content_url}}</td>
+        <td>{{abroad_enroll.Abroad_enroll_url}}</td>
+        <td>{{abroad_enroll.Abroad_enroll_order}}</td>
         <td>
             <a href="/admin/study_abroad/nav/enroll/edit?id={{abroad_enroll._id.toString()}}">修改</a>
              | <a href="/admin/study_abroad/nav/enroll/delete?id={{abroad_enroll._id.toString()}}">删除</a>
