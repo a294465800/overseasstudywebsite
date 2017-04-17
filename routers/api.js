@@ -15,7 +15,8 @@ var User = require('../models/User'),
     Nav_content = require('../models/Nav_content'),
     Abroad = require('../models/Abroad'),
     Abroad_nav = require('../models/Abroad_nav'),
-    Abroad_content = require('../models/Abroad_content');
+    Abroad_content = require('../models/Abroad_content'),
+    School = require('../models/School');
 
 //返回统一格式
 var responseData;
@@ -244,6 +245,27 @@ router.post('/study_abroad/nav/content/add',function (req, res) {
         }).populate('abroad').sort({Abroad_nav_order:1}).then(function (rs) {
             responseData.abroad_navs = rs;
             res.json(responseData);
+        });
+    }
+});
+
+/*
+* 学校点赞
+* */
+router.post('/school',function (req, res) {
+    var school_id = req.body.school;
+    if(school_id){
+        School.findById(school_id).then(function (rs) {
+            var temp = rs.School_love + 1;
+            School.update({
+                _id: school_id
+            },{
+                School_love: temp
+            }).then(function (rs) {
+                responseData.ok = rs.ok;
+                responseData.love = temp;
+                res.json(responseData);
+            });
         });
     }
 });

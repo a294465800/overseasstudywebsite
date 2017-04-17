@@ -1711,7 +1711,7 @@ router.get('/study_abroad/nav/enroll',function (req, res) {
     //获取数据库中的条数
     Abroad_enroll.count().then(function (count) {
         calculatePages(count);
-        Abroad_enroll.find().populate(['abroad','school','test1','test2']).sort({Abroad_enroll_order:1}).limit(data.limit).skip(data.skip).then(function (rs) {
+        Abroad_enroll.find().populate(['abroad','school','test1','test2']).sort({abroad:1,Abroad_enroll_order:1}).limit(data.limit).skip(data.skip).then(function (rs) {
             data.abroad_enrolls = rs;
             data.forPage = 'study_abroad/nav/enroll';
             res.render('admin/abroad/abroad_nav_enroll_index',data);

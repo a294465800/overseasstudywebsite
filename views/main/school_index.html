@@ -3,6 +3,7 @@
 {% block title %}
 <title>搜索学校</title>
 <link rel="stylesheet" href="/public/css/school_index.css">
+<script src="/public/js/school_action.js"></script>
 {% endblock %}
 
 {% block big_bg %}
@@ -53,12 +54,12 @@
             <li class="clearfix">
                 <a href="#" class="school_img" style="background: url('/public/images/school/{{school.School_url}}') no-repeat;"></a>
                 <p title="综合排名" class="rank">
-                    <span>综</span><span class="rank_num">{{school.School_rank}}</span>
+                    <span>综</span><span class="rank_num">{% if school.School_rank == 999 %}—{% else %}{{school.School_rank}}{% endif %}</span>
                 </p>
                 <a href="#" class="school_zn">{{school.School_zn}}</a>
                 <a href="#" class="school_en">{{school.School_en}}</a>
                 <p class="area"><span>所在地:</span><span class="school_area">{{school.area.Area_name}}</span></p>
-                <p class="love">{{school.School_love}}</p>
+                <p class="love" data-id="{{school._id.toString()}}">{{school.School_love}}</p>
             </li>
             {% endfor %}
         {% else %}
