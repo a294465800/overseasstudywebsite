@@ -53,11 +53,9 @@ $(function () {
         });
     });
 
-
+    //留学文章添加二级联动菜单
     var $abroad = $('#abroad'),
         $abroad_nav = $('#abroad_nav');
-
-    //留学文章添加二级联动菜单
     $abroad.on('change',function () {
         $.ajax({
             type: 'post',
@@ -79,4 +77,29 @@ $(function () {
         });
     });
 
+
+    //培训文章添加二级联动菜单
+    var $test = $('#test'),
+        $training = $('#training');
+
+    $test.on('change',function () {
+        $.ajax({
+            type: 'post',
+            url: '/api/training/content/add',
+            data:{
+                test: $test.val()
+            },
+            dataType:'json',
+            success: function (data) {
+                if(data.trainings == ''){
+                    $training.html('<option value="">该考试项目下没有培训分类</option>');
+                    return ;
+                }
+                $training.html('<option value="">请选择培训分类</option>');
+                for(var trainings in data.trainings){
+                    $training.append('<option value="'+ data.trainings[trainings]._id +'">'+ data.trainings[trainings].Training_name +'</option>');
+                }
+            }
+        });
+    });
 });

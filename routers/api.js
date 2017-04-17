@@ -16,7 +16,10 @@ var User = require('../models/User'),
     Abroad = require('../models/Abroad'),
     Abroad_nav = require('../models/Abroad_nav'),
     Abroad_content = require('../models/Abroad_content'),
-    School = require('../models/School');
+    School = require('../models/School'),
+    Test = require('../models/Test'),
+    Training = require('../models/Training'),
+    Training_content = require('../models/Training_content');
 
 //返回统一格式
 var responseData;
@@ -246,6 +249,20 @@ router.post('/study_abroad/nav/content/add',function (req, res) {
             responseData.abroad_navs = rs;
             res.json(responseData);
         });
+    }
+});
+
+/*
+* 留学文章标题添加、修改二级联动菜单
+* */
+router.post('/training/content/add',function (req, res) {
+    var test = req.body.test;
+    if(test == ''){
+    }else{
+        Training.find({test: test}).populate('test').sort({Training_content_order:1}).then(function (rs) {
+            responseData.trainings = rs;
+            res.json(responseData);
+        })
     }
 });
 

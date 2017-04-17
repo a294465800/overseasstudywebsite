@@ -18,6 +18,8 @@ var express = require('express'),
     Abroad_nav = require('../models/Abroad_nav'),
     Abroad_content = require('../models/Abroad_content'),
     Abroad_enroll = require('../models/Abroad_enroll'),
+    Training = require('../models/Training'),
+    Training_content = require('../models/Training_content'),
     data;
 
 /*
@@ -1957,6 +1959,324 @@ router.get('/study_abroad/nav/enroll/delete',function (req, res) {
         });
     });
 });
+
+/*
+* 培训分类列表
+* */
+router.get('/training',function (req, res) {
+    Training.find().populate('test').sort({test:1,Training_order: 1}).then(function (rs) {
+        data.trainings = rs;
+        res.render('admin/training/training_category_index',data);
+    });
+});
+
+/*
+ * 培训分类添加
+ * */
+router.get('/training/add',function (req, res) {
+    Test.find().sort({Test_order: 1}).then(function (rs) {
+        data.tests = rs;
+        res.render('admin/training/training_category_add',data);
+    });
+});
+
+/*
+* 培训分类添加保存
+* */
+router.post('/training/add',function (req, res) {
+    var test = req.body.test,
+        training_name = req.body.training_name,
+        training_url = req.body.training_url || '/',
+        training_order = Number(req.body.training_order);
+    if(!test){
+        data.message = '考试项目不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    if(!training_name){
+        data.message = '培训分类名称不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    Training.findOne({test: test,Training_name: training_name}).then(function (rs) {
+        if(rs){
+            data.message = '培训分类名称不能重复！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else{
+            return new Training({
+                test: test,
+                Training_name: training_name,
+                Training_url: training_url,
+                Training_order: training_order
+            }).save();
+        }
+    }).then(function () {
+        Training.find({test: test}).count().then(function (count) {
+            return Test.update({_id: test},{Test_count: count});
+        }).then(function () {
+            data.message = '培训分类添加成功！';
+            data.url = '/admin/training';
+            res.render('admin/success',data);
+        });
+    });
+});
+
+/*
+* 培训分类修改
+* */
+router.get('/training/edit',function (req, res) {
+    var id = req.query.id;
+    Test.find().sort({Test_order: 1}).then(function (rs) {
+        data.tests =rs;
+        Training.findById(id).populate('test').then(function (rs) {
+            if(!rs){
+                data.message = '所要修改的培训分类不存在！';
+                res.render('admin/error',data);
+                return Promise.reject();
+            }else{
+                data.training = rs;
+                res.render('admin/training/training_category_edit',data);
+            }
+        });
+    });
+});
+
+/*
+* 培训分类修改保存
+* */
+router.post('/training/edit',function (req, res) {
+    var id = req.query.id,
+        test = req.body.test,
+        training_name = req.body.training_name,
+        training_url = req.body.training_url || '/',
+        training_order = Number(req.body.training_order);
+
+    if(!test){
+        data.message = '考试项目不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    if(!training_name){
+        data.message = '培训分类名称不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    Training.findOne({test: test,_id:{$ne:id},Training_name: training_name}).then(function (rs) {
+        if(rs){
+            data.message = '培训分类名称不能重复！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else{
+            return Training.update({
+                _id:id
+            },{
+                test: test,
+                Training_name: training_name,
+                Training_url: training_url,
+                Training_order: training_order
+            });
+        }
+    }).then(function () {
+        data.message = '培训分类修改成功！';
+        data.url = '/admin/training';
+        res.render('admin/success',data);
+    });
+});
+
+/*
+* 培训分类删除
+* */
+router.get('/training/delete',function (req, res) {
+    var id = req.query.id,
+        test;
+    Training.findById(id).populate('test').then(function (rs) {
+        if(!rs){
+            data.message = '要删除的培训分类不存在！';
+            res.render('admin/error',data);
+        }else{
+            test = rs.test._id;
+            return Training.remove({_id:id});
+        }
+    }).then(function () {
+        Training.find({test: test}).count().then(function (count) {
+            return Test.update({_id: test},{Test_count: count});
+        }).then(function () {
+            data.message = '培训分类删除成功！';
+            data.url = '/admin/training';
+            res.render('admin/success',data);
+        });
+    });
+});
+
+/*
+* 培训文章列表
+* */
+router.get('/training/content',function (req, res) {
+    Training_content.find().populate(['test','training']).sort({test:1,training:1,Training_content_order:1}).then(function (rs) {
+        data.training_contents = rs;
+        res.render('admin/training/training_content_index',data);
+    });
+});
+
+/*
+ * 培训文章添加
+ * */
+router.get('/training/content/add',function (req, res) {
+    Test.find().sort({Test_order:1}).then(function (rs) {
+        data.tests = rs;
+        res.render('admin/training/training_content_add',data);
+    });
+});
+
+/*
+* 培训文章添加保存
+* */
+router.post('/training/content/add',function (req, res) {
+    var test = req.body.test,
+        training = req.body.training,
+        training_content_name = req.body.training_content_name,
+        training_content_url = req.body.training_content_url || '/',
+        training_content_order = Number(req.body.training_content_order || 10);
+
+    if(!test || !training){
+        data.message = '考试项目或者培训分类不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    if(!training_content_name){
+        data.message = '培训分类文章标题不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    Training_content.findOne({test: test,training: training,Training_content_name:training_content_name}).then(function (rs) {
+        if(rs){
+            data.message = '培训分类文章标题不能重复！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else{
+            return new Training_content({
+                test: test,
+                training: training,
+                Training_content_name: training_content_name,
+                Training_content_url: training_content_url,
+                Training_content_order: training_content_order
+            }).save();
+        }
+    }).then(function () {
+        Training_content.find({test: test,training: training}).count().then(function (count) {
+            Training.update({
+                _id: training
+            },{
+                Training_count: count
+            }).then(function () {
+                data.message = '培训文章添加成功！';
+                data.url = '/admin/training/content';
+                res.render('admin/success',data);
+            });
+        });
+    });
+});
+
+/*
+* 培训文章修改
+* */
+router.get('/training/content/edit',function (req, res) {
+    var id = req.query.id;
+    Test.find().sort({Test_order:1}).then(function (rs) {
+        data.tests = rs;
+        Training_content.findById(id).populate('test').then(function (re) {
+            if(!re){
+                data.message = '要修改的培训文章不存在！';
+                res.render('admin/error',data);
+                return Promise.reject();
+            }else{
+                data.training_content = re;
+                Training.find({test: data.training_content.test._id}).sort({Training_order:1}).then(function (rs) {
+                    data.trainings = rs;
+                    res.render('admin/training/training_content_edit',data);
+                });
+            }
+        });
+    });
+});
+
+/*
+* 培训文章修改保存
+* */
+router.post('/training/content/edit',function (req, res) {
+    var id = req.query.id,
+        test = req.body.test,
+        training = req.body.training,
+        training_content_name = req.body.training_content_name,
+        training_content_url = req.body.training_content_url || '/',
+        training_content_order = Number(req.body.training_content_order || 10);
+
+    if(!test || !training){
+        data.message = '考试项目或者培训分类不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+    if(!training_content_name){
+        data.message = '培训文章标题不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    Training_content.findOne({Training_content_name: training_content_name,_id: {$ne:id}}).then(function (rs) {
+        if(rs){
+            data.message = '培训文章标题不能重复！';
+            res.render('admin/error',data);
+            return Promise.reject();
+        }else{
+            return Training_content.update({
+                _id: id
+            },{
+                test: test,
+                training: training,
+                Training_content_name: training_content_name,
+                Training_content_url: training_content_url,
+                Training_content_order: training_content_order
+            });
+        }
+    }).then(function () {
+        data.message = '培训文章修改成功！';
+        data.url = '/admin/training/content';
+        res.render('admin/success',data);
+    });
+});
+
+/*
+* 培训文章删除
+* */
+router.get('/training/content/delete',function (req, res) {
+    var id = req.query.id,
+        training;
+
+    Training_content.findById(id).populate('training').then(function (rs) {
+        if(!rs){
+            data.message = '要删除的文章不存在！';
+            res.render('admin/error',data);
+            return ;
+        }else{
+            training = rs.training._id;
+            return Training_content.remove({_id: id});
+        }
+    }).then(function () {
+        Training_content.find({training: training}).count().then(function (count) {
+            console.log(training);
+            Training.update({_id: training},{Training_count:count}).then(function () {
+                data.message = '培训文章删除成功！';
+                data.url = '/admin/training/content';
+                res.render('admin/success',data);
+            });
+        });
+    });
+});
+
 
 //返回出去给app.js
 module.exports = router;
