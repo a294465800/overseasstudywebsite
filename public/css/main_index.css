@@ -627,7 +627,7 @@ body{
 }
 .popular_school .school_logo{
     border-bottom: 1px dotted #ccc;
-    padding-bottom: 6px;
+    padding-bottom: 14px;
 }
 .popular_school .school_logo ul{
     list-style: none;
@@ -640,7 +640,7 @@ body{
     margin: 22px 0 0 0 ;
     float: left;
 }
-.popular_school .school_logo ul .mid_logo{
+.popular_school .school_logo ul li:nth-child(3n+2){
     margin: 22px 30px 0;
 }
 .popular_school .school_logo .logo_img{
@@ -965,6 +965,9 @@ body{
 }
 .study_abroad .case_title a:nth-child(1){
     background-color: #337ab7;
+}
+.study_abroad .case_content:nth-child(3){
+    display: none;
 }
 .study_abroad .case_content p{
     color: #333;

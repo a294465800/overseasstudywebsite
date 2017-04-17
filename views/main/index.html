@@ -262,40 +262,13 @@
         </div>
         <div class="school_logo clearfix">
             <ul>
+                {% for hot_school in hot_schools %}
                 <li>
-                    <a href="" class="logo_img" style="background: url('/public/images/school/Cambridge.jpg') no-repeat left top"></a>
-                    <p><a href="" class="logo_cn">剑桥大学</a></p>
-                    <a href="" class="logo_en">University of Cambridge</a>
+                    <a href="" class="logo_img" style="background: url('/public/images/school/{{hot_school.School_url}}') no-repeat left top"></a>
+                    <p><a href="" class="logo_cn">{{hot_school.School_zn}}</a></p>
+                    <a href="" class="logo_en">{{hot_school.School_en}}</a>
                 </li>
-                <li class="mid_logo">
-                    <a href="" class="logo_img" style="background: url('/public/images/school/Oxford.jpg') no-repeat left top"></a>
-                    <p><a href="" class="logo_cn">牛津大学</a></p>
-                    <a href="" class="logo_en">University of Oxford</a>
-                </li>
-                <li>
-                    <a href="" class="logo_img" style="background: url('/public/images/school/St Andrew.jpg') no-repeat left top"></a>
-                    <p><a href="" class="logo_cn">圣安德鲁斯大学</a></p>
-                    <a href="" class="logo_en">The University of St Andrews</a>
-                </li>
-            </ul>
-        </div>
-        <div class="school_logo clearfix">
-            <ul>
-                <li>
-                    <a href="" class="logo_img" style="background: url('/public/images/school/Durham.jpg') no-repeat left top"></a>
-                    <p><a href="" class="logo_cn">杜伦大学</a></p>
-                    <a href="" class="logo_en">Durham University</a>
-                </li>
-                <li class="mid_logo">
-                    <a href="" class="logo_img" style="background: url('/public/images/school/Imperial.jpg') no-repeat left top"></a>
-                    <p><a href="" class="logo_cn">帝国理工学院</a></p>
-                    <a href="" class="logo_en">Imperial College London</a>
-                </li>
-                <li>
-                    <a href="" class="logo_img" style="background: url('/public/images/school/London.jpg') no-repeat left top"></a>
-                    <p><a href="" class="logo_cn">伦敦大学学院</a></p>
-                    <a href="" class="logo_en">University College London</a>
-                </li>
+                {% endfor %}
             </ul>
         </div>
     </div>
@@ -479,7 +452,7 @@
                 {% endif %}
             {% endfor %}
         </div>
-        <div class="case_content" style="display: none">
+        <div class="case_content">
             <p>SAT的完23规划 2400满分经验</p>
             <ul>
                 <li>基本成绩：SAT1540 提分860</li>
@@ -604,6 +577,18 @@
         <div class="case_title clearfix">
             <a href="">录取案例</a>
             <a href="">高分案例</a>
+        </div>
+        <div class="case_content">
+            {% for abroad_enroll in abroad_enrolls %}
+            {% if abroad_enroll.abroad.Abroad_name == '英国研究生留学' %}
+            <p>{{abroad_enroll.Abroad_enroll_name}}</p>
+            <ul>
+                <li>成绩：{{abroad_enroll.test1.Test_name}}{{abroad_enroll.Abroad_enroll_score1}} {{abroad_enroll.test2.Test_name}}{{abroad_enroll.Abroad_enroll_score2}}</li>
+                <li>录取学校：{{abroad_enroll.school.School_zn}}</li>
+            </ul>
+            {% else %}
+            {% endif %}
+            {% endfor %}
         </div>
         <div class="case_content">
             <p>SAT的完美规划 2400满分经验</p>
@@ -750,6 +735,33 @@
             <ul>
                 <li>基本成绩：SAT1540 提分860</li>
                 <li>提分后成绩：SAT2400</li>
+            </ul>
+            <p>SAT的完美规划 2400满分经验</p>
+            <ul>
+                <li>基本成绩：SAT1540 提分860</li>
+                <li>提分后成绩：SAT2400</li>
+            </ul>
+        </div>
+        <div class="case_content">
+            <p>SAT的完美42 2400满分经验</p>
+            <ul>
+                <li>基本成绩：SAT1540 提分860</li>
+                <li>提分后成绩：SAT2400</li>
+            </ul>
+            <p>SAT快速提分 个性化方案</p>
+            <ul>
+                <li>基本23绩：SAT1540 提分860</li>
+                <li>提分后成绩：SAT2400</li>
+            </ul>
+            <p>SAT精品强化 轻松提升</p>
+            <ul>
+                <li>基本成绩：SAT1540 提分860</li>
+                <li>提分111绩：SAT2400</li>
+            </ul>
+            <p>SAT突破自我 从1840到2240</p>
+            <ul>
+                <li>基本成绩：SAT1540 提分860</li>
+                <li>提分22绩：SAT2400</li>
             </ul>
             <p>SAT的完美规划 2400满分经验</p>
             <ul>

@@ -97,7 +97,10 @@ router.use(function (req, res, next) {
 * 首页
 * */
 router.get('/',function (req, res) {
-    res.render('main/index',data);
+    School.find().sort({School_love: -1}).limit(6).then(function (rs) {
+        data.hot_schools = rs;
+        res.render('main/index',data);
+    });
 });
 
 /*

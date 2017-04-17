@@ -154,6 +154,8 @@
     clear: both;
     display: block;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-size: 12px;
     line-height: 25px;
     color: #333;
