@@ -16,6 +16,7 @@ var express = require('express'),
     Abroad_nav = require('../models/Abroad_nav'),
     Abroad_content = require('../models/Abroad_content'),
     Abroad_enroll = require('../models/Abroad_enroll'),
+    Test = require('../models/Test'),
     data;
 
 /*
@@ -88,9 +89,12 @@ router.use(function (req, res, next) {
         return Abroad_enroll.find({Abroad_enroll_order:{$lt:5}}).populate(['abroad','school','test1','test2']).sort({abroad:1,_id:-1});
     }).then(function (rs) {
         data.abroad_enrolls =rs;
+    }).then(function () {
+        return Test.find().sort({Test_order:1});
+    }).then(function (rs) {
+        data.tests = rs;
         next();
     });
-
 });
 
 /*

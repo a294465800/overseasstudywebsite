@@ -15,6 +15,10 @@ module.exports = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    Test_url:{
+        type: String,
+        default: '/'
+    },
     Test_count:{
         type:Number,
         default: 0

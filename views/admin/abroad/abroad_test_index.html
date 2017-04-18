@@ -12,6 +12,7 @@
     <tr>
         <th>考试ID</th>
         <th>考试项目</th>
+        <th>考试url</th>
         <th>考试顺序</th>
         <th>操作</th>
     </tr>
@@ -19,6 +20,7 @@
     <tr>
         <td>{{test._id.toString()}}</td>
         <td>{{test.Test_name}}</td>
+        <td>{{test.Test_url}}</td>
         <td>{{test.Test_order}}</td>
         <td>
             <a href="/admin/study_abroad/test/edit?id={{test._id.toString()}}">修改</a>

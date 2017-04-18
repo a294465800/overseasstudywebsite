@@ -1150,6 +1150,7 @@ router.get('/study_abroad/test/add',function (req, res) {
 * */
 router.post('/study_abroad/test/add',function (req, res) {
     var test_name = req.body.test_name,
+        test_url = req.body.test_url || '/',
         test_order = Number(req.body.test_order);
     if(!test_name){
         data.message = '考试名称不能为空！';
@@ -1165,6 +1166,7 @@ router.post('/study_abroad/test/add',function (req, res) {
         }
         new Test({
             Test_name: test_name,
+            Test_url: test_url,
             test_order: test_order
         }).save().then(function () {
             data.message = '考试保存成功！';
@@ -1198,6 +1200,7 @@ router.get('/study_abroad/test/edit',function (req, res) {
 router.post('/study_abroad/test/edit',function (req, res) {
     var id = req.query.id,
         test_name = req.body.test_name,
+        test_url = req.body.test_url || '/',
         test_order = Number(req.body.test_order);
 
     if(!test_name){
@@ -1216,6 +1219,7 @@ router.post('/study_abroad/test/edit',function (req, res) {
                 _id: id
             },{
                 Test_name: test_name,
+                Test_url: test_url,
                 Test_order: test_order
             });
         }

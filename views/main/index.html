@@ -779,13 +779,13 @@
         <p>能力培训</p>
     </div>
     <ul class="training_list clearfix">
-        <li><a href="">托福</a></li>
-        <li><a href="">雅思</a></li>
-        <li><a href="">GRE</a></li>
-        <li><a href="">GMAT</a></li>
-        <li><a href="">SAT</a></li>
-        <li><a href="">SSAT</a></li>
-        <li class="last_part"><a href="">ACT</a></li>
+        {% for test in tests %}
+        {% if loop.last %}
+            <li class="last_part"><a href="{{test.Test_url}}" target="_blank">{{test.Test_name}}</a></li>
+        {% else %}
+            <li><a href="{{test.Test_url}}" target="_blank">{{test.Test_name}}</a></li>
+        {% endif %}
+        {% endfor %}
     </ul>
     <div class="training_block clearfix">
         <div class="training_part">
