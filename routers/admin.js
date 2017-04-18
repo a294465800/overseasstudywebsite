@@ -1968,9 +1968,14 @@ router.get('/study_abroad/nav/enroll/delete',function (req, res) {
 * 培训分类列表
 * */
 router.get('/training',function (req, res) {
-    Training.find().populate('test').sort({test:1,Training_order: 1}).then(function (rs) {
-        data.trainings = rs;
-        res.render('admin/training/training_category_index',data);
+    data.page = Number(req.query.page) || 1;
+    Training.find().count().then(function (count) {
+        calculatePages(count);
+        data.forPage = 'training';
+        Training.find().populate('test').sort({test:1,Training_order: 1}).limit(data.limit).skip(data.skip).then(function (rs) {
+            data.trainings = rs;
+            res.render('admin/training/training_category_index',data);
+        });
     });
 });
 
@@ -2119,9 +2124,14 @@ router.get('/training/delete',function (req, res) {
 * 培训文章列表
 * */
 router.get('/training/content',function (req, res) {
-    Training_content.find().populate(['test','training']).sort({test:1,training:1,Training_content_order:1}).then(function (rs) {
-        data.training_contents = rs;
-        res.render('admin/training/training_content_index',data);
+    data.page = Number(req.query.page) || 1;
+    Training_content.find().count().then(function (count) {
+        calculatePages(count);
+        data.forPage = 'training/content';
+        Training_content.find().populate(['test','training']).sort({test:1,training:1,Training_content_order:1}).limit(data.limit).skip(data.skip).then(function (rs) {
+            data.training_contents = rs;
+            res.render('admin/training/training_content_index',data);
+        });
     });
 });
 

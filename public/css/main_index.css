@@ -1123,19 +1123,20 @@ body{
     font-weight: bold;
     color: #fff;
 }
-.training .training_list li a:hover{
+.training .training_list li:nth-child(1) a{
     color: #333;
 }
 .training .training_block{
     margin: 30px 0 70px;
     width: 100%;
+    display: none;
 }
 
 /*培训板块通用样式*/
 .training_part{
     width: 371px;
     height: 120px;
-    border-left: 1px solid #c8a53a;
+    border-left: 2px solid #136cbf;
     background-color: #fafafa;
     float: left;
     margin: 0 13px 25px 0;
@@ -1158,18 +1159,20 @@ body{
     text-align: center;
 }
 .training_part .training_img p a{
-    color: #c8a53a;
+    color: #136cbf;
     font-size: 16px;
     line-height: 20px;
 }
 .training_part .training_content{
     float: right;
+    padding: 20px 0;
     width: 72%;
 }
 .training_part .training_content ul{
     list-style: none;
     margin: 0;
-    padding: 20px 0;
+    height: 80px;
+    overflow: hidden;
 }
 .training_part .training_content ul span{
     color: #666;
@@ -1205,6 +1208,49 @@ body{
 }
 .training_part .learn i{
     background: url("/public/images/icon/traning_icon.png") -416px -67px;
+}
+.training_part:nth-child(3n+3){
+    margin: 0;
+    float: right;
+}
+.training_block:nth-last-child(1) .training_part{
+    border-color: #575186;
+}
+.training_block:nth-last-child(1) .training_part .training_img p a{
+    color: #575186;
+}
+.training_block:nth-last-child(2) .training_part{
+    border-color: #5597a1;
+}
+.training_block:nth-last-child(2) .training_part .training_img p a{
+    color: #5597a1;
+}
+.training_block:nth-last-child(3) .training_part{
+    border-color: #c05958;
+}
+.training_block:nth-last-child(3) .training_part .training_img p a{
+    color: #c05958;
+}
+.training_block:nth-last-child(4) .training_part{
+    border-color: #9170a6;
+}
+.training_block:nth-last-child(4) .training_part .training_img p a{
+    color: #9170a6;
+}
+.training_block:nth-last-child(5) .training_part{
+    border-color: #c8a53a;
+}
+.training_block:nth-last-child(5) .training_part .training_img p a{
+    color: #c8a53a;
+}
+.training_block:nth-last-child(6) .training_part{
+    border-color: #bf3e5a;
+}
+.training_block:nth-last-child(6) .training_part .training_img p a{
+    color: #bf3e5a;
+}
+.training_block:nth-last-child(7){
+    display: block;
 }
 
 

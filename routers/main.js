@@ -17,6 +17,8 @@ var express = require('express'),
     Abroad_content = require('../models/Abroad_content'),
     Abroad_enroll = require('../models/Abroad_enroll'),
     Test = require('../models/Test'),
+    Training = require('../models/Training'),
+    Training_content = require('../models/Training_content'),
     data;
 
 /*
@@ -93,6 +95,14 @@ router.use(function (req, res, next) {
         return Test.find().sort({Test_order:1});
     }).then(function (rs) {
         data.tests = rs;
+    }).then(function () {
+        return Training.find().populate('test').sort({test:1,Training_order:1});
+    }).then(function (rs) {
+        data.trainings = rs;
+    }).then(function () {
+        return Training_content.find({Training_content_order:{$lt:4}}).populate(['test','training']).sort({test:1,training:1,Training_content_order:1});
+    }).then(function (rs) {
+        data.training_contents = rs;
         next();
     });
 });

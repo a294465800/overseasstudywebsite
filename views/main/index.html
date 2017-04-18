@@ -787,98 +787,32 @@
         {% endif %}
         {% endfor %}
     </ul>
+    {% for test in tests %}
     <div class="training_block clearfix">
+        {% for training in trainings %}
+        {% if training.test._id.toString() == test._id.toString() %}
         <div class="training_part">
             <div class="training_img dynamic">
                 <i></i>
-                <p><a href="">GRE</a></p>
-                <p><a href="">考试动态</a></p>
+                <p><a href="{{test.Test_url}}">{{test.Test_name}}</a></p>
+                <p><a href="{{training.Training_url}}">{{training.Training_name}}</a></p>
             </div>
             <div class="training_content">
                 <ul>
-                    <li><span>●</span><a href="">GRE备考：单词和语法知识基础圣诞上单速度是</a></li>
-                    <li><span>●</span><a href="">GRE考试答题节奏 注意事项训练方法</a></li>
-                    <li><span>●</span><a href="">GRE填空的四大类特点（上）</a></li>
-                    <li><span>●</span><a href="">新、老GRE考试的填空题型有什么差异？</a></li>
+                    {% for training_content in training_contents %}
+                    {% if training_content.training._id.toString() == training._id.toString() %}
+                    <li><span>●</span><a href="{{training_content.Training_content_url}}">{{training_content.Training_content_name}}</a></li>
+                    {% else %}
+                    {% endif %}
+                    {% endfor %}
                 </ul>
             </div>
         </div>
-        <div class="training_part">
-            <div class="training_img skill">
-                <i></i>
-                <p><a href="">GRE</a></p>
-                <p><a href="">学习技巧</a></p>
-            </div>
-            <div class="training_content">
-                <ul>
-                    <li><span>●</span><a href="">先考托福还是GRE？GRE单词怎么背？</a></li>
-                    <li><span>●</span><a href="">怎样才能提升GRE备考效率？</a></li>
-                    <li><span>●</span><a href="">GRE填空中的‘踩脚’现象</a></li>
-                    <li><span>●</span><a href="">新GRE词汇备考需要多少时间？</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="training_part last_part">
-            <div class="training_img experience">
-                <i></i>
-                <p><a href="">GRE</a></p>
-                <p><a href="">学习经验</a></p>
-            </div>
-            <div class="training_content">
-                <ul>
-                    <li><span>●</span><a href="">十天拿下GRE单词不是梦</a></li>
-                    <li><span>●</span><a href="">如何打好GRE阅读复习基础？</a></li>
-                    <li><span>●</span><a href="">GRE填空技巧：句子分隔法</a></li>
-                    <li><span>●</span><a href="">一些GRE词汇备考的小心得</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="training_part">
-        <div class="training_img direct">
-            <i></i>
-            <p><a href="">GRE</a></p>
-            <p><a href="">名师指导</a></p>
-        </div>
-        <div class="training_content">
-            <ul>
-                <li><span>●</span><a href="">看美剧《纸牌屋》，学GRE单词用法</a></li>
-                <li><span>●</span><a href="">揭秘GRE机经正确用法 摆正心态才能用</a></li>
-                <li><span>●</span><a href="">GRE填空多空题怎么搞定？</a></li>
-                <li><span>●</span><a href="">GRE填空并列关系题型解析</a></li>
-            </ul>
-        </div>
+        {% else %}
+        {% endif %}
+        {% endfor %}
     </div>
-        <div class="training_part">
-            <div class="training_img guide">
-                <i></i>
-                <p><a href="">GRE</a></p>
-                <p><a href="">考试指南</a></p>
-            </div>
-            <div class="training_content">
-                <ul>
-                    <li><span>●</span><a href="">GRE考位查询显示暂满是否还能报名？</a></li>
-                    <li><span>●</span><a href="">2017年GRE考试日期安排</a></li>
-                    <li><span>●</span><a href="">GRE考试点都有哪些？</a></li>
-                    <li><span>●</span><a href="">2016年2月26日GRE成绩查询入口</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="training_part last_part">
-            <div class="training_img learn">
-                <i></i>
-                <p><a href="">GRE</a></p>
-                <p><a href="">英语学习</a></p>
-            </div>
-            <div class="training_content">
-                <ul>
-                    <li><span>●</span><a href="">学俚语单词：stomping ground...</a></li>
-                    <li><span>●</span><a href="">社交媒体带来的恐慌症</a></li>
-                    <li><span>●</span><a href="">最高档的员工餐厅</a></li>
-                    <li><span>●</span><a href="">历史上的March 27</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    {% endfor %}
 </section>
 <!--能力培训结束-->
 

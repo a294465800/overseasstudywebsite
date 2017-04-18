@@ -166,4 +166,20 @@ $(function () {
     });
 
 
+    /*
+    * 能力培训mouseover事件
+    * */
+    var $training_list_li = $('.training_list li'),
+        $training_list_a = $('.training_list li a'),
+        $training_block = $('.training_block');
+
+    $training_list_li.mouseenter(function () {
+        var index = $training_list_li.index(this),
+            temp = $training_block.eq(index);
+        $training_block.css('display','none');
+        $training_list_a.css('color','#fff');
+        $(this).find('a').css('color','#333');
+        temp.css('display','block');
+    });
+
 });
