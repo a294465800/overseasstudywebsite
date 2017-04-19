@@ -31,3 +31,4 @@
 * view存放前后台的前端页面
 * schemas存放数据结构
 * router存放前后端路由、ajax路由
+* public存放css样式、js、字体fonts和图片images
