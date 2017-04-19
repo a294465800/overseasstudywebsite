@@ -2291,6 +2291,21 @@ router.get('/training/content/delete',function (req, res) {
     });
 });
 
+/*
+* 教师列表
+* */
+router.get('/teacher',function (req, res) {
+    res.render('admin/teacher/teacher_index',data);
+});
+
+/*
+* 教师添加
+* */
+router.get('/teacher/add',function (req, res) {
+    res.render('admin/teacher/teacher_add',data);
+});
+
+
 
 //返回出去给app.js
 module.exports = router;
