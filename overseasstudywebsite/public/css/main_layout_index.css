@@ -1,0 +1,491 @@
+/*
+    导航、登录、注册
+*/
+.hold{
+    width: 100%;
+    min-width: 1140px;
+    margin: auto;
+    background-color: rgba(0,0,0,.3);
+    position: relative;
+    top: 0;
+    left:0;
+}
+.container{
+    width: 1140px;
+    position: relative;
+}
+.container .ban{
+    text-shadow:0 1px 0 rgba(255,255,255,.25);
+    list-style: none;
+    margin: 0;
+    padding: 15px 0;
+    float: right;
+}
+.container .ban li{
+    line-height: 25px;
+    height: 25px;
+    font-size: 14px;
+    float: left;
+    margin-left: 20px;
+}
+#logo{
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
+    position: absolute;
+    left: 0;
+    top: 10px;
+}
+#logo img{
+    width:20%;
+    display: block;
+    float: left;
+    cursor: pointer;
+    margin-top: -3px;
+}
+#logo span{
+    cursor: pointer;
+    float: left;
+    width: 120px;
+    padding: 5px 10px;
+    display: block;
+    color: #337ab7;
+    background-color: rgba(255,255,204,.5);
+    border-radius: 8px;
+}
+.container .ban li a{
+    color: #fff;
+    text-decoration: none;
+}
+#username{
+    color: #fff;
+    font-size: 14px;
+    position: relative;
+    z-index: 1;
+}
+#username .banlist{
+    list-style: none;
+    margin: 0 0 0 -60px;
+    padding: 10px 15px 0;
+    background-color: rgba(0,0,0,.6);
+    width: 120px;
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    white-space: nowrap;
+}
+.container .ban .banlist li{
+    margin-left: 0;
+    margin-bottom: 20px;
+    line-height: 20px;
+    height: 20px;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+
+/*
+    登录、注册的遮罩层
+*/
+.shade{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    left: 0;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 3;
+}
+.login,.register{
+    width: 404px;
+    background-color: rgba(255,255,255,0.95);
+    border: 1px solid darkgray;
+    padding: 50px;
+    position: relative;
+    top: 50%;
+}
+.register{
+    margin: -210px auto 0;
+    height: 420px;
+}
+.login{
+    margin: -180px auto 0;
+    height: 360px;
+}
+.login span,.register span{
+    width: 21px;
+    height: 21px;
+    display: block;
+    background: url("../images/icon/closeicon.png") no-repeat center top;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.login span:hover,.register span:hover{
+    cursor: pointer;
+}
+.login h3,.register h3{
+    font-size: 24px;
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 30px;
+}
+.login input{
+    margin-bottom: 20px;
+}
+.login .zhuce,.register .denglu{
+    list-style: none;
+    margin: 0 0 0 0;
+    padding: 0;
+}
+.login .zhuce li,.register .denglu li{
+    float: right;
+}
+.login button{
+    margin-top: 40px;
+}
+.colWarning{
+    color: #999;
+    margin: 0;
+    line-height: 35px;
+    text-indent: .2em;
+    font-size: 14px;
+    width: 100%;
+    height: 35px;
+    display: inline-block;
+}
+.tips2{
+    text-align: center;
+    color: #a94442;
+    font-size: 14px;
+}
+.tips{
+    width: 100%;
+    display: inline-block;
+    color: #3c763d;
+    margin: 0;
+    text-align: center;
+    height: 25px;
+    font-size: 14px;
+}
+.tips a{
+    margin: 0;
+    line-height: 25px;
+}
+
+/*
+    导航栏
+*/
+.outer{
+    width: 100%;
+    min-width: 1140px;
+    margin: 20px auto 0;
+}
+.menu{
+    width: 1140px;
+    height: 41px;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+}
+.menu .navigation{
+    list-style: none;
+    padding: 0;
+    height: 41px;
+    display: inline-block;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.menu .navigation .nav_head{
+    background-color: white;
+    float: left;
+    margin: 0;
+    border-bottom: 1px solid #337ab7;
+}
+.menu .navigation .nav_head a{
+    padding: 0 18px;
+    line-height: 40px;
+    font-size: 16px;
+    color: #000;
+}
+.menu .navigation .nav_head:hover{
+    background-color: #337ab7;
+    cursor: pointer;
+}
+.menu .navigation .nav_content{
+    position: absolute;
+    top: 41px;
+    left: 50%;
+    background-color: rgba(255,255,255,.95);
+    padding: 0 15px;
+    border: 1px solid #337ab7;
+    display: none;
+    z-index: 1;
+}
+.menu .navigation .nav_content .nav_part{
+    width:100%;
+    float: left;
+    padding-top: 10px;
+    cursor: default;
+    text-align: left;
+}
+.menu .navigation h4{
+    font-size: 14px;
+    font-weight: bold;
+    float: left;
+    width: 8%;
+    line-height: 28px;
+    color: #000;
+    cursor: text;
+}
+.menu .navigation .nav_head:hover .nav_content{
+    display: block;
+}
+.menu .navigation .nav_list{
+    padding: 0 25px 15px;
+    width: 85%;
+    margin: 0 0 0 40px;
+    list-style: none;
+    float: left;
+    cursor: default;
+    border-bottom: 1px solid #ccc;
+}
+.menu .navigation .nav_list li{
+    margin-right: 15px;
+    float: left;
+}
+.menu .navigation .nav_list li a{
+    padding: 0;
+    line-height: 28px;
+    font-size: 13px;
+    color: #444;
+}
+.menu .navigation .nav_list li a:hover{
+    color: #0066FF;
+}
+
+
+.big_bg{
+    width: 100%;
+    height: 550px;
+}
+.big_bg a{
+    display: block;
+    min-width: 1140px;
+    width: 100%;
+    height: 550px;
+}
+
+
+/*
+    底部信息footer
+*/
+.footer{
+    width:100%;
+    min-width: 1140px;
+    margin: 0 auto;
+    background-color: #323232;
+}
+.footer .catalog{
+    width: 1140px;
+    height: 320px;
+    margin: 0 auto;
+    padding: 80px 0 50px;
+    border-bottom: 1px solid #4d4d4d;
+    overflow: hidden;
+}
+.footer .catalog ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.footer .catalog .footer_part{
+    float: left;
+    margin: 0 110px 0 0;
+}
+.footer .catalog .footer_part .footer_title{
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 15px 0;
+}
+.footer .catalog .footer_part li a{
+    font-size: 14px;
+    color: #fff;
+    line-height: 30px;
+}
+.footer .catalog .footer_part li a:hover{
+    color: #0066FF;
+}
+/*
+    公司栏
+*/
+.footer .catalog .company{
+    width: 380px;
+    margin: 0;
+}
+.footer .catalog .company li a{
+    margin-right: 5px;
+}
+.footer .catalog .company li a:hover{
+    color: #0066FF;
+}
+
+/*
+    版权
+*/
+.footer .copyright{
+    width: 1140px;
+    height: 120px;
+    margin: 0 auto;
+    border-top: 1px solid #000;
+    padding: 20px 0;
+    overflow: hidden;
+}
+.footer .copyright p{
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+/*
+    友情链接
+*/
+.friend_link{
+    width: 100%;
+    min-width: 1140px;
+    margin: 0 auto;
+    background-color: #000;
+    position: relative;
+}
+.friend_link .links{
+    width: 1140px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+.friend_link .links span{
+    float: left;
+    font-size: 14px;
+    line-height: 20px;
+    color: #fff;
+    margin-right: 10px;
+}
+.friend_link .links ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.friend_link .links ul li{
+    float: left;
+    margin-right: 15px;
+}
+.friend_link .links ul li a{
+    color: #fff;
+    font-size: 14px;
+    line-height: 20px;
+}
+.friend_link .links ul li a:hover{
+    color: #0066FF;
+}
+
+
+/*
+    电话咨询栏
+*/
+.tel_call{
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top:40%;
+    width: 136px;
+    height: 220px;
+    border: 2px solid #337ab7;
+    border-left: none;
+    background-color: #fff;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    overflow: hidden;
+}
+.tel_call em{
+    display: block;
+    position: relative;
+    left: 116px;
+    top: 0;
+    width: 20px;
+    height:20px;
+    background: url("/public/images/tel_close.png");
+    background-size: cover;
+    cursor: pointer;
+}
+.tel_call p{
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    font-weight: bold;
+    margin: 5px 0;
+    white-space: nowrap;
+}
+.tel_call i{
+    display: block;
+    margin: 5px auto;
+    width:120px;
+    height: 90px;
+    background: url("/public/images/tel.png");
+    background-size: cover;
+}
+.tel_call input{
+    width: 120px;
+    margin: 0 0 0 6px;
+    font-size: 12px;
+    border: 1px solid #337ab7;
+}
+.tel_call input:focus{
+    outline: none;
+    border: 1px solid #259;
+}
+.tel_call .tel_on{
+    width: 100px;
+    height:25px;
+    margin: 10px auto;
+    background-color: #337ab7;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 25px;
+    text-align: center;
+    cursor: pointer;
+}
+
+/*
+    电话图标栏
+*/
+.tel_logo{
+    position: fixed;
+    left:0;
+    top: 40%;
+    width: 40px;
+    height: 100px;
+    background-color: #337ab7;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 1;
+}
+.tel_logo .tel_title{
+    margin: 5px 0 0;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    line-height: 18px;
+}
+.tel_logo i{
+    display: block;
+    width: 30px;
+    height: 36px;
+    background: url("/public/images/tel_logo.png") no-repeat;
+    background-size: cover;
+    margin: 10px auto;
+}

@@ -2305,7 +2305,5 @@ router.get('/teacher/add',function (req, res) {
     res.render('admin/teacher/teacher_add',data);
 });
 
-
-
 //返回出去给app.js
 module.exports = router;
