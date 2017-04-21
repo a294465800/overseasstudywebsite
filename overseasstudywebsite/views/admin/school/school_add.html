@@ -1,0 +1,33 @@
+{% extends '../layout.html' %}
+
+{% block main %}
+<ol class="breadcrumb">
+    <li><a href="/" target="_blank">官网首页</a></li>
+    <li><span>学校添加</span></li>
+</ol>
+
+<h3 style="font-size: 24px;font-weight: bold; line-height: 50px;margin-bottom: 20px;border-bottom: 1px solid #ccc">学校添加</h3>
+
+<form role="form" method="post">
+    <div class="form-group">
+        <label for="area_name">学校地区：</label>
+        <select name="area_name" id="area_name" class="form-control" style="margin: 10px 0">
+            {% for area in areas %}
+                <option value="{{area.id}}">{{area.Area_name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="school_zn">学校中文名称：</label>
+        <input style="margin: 5px 0 20px" type="text" class="form-control" id="school_zn" placeholder="请输入学校中文名称" name="school_zn">
+        <label for="school_en">学校英文名称：</label>
+        <input style="margin: 5px 0 20px" type="text" class="form-control" id="school_en" placeholder="请输入学校英文名称" name="school_en">
+        <label for="school_rank">学校排名：</label>
+        <input style="margin: 5px 0 20px" type="text" class="form-control" id="school_rank" placeholder="请输入学校排名" name="school_rank">
+        <label for="school_url">学校图片名称：</label>
+        <input style="margin: 5px 0 20px" type="text" class="form-control" id="school_url" placeholder="请输入学校图片名称，带后缀，图片放在images下的school文件夹" name="school_url">
+    </div>
+    <button type="submit" class="btn btn-default">提交</button>
+</form>
+
+{% endblock %}

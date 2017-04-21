@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+<title>搜索学校</title>
+<link rel="stylesheet" href="/public/css/school_index.css">
+<script src="/public/js/school_action.js"></script>
+{% endblock %}
+
+{% block big_bg %}
+<a href="#" style="background: url('/public/images/school/big_bg.jpg') no-repeat left center"></a>
+{% endblock %}
+
+{% block prepare %}
+<!--学校搜索选项开始-->
+<section class="search_bar clearfix">
+    <div class="section_title">
+        <p>大学列表</p>
+    </div>
+    <form action="" method="post">
+        <div class="search_input clearfix">
+            <p>学校名称：</p>
+            <label for="school_name" class="search_icon">
+                <input type="text" id="school_name" placeholder="请输入学校的中文名称" value="{{schools.School_zn}}" name="school_name">
+            </label>
+            <button type="submit" class="search">搜索</button>
+        </div>
+    </form>
+    <div class="search_input clearfix">
+        <p>所在地区：</p>
+        <a href="/school?school_area=&school_rank={{rank}}&call=0&call2={{call2}}&" class="{% if call == 0 %}active{%else%}{%endif%}">全部</a>
+        <a href="/school?school_area=英格兰&school_rank={{rank}}&call=1&call2={{call2}}" class="{% if call == 1 %}active{%else%}{%endif%}">英格兰</a>
+        <a href="/school?school_area=苏格兰&school_rank={{rank}}&call=2&call2={{call2}}" class="{% if call == 2 %}active{%else%}{%endif%}">苏格兰</a>
+        <a href="/school?school_area=威尔士&school_rank={{rank}}&call=3&call2={{call2}}" class="{% if call == 3 %}active{%else%}{%endif%}">威尔士</a>
+        <a href="/school?school_area=北爱尔兰&school_rank={{rank}}&call=4&call2={{call2}}" class="{% if call == 4 %}active{%else%}{%endif%}">北爱尔兰</a>
+        <a href="/school?school_area=伦敦&school_rank={{rank}}&call=5&call2={{call2}}" class="{% if call == 5 %}active{%else%}{%endif%}">英格兰伦敦</a>
+    </div>
+    <div class="search_input clearfix">
+        <p>综合排名：</p>
+        <a href="/school?school_area={{area}}&school_rank=0&call={{call}}&call2=0" class="{% if call2 == 0 %}active{%else%}{%endif%}">全部</a>
+        <a href="/school?school_area={{area}}&school_rank=1&call={{call}}&call2=1" class="{% if call2 == 1 %}active{%else%}{%endif%}">1~10名</a>
+        <a href="/school?school_area={{area}}&school_rank=2&call={{call}}&call2=2" class="{% if call2 == 2 %}active{%else%}{%endif%}">10~20名</a>
+        <a href="/school?school_area={{area}}&school_rank=3&call={{call}}&call2=3" class="{% if call2 == 3 %}active{%else%}{%endif%}">20~50名</a>
+        <a href="/school?school_area={{area}}&school_rank=4&call={{call}}&call2=4" class="{% if call2 == 4 %}active{%else%}{%endif%}">50~100名</a>
+        <a href="/school?school_area={{area}}&school_rank=5&call={{call}}&call2=5" class="{% if call2 == 5 %}active{%else%}{%endif%}">100~150名</a>
+        <a href="/school?school_area={{area}}&school_rank=6&&call={{call}}&call2=6" class="{% if call2 == 6 %}active{%else%}{%endif%}">150~名</a>
+    </div>
+</section>
+<!--学校搜索选项结束-->
+
+<section class="school_bar clearfix">
+    <ul>
+        {% if schools !='' %}
+        {% for school in schools %}
+            <li class="clearfix">
+                <a href="#" class="school_img" style="background: url('/public/images/school/{{school.School_url}}') no-repeat;"></a>
+                <p title="综合排名" class="rank">
+                    <span>综</span><span class="rank_num">{% if school.School_rank == 999 %}—{% else %}{{school.School_rank}}{% endif %}</span>
+                </p>
+                <a href="#" class="school_zn">{{school.School_zn}}</a>
+                <a href="#" class="school_en">{{school.School_en}}</a>
+                <p class="area"><span>所在地:</span><span class="school_area">{{school.area.Area_name}}</span></p>
+                <p class="love" data-id="{{school._id.toString()}}">{{school.School_love}}</p>
+            </li>
+            {% endfor %}
+        {% else %}
+        <div class="alert alert-warning school_none" role="alert">没有找到该学校！</div>
+        {% endif %}
+    </ul>
+</section>
+{%include 'page.html'%}
+
+{%endblock%}

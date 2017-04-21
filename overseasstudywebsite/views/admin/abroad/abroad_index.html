@@ -1,0 +1,30 @@
+{% extends '../layout.html' %}
+
+{% block main %}
+<ol class="breadcrumb">
+    <li><a href="/" target="_blank">官网首页</a></li>
+    <li><span>留学列表</span></li>
+</ol>
+
+<h3 style="font-size: 24px;font-weight: bold; line-height: 50px">留学列表</h3>
+
+<table class="table table-hover table-striped">
+    <tr>
+        <th>留学ID</th>
+        <th>留学名称</th>
+        <th>操作</th>
+    </tr>
+    {% for abroad in abroads %}
+    <tr>
+        <td>{{abroad._id.toString()}}</td>
+        <td>{{abroad.Abroad_name}}</td>
+        <td>
+            <a href="/admin/study_abroad/edit?id={{abroad._id.toString()}}">修改</a>
+             | <a href="/admin/study_abroad/delete?id={{abroad._id.toString()}}">删除</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}

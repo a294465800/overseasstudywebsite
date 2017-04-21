@@ -1,0 +1,37 @@
+{% extends '../layout.html' %}
+
+{% block main %}
+<ol class="breadcrumb">
+    <li><a href="/" target="_blank">官网首页</a></li>
+    <li><span>留学导航列表</span></li>
+</ol>
+
+<h3 style="font-size: 24px;font-weight: bold; line-height: 50px">留学导航列表</h3>
+
+<table class="table table-hover table-striped">
+    <tr>
+        <th>ID</th>
+        <th>留学名称</th>
+        <th>导航名称</th>
+        <th>导航url</th>
+        <th>标题顺序</th>
+        <th>操作</th>
+    </tr>
+    {% for abroad_nav in abroad_navs %}
+    <tr>
+        <td>{{abroad_nav._id.toString()}}</td>
+        <td>{{abroad_nav.abroad.Abroad_name}}</td>
+        <td>{{abroad_nav.Abroad_nav_name}}</td>
+        <td>{{abroad_nav.Abroad_nav_url}}</td>
+        <td>{{abroad_nav.Abroad_nav_order}}</td>
+        <td>
+            <a href="/admin/study_abroad/nav/edit?id={{abroad_nav._id.toString()}}">修改</a>
+             | <a href="/admin/study_abroad/nav/delete?id={{abroad_nav._id.toString()}}">删除</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<!--引用模版，相当于引用文件，在这里引用page.html里面的内容，不一定是html文件，其他都可以-->
+{%include '../page.html'%}
+
+{% endblock %}
