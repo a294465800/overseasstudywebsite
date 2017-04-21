@@ -14,7 +14,7 @@ $(function () {
             },
             dataType: 'json',
             success: function (data) {
-                if(data.ok == 1){
+                if(data.ok === 1){
                     $this.text(data.love);
                 }
             }

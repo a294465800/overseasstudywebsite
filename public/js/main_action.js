@@ -39,7 +39,7 @@ $(function () {
             temp2 = $big.children().eq(index);
         $bg_btn.css('background','#fff');
         $(this).css('background','#337ab7');
-        if(temp1.css('display') == 'block'){
+        if(temp1.css('display') === 'block'){
             return ;
         }
 
@@ -111,7 +111,7 @@ $(function () {
             backColor = $(this).css('background-color'),
             index = $parent.find('li').index(this),
             temp = $parent2.eq(index);
-        if(backColor == 'rgb(255, 255, 255)'){
+        if(backColor === 'rgb(255, 255, 255)'){
         }else{
             $parent.find('li').css('background-color',backColor);
             $parent.find('a').css('color','#fff');
@@ -135,7 +135,7 @@ $(function () {
             index = $parent.index(this),
             $parent2 = $(this).closest('.study_abroad_case').find('.case_content'),
             temp = $parent2.eq(index);
-        if(temp.css('display') == 'block'){
+        if(temp.css('display') === 'block'){
         }else{
             $parent.css('background-color','#fff');
             $(this).css('background-color','#337ab7');
@@ -156,7 +156,7 @@ $(function () {
             index = $parent.find('p').index(this),
             $parent2 = $parent.find('ul'),
             temp = $parent2.eq(index);
-        if(temp.css('display') == 'block'){
+        if(temp.css('display') === 'block'){
         }else{
             $parent2.animate({opacity: 0},50);
             $parent2.css('display','none');
