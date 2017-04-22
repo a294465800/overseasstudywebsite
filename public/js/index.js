@@ -96,10 +96,10 @@ $(function () {
             },
             dataType: 'json',
             success: function (data) {
-                if(data.code == 1 || data.code == 2){
+                if(data.code === 1 || data.code === 2){
                     $phone.html(data.message);
                     $phone.css('color','#a94442');
-                }else if(data.code == 3){
+                }else if(data.code === 3){
                     $phone.html(data.message);
                     $phone.css('color','#3c763d');
                 }else {
@@ -135,10 +135,10 @@ $(function () {
             },
             dataType: 'json',
             success: function (data) {
-                if(data.code == 5){
+                if(data.code === 5){
                     $password.html(data.message);
                     $password.css('color','#a94442');
-                }else if(data.code == 6){
+                }else if(data.code === 6){
                     $password.html(data.message);
                     $password.css('color','#3c763d');
                 }else {
@@ -162,7 +162,7 @@ $(function () {
                         news3 = '2';
                         return '2';
                     }else{
-                        if( $password2.val() == $value){
+                        if( $password2.val() === $value){
                             news3 = '0';
                             return '0';
                         }else{
@@ -174,10 +174,10 @@ $(function () {
             },
             dataType: 'json',
             success: function (data) {
-                if(data.code == 8){
+                if(data.code === 8){
                     $repassword.html(data.message);
                     $repassword.css('color','#a94442');
-                }else if(data.code == 9){
+                }else if(data.code === 9){
                     $repassword.html(data.message);
                     $repassword.css('color','#3c763d');
                 }else {
@@ -221,7 +221,7 @@ $(function () {
         /*
         * 当没有错误的时候才发送ajax请求
         * */
-        if(news == '0' && news2 == '0' && news3 == '0'){
+        if(news === '0' && news2 === '0' && news3 === '0'){
             $.ajax({
                 type: 'post',
                 url: 'api/user/register',
@@ -238,7 +238,7 @@ $(function () {
                     stop = setInterval(function () {
                         time--;
                         $tips.html(data.message + time + '秒后跳转登录页面');
-                        if(time == 0){
+                        if(time === 0){
                             clearInterval(stop);
                             $registerBox.hide();
                             $loginBox.show();
@@ -280,11 +280,11 @@ $(function () {
             },
             dataType: 'json',
             success: function (data) {
-                if(data.code == 11){
+                if(data.code === 11){
                     $tips2.html('用户名或者密码不能为空！');
-                }else if(data.code == 12){
+                }else if(data.code === 12){
                     $tips2.html('用户名不存在！');
-                }else if(data.code == 13){
+                }else if(data.code === 13){
                     $tips2.html('密码不正确！');
                 }else{
                     $tips2.html('登录成功！');
