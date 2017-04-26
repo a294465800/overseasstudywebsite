@@ -24,7 +24,7 @@ $(function () {
     * */
     var $nav_head = $('.nav_head'),
         width = $('.navigation').css('width');
-    width = parseInt(width) - 230;
+    width = parseInt(width);
     $nav_head.find('.nav_content').css('width',width + 'px');
 
     /*
@@ -105,13 +105,13 @@ $(function () {
     * */
     var $study_abroad_nav_li = $('.study_abroad_nav ul li');
 
-    $study_abroad_nav_li.on('mouseover',function () {
+    $study_abroad_nav_li.mouseenter(function () {
         var $parent = $(this).closest('.study_abroad_nav'),
             $parent2 = $(this).closest('.study_abroad_content').find('.study_abroad_num'),
             backColor = $(this).css('background-color'),
             index = $parent.find('li').index(this),
             temp = $parent2.eq(index);
-        if(backColor === 'rgb(255, 255, 255)'){
+        if(backColor === 'rgb(255, 255, 255)' || backColor === '#fff'){
         }else{
             $parent.find('li').css('background-color',backColor);
             $parent.find('a').css('color','#fff');
