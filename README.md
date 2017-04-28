@@ -25,6 +25,7 @@
 * cookies:保存浏览器登录信息
 * mongoose:用来管理mongodb的数据
 * swig:模版引擎，用于解决前后端分离
+* formidable：实现文件上传
 
 #### 文件夹以及文件解释
 * app.js为启动文件
