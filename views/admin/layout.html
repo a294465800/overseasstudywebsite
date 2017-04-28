@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="/public/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/public/css/admin_index.css">
     <link rel="stylesheet" href="/public/css/reset.css">
-    <script src="/public/js/jquery-3.2.0.min.js"></script>
-    <script src="/public/js/npm.js"></script>
-    <script src="/public/js/bootstrap.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -84,6 +81,13 @@
                         <li><a href="/admin/teacher/add">教师添加</a></li>
                     </ul>
                 </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">图片管理<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/admin/file_upload/school">学校图片上传</a></li>
+                        <li><a href="/admin/file_upload/teacher">教师图片上传</a></li>
+                    </ul>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -96,6 +100,8 @@
         </div>
     </div>
 </nav>
+<script src="/public/js/jquery-3.2.0.min.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
 <div class="container-fluid">
     {% block main %}{%endblock%}
     <!--预留block-->
