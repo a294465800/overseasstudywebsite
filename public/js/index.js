@@ -309,10 +309,10 @@ $(function () {
 
 
     //登录后的悬浮列表
-    $username.mouseover(function () {
+    $username.mouseenter(function () {
         $username.find('#banlist').show();
     });
-    $username.mouseout(function () {
+    $username.mouseleave(function () {
         $username.find('#banlist').hide();
     });
 });

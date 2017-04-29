@@ -2311,7 +2311,8 @@ router.get('/teacher/add',function (req, res) {
 * 文件上传--学校
 * */
 router.get('/file_upload/school',function (req, res) {
-    data.message = '学校图片上传--图片大小不超过2m';
+    data.warning = '如果图片已存在，将会覆盖！（图片大小不超过2m，只允许jpg和png）';
+    data.message = '学校图片上传';
     res.render('admin/fileupload/fileupload',data);
 });
 
@@ -2336,21 +2337,20 @@ router.post('/file_upload/school',function (req, res) {
         /*
          * 保留文件原来名字
          * */
-		if(files.fileInfo.length > 1){
+		if(files.files.length > 1){
 			//如果同时上传多个文件，返回的是数组，对所有数组中的文件重命名
-			for(var i = 0; i < files.fileInfo.length;i++){
-				fs.renameSync(files.fileInfo[i].path, form.uploadDir + files.fileInfo[i].name);  //重命名
+			for(var i = 0; i < files.files.length;i++){
+				fs.renameSync(files.files[i].path, form.uploadDir + files.files[i].name);  //重命名
 			}
 		}else{
 			//对单一文件进行重命名
-			fs.renameSync(files.fileInfo.path, form.uploadDir + files.fileInfo.name);  //重命名
+			fs.renameSync(files.files.path, form.uploadDir + files.files.name);  //重命名
 		}
-		data.school_img_num = files.fileInfo.length || 1;
+		data.school_img_num = files.files.length || 1;
 	});
 	form.on('end', function() {
 		data.message = '上传成功，共上传了' + data.school_img_num + '张图片';
-		data.url = '/';
-		res.render('admin/success', data);
+		res.json(data);
 	});
 });
 

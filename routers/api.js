@@ -257,7 +257,7 @@ router.post('/study_abroad/nav/content/add',function (req, res) {
 * */
 router.post('/training/content/add',function (req, res) {
     var test = req.body.test;
-    if(test == ''){
+    if(test === ''){
     }else{
         Training.find({test: test}).populate('test').sort({Training_content_order:1}).then(function (rs) {
             responseData.trainings = rs;

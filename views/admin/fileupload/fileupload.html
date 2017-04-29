@@ -4,14 +4,18 @@
 <link rel="stylesheet" href="/public/css/form.css">
 <div id="container" class="container">
     <div id="errorTip" class="alert alert-warning">请选择要上传的文件！</div>
-    <div id="typeTip" class="alert alert-warning">只允许上传jpg和png文件！</div>
     <form class="form-signin" role="form" method="post" enctype='multipart/form-data'>
         <h2 class="form-signin-heading" style="font: bold 26px/60px '微软雅黑';">{{message}}</h2>
-        <span style="color: #a94442;font: normal 16px/45px '微软雅黑'">如果图片已存在，将会覆盖！</span>
-        <input id="file-info" name="fileInfo" type="file" accept="image/png,image/gif,image/jpeg" class="form-control" multiple />
+        <span style="color: #a94442;font: normal 16px/45px '微软雅黑'">{{warning}}</span>
+        <input id="file-info" name="fileInfo" type="file" accept="image/png,image/jpeg" class="form-control" multiple />
         <br/>
         <button id="btnSub" class="btn btn-lg btn-primary" type="submit">上 传</button>
     </form>
+    <p id="file_num"></p>
+    <div class="container">
+        <ul id="file_list">
+        </ul>
+    </div>
 </div>
 <script src="/public/js/action.js"></script>
 {% endblock %}

@@ -8,3 +8,43 @@
 #typeTip {
     display: none;
 }
+#file_list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#file_list li {
+    padding: 10px 20px;
+    border: 1px solid #999;
+    clear: both;
+    overflow: hidden;
+    font: normal 16px/20px "微软雅黑";
+    background-color: #f0f0f0;
+    margin-bottom: 10px;
+}
+#file_list li p{
+    float: left;
+    margin: 0;
+}
+#file_list li .file_cancel {
+    float: right;
+    cursor: pointer;
+    margin-top: 10px;
+}
+#file_list .file_load {
+    clear: both;
+    display: inline-block;
+    height: 10px;
+    width: 600px;
+    background-color: mediumseagreen;
+}
+#file_list li .percent {
+    display: inline-block;
+    margin-left: 20px;
+}
+#file_num {
+    font: normal 16px/40px "微软雅黑";
+    color: #286090;
+    text-align: center;
+    margin: 0;
+}
