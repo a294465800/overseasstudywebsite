@@ -14,6 +14,7 @@ $(function () {
 		var fd = new FormData();
 		errorTip.css('display','none');
 
+		console.log(file_info.files  === files);
 		if(!length)
 		{
 			errorTip.css('display','block');
@@ -58,8 +59,10 @@ $(function () {
 				percentage.html(percent + '%');
 				if(progress.val() === 100){
 					cancel.html('成功');
+					//成功后解绑取消函数，同时清空表单的文件
 					cancel.off();
 					files = [];
+					file_info.value = '';
 				}
 			}),
 			success: function (data) {

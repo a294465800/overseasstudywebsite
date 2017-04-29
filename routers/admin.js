@@ -36,13 +36,22 @@ function setArrFont(sum) {
 }
 
 function setArrEnd(sum) {
-    var arr = [],
-        a = sum;
-    for(var i = 0;i<5;i++){
-        arr[i] = a;
-        a--;
-    }
-    return arr.reverse();
+	if(sum >= 5){
+		var arr = [],
+			a = sum;
+		for(var i = 0;i<5;i++){
+			arr[i] = a;
+			a--;
+		}
+		return arr.reverse();
+	}else{
+		var arr = [],
+			a = sum;
+		for(var i = 0;i<5;i++){
+			arr[i] = a;
+			a--;
+		}
+	}
 }
 
 function calculatePages(count) {
@@ -2313,7 +2322,7 @@ router.get('/teacher/add',function (req, res) {
 router.get('/file_upload/school',function (req, res) {
     data.warning = '如果图片已存在，将会覆盖！（图片大小不超过2m，只允许jpg和png）';
     data.message = '学校图片上传';
-    res.render('admin/fileupload/fileupload',data);
+    res.render('admin/fileupload/fileupload_school',data);
 });
 
 /*
@@ -2337,7 +2346,8 @@ router.post('/file_upload/school',function (req, res) {
         /*
          * 保留文件原来名字
          * */
-		if(files.files.length > 1){
+
+		if(files.files.length){
 			//如果同时上传多个文件，返回的是数组，对所有数组中的文件重命名
 			for(var i = 0; i < files.files.length;i++){
 				fs.renameSync(files.files[i].path, form.uploadDir + files.files[i].name);  //重命名
@@ -2351,6 +2361,45 @@ router.post('/file_upload/school',function (req, res) {
 	form.on('end', function() {
 		data.message = '上传成功，共上传了' + data.school_img_num + '张图片';
 		res.json(data);
+	});
+});
+
+/*
+* 学校图片列表
+* */
+router.get('/file_upload/school/list',function (req, res) {
+	var path = 'public/images/school';
+	var fileArray = fs.readdirSync(path);
+	data.fileArray = [];
+	data.page = Number(req.query.page) || 1;
+
+	for(var i = (data.page - 1) * data.limit; i < (data.page) * data.limit; i++ ){
+		if(fileArray[i]){
+			data.fileArray.push(fileArray[i]);
+		}
+	}
+	data.count = fileArray.length;
+	data.forPage = 'file_upload/school/list';
+	calculatePages(data.count);
+	res.render('admin/fileupload/fileupload_school_list',data);
+});
+
+/*
+* 学校图片删除
+* */
+router.get('/file_upload/school/list/delete',function (req, res) {
+	var name = req.query.filename,
+		path = 'public/images/school';
+
+	fs.unlink(path + '/' + name, function (err) {
+		if(err){
+			data.message = err;
+			res.render('admin/error',data);
+		}else{
+			data.message = '删除文件' + name + '成功！';
+			data.url = '/admin/file_upload/school/list';
+			res.render('admin/success',data);
+		}
 	});
 });
 
