@@ -25,8 +25,14 @@ module.exports = new mongoose.Schema({
         default: 0
     },
 
-    //学校图片名称
-    School_url: String,
+    //学校url
+	School_url: {
+        type: String,
+        default: '/'
+    },
+
+	//学校图片
+	School_img: String,
 
     //点赞数
     School_love:{

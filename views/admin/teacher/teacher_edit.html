@@ -1,0 +1,29 @@
+{% extends '../layout.html' %}
+
+{% block main %}
+<ol class="breadcrumb">
+    <li><a href="/" target="_blank">官网首页</a></li>
+    <li><span>教师编辑</span></li>
+</ol>
+
+<h3 style="font-size: 24px;font-weight: bold; line-height: 50px;margin-bottom: 20px;border-bottom: 1px solid #ccc">教师编辑 - {{teacher.Teacher_name}}</h3>
+
+<form role="form" method="post">
+    <div class="form-group">
+        <label for="teacher_name">教师名称：</label>
+        <input style="margin: 5px 0 20px" type="text" class="form-control" id="teacher_name" value="{{teacher.Teacher_name}}" name="teacher_name">
+        <label for="teacher_intro">教师简介：</label>
+        <input style="margin: 5px 0 20px" type="text" class="form-control" id="teacher_intro" value="{{teacher.Teacher_intro}}" name="teacher_intro">
+        <label for="teacher_img">教师图片名称：</label>
+        <input style="margin: 5px 0 20px" type="text" class="form-control" id="teacher_img" value="{{teacher.Teacher_img}}" name="teacher_img">
+        <label for="teacher_url">教师url：</label>
+        <input style="margin: 5px 0 20px" type="text" class="form-control" id="teacher_url" value="{{teacher.Teacher_url}}" name="teacher_url">
+        <label for="teacher_order">教师顺序：</label>
+        <input style="margin: 5px 0 20px" type="text" class="form-control" id="teacher_order" value="{{teacher.Teacher_order}}" name="teacher_order">
+        <label for="teacher_background">教师背景：</label><br>
+        <textarea class="form-control" style="margin-top: 10px;resize: none" name="teacher_background" id="teacher_background" rows="5" value="{{teacher.Teacher_background}}"></textarea>
+    </div>
+    <button type="submit" class="btn btn-default">提交</button>
+</form>
+
+{% endblock %}

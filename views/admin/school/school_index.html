@@ -15,6 +15,7 @@
         <th>学校地区</th>
         <th>学校排名</th>
         <th>录取人数</th>
+        <th>学校url</th>
         <th>学校图片名称</th>
         <th>操作</th>
     </tr>
@@ -26,6 +27,7 @@
         <td>{{school.School_rank}}</td>
         <td>{{school.School_enroll}}</td>
         <td>{{school.School_url}}</td>
+        <td>{{school.School_img}}</td>
         <td>
             <a href="/admin/school/edit?id={{school._id.toString()}}">修改</a>
              | <a href="/admin/school/delete?id={{school._id.toString()}}">删除</a>

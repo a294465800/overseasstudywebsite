@@ -22,6 +22,7 @@ var express = require('express'),
     Abroad_enroll = require('../models/Abroad_enroll'),
     Training = require('../models/Training'),
     Training_content = require('../models/Training_content'),
+    Teacher = require('../models/Teacher'),
     data;
 
 /*
@@ -75,8 +76,9 @@ router.use(function (req, res, next) {
     data = {
         userInfo: req.userInfo,
         limit: 20,
-        count:0
-    };
+        count: 0,
+	    warning: '如果图片已存在，将会覆盖！（图片大小不超过2m，只允许jpg和png）'
+};
     next();
 });
 
@@ -965,7 +967,6 @@ router.get('/school',function (req, res) {
 * 学校添加
 * */
 router.get('/school/add',function (req, res) {
-
     Area.find().sort({Area_order:1}).then(function (rs) {
         data.areas = rs;
         res.render('admin/school/school_add',data);
@@ -980,14 +981,15 @@ router.post('/school/add',function (req, res) {
         school_zn = req.body.school_zn || '',
         school_en = req.body.school_en || '',
         school_rank = Number(req.body.school_rank),
-        school_url = req.body.school_url;
+        school_url = req.body.school_url || '/',
+        school_img = req.body.school_img;
 
-    if(area_name == ''){
+    if(area_name === ''){
         data.message = '学校地区不能为空！';
         res.render('admin/error',data);
         return ;
     }
-    if(school_zn == '' || school_en == ''){
+    if(school_zn === '' || school_en === ''){
         data.message = '学校名称不能为空！';
         res.render('admin/error',data);
         return ;
@@ -1016,7 +1018,8 @@ router.post('/school/add',function (req, res) {
                 School_zn: school_zn,
                 School_en: school_en,
                 School_rank: school_rank,
-                School_url: school_url
+                School_url: school_url,
+	            School_img: school_img
             }).save();
         }
     }).then(function () {
@@ -1059,15 +1062,16 @@ router.post('/school/edit',function (req, res) {
         school_zn = req.body.school_zn || '',
         school_en = req.body.school_en || '',
         school_rank = Number(req.body.school_rank),
-        school_url = req.body.school_url;
+        school_url = req.body.school_url,
+	    school_img = req.body.school_img;
 
-    if(area_name == ''){
+    if(area_name === ''){
         data.message = '学校地区不能为空！';
         res.render('admin/error',data);
         return ;
     }
 
-    if(school_zn == '' || school_en == ''){
+    if(school_zn === '' || school_en === ''){
         data.message = '学校名称不能为空！';
         res.render('admin/error',data);
         return ;
@@ -1094,7 +1098,8 @@ router.post('/school/edit',function (req, res) {
                 School_zn: school_zn,
                 School_en: school_en,
                 School_rank: school_rank,
-                School_url: school_url
+                School_url: school_url,
+	            School_img: school_img
             });
         }
     }).then(function () {
@@ -2306,7 +2311,10 @@ router.get('/training/content/delete',function (req, res) {
 * 教师列表
 * */
 router.get('/teacher',function (req, res) {
-    res.render('admin/teacher/teacher_index',data);
+	Teacher.find().sort({Teacher_order: -1}).then(function (teachers) {
+		data.teachers = teachers;
+		res.render('admin/teacher/teacher_index',data);
+	})
 });
 
 /*
@@ -2317,12 +2325,111 @@ router.get('/teacher/add',function (req, res) {
 });
 
 /*
+ * 教师添加保存
+ * */
+router.post('/teacher/add',function (req, res) {
+	var teacher_name = req.body.teacher_name,
+		teacher_intro = req.body.teacher_intro,
+		teacher_img = req.body.teacher_img,
+		teacher_url = req.body.teacher_url || '/',
+		teacher_order = Number(req.body.teacher_order || 0),
+		teacher_background = req.body.teacher_background;
+
+	if(!teacher_name){
+		data.message = '教师名称不能为空';
+		res.render('admin/error',data);
+		return ;
+	}
+
+	new Teacher({
+		Teacher_name: teacher_name,
+		Teacher_intro: teacher_intro,
+		Teacher_img: teacher_img,
+		Teacher_url: teacher_url,
+		Teacher_order: teacher_order,
+		Teacher_background: teacher_background
+	}).save().then(function () {
+		data.message = '教师信息保存成功！';
+		data.url = '/admin/teacher';
+		res.render('admin/success',data);
+	});
+});
+
+/*
+* 教师修改
+* */
+router.get('/teacher/edit',function (req, res) {
+	var id = req.query.id;
+
+	Teacher.findById(id).then(function (rs) {
+		if(!rs){
+			data.message = '所要修改的教师信息不存在！';
+			res.render('admin/error',data);
+			return Promise.reject();
+		}
+		data.teacher = rs;
+		res.render('admin/teacher/teacher_edit',data);
+	})
+});
+
+/*
+ * 教师修改保存
+ * */
+router.post('/teacher/edit',function (req, res) {
+	var id = req.query.id,
+		teacher_name = req.body.teacher_name,
+		teacher_intro = req.body.teacher_intro,
+		teacher_img = req.body.teacher_img,
+		teacher_url = req.body.teacher_url || '/',
+		teacher_order = Number(req.body.teacher_order || 0),
+		teacher_background = req.body.teacher_background;
+
+	if(!teacher_name){
+		data.message = '教师名称不能为空！';
+		res.render('admin/error',data);
+		return ;
+	}
+
+	Teacher.update({_id: id},{
+		Teacher_name: teacher_name,
+		Teacher_intro: teacher_intro,
+		Teacher_img: teacher_img,
+		Teacher_url: teacher_url,
+		Teacher_order: teacher_order,
+		Teacher_background: teacher_background
+	}).then(function () {
+		data.message = '教师信息修改成功！';
+		data.url = '/admin/teacher';
+		res.render('admin/success',data);
+	});
+});
+
+/*
+* 教师删除
+* */
+router.get('/teacher/delete',function (req, res) {
+	var id = req.query.id;
+
+	Teacher.findById(id).then(function (rs) {
+		if(!rs){
+			data.message = '所要删除的教师信息不存在！';
+			res.render('admin/error',data);
+			return Promise.reject();
+		}
+		Teacher.remove({_id: id}).then(function () {
+			data.message = '教师信息删除成功！';
+			data.url = '/admin/teacher';
+			res.render('admin/success',data);
+		})
+	})
+});
+
+/*
 * 文件上传--学校
 * */
 router.get('/file_upload/school',function (req, res) {
-    data.warning = '如果图片已存在，将会覆盖！（图片大小不超过2m，只允许jpg和png）';
     data.message = '学校图片上传';
-    res.render('admin/fileupload/fileupload_school',data);
+    res.render('admin/fileupload/fileupload_index',data);
 });
 
 /*
@@ -2346,7 +2453,6 @@ router.post('/file_upload/school',function (req, res) {
         /*
          * 保留文件原来名字
          * */
-
 		if(files.files.length){
 			//如果同时上传多个文件，返回的是数组，对所有数组中的文件重命名
 			for(var i = 0; i < files.files.length;i++){
@@ -2398,6 +2504,91 @@ router.get('/file_upload/school/list/delete',function (req, res) {
 		}else{
 			data.message = '删除文件' + name + '成功！';
 			data.url = '/admin/file_upload/school/list';
+			res.render('admin/success',data);
+		}
+	});
+});
+
+/*
+ * 文件上传--教师
+ * */
+router.get('/file_upload/teacher',function (req, res) {
+	data.message = '教师图片上传';
+	res.render('admin/fileupload/fileupload_index',data);
+});
+
+/*
+ * 教师图片上传保存
+ * */
+router.post('/file_upload/teacher',function (req, res) {
+	var form = new formidable.IncomingForm();   //创建上传表单
+	form.encoding = 'utf-8';    //设置编码
+	form.uploadDir = 'public/images/teacher/';     //设置上传目录
+	form.keepExtensions = true;     //保留后缀
+	form.maxFieldsSize = 2 * 1024 * 1024;   //限制文件大小，2m
+	form.multiples = true;      //允许多文件上传
+
+	form.parse(req, function (err, fields, files) {     //错误， 字段域， 文件信息
+		if(err){
+			data.message = err;
+			res.render('admin/error',data);
+			return ;
+		}
+
+		/*
+		 * 保留文件原来名字
+		 * */
+		if(files.files.length){
+			//如果同时上传多个文件，返回的是数组，对所有数组中的文件重命名
+			for(var i = 0; i < files.files.length;i++){
+				fs.renameSync(files.files[i].path, form.uploadDir + files.files[i].name);  //重命名
+			}
+		}else{
+			//对单一文件进行重命名
+			fs.renameSync(files.files.path, form.uploadDir + files.files.name);  //重命名
+		}
+		data.school_img_num = files.files.length || 1;
+	});
+	form.on('end', function() {
+		data.message = '上传成功，共上传了' + data.school_img_num + '张图片';
+		res.json(data);
+	});
+});
+
+/*
+ * 教师图片列表
+ * */
+router.get('/file_upload/teacher/list',function (req, res) {
+	var path = 'public/images/teacher';
+	var fileArray = fs.readdirSync(path);
+	data.fileArray = [];
+	data.page = Number(req.query.page) || 1;
+
+	for(var i = (data.page - 1) * data.limit; i < (data.page) * data.limit; i++ ){
+		if(fileArray[i]){
+			data.fileArray.push(fileArray[i]);
+		}
+	}
+	data.count = fileArray.length;
+	data.forPage = 'file_upload/teacher/list';
+	calculatePages(data.count);
+	res.render('admin/fileupload/fileupload_teacher_list',data);
+});
+
+/*
+ * 教师图片删除
+ * */
+router.get('/file_upload/teacher/list/delete',function (req, res) {
+	var name = req.query.filename,
+		path = 'public/images/teacher';
+
+	fs.unlink(path + '/' + name, function (err) {
+		if(err){
+			data.message = err;
+			res.render('admin/error',data);
+		}else{
+			data.message = '删除文件' + name + '成功！';
+			data.url = '/admin/file_upload/teacher/list';
 			res.render('admin/success',data);
 		}
 	});

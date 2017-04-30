@@ -12,6 +12,10 @@ $(function () {
 	btnSub.on('click',function(){
 		var length = file_info.files.length;
 		var fd = new FormData();
+		var re = /\/admin.*/;
+		//获取当前URL，用于判定post请求的位置
+		var url = document.URL;
+		url = url.match(re);
 		errorTip.css('display','none');
 
 		console.log(file_info.files  === files);
@@ -48,7 +52,7 @@ $(function () {
 		var cancel = $('.file_cancel');
 		$.ajax({
 			type: 'post',
-			url: '/admin/file_upload/school',
+			url: url,
 			data: fd,
 			processData: false,
 			contentType: false,

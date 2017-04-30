@@ -52,7 +52,7 @@
         {% if schools !='' %}
         {% for school in schools %}
             <li class="clearfix">
-                <a href="#" class="school_img" style="background: url('/public/images/school/{{school.School_url}}') no-repeat;"></a>
+                <a href="#" class="school_img" style="background: url('/public/images/school/{{school.School_img}}') no-repeat;"></a>
                 <p title="综合排名" class="rank">
                     <span>综</span><span class="rank_num">{% if school.School_rank == 999 %}—{% else %}{{school.School_rank}}{% endif %}</span>
                 </p>
