@@ -18,7 +18,6 @@ $(function () {
 		url = url.match(re);
 		errorTip.css('display','none');
 
-		console.log(file_info.files  === files);
 		if(!length)
 		{
 			errorTip.css('display','block');
