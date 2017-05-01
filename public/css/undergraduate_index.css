@@ -1,3 +1,6 @@
+body {
+    _text-align: center;
+}
 
 /*导语样式*/
 .introduction{
@@ -13,30 +16,26 @@
     background: url("/public/images/undergraduate/introduction_bg.png") no-repeat left top;
 }
 .introduction .left p{
-    line-height: 53px;
-    font-size: 20px;
+    font: bold 20px/53px "微软雅黑";
     text-indent: 18px;
-    font-weight: bold;
     letter-spacing: 18px;
 }
 .introduction .right{
     width: 1020px;
 }
 .introduction .right p{
-    font-size: 16px;
-    line-height: 25px;
+    font: normal 16px/25px "微软雅黑";
     color: #48526d;
 }
 
 /*公共头样式*/
 .common_head{
     text-align: center;
-    font-size: 45px;
-    font-weight: bold;
+    font: bold 45px "微软雅黑";
     padding: 30px 0;
 }
 .common_head span{
-    color: rgba(0,51,102,.9);
+    color: rgb(0,51,102);
 }
 
 /*九宫格样式*/
@@ -66,14 +65,12 @@
     position: absolute;
     top: 0;
     left: 0;
-    font-size: 24px;
-    font-weight: bold;
     background-color: rgba(0,51,102,.9);
     color: #fff;
     width: 323px;
     height: 57px;
     text-align: center;
-    line-height: 57px;
+    font: bold 24px/57px "微软雅黑";
 }
 .night .night_part .night_hide{
     position: absolute;
@@ -85,11 +82,9 @@
     display: none;
 }
 .night .night_part .night_hide h4{
-    font-size: 24px;
-    font-weight: bold;
     color: #fff;
     text-align: center;
-    line-height: 57px;
+    font: bold 24px/57px "微软雅黑";
 }
 .night .night_part .night_hide p{
     font-size: 18px;
