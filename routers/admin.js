@@ -129,7 +129,7 @@ router.post('/user/add',function (req, res) {
     var username = req.body.username || '',
         password = req.body.password || '',
         isAdmin = req.body.isAdmin || false;
-    if(username == '' || password == ''){
+    if(username === '' || password === ''){
         data.message = '用户名称或者密码不能为空！';
         res.render('admin/error', data);
         return ;
@@ -193,7 +193,7 @@ router.post('/user/edit',function (req, res) {
         password = req.body.password || '',
         isAdmin = req.body.isAdmin || false;
 
-    if(username == '' || password == ''){
+    if(username === '' || password === ''){
         data.message = '用户名称或者密码不能为空！';
         res.render('admin/error', data);
         return ;
@@ -208,7 +208,7 @@ router.post('/user/edit',function (req, res) {
             return Promise.reject();
         }else{
             //当用户没有修改名称和密码提交的时候
-            if(username == rs.username && password == rs.password){
+            if(username === rs.username && password === rs.password){
                 User.update({
                     _id: id
                 },{
@@ -290,7 +290,7 @@ router.post('/navigation/add',function (req, res) {
     var Nav_name = req.body.Nav_name || '',
         Nav_order = Number(req.body.Nav_order),
         Nav_url = req.body.Nav_url || '/';
-    if(Nav_name == ''){
+    if(Nav_name === ''){
         res.render('admin/error',{
             userInfo:req.userInfo,
             message: '导航名称不能为空！'
@@ -315,7 +315,7 @@ router.post('/navigation/add',function (req, res) {
                 Nav_url:Nav_url
             }).save();
         }
-    }).then(function (rs) {
+    }).then(function () {
         res.render('admin/success',{
             userInfo: req.userInfo,
             message: '导航保存成功！',
@@ -363,7 +363,7 @@ router.post('/navigation/edit',function (req, res) {
         Nav_order = Number(req.body.Nav_order),
         Nav_url = req.body.Nav_url || '/';
 
-    if(Nav_name == ''){
+    if(Nav_name === ''){
         res.render('admin/error',{
             userInfo: req.userInfo,
             message: '导航名称不能为空！'
@@ -382,7 +382,7 @@ router.post('/navigation/edit',function (req, res) {
             return Promise.reject();
         }else{
             //当用户没有修改名称提交的时候
-            if(Nav_name == rs.Nav_name){
+            if(Nav_name === rs.Nav_name){
                 Navigation.update({
                     _id: id
                 },{
@@ -485,12 +485,12 @@ router.post('/navigation/title/add',function (req, res) {
     var navigation = req.body.navigation || '',
         title = req.body.Nav_title || '',
         order = Number(req.body.Nav_title_order);
-    if(navigation == ''){
+    if(navigation === ''){
         data.message = '导航分类不能为空！';
         res.render('admin/error', data);
         return ;
     }
-    if(title == ''){
+    if(title === ''){
         data.message = '导航内容标题不能为空！';
         res.render('admin/error', data);
         return ;
@@ -565,12 +565,12 @@ router.post('/navigation/title/edit',function (req, res) {
 
     Nav_title.findOne({
         _id: id
-    }).populate('navigation').then(function (rs) {
-        if (req.body.navigation == '') {
+    }).populate('navigation').then(function () {
+        if (req.body.navigation === '') {
             data.message = '导航名称不能为空！';
             res.render('admin/error', data);
             return Promise.reject();
-        } else if (title == '') {
+        } else if (title === '') {
             data.message = '内容标题不能为空！';
             res.render('admin/error', data);
             return Promise.reject();
@@ -671,13 +671,13 @@ router.post('/navigation/title/content/add',function (req, res) {
         Nav_content_url = req.body.Nav_content_url || '/',
         Nav_content_order = Number(req.body.Nav_content_order);
 
-    if(navigation == '' || nav_title == ''){
+    if(navigation === '' || nav_title === ''){
         data.message = '导航名称或者导航标题不能为空！';
         res.render('admin/error',data);
         return ;
     }
 
-    if(Nav_content_name == ''){
+    if(Nav_content_name === ''){
         data.message = '标题内容不能为空！';
         res.render('admin/error',data);
         return ;
@@ -760,13 +760,13 @@ router.post('/navigation/title/content/edit',function (req, res) {
         Nav_content_url = req.body.Nav_content_url,
         Nav_content_order = Number(req.body.Nav_content_order);
 
-    if(navigation == '' || nav_title == ''){
+    if(navigation === '' || nav_title === ''){
         data.message = '导航或者导航标题不能为空！';
         res.render('admin/error',data);
         return ;
     }
 
-    if(Nav_content_name == ''){
+    if(Nav_content_name === ''){
         data.message = '标题内容不能为空！';
         res.render('admin/error',data);
         return ;
@@ -853,7 +853,7 @@ router.get('/area/add',function (req, res) {
 router.post('/area/add',function (req, res) {
     var area_name = req.body.area_name,
         area_order = req.body.area_order;
-    if(area_name == ''){
+    if(area_name === ''){
         data.message = '地区名称不能为空！';
         res.render('admin/error',data);
         return ;
@@ -1792,7 +1792,7 @@ router.post('/study_abroad/nav/enroll/add',function (req, res) {
         res.render('admin/error',data);
         return ;
     }
-    if(test1 == test2){
+    if(test1 === test2){
         data.message = '两个考试科目重复！';
         res.render('admin/error',data);
         return ;
@@ -1906,7 +1906,7 @@ router.post('/study_abroad/nav/enroll/edit',function (req, res) {
         res.render('admin/error',data);
         return ;
     }
-    if(test1 == test2){
+    if(test1 === test2){
         data.message = '两个考试科目重复！';
         res.render('admin/error',data);
         return ;
@@ -1939,7 +1939,7 @@ router.post('/study_abroad/nav/enroll/edit',function (req, res) {
                     Abroad_enroll_student: abroad_enroll_student,
                     Abroad_enroll_code: abroad_enroll_code,
                     Abroad_enroll_url: abroad_enroll_url,
-                    Abroad_enroll_order: abroad_enroll_order,
+                    Abroad_enroll_order: abroad_enroll_order
             }).then(function () {
                     data.message = '录取案例保存成功！';
                     data.url = '/admin/study_abroad/nav/enroll';
@@ -2290,7 +2290,7 @@ router.get('/training/content/delete',function (req, res) {
         if(!rs){
             data.message = '要删除的文章不存在！';
             res.render('admin/error',data);
-            return ;
+            return Promise.reject();
         }else{
             training = rs.training._id;
             return Training_content.remove({_id: id});
@@ -2311,10 +2311,15 @@ router.get('/training/content/delete',function (req, res) {
 * 教师列表
 * */
 router.get('/teacher',function (req, res) {
-	Teacher.find().sort({Teacher_order: -1}).then(function (teachers) {
-		data.teachers = teachers;
-		res.render('admin/teacher/teacher_index',data);
-	})
+	data.page = Number(req.query.page) || 1;
+	Teacher.find().count().then(function (count) {
+		calculatePages(count);
+		data.forPage = 'teacher';
+		Teacher.find().sort({Teacher_order: 1}).limit(data.limit).skip(data.skip).then(function (rs) {
+			data.teachers = rs;
+			res.render('admin/teacher/teacher_index',data);
+		});
+	});
 });
 
 /*

@@ -19,6 +19,7 @@ var express = require('express'),
     Test = require('../models/Test'),
     Training = require('../models/Training'),
     Training_content = require('../models/Training_content'),
+    Teacher = require('../models/Teacher'),
     data;
 
 /*
@@ -103,7 +104,11 @@ router.use(function (req, res, next) {
         return Training_content.find({Training_content_order:{$lt:4}}).populate(['test','training']).sort({test:1,training:1,Training_content_order:1});
     }).then(function (rs) {
         data.training_contents = rs;
-        next();
+    }).then(function () {
+        return Teacher.find({Teacher_order: {$lt: 19}}).sort({Teacher_order: 1});
+    }).then(function (rs) {
+        data.teachers = rs;
+	    next();
     });
 });
 

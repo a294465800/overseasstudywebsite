@@ -578,10 +578,12 @@ body{
     font: 700 14px "微软雅黑";
     color: #818181;
     *white-space: nowrap;
+    _margin-top: 0;
 }
 .school .school_search_content .school_area{
     width: 100%;
     float: left;
+    _width: 250px;
 }
 .school_area a{
     float: left;
@@ -702,6 +704,7 @@ body{
     width: 130px;
     margin: 22px 0 0 0 ;
     float: left;
+    _margin-right: 20px;
 }
 .popular_school .school_logo ul li:nth-child(3n+2){
     margin: 22px 30px 0;
@@ -764,6 +767,7 @@ body{
     margin-right: 28px;
     *width: 56px;
     *height: 77px;
+    _width: 118px;
 }
 .study_procedure .procedure .procedure_last{
     margin: 0;
@@ -1361,6 +1365,7 @@ body{
     margin-right: 36px;
     width: 132px;
     height: 149px;
+    _margin-right: 30px;
 }
 .teacher .teacher_part a{
     display: block;
@@ -1371,9 +1376,6 @@ body{
     width: 100px;
     height: 100px;
     border-radius: 100px;
-    background: url("/public/images/teacher1.png") 50% no-repeat;
-    background-size: cover;
-    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/public/images/teacher1.png",  sizingMethod="scale")
 }
 .teacher ul h3{
     font-size: 16px;
@@ -1406,6 +1408,12 @@ body{
 /*教师阵容样式修改*/
 .teacher .line_2{
     padding: 0;
+}
+.teacher .line_2 li:nth-last-child(1){
+    margin: 0;
+}
+.teacher .line_1 li:nth-last-child(1){
+    margin: 0;
 }
 
 /*
