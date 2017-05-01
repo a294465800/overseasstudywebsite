@@ -7,6 +7,20 @@
     <link rel="stylesheet" href="/public/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/public/css/main_layout_index.css">
     <link rel="stylesheet" href="/public/css/reset.css">
+    <!--[if lt IE 9]>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+        (function() {
+            if (!/*@cc_on!@*/0) return;
+            var e = "abbr, article, aside, audio, canvas, datalist, details, dialog, eventsource, figure, footer, header, hgroup, mark, menu, meter, nav, output, progress, section, time, video".split(', ');
+            var i= e.length;
+            while (i--){
+                document.createElement(e[i])
+            }
+        })()
+    </script>
+    <![endif]-->
+    <script src="/public/js/selectivizr-development.js"></script>
     <script src="/public/js/jquery-3.2.0.min.js"></script>
     <script src="/public/js/bootstrap.min.js"></script>
     <script src="/public/js/index.js"></script>
@@ -14,10 +28,9 @@
     {% block title %}{% endblock %}
 </head>
 <body>
-<!--顶部logo加登录位置开始-->
-<nav id="mainNav" class="navbar hold">
+<div id="mainNav" class="navbar hold">
     <div class="container">
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div>
             <ul class="ban">
                 <li id="logo">
                     <img src="/public/images/logo.png" alt="海外留学网">
@@ -29,7 +42,7 @@
                 {% if userInfo.id %}
                 <li id="success">
                     <div id="username">欢迎！{{userInfo.username}}
-                        <ul class="banlist" id="banlist" style="display: none">
+                        <ul class="banlist" id="banlist">
                             <li><a href="javascript:">个人中心</a></li>
                             <li><a href="javascript:">学习中心</a></li>
                             {% if userInfo.isAdmin %}
@@ -51,18 +64,19 @@
             </ul>
         </div>
     </div>
-</nav>
+</div>
 <!--顶部结束-->
 
 <!--登录开始-->
-<div class="shade" style="display: none" id="loginBox">
+<div class="shade_wrap" style="display: none" id="loginBox">
+    <div class="shade"></div>
     <div class="login">
         <span></span>
         <h3>登录海外留学网</h3>
         <label for="inputEmail" class="sr-only"></label>
-        <input type="text" class="form-control" id="inputEmail" name="username" placeholder="手机号/邮箱">
+        <!--[if lte IE 9]><b>登录</b>：<![endif]--><input type="text" class="form-control" id="inputEmail" name="username" placeholder="手机号/邮箱">
         <label for="password" class="sr-only"></label>
-        <input type="password" id="password" class="form-control" name="password" placeholder="密码">
+        <!--[if lte IE 9]><b>密码：</b><![endif]--><input type="password" id="password" class="form-control" name="password" placeholder="密码">
         <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
         <p class="colWarning textCenter tips2"></p>
         <ul class="zhuce">
@@ -73,7 +87,8 @@
 <!--登录结束-->
 
 <!--注册开始-->
-<div class="shade" style="display: none" id="registerBox">
+<div class="shade_wrap" style="display: none" id="registerBox">
+    <div class="shade"></div>
     <div class="register">
         <span></span>
         <h3>注册海外留学网帐号</h3>
@@ -249,6 +264,5 @@
     <i></i>
 </div>
 <!--电话咨询栏结束-->
-
 </body>
 </html>

@@ -3,6 +3,10 @@
     margin: 0 auto;
     text-align: center;
 }
+.pagination {
+    *zoom: 1;
+    *display: inline;
+}
 .pagination li a{
     margin-right: 10px;
 }

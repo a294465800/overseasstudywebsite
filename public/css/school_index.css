@@ -1,7 +1,11 @@
+bdoy {
+    *text-align: center;
+}
 /*
     大学列表样式
 */
 .search_bar{
+    display: block;
     width:1140px;
     margin: 20px auto 60px;
 }
@@ -9,10 +13,8 @@
     border-bottom: 1px solid #337ab7;
 }
 .section_title p{
-    font-size: 22px;
-    line-height: 50px;
+    font: normal 22px/50px "微软雅黑";
     color: #333;
-    font-weight: normal;
 }
 
 /*search_input公共样式*/
@@ -24,6 +26,7 @@
     border: 1px solid #ccc;
     border-top: none;
     overflow: hidden;
+    *height: 29px;
 }
 
 /*
@@ -31,8 +34,7 @@
 */
 .search_input p{
     float: left;
-    font-size: 14px;
-    line-height: 28px;
+    font: normal 14px/28px "微软雅黑";
     color: #818181;
 }
 .search_icon{
@@ -42,15 +44,16 @@
     height: 28px;
     padding-left: 35px;
     background: url("/public/images/icon/search_icon.png") no-repeat -25px -56px;
+    *height: 26px;
 }
 #school_name{
     width: 100%;
     height: 26px;
     border: none;
     outline: medium;
-    padding: 3px 5px 3px 1px;
-    font-size: 12px;
-    font-weight: normal;
+    padding: 0;
+    font: normal 12px/28px "微软雅黑";
+    *height: 25px;
 }
 .search{
     float: left;
@@ -58,13 +61,11 @@
     height: 28px;
     width: 48px;
     background-color: #337ab7;
-    font-size: 14px;
-    line-height: 28px;
     text-align: center;
     color: #fff;
-    font-weight: bold;
     border: none;
     outline: none;
+    font:bold 14px/26px "微软雅黑";
 }
 
 /*
@@ -72,15 +73,13 @@
 */
 .search_input p{
     float: left;
-    font-size: 14px;
-    line-height: 28px;
+    font:normal 14px/28px "微软雅黑";
     color: #818181;
 }
 .search_input a{
     float: left;
     height: 28px;
-    font-size: 14px;
-    line-height: 28px;
+    font:normal 14px/28px "微软雅黑";
     color: #333;
     margin-right: 35px;
     padding: 0 5px;
@@ -98,6 +97,7 @@
     学校显示栏
 */
 .school_bar{
+    display: block;
     width:1140px;
     margin: 0 auto 40px;
 }
@@ -114,6 +114,8 @@
     border: 1px solid #99CCFF;
     padding: 15px;
     margin: 0 46px 40px 0;
+    *width: 218px;
+    *height: 118px;
 }
 .school_bar ul li:hover{
     border: 1px solid #3366CC;
@@ -174,13 +176,15 @@
     background: url("/public/images/school/love.png") no-repeat;
     background-size: cover;
     padding-left: 12px;
-    font-style: normal;
     float: right;
-    font-size: 12px;
-    line-height: 12px;
+    font: normal 12px/12px "微软雅黑";
     text-indent: .5em;
     margin: 2px 28px 0 0;
     cursor: pointer;
+    *padding: 0;
+    *margin-right: 10px;
+    background: none\9;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/public/images/school/love.png",  sizingMethod="scale")
 }
 .school_bar ul .area span{
     color: #999;
