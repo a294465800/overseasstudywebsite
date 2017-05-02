@@ -45,7 +45,7 @@ app.use( bodyParser.urlencoded({extended: true}));
 swig.setDefaults({cache:false});
 
 //读取数据模型，用于检测是否是管理员
-var User = require('./models/User');
+var User = require('./models/User'); 
 
 /*
 * 设置cookie
