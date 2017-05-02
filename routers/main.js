@@ -282,5 +282,12 @@ router.get('/undergraduate',function (req, res) {
     res.render('main/undergraduate_index',data);
 });
 
+/*
+* 留学咨询文章首页
+* */
+router.get('/article',function (req, res) {
+    res.render('main/article_list_layout',data);
+});
+
 //返回出去给app.js
 module.exports = router;

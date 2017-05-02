@@ -279,7 +279,7 @@ body{
     text-align: center;
     background-color: #337ab7;
     border-bottom: 1px solid #337ab7;
-    color: #000;
+    color: #fff;
 }
 .menu .server .server_cover {
     position: absolute;
@@ -346,6 +346,9 @@ body{
     background-color: #337ab7;
     cursor: pointer;
 }
+.menu .navigation .nav_head:hover a {
+    color: #fff;
+}
 .menu .navigation .nav_head:hover .nav_content{
     display: block;
 }
@@ -394,7 +397,7 @@ body{
     margin-right: 15px;
     float: left;
 }
-.menu .navigation .nav_list li a{
+.menu .navigation .nav_head .nav_list li a{
     padding: 0;
     font: bold 13px/28px "微软雅黑";
     color: #444;
