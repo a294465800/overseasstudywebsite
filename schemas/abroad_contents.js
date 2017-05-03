@@ -30,5 +30,6 @@ module.exports = new mongoose.Schema({
     Abroad_content_url: {
         type: String,
         default: '/'
-    }
+    },
+    Abroad_content_markdown: String
 });

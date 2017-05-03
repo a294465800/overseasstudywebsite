@@ -23,6 +23,7 @@ var express = require('express'),
     Training = require('../models/Training'),
     Training_content = require('../models/Training_content'),
     Teacher = require('../models/Teacher'),
+    markdown = require('markdown').markdown,
     data;
 
 /*
@@ -1578,7 +1579,8 @@ router.post('/study_abroad/nav/content/add',function (req, res) {
         abroad_nav = req.body.abroad_nav,
         abroad_content_name = req.body.abroad_content_name,
         abroad_content_url = req.body.abroad_content_url,
-        abroad_content_order = Number(req.body.abroad_content_order);
+        abroad_content_order = Number(req.body.abroad_content_order),
+	    abroad_content_markdown = req.body.abroad_content_markdown;
 
     if(!abroad || !abroad_nav){
         data.message = '留学项目或者导航名称不能为空！';
@@ -1607,7 +1609,8 @@ router.post('/study_abroad/nav/content/add',function (req, res) {
             abroad_nav: abroad_nav,
             Abroad_content_name: abroad_content_name,
             Abroad_content_url: abroad_content_url,
-            Abroad_content_order: abroad_content_order
+            Abroad_content_order: abroad_content_order,
+            Abroad_content_markdown: abroad_content_markdown
         }).save().then(function () {
             Abroad_content.find({abroad_nav: abroad_nav}).count().then(function (count) {
                 Abroad_nav.update({
@@ -1656,8 +1659,10 @@ router.post('/study_abroad/nav/content/edit',function (req, res) {
         abroad_nav = req.body.abroad_nav,
         abroad_content_name = req.body.abroad_content_name,
         abroad_content_url = req.body.abroad_content_url,
-        abroad_content_order = Number(req.body.abroad_content_order);
-    if(!abroad || !abroad_nav){
+        abroad_content_order = Number(req.body.abroad_content_order),
+	    abroad_content_markdown = req.body.abroad_content_markdown;
+
+	if(!abroad || !abroad_nav){
         data.message = '留学项目或者留学导航不能为空！';
         res.render('admin/error',data);
         return ;
@@ -1687,7 +1692,8 @@ router.post('/study_abroad/nav/content/edit',function (req, res) {
             abroad_nav: abroad_nav,
             Abroad_content_name: abroad_content_name,
             Abroad_content_url: abroad_content_url,
-            Abroad_content_order: abroad_content_order
+            Abroad_content_order: abroad_content_order,
+            Abroad_content_markdown: abroad_content_markdown
         }).then(function () {
             data.message = '文章标题修改成功！';
             data.url = '/admin/study_abroad/nav/content';
@@ -2169,7 +2175,8 @@ router.post('/training/content/add',function (req, res) {
         training = req.body.training,
         training_content_name = req.body.training_content_name,
         training_content_url = req.body.training_content_url || '/',
-        training_content_order = Number(req.body.training_content_order || 10);
+        training_content_order = Number(req.body.training_content_order || 10),
+	    training_content_markdown = req.body.training_content_markdown;
 
     if(!test || !training){
         data.message = '考试项目或者培训分类不能为空！';
@@ -2193,7 +2200,8 @@ router.post('/training/content/add',function (req, res) {
                 training: training,
                 Training_content_name: training_content_name,
                 Training_content_url: training_content_url,
-                Training_content_order: training_content_order
+                Training_content_order: training_content_order,
+                Training_content_markdown: training_content_markdown
             }).save();
         }
     }).then(function () {
@@ -2243,7 +2251,8 @@ router.post('/training/content/edit',function (req, res) {
         training = req.body.training,
         training_content_name = req.body.training_content_name,
         training_content_url = req.body.training_content_url || '/',
-        training_content_order = Number(req.body.training_content_order || 10);
+        training_content_order = Number(req.body.training_content_order || 10),
+	    training_content_markdown = req.body.training_content_markdown;
 
     if(!test || !training){
         data.message = '考试项目或者培训分类不能为空！';
@@ -2269,7 +2278,8 @@ router.post('/training/content/edit',function (req, res) {
                 training: training,
                 Training_content_name: training_content_name,
                 Training_content_url: training_content_url,
-                Training_content_order: training_content_order
+                Training_content_order: training_content_order,
+	            Training_content_markdown: training_content_markdown
             });
         }
     }).then(function () {
