@@ -463,6 +463,11 @@ body{
     color: #fff;
     background-color: #337ab7;
 }
+/*激活的背景蓝色*/
+.article_input_list .article_input .active {
+    background-color: #337ab7;
+    color: #fff;
+}
 /*
     文章列表
 */

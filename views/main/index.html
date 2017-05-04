@@ -373,7 +373,11 @@
             <ul>
                 {% for abroad_nav in abroad_navs %}
                 {% if abroad_nav.abroad.Abroad_name == '英国本科留学' %}
-                <li><a href="{{abroad_nav.Abroad_nav_url}}" target="_blank">{{abroad_nav.Abroad_nav_name}}</a></li>
+                    {% if abroad_nav.Abroad_nav_name == '申请规划表' %}
+                    <li><a href="javascript:" target="_blank">{{abroad_nav.Abroad_nav_name}}</a></li>
+                    {% else %}
+                    <li><a href="/Abroad_article?abroad_nav={{abroad_nav.Abroad_nav_name}}" target="_blank">{{abroad_nav.Abroad_nav_name}}</a></li>
+                    {% endif %}
                 {% else %}
                 {% endif %}
                 {% endfor %}
@@ -434,7 +438,7 @@
                         {% endif %}
                         {% endfor %}
                     </ul>
-                    <a href="{{abroad_nav.Abroad_nav_url}}" class="study_abroad_more" target="_blank">&gt;&gt;</a>
+                    <a href="/Abroad_article?abroad={{abroad_nav.abroad.Abroad_name}}&abroad_nav={{abroad_nav.Abroad_nav_name}}" class="study_abroad_more" target="_blank">&gt;&gt;</a>
                 </div>
                 <div class="mid_img">
                     <p><a href="">留学评估</a></p>
@@ -510,7 +514,11 @@
             <ul>
                 {% for abroad_nav in abroad_navs %}
                 {% if abroad_nav.abroad.Abroad_name == '英国研究生留学' %}
-                <li><a href="{{abroad_nav.Abroad_nav_url}}" target="_blank">{{abroad_nav.Abroad_nav_name}}</a></li>
+                    {% if abroad_nav.Abroad_nav_name == '申请规划表' %}
+                    <li><a href="javascript:" target="_blank">{{abroad_nav.Abroad_nav_name}}</a></li>
+                    {% else %}
+                    <li><a href="/Abroad_article?abroad_nav={{abroad_nav.Abroad_nav_name}}" target="_blank">{{abroad_nav.Abroad_nav_name}}</a></li>
+                    {% endif %}
                 {% else %}
                 {% endif %}
                 {% endfor %}
@@ -571,7 +579,7 @@
                         {% endif %}
                         {% endfor %}
                     </ul>
-                    <a href="{{abroad_nav.Abroad_nav_url}}" class="study_abroad_more" target="_blank">&gt;&gt;</a>
+                    <a href="/Abroad_article?abroad={{abroad_nav.abroad.Abroad_name}}&abroad_nav={{abroad_nav.Abroad_nav_name}}" class="study_abroad_more" target="_blank">&gt;&gt;</a>
                 </div>
                 <div class="mid_img">
                     <p><a href="">留学评估</a></p>
@@ -648,7 +656,11 @@
             <ul>
                 {% for abroad_nav in abroad_navs %}
                 {% if abroad_nav.abroad.Abroad_name == '英国中学留学' %}
-                <li><a href="{{abroad_nav.Abroad_nav_url}}" target="_blank">{{abroad_nav.Abroad_nav_name}}</a></li>
+                    {% if abroad_nav.Abroad_nav_name == '申请规划表' %}
+                    <li><a href="javascript:" target="_blank">{{abroad_nav.Abroad_nav_name}}</a></li>
+                    {% else %}
+                    <li><a href="/Abroad_article?abroad_nav={{abroad_nav.Abroad_nav_name}}" target="_blank">{{abroad_nav.Abroad_nav_name}}</a></li>
+                    {% endif %}
                 {% else %}
                 {% endif %}
                 {% endfor %}
@@ -709,7 +721,7 @@
                         {% endif %}
                         {% endfor %}
                     </ul>
-                    <a href="{{abroad_nav.Abroad_nav_url}}" class="study_abroad_more" target="_blank">&gt;&gt;</a>
+                    <a href="/Abroad_article?abroad={{abroad_nav.abroad.Abroad_name}}&abroad_nav={{abroad_nav.Abroad_nav_name}}" class="study_abroad_more" target="_blank">&gt;&gt;</a>
                 </div>
                 <div class="mid_img">
                     <p><a href="">留学评估</a></p>

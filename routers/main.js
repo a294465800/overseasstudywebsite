@@ -285,8 +285,19 @@ router.get('/undergraduate',function (req, res) {
 /*
 * 留学咨询文章首页
 * */
-router.get('/article',function (req, res) {
-    res.render('main/article_list_layout',data);
+router.get('/Abroad_article',function (req, res) {
+    var article_rank = req.query.article_rank,
+	    article_type = req.query.article_type,
+	    article_abroad = req.query.article_abroad;
+
+	data.call1 = Number(req.query.call1 || 0);
+    data.call2 = Number(req.query.call2 || 0);
+	data.call3 = Number(req.query.call3 || 0);
+	data.article_rank = article_rank;
+	data.article_type = article_type;
+	data.article_abroad = article_abroad;
+
+	res.render('main/article_list_layout',data);
 });
 
 //返回出去给app.js

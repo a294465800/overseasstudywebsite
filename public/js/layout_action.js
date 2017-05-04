@@ -26,5 +26,8 @@ $(function () {
         width = $('.navigation').css('width');
     $nav_head.find('.nav_content').css('width',width);
 
+    /*
+    * 文章列表选择
+    * */
 
 });

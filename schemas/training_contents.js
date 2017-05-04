@@ -31,5 +31,9 @@ module.exports = new mongoose.Schema({
         type: String,
         default: '/'
     },
-    Training_content_markdown: String
+    Training_content_markdown: String,
+    Training_content_hot: {
+        type: Number,
+        default: 0
+    }
 });
