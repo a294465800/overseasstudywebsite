@@ -482,12 +482,11 @@ body{
 .article .article_bar .article_list .article_content li {
     position: relative;
     box-sizing: content-box;
-    padding: 20px 30px 30px 20px;
+    padding: 10px 0 10px 10px;
     background-color: #f7f7f7;
     margin-bottom: 10px;
 }
 .article .article_bar .article_list .article_content li h3 {
-    text-align: center;
     font: bold 14px/30px "微软雅黑";
     color: #485359;
     margin: 0;
@@ -503,8 +502,8 @@ body{
 }
 .article .article_bar .article_list .article_content span {
     position: absolute;
-    top: 15px;
-    right: 20px;
+    top: 10px;
+    right: 80px;
     width: 100px;
     font: normal 12px/30px "微软雅黑";
     text-align: center;
@@ -518,7 +517,7 @@ body{
 }
 .article .article_bar .article_list .article_content .article_detail {
     position: absolute;
-    bottom: 2px;
+    bottom: 10px;
     right: 15px;
     font: normal 12px/30px "微软雅黑";
     color: #eb504e;

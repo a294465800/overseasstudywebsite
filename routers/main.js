@@ -290,14 +290,53 @@ router.get('/Abroad_article',function (req, res) {
 	    article_type = req.query.article_type,
 	    article_abroad = req.query.article_abroad;
 
-	data.call1 = Number(req.query.call1 || 0);
-    data.call2 = Number(req.query.call2 || 0);
-	data.call3 = Number(req.query.call3 || 0);
 	data.article_rank = article_rank;
 	data.article_type = article_type;
 	data.article_abroad = article_abroad;
+	var temp = [];
 
-	res.render('main/article_list_layout',data);
+	function articleAbroad(rs) {
+        var arr = [];
+		for(var content in rs){
+			if(rs[content].abroad.Abroad_name === article_abroad) {
+				arr.push(rs[content]);
+			}
+		}
+
+		return arr.length?arr:rs;
+	}
+
+	function articleType(rs) {
+		var arr = [];
+		for(var content in rs){
+			if(rs[content].abroad_nav.Abroad_nav_name === article_type) {
+				arr.push(rs[content]);
+			}
+		}
+		return arr.length?arr:rs;
+	}
+
+	if(article_rank){
+	    if(article_rank === '最新上传'){
+		    Abroad_content.find().populate(['abroad','abroad_nav']).sort({_id: -1}).then(function (rs) {
+			    temp = articleType(rs);
+			    data.articles = articleAbroad(temp);
+			    res.render('main/article_list_layout',data);
+		    });
+        }else {
+		    Abroad_content.find().populate(['abroad','abroad_nav']).sort({Abroad_content_hot: -1}).then(function (rs) {
+			    temp = articleType(rs);
+			    data.articles = articleAbroad(temp);
+			    res.render('main/article_list_layout',data);
+		    });
+        }
+    }else {
+	    Abroad_content.find().populate(['abroad','abroad_nav']).sort({_id: -1}).then(function (rs) {
+		    temp = articleType(rs);
+		    data.articles = articleAbroad(temp);
+		    res.render('main/article_list_layout',data);
+	    });
+    }
 });
 
 //返回出去给app.js

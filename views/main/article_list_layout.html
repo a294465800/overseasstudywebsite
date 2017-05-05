@@ -140,31 +140,41 @@
 <section class="article clearfix">
     <div class="article_bar">
         <div class="article_input_list" id="article_list">
-            <h3>文章列表筛选（共有111篇）</h3>
+            <h3>文章列表筛选（共有{{articles.length}}篇）</h3>
             <div class="article_input clearfix">
                 <p>推荐：</p>
-                <a href="/Abroad_article?article_rank=&article_type={{article_type}}&article_abroad={{article_abroad}}&call1=&call2={{call2}}&call3={{call3}}" class="{% if call1 == 0 %}active{%else%}{%endif%}">不限</a>
-                <a href="/Abroad_article?article_rank=1&article_type={{article_type}}&article_abroad={{article_abroad}}&call1=1&call2={{call2}}&call3={{call3}}" class="{% if call1 == 1 %}active{%else%}{%endif%}">最新上传</a>
-                <a href="/Abroad_article?article_rank=2&article_type={{article_type}}&article_abroad={{article_abroad}}&call1=2&call2={{call2}}&call3={{call3}}" class="{% if call1 == 2 %}active{%else%}{%endif%}">热度排行</a>
+                <a href="/Abroad_article?article_rank=&article_type={{article_type}}&article_abroad={{article_abroad}}" class="{% if article_rank == '' %}active{%else%}{%endif%}">不限</a>
+                <a href="/Abroad_article?article_rank=最新上传&article_type={{article_type}}&article_abroad={{article_abroad}}" class="{% if article_rank == '最新上传' %}active{%else%}{%endif%}">最新上传</a>
+                <a href="/Abroad_article?article_rank=热度排行&article_type={{article_type}}&article_abroad={{article_abroad}}" class="{% if article_rank == '热度排行' %}active{%else%}{%endif%}">热度排行</a>
             </div>
             <div class="article_input clearfix">
                 <p>文章类型：</p>
-                <a href="/Abroad_article?article_rank=&article_type=&article_abroad={{article_abroad}}&call1={{call1}}&call2=&call3={{call3}}" class="{% if call2 == 0 %}active{%else%}{%endif%}">不限</a>
-                <a href="/Abroad_article?article_rank={{article_rank}}&article_type=留学规划&article_abroad={{article_abroad}}&call1={{call1}}&call2=1&call3={{call3}}" class="{% if call2 == 1 %}active{%else%}{%endif%}">留学规划</a>
-                <a href="/Abroad_article?article_rank={{article_rank}}&article_type=专业推荐info&article_abroad={{article_abroad}}&call1={{call1}}&call2=2&call3={{call3}}" class="{% if call2 == 2 %}active{%else%}{%endif%}">专业推荐</a>
-                <a href="/Abroad_article?article_rank={{article_rank}}&article_type=院校申请info&article_abroad={{article_abroad}}&call1={{call1}}&call2=3&call3={{call3}}" class="{% if call2 == 3 %}active{%else%}{%endif%}">院校申请</a>
-                <a href="/Abroad_article?article_rank={{article_rank}}&article_type=签证指南info&article_abroad={{article_abroad}}&call1={{call1}}&call2=4&call3={{call3}}" class="{% if call2 == 4 %}active{%else%}{%endif%}">签证指南</a>
+                <a href="/Abroad_article?article_rank={{article_rank}}&article_type=&article_abroad={{article_abroad}}" class="{% if article_type == '' %}active{%else%}{%endif%}">不限</a>
+                <a href="/Abroad_article?article_rank={{article_rank}}&article_type=留学规划&article_abroad={{article_abroad}}" class="{% if article_type == '留学规划' %}active{%else%}{%endif%}">留学规划</a>
+                <a href="/Abroad_article?article_rank={{article_rank}}&article_type=专业推荐&article_abroad={{article_abroad}}" class="{% if article_type == '专业推荐' %}active{%else%}{%endif%}">专业推荐</a>
+                <a href="/Abroad_article?article_rank={{article_rank}}&article_type=院校申请&article_abroad={{article_abroad}}" class="{% if article_type == '院校申请' %}active{%else%}{%endif%}">院校申请</a>
+                <a href="/Abroad_article?article_rank={{article_rank}}&article_type=签证指南&article_abroad={{article_abroad}}" class="{% if article_type == '签证指南' %}active{%else%}{%endif%}">签证指南</a>
+                <a href="/Abroad_article?article_rank={{article_rank}}&article_type=行程准备&article_abroad={{article_abroad}}" class="{% if article_type == '行程准备' %}active{%else%}{%endif%}">行程准备</a>
+                <a href="/Abroad_article?article_rank={{article_rank}}&article_type=中学留学&article_abroad={{article_abroad}}" class="{% if article_type == '中学留学' %}active{%else%}{%endif%}">中学留学</a>
             </div>
             <div class="article_input clearfix">
                 <p>学历：</p>
-                <a href="/Abroad_article?article_rank=&article_type=&article_abroad={{article_abroad}}&call1={{call1}}&call2={{call2}}&call3=" class="{% if call3 == 0 %}active{%else%}{%endif%}">不限</a>
-                <a href="/Abroad_article?article_rank={{article_rank}}&article_type={{article_type}}&article_abroad=英国本科留学&call1={{call1}}&call2={{call2}}&call3=1" class="{% if call3 == 1 %}active{%else%}{%endif%}">本科</a>
-                <a href="/Abroad_article?article_rank={{article_rank}}&article_type={{article_type}}&article_abroad=英国研究生留学&call1={{call1}}&call2={{call2}}&call3=2" class="{% if call3 == 2 %}active{%else%}{%endif%}">研究生</a>
-                <a href="/Abroad_article?article_rank={{article_rank}}&article_type={{article_type}}&article_abroad=英国中学留学&call1={{call1}}&call2={{call2}}&call3=3" class="{% if call3 == 3 %}active{%else%}{%endif%}">中学</a>
+                <a href="/Abroad_article?article_rank={{article_rank}}&article_type={{article_type}}&article_abroad=" class="{% if article_abroad == '' %}active{%else%}{%endif%}">不限</a>
+                <a href="/Abroad_article?article_rank={{article_rank}}&article_type={{article_type}}&article_abroad=英国本科留学" class="{% if article_abroad == '英国本科留学' %}active{%else%}{%endif%}">本科</a>
+                <a href="/Abroad_article?article_rank={{article_rank}}&article_type={{article_type}}&article_abroad=英国研究生留学" class="{% if article_abroad == '英国研究生留学' %}active{%else%}{%endif%}">研究生</a>
+                <a href="/Abroad_article?article_rank={{article_rank}}&article_type={{article_type}}&article_abroad=英国中学留学" class="{% if article_abroad == '英国中学留学' %}active{%else%}{%endif%}">中学</a>
             </div>
         </div>
         <div class="article_list">
             <ul class="article_content">
+                {% for article in articles %}
+                <li>
+                    <a href=""><h3>{{article.Abroad_content_name}}</h3></a>
+                    <span>阅读量 <i>{{articles.Abroad_content_hot || 0}}</i></span>
+                    <a href="" class="article_detail">【详细】</a>
+                </li>
+                {% endfor %}
+                <!--
                 <li>
                     <a href=""><h3>英国大量中小学开设“同情难民感受”课程</h3></a>
                     <p>据英国路透社7月20日报道，英国大量小学和初中开设同情难民感受教学课程，旨在让学生能对难民有更好的理解。在伦敦西北部一所僻静据英国路透社7月20日报道，英国大量小学和初中开设同情难民感受教学课程，旨在让学生能对难民有更好的理解。在伦敦西北部一所僻静据英国路透社7月20日报道，英国大量小学和初中开设同情难民感受教学课程，旨在让学生能对难民有更好的理解。在伦敦西北部一所僻静</p>
@@ -230,7 +240,7 @@
                     <p>据英国路透社7月20日报道，英国大量小学和初中开设同情难民感受教学课程，旨在让学生能对难民有更好的理解。在伦敦西北部一所僻静据英国路透社7月20日报道，英国大量小学和初中开设同情难民感受教学课程，旨在让学生能对难民有更好的理解。在伦敦西北部一所僻静据英国路透社7月20日报道，英国大量小学和初中开设同情难民感受教学课程，旨在让学生能对难民有更好的理解。在伦敦西北部一所僻静</p>
                     <span>阅读量 <i>80</i></span>
                     <a href="" class="article_detail">【详细】</a>
-                </li>
+                </li>-->
             </ul>
         </div>
     </div>
