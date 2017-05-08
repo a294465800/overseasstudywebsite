@@ -287,5 +287,25 @@ router.post('/school',function (req, res) {
     }
 });
 
+/*
+* 文章阅读数统计
+* */
+router.post('/Abroad_article',function (req, res) {
+    var article_id = req.body.article;
+    if(article_id){
+	    Abroad_content.findById(article_id).then(function (rs) {
+            var temp = rs.Abroad_content_hot + 1;
+            Abroad_content.update({
+                _id: article_id
+            },{
+	            Abroad_content_hot: temp
+            }).then(function () {
+                console.log(temp);
+                res.json(responseData);
+            })
+	    })
+    }
+});
+
 //返回出去给app.js
 module.exports = router;

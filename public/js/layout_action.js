@@ -27,7 +27,22 @@ $(function () {
     $nav_head.find('.nav_content').css('width',width);
 
     /*
-    * 文章列表选择
+    * 文章统计
     * */
+    var $article_content_a = $('#article_content a');
+
+    $article_content_a.on('click',function () {
+        var $this = $(this);
+        $.ajax({
+            type: 'post',
+            url: 'api/Abroad_article',
+            data: {
+	            article: $this.data('id')
+            },
+            dataType: 'json',
+	        success: function () {
+	        }
+        })
+    });
 
 });

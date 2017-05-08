@@ -455,6 +455,10 @@ body{
     margin-right: 5px;
     padding: 0 5px;
 }
+.article_input a:hover {
+    background-color: #337ab7;
+    color: #fff;
+}
 .article_input .active{
     color: #fff;
     background-color: #337ab7;
@@ -765,4 +769,11 @@ body{
     margin: 10px auto;
     background: none\9;
     filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/public/images/tel_logo.png",  sizingMethod="scale")
+}
+.page {
+    width: 100%!important;
+}
+.page>.pagination>li>span,
+.pagination-lg>li>a {
+    padding: 6px 12px!important;
 }

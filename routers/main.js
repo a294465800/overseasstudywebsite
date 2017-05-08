@@ -283,17 +283,21 @@ router.get('/undergraduate',function (req, res) {
 });
 
 /*
-* 留学咨询文章首页
+* 文章首页
 * */
 router.get('/Abroad_article',function (req, res) {
     var article_rank = req.query.article_rank,
 	    article_type = req.query.article_type,
 	    article_abroad = req.query.article_abroad;
 
+	data.page = Number(req.query.page || 1);
 	data.article_rank = article_rank;
 	data.article_type = article_type;
 	data.article_abroad = article_abroad;
-	var temp = [];
+	var temp = [],
+		articles = [];
+	data.articles = [];
+
 
 	function articleAbroad(rs) {
         var arr = [];
@@ -316,27 +320,51 @@ router.get('/Abroad_article',function (req, res) {
 		return arr.length?arr:rs;
 	}
 
+	function getLimit(articles) {
+		for(var i = (data.page - 1) * data.limit; i < (data.page) * data.limit; i++ ){
+			if(articles[i]){
+				data.articles.push(articles[i]);
+			}
+		}
+	}
+
 	if(article_rank){
 	    if(article_rank === '最新上传'){
 		    Abroad_content.find().populate(['abroad','abroad_nav']).sort({_id: -1}).then(function (rs) {
 			    temp = articleType(rs);
-			    data.articles = articleAbroad(temp);
+			    articles = articleAbroad(temp);
+			    data.length = articles.length;
+			    calculatePages(articles.length);
+			    getLimit(articles);
 			    res.render('main/article_list_layout',data);
 		    });
         }else {
 		    Abroad_content.find().populate(['abroad','abroad_nav']).sort({Abroad_content_hot: -1}).then(function (rs) {
 			    temp = articleType(rs);
-			    data.articles = articleAbroad(temp);
+			    articles = articleAbroad(temp);
+			    data.length = articles.length;
+			    calculatePages(articles.length);
+			    getLimit(articles);
 			    res.render('main/article_list_layout',data);
 		    });
         }
     }else {
 	    Abroad_content.find().populate(['abroad','abroad_nav']).sort({_id: -1}).then(function (rs) {
 		    temp = articleType(rs);
-		    data.articles = articleAbroad(temp);
+		    articles = articleAbroad(temp);
+		    data.length = articles.length;
+		    calculatePages(articles.length);
+		    getLimit(articles);
 		    res.render('main/article_list_layout',data);
 	    });
     }
+});
+
+/*
+* 文章阅读页面
+* */
+router.get('/Abroad_article/content',function (req, res) {
+    res.render('main/article_list_layout');
 });
 
 //返回出去给app.js
