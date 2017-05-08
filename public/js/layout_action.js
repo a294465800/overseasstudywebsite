@@ -29,20 +29,32 @@ $(function () {
     /*
     * 文章统计
     * */
-    var $article_content_a = $('#article_content a');
+    var $article_content_a = $('#article_content a'),
+        $article_detail = $('.article_detail'),
+        $recommend_articles_a = $('.recommend_articles a');
 
+    function articleCount(rs) {
+	    $.ajax({
+		    type: 'post',
+		    url: '/api/Abroad_article',
+		    data: {
+			    article: rs.data('id')
+		    },
+		    dataType: 'json',
+		    success: function () {
+		    }
+	    });
+    }
     $article_content_a.on('click',function () {
         var $this = $(this);
-        $.ajax({
-            type: 'post',
-            url: 'api/Abroad_article',
-            data: {
-	            article: $this.data('id')
-            },
-            dataType: 'json',
-	        success: function () {
-	        }
-        })
+	    articleCount($this);
     });
-
+	$article_detail.on('click',function () {
+		var $this = $(this);
+		articleCount($this);
+	});
+	$recommend_articles_a.on('click',function () {
+		var $this = $(this);
+		articleCount($this);
+	});
 });

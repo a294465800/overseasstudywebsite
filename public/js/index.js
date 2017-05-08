@@ -76,11 +76,11 @@ $(function () {
 
         $.ajax({
             type: 'post',
-            url: 'api/user/register/namecheck',
+            url: '/api/user/register/namecheck',
             data: {
                 username: $value,
                 news: function () {
-                    if($value == ''){
+                    if($value === ''){
                         news = '2';
                         return '2';
                     }else{
@@ -115,7 +115,7 @@ $(function () {
         var $value = value;
         $.ajax({
             type: 'post',
-            url: 'api/user/register/passwordcheck',
+            url: '/api/user/register/passwordcheck',
             data:{
                 password: $value,
                 news2: function () {
@@ -154,7 +154,7 @@ $(function () {
         var $value = value;
         $.ajax({
             type: 'post',
-            url: 'api/user/register/repasswordcheck',
+            url: '/api/user/register/repasswordcheck',
             data: {
                 repassword: $value,
                 news3: function () {
@@ -224,7 +224,7 @@ $(function () {
         if(news === '0' && news2 === '0' && news3 === '0'){
             $.ajax({
                 type: 'post',
-                url: 'api/user/register',
+                url: '/api/user/register',
                 data: {
                     username: $registerBox.find('[name = "username"]').val(),
                     password: $registerBox.find('[name = "password"]').val(),

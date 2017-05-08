@@ -1,0 +1,100 @@
+/*markdown样式保护*/
+.bread_wrap .bread_content span {
+    color: #333;
+}
+.bread_wrap .bread_content ol {
+    color: #333;
+}
+.bread_wrap .bread_content a:hover {
+    text-decoration: none;
+}
+.article_bar .article_list h3 {
+    font: normal 20px/26px "Microsoft YaHei";
+    color: #221815;
+    background-color: transparent;
+    margin: 10px 0;
+}
+.article .article_bar h3 {
+    text-indent: 52px;
+}
+.article .article_bar .article_title {
+    text-indent: 10px;
+}
+.article_list {
+    margin: 0 auto;
+}
+.article_list .second_title {
+    text-indent: 10px!important;
+    padding: 0;
+}
+.article_list .second_title span {
+    color: #c7bebe;
+    font: normal 14px/28px "Microsoft YaHei";
+    margin-right: 20px;
+}
+.footer_part p {
+    text-indent: 0;
+    padding: 0;
+    text-align: left;
+    margin-bottom: 15px;
+}
+.footer_part a:hover {
+    text-decoration: none;
+}
+.shade_wrap a {
+    color: #337ab7;
+}
+.shade_wrap a:hover {
+    text-decoration: none;
+    color: #23527c;
+}
+.shade_wrap h3 {
+    color: #333;
+    text-indent: 0;
+}
+.shade_wrap p {
+    padding: 0;
+    text-indent: 0;
+}
+.navigation a:hover {
+    text-decoration: none;
+}
+
+/*文章推荐样式*/
+.article_sidebar .recommend_articles {
+    list-style: none;
+    margin: 0;
+    padding: 20px 15px;
+    background-color: #fdfbfb;
+}
+.article_sidebar .recommend_articles li {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+}
+.article_sidebar .recommend_articles li span {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    font: bold 12px/15px "Microsoft YaHei";
+    text-align: center;
+    background-color: #337ab7;
+    color: #fff;
+}
+.article_sidebar .recommend_articles>li+li+li+li>span {
+    background-color: #c8c7c7;
+}
+.article_sidebar .recommend_articles li a {
+    text-decoration: none;
+    text-indent: 32px;
+    font: normal 12px/24px "Microsoft YaHei";
+    color: #999595;
+}
+.article_sidebar .recommend_articles li a:hover {
+    text-decoration: none;
+}
+.article_bar {
+    box-shadow:1px 0 4px #999;
+    margin-bottom: 30px;
+}
