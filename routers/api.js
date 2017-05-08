@@ -66,11 +66,11 @@ router.post('/user/register/namecheck',function (req, res) {
     var username = req.body.username,
         news = req.body.news;
 
-    if(news == '1'){
+    if(news === '1'){
         responseData.code = 2;
         responseData.message = '手机号码或者邮箱不正确！';
         res.json(responseData);
-    }else if(news == '2'){
+    }else if(news === '2'){
         responseData.code = 4;
         responseData.message = '请填写手机号码或者邮箱';
         res.json(responseData);
@@ -99,11 +99,11 @@ router.post('/user/register/passwordcheck',function (req, res) {
     var password = req.body.password,
         news2 = req.body.news2;
 
-    if(news2 == '1'){
+    if(news2 === '1'){
         responseData.code = 5;
         responseData.message = '密码位数请控制在6~16个字符！';
         res.json(responseData);
-    }else if(news2 == '0'){
+    }else if(news2 === '0'){
         responseData.code = 6;
         responseData.message = '密码可用';
         res.json(responseData);
@@ -120,11 +120,11 @@ router.post('/user/register/passwordcheck',function (req, res) {
 router.post('/user/register/repasswordcheck',function (req, res) {
     var news3 = req.body.news3;
 
-    if(news3 == '1'){
+    if(news3 === '1'){
         responseData.code = 8;
         responseData.message = '两次输入的密码不一致';
         res.json(responseData);
-    }else if(news3 == '0'){
+    }else if(news3 === '0'){
         responseData.code = 9;
         responseData.message = '密码正确';
         res.json(responseData);
@@ -142,7 +142,7 @@ router.post('/user/login',function (req, res) {
     var username = req.body.username,
         password = req.body.password;
 
-    if(username == '' || password == ''){
+    if(username === '' || password === ''){
         responseData.code = 11;
         responseData.message = '用户名或者密码不能为空！';
         res.json(responseData);
@@ -199,7 +199,7 @@ router.get('/user/logout',function (req, res) {
 * */
 router.post('/navigation/title/content/add',function (req, res) {
     var navigation = req.body.navigation;
-    if(navigation == ''){
+    if(navigation === ''){
     }else{
         Nav_title.find({
             navigation: navigation
@@ -219,7 +219,7 @@ router.post('/navigation/title/content/edit',function (req, res) {
         re = /.*id=([^&]*).*/;
         id = id.replace(re,"$1");
 
-    if(navigation == ''){
+    if(navigation === ''){
     }else{
         Nav_title.find({
             navigation: navigation
@@ -241,7 +241,7 @@ router.post('/navigation/title/content/edit',function (req, res) {
 * */
 router.post('/study_abroad/nav/content/add',function (req, res) {
     var abroad = req.body.abroad;
-    if(abroad == ''){
+    if(abroad === ''){
     }else{
         Abroad_nav.find({
             abroad: abroad
