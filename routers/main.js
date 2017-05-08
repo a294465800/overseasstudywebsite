@@ -373,12 +373,14 @@ router.get('/Abroad_article/content',function (req, res) {
 		var article_markdown = rs.Abroad_content_markdown || '';
 		fs.open('views/main/markdown.html','w',function (err, fd) {
 			if(article_markdown){
-				var writeBuffer = new Buffer(markdown.toHTML(article_markdown)),
-					bufferPosition = 0,
-					bufferLength = writeBuffer.length,
-					filePosition = null;
-				fs.writeSync(fd,writeBuffer,bufferPosition,bufferLength,filePosition);
+				var writeBuffer = new Buffer(markdown.toHTML(article_markdown));
+			}else {
+				var writeBuffer = new Buffer('<p>该文章内容为空！</p>');
 			}
+			var	bufferPosition = 0,
+				bufferLength = writeBuffer.length,
+				filePosition = null;
+			fs.writeSync(fd,writeBuffer,bufferPosition,bufferLength,filePosition);
 			Abroad_content.find().populate(['abroad','abroad_nav']).sort({Abroad_content_hot: -1}).limit(10).then(function (rs) {
 				data.abroad_contents = rs;
 				res.render('main/article_content',data);
