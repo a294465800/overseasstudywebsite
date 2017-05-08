@@ -300,10 +300,9 @@ router.post('/Abroad_article',function (req, res) {
             },{
 	            Abroad_content_hot: temp
             }).then(function () {
-                console.log(temp);
                 res.json(responseData);
-            })
-	    })
+            });
+	    });
     }
 });
 
