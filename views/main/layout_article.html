@@ -5,7 +5,7 @@
     <meta name="renderer" content="webkit">
     <link rel="stylesheet" href="/public/css/bootstrap.min.css">
     <link rel="stylesheet" href="/public/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="/public/css/main_layout_index.css">
+    <link rel="stylesheet" href="/public/css/article_list_layout.css">
     <link rel="stylesheet" href="/public/css/reset.css">
     <!--[if lt IE 9]>
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -113,31 +113,7 @@
         <ul class="navigation">
             {% for navigation in navigations %}
             <li class="nav_head">
-                <a href="{{navigation.Nav_url}}">{{navigation.Nav_name}}</a>
-                {% if navigation.Nav_count %}
-                <div class="nav_content">
-                    {% for nav_title in nav_titles %}
-                    {% if nav_title.navigation._id.toString() == navigation._id.toString() %}
-                    <div class="nav_part">
-                        <h4>{{nav_title.Nav_title}}</h4>
-                        {% if nav_title.Nav_title_count %}
-                        <ul class="nav_list clearfix">
-                            {% for nav_content in nav_contents %}
-                            {% if nav_content.nav_title._id.toString() == nav_title._id.toString() %}
-                            <li><a href="{{nav_content.Nav_content_url}}">{{nav_content.Nav_content_name}}</a></li>
-                            {% else %}
-                            {% endif %}
-                            {% endfor %}
-                        </ul>
-                        {% else %}
-                        {% endif %}
-                    </div>
-                    {%else%}
-                    {%endif%}
-                    {% endfor %}
-                </div>
-                {% else %}
-                {% endif %}
+                <a href="{{navigation.Nav_url}}" target="_blank">{{navigation.Nav_name}}</a>
             </li>
             {% endfor %}
         </ul>
@@ -145,11 +121,7 @@
 </nav>
 <!--导航部分结束-->
 
-<div class="big_bg">
-    {% block big_bg %}{% endblock %}
-</div>
-
-{% block prepare %}{%endblock%}
+{% block article %}{% endblock %}
 
 <!--底部版权开始-->
 <footer class="footer clearfix">

@@ -20,6 +20,8 @@ var express = require('express'),
     Training = require('../models/Training'),
     Training_content = require('../models/Training_content'),
     Teacher = require('../models/Teacher'),
+	markdown = require('markdown').markdown,
+    fs = require('fs'),
     data;
 
 /*
@@ -364,7 +366,25 @@ router.get('/Abroad_article',function (req, res) {
 * 文章阅读页面
 * */
 router.get('/Abroad_article/content',function (req, res) {
-    res.render('main/article_list_layout');
+	var id = req.query.id;
+
+	Abroad_content.findById(id).populate(['abroad','abroad_nav']).then(function (rs) {
+		data.abroad_content = rs;
+		var article_markdown = rs.Abroad_content_markdown || '';
+		fs.open('views/main/markdown.html','w',function (err, fd) {
+			if(article_markdown){
+				var writeBuffer = new Buffer(markdown.toHTML(article_markdown)),
+					bufferPosition = 0,
+					bufferLength = writeBuffer.length,
+					filePosition = null;
+				fs.writeSync(fd,writeBuffer,bufferPosition,bufferLength,filePosition);
+			}
+			Abroad_content.find().populate(['abroad','abroad_nav']).sort({Abroad_content_hot: -1}).limit(10).then(function (rs) {
+				data.abroad_contents = rs;
+				res.render('main/article_content',data);
+			});
+		});
+	});
 });
 
 //返回出去给app.js
