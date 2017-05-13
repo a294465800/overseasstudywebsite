@@ -1,0 +1,35 @@
+{% extends '../layout.html' %}
+
+{% block main %}
+<ol class="breadcrumb">
+    <li><a href="/" target="_blank">官网首页</a></li>
+    <li><span>标题内容列表</span></li>
+</ol>
+
+<h3 style="font-size: 24px;font-weight: bold; line-height: 50px">标题内容列表</h3>
+
+<table class="table table-hover table-striped">
+    <tr>
+        <th>ID</th>
+        <th>标题类名称</th>
+        <th>标题内容</th>
+        <th>标题内容顺序</th>
+        <th>操作</th>
+    </tr>
+    {% for abroad_t_title in abroad_t_titles %}
+    <tr>
+        <td>{{abroad_t_title._id.toString()}}</td>
+        <td>{{abroad_t_title.abroad_transparent.Abroad_t_name}}</td>
+        <td>{{abroad_t_title.Abroad_t_title}}</td>
+        <td>{{abroad_t_title.Abroad_t_title_order}}</td>
+        <td>
+            <a href="/admin/abroad_transparent/content/edit?id={{abroad_t_title._id.toString()}}">修改</a>
+             | <a href="/admin/abroad_transparent/content/delete?id={{abroad_t_title._id.toString()}}">删除</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<!--引用模版，相当于引用文件，在这里引用page.html里面的内容，不一定是html文件，其他都可以-->
+{%include '../page.html'%}
+
+{% endblock %}

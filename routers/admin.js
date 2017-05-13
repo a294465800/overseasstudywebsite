@@ -24,6 +24,7 @@ var express = require('express'),
     Training_content = require('../models/Training_content'),
     Teacher = require('../models/Teacher'),
     Abroad_transparent = require('../models/Abroad_transparent'),
+    Abroad_t_title = require('../models/Abroad_t_title'),
     markdown = require('markdown').markdown,
     data;
 
@@ -2713,7 +2714,7 @@ router.get('/abroad_transparent/delete',function (req, res) {
     var id = req.query.id;
     Abroad_transparent.findById(id).then(function (rs) {
         if(!rs){
-	        data.message = '要删除的标题名称不存在！';
+	        data.message = '要删除的标题不存在！';
 	        res.render('admin/error',data);
 	        return ;
         }
@@ -2723,6 +2724,143 @@ router.get('/abroad_transparent/delete',function (req, res) {
 	        res.render('admin/success',data);
         });
     });
+});
+
+/*
+* 透明标题内容列表
+* */
+router.get('/abroad_transparent/content',function (req, res) {
+	data.page = Number(req.query.page) || 1;
+	Abroad_t_title.find().count().then(function (count) {
+		calculatePages(count);
+		data.forPage = 'abroad_transparent/content';
+		Abroad_t_title.find().sort({Abroad_t_title_order: 1}).limit(data.limit).skip(data.skip).populate('abroad_transparent').then(function (rs) {
+			data.abroad_t_titles = rs;
+			res.render('admin/abroad/abroad_transparent_title',data);
+		});
+	});
+});
+
+/*
+* 透明标题内容添加
+* */
+router.get('/abroad_transparent/content/add',function (req, res) {
+    Abroad_transparent.find().sort({Abroad_t_order: 1}).then(function (rs) {
+        data.abroad_transparents = rs;
+	    res.render('admin/abroad/abroad_transparent_title_add',data);
+    });
+});
+
+/*
+ * 透明标题内容添加保存
+ * */
+router.post('/abroad_transparent/content/add',function (req, res) {
+    var abroad_transparent = req.body.abroad_transparent,
+	    abroad_t_title = req.body.abroad_t_title,
+	    abroad_t_title_order = Number(req.body.abroad_t_title_order || 0),
+	    abroad_t_title_content = req.body.abroad_t_title_content;
+
+    if(!abroad_transparent){
+	    data.message = '导航标题不能为空！';
+	    res.render('admin/error',data);
+	    return ;
+    }
+
+    if(!abroad_t_title){
+	    data.message = '内容标题名称不能为空！';
+	    res.render('admin/error',data);
+	    return ;
+    }
+
+    new Abroad_t_title({
+	    abroad_transparent: abroad_transparent,
+	    Abroad_t_title: abroad_t_title,
+	    Abroad_t_title_order: abroad_t_title_order,
+	    Abroad_t_title_content: abroad_t_title_content
+    }).save().then(function () {
+	    data.message = '标题内容添加成功！';
+	    data.url = '/admin/abroad_transparent/content';
+	    res.render('admin/success',data);
+    })
+});
+
+/*
+ * 透明标题内容修改
+ * */
+router.get('/abroad_transparent/content/edit',function (req, res) {
+    var id = req.query.id;
+
+    Abroad_t_title.findById(id).populate('abroad_transparent').then(function (rs) {
+        if(!rs){
+	        data.message = '要修改的内容标题名称不存在！';
+	        res.render('admin/error',data);
+	        return ;
+        }
+        data.abroad_t_title = rs;
+        Abroad_transparent.find().sort({Abroad_t_order: 1}).then(function (rs) {
+            data.abroad_transparents = rs;
+	        res.render('admin/abroad/abroad_transparent_title_edit',data);
+        });
+    });
+});
+
+/*
+* 透明标题内容修改保存
+* */
+router.post('/abroad_transparent/content/edit',function (req, res) {
+    var id = req.query.id,
+	    abroad_transparent = req.body.abroad_transparent,
+	    abroad_t_title = req.body.abroad_t_title,
+	    abroad_t_title_order = Number(req.body.abroad_t_title_order || 0),
+	    abroad_t_title_content = req.body.abroad_t_title_content;
+
+    if(!abroad_transparent || !abroad_t_title){
+	    data.message = '标题或者内容标题名称不能为空！';
+	    res.render('admin/error',data);
+	    return ;
+    }
+    Abroad_t_title.findOne({
+        abroad_transparent: abroad_transparent,
+	    Abroad_t_title: abroad_t_title,
+        _id: {$ne: id}
+    }).then(function (rs) {
+        if(rs){
+	        data.message = '内容标题名称不能重复！';
+	        res.render('admin/error',data);
+	        return Promise.reject();
+        }
+        Abroad_t_title.update({
+            _id: id
+        },{
+	        Abroad_transparent: abroad_transparent,
+	        Abroad_t_title: abroad_t_title,
+	        Abroad_t_title_order: abroad_t_title_order,
+	        Abroad_t_title_content: abroad_t_title_content
+        }).then(function () {
+	        data.message = '标题内容修改成功！';
+	        data.url = '/admin/abroad_transparent/content';
+	        res.render('admin/success',data);
+        });
+    });
+});
+
+/*
+* 透明标题删除
+* */
+router.get('/abroad_transparent/content/delete',function (req, res) {
+	var id = req.query.id;
+	Abroad_t_title.findById(id).then(function (rs) {
+		if(!rs){
+			data.message = '要删除的内容标题不存在！';
+			res.render('admin/error',data);
+			return ;
+		}
+		Abroad_t_title.remove({_id:id}).then(function () {
+			data.message = '内容标题删除成功！';
+			data.url = '/admin/abroad_transparent/content';
+			res.render('admin/success',data);
+		});
+	});
 });
 
 //返回出去给app.js
