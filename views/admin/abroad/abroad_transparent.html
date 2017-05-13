@@ -1,0 +1,32 @@
+{% extends '../layout.html' %}
+
+{% block main %}
+<ol class="breadcrumb">
+    <li><a href="/" target="_blank">官网首页</a></li>
+    <li><span>标题列表</span></li>
+</ol>
+
+<h3 style="font-size: 24px;font-weight: bold; line-height: 50px">标题列表</h3>
+
+<table class="table table-hover table-striped">
+    <tr>
+        <th>标题ID</th>
+        <th>标题名称</th>
+        <th>标题顺序</th>
+        <th>操作</th>
+    </tr>
+    {% for abroad_t in abroad_transparents %}
+    <tr>
+        <td>{{abroad_t._id.toString()}}</td>
+        <td>{{abroad_t.Abroad_t_name}}</td>
+        <td>{{abroad_t.Abroad_t_order}}</td>
+        <td>
+            <a href="/admin/abroad_transparent/edit?id={{abroad_t._id.toString()}}">修改</a>
+             | <a href="/admin/abroad_transparent/delete?id={{abroad_t._id.toString()}}">删除</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}

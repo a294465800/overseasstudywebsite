@@ -23,6 +23,7 @@ var express = require('express'),
     Training = require('../models/Training'),
     Training_content = require('../models/Training_content'),
     Teacher = require('../models/Teacher'),
+    Abroad_transparent = require('../models/Abroad_transparent'),
     markdown = require('markdown').markdown,
     data;
 
@@ -2607,6 +2608,121 @@ router.get('/file_upload/teacher/list/delete',function (req, res) {
 			res.render('admin/success',data);
 		}
 	});
+});
+
+/*
+* 透明导航列表
+* */
+router.get('/abroad_transparent',function (req, res) {
+	data.page = Number(req.query.page) || 1;
+	Abroad_transparent.find().count().then(function (count) {
+		calculatePages(count);
+		data.forPage = 'abroad_transparent';
+		Abroad_transparent.find().sort({Abroad_t_order: 1}).limit(data.limit).skip(data.skip).then(function (rs) {
+			data.abroad_transparents = rs;
+			res.render('admin/abroad/abroad_transparent',data);
+		});
+	});
+});
+
+/*
+* 透明导航添加
+* */
+router.get('/abroad_transparent/add',function (req, res) {
+	res.render('admin/abroad/abroad_transparent_add',data);
+});
+
+/*
+* 透明导航添加保存
+* */
+router.post('/abroad_transparent/add',function (req, res) {
+    var abroad_t_name = req.body.abroad_t_name,
+	    abroad_t_order = Number(req.body.abroad_t_order || 0),
+	    abroad_t_content = req.body.abroad_t_content;
+
+    if(!abroad_t_name){
+        data.message = '透明导航标题名称不能为空！';
+        res.render('admin/error',data);
+        return ;
+    }
+
+    new Abroad_transparent({
+	    Abroad_t_name: abroad_t_name,
+	    Abroad_t_order: abroad_t_order,
+	    Abroad_t_content: abroad_t_content
+    }).save().then(function () {
+        data.message = '透明导航保存成功！';
+        data.url = '/admin/abroad_transparent';
+        res.render('admin/success',data);
+    })
+});
+
+/*
+ * 透明导航修改
+ * */
+router.get('/abroad_transparent/edit',function (req, res) {
+    var id = req.query.id;
+    Abroad_transparent.findById(id).then(function (rs) {
+        if(!rs){
+            data.message = '所有修改的标题不存在！';
+            req.render('admin/error',data);
+            return ;
+        }
+        data.abroad_transparent = rs;
+	    res.render('admin/abroad/abroad_transparent_edit',data);
+    });
+});
+
+/*
+ * 透明导航修改保存
+ * */
+router.post('/abroad_transparent/edit',function (req, res) {
+    var id = req.query.id,
+	    abroad_t_name = req.body.abroad_t_name,
+	    abroad_t_order = Number(req.body.abroad_t_order || 0),
+	    abroad_t_content = req.body.abroad_t_content;
+
+	if(!abroad_t_name){
+		data.message = '透明导航标题名称不能为空！';
+		res.render('admin/error',data);
+		return ;
+	}
+
+	Abroad_transparent.findOne({_id:{$ne:id},Abroad_t_name:abroad_t_name}).then(function (rs) {
+        if(rs){
+	        data.message = '透明导航标题名称不能为重复！';
+	        res.render('admin/error',data);
+	        return Promise.reject();
+        }
+        Abroad_transparent.update({_id: id},{
+	        Abroad_t_name: abroad_t_name,
+	        Abroad_t_order: abroad_t_order,
+	        Abroad_t_content: abroad_t_content
+        }).then(function () {
+	        data.message = '透明导航修改成功！';
+	        data.url = '/admin/abroad_transparent';
+	        res.render('admin/success',data);
+        });
+	});
+});
+
+/*
+ * 透明导航删除
+ * */
+router.get('/abroad_transparent/delete',function (req, res) {
+    var id = req.query.id;
+    Abroad_transparent.findById(id).then(function (rs) {
+        if(!rs){
+	        data.message = '要删除的标题名称不存在！';
+	        res.render('admin/error',data);
+	        return ;
+        }
+        Abroad_transparent.remove({_id:id}).then(function () {
+	        data.message = '透明导航删除成功！';
+	        data.url = '/admin/abroad_transparent';
+	        res.render('admin/success',data);
+        });
+    });
 });
 
 //返回出去给app.js
