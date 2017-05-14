@@ -2734,7 +2734,7 @@ router.get('/abroad_transparent/content',function (req, res) {
 	Abroad_t_title.find().count().then(function (count) {
 		calculatePages(count);
 		data.forPage = 'abroad_transparent/content';
-		Abroad_t_title.find().sort({Abroad_t_title_order: 1}).limit(data.limit).skip(data.skip).populate('abroad_transparent').then(function (rs) {
+		Abroad_t_title.find().sort({abroad_transparent: 1,Abroad_t_title_order: 1}).limit(data.limit).skip(data.skip).populate('abroad_transparent').then(function (rs) {
 			data.abroad_t_titles = rs;
 			res.render('admin/abroad/abroad_transparent_title',data);
 		});

@@ -125,39 +125,33 @@
             <h3>留学服务</h3>
             <div class="server_cover"></div>
             <ul>
-                <li class="server_part clearfix">
-                    <a class="server_head clearfix" href="">考试培训</a>
+                {% for abroad_transparent in abroad_transparents %}
+                {% if loop.last %}
+                <li class="server_part clearfix" style="border: 0">
+                    <a class="server_head clearfix" href="">{{abroad_transparent.Abroad_t_name}}</a>
                     <ul class="server_list clearfix">
-                        <li><a href="">一对一课程</a></li>
-                        <li><a href="">学习规划</a></li>
-                        <li><a href="">封闭保分班</a></li>
-                        <li><a href="">英国sat封闭保分班</a></li>
+                        {% for abroad_t_title in abroad_t_titles %}
+                        {% if abroad_t_title.abroad_transparent.Abroad_t_name == abroad_transparent.Abroad_t_name %}
+                        <li><a href="">{{abroad_t_title.Abroad_t_title}}</a></li>
+                        {% else %}
+                        {% endif %}
+                        {% endfor %}
                     </ul>
                 </li>
+                {% else %}
                 <li class="server_part clearfix">
-                    <a class="server_head clearfix" href="">背景提升</a>
+                    <a class="server_head clearfix" href="">{{abroad_transparent.Abroad_t_name}}</a>
                     <ul class="server_list clearfix">
-                        <li><a href="">活动规划</a></li>
-                        <li><a href="">科研/实习项目</a></li>
-                        <li><a href="">名校夏季课程</a></li>
-                        <li><a href="">精英夏令营</a></li>
+                        {% for abroad_t_title in abroad_t_titles %}
+                        {% if abroad_t_title.abroad_transparent.Abroad_t_name == abroad_transparent.Abroad_t_name %}
+                        <li><a href="">{{abroad_t_title.Abroad_t_title}}</a></li>
+                        {% else %}
+                        {% endif %}
+                        {% endfor %}
                     </ul>
                 </li>
-                <li class="server_part clearfix">
-                    <a class="server_head clearfix" href="">留学申请</a>
-                    <ul class="server_list clearfix">
-                        <li><a href="">英国本科留学</a></li>
-                        <li><a href="">英国研究生留学</a></li>
-                        <li><a href="">英国中学留学</a></li>
-                        <li><a href="">英国本科转学</a></li>
-                    </ul>
-                </li>
-                <li class="server_part clearfix">
-                    <a class="server_head clearfix" href="">一站式服务</a>
-                    <ul class="server_list clearfix">
-                        <li><a href="">精英计划</a></li>
-                    </ul>
-                </li>
+                {% endif %}
+                {% endfor %}
             </ul>
         </div>
         <ul class="navigation">

@@ -21,6 +21,8 @@ var express = require('express'),
     Training_content = require('../models/Training_content'),
     Teacher = require('../models/Teacher'),
 	markdown = require('markdown').markdown,
+    Abroad_transparent = require('../models/Abroad_transparent'),
+    Abroad_t_title = require('../models/Abroad_t_title'),
     fs = require('fs'),
     data;
 
@@ -120,7 +122,13 @@ router.use(function (req, res, next) {
 router.get('/',function (req, res) {
     School.find().sort({School_love: -1}).limit(6).then(function (rs) {
         data.hot_schools = rs;
-        res.render('main/index',data);
+        Abroad_transparent.find().sort({Abroad_t_order: 1}).then(function (rs) {
+	        data.abroad_transparents = rs;
+	        Abroad_t_title.find().sort({Abroad_t_title_order: 1}).populate('abroad_transparent').then(function (rs) {
+		        data.abroad_t_titles = rs;
+		        res.render('main/index',data);
+	        });
+        });
     });
 });
 
