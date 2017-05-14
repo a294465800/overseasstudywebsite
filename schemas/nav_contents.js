@@ -27,8 +27,9 @@ module.exports = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    Nav_content_url: {
-        type: String,
-        default: '/'
+    Nav_content_url: String,
+	Nav_content_hot: {
+        type: Number,
+        default: 0
     }
 });

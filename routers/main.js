@@ -419,7 +419,16 @@ router.get('/articles',function (req, res) {
 				content = rs.Abroad_t_title_content;
 				return data.article_all = rs;
 			}
-		})
+
+			Nav_content.findById(id).then(function (rs) {
+				if(rs){
+					data.article_name = rs.Nav_content_name;
+					data.article_hot = rs.Nav_content_hot;
+					content = rs.Nav_content_url;
+					return data.article_all = rs;
+				}
+			});
+		});
 	}).then(function () {
 
 		fs.open('views/main/markdown_articles.html','w',function (err, fd) {

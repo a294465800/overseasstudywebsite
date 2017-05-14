@@ -38,10 +38,10 @@
     <div class="form-group">
         <label for="Nav_content_name">标题内容：</label>
         <input style="margin: 5px 0 20px" type="text" class="form-control" id="Nav_content_name" value="{{nav_content.Nav_content_name}}" name="Nav_content_name">
-        <label for="Nav_content_url">标题内容url：</label>
-        <input style="margin: 5px 0 20px" type="text" class="form-control" id="Nav_content_url" value="{{nav_content.Nav_content_url}}" name="Nav_content_url">
         <label for="Nav_content_order">标题内容顺序：</label>
         <input style="margin: 5px 0 20px" type="text" class="form-control" id="Nav_content_order" value="{{nav_content.Nav_content_order}}" name="Nav_content_order">
+        <label for="Nav_content_url">文章内容：</label>
+        <textarea class="form-control" style="margin-top: 10px;resize: none" name="Nav_content_url" id="Nav_content_url" cols="30" rows="10">{{nav_content.Nav_content_url}}</textarea>
     </div>
     <button type="submit" class="btn btn-default">提交</button>
 </form>
