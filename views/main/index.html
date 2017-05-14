@@ -168,7 +168,7 @@
                             <ul class="nav_list clearfix">
                                 {% for nav_content in nav_contents %}
                                     {% if nav_content.nav_title._id.toString() == nav_title._id.toString() %}
-                                        <li><a href="{{nav_content.Nav_content_url}}">{{nav_content.Nav_content_name}}</a></li>
+                                        <li><a target="_blank" href="/articles?id={{nav_content._id.toString()}}">{{nav_content.Nav_content_name}}</a></li>
                                     {% else %}
                                     {% endif %}
                                 {% endfor %}

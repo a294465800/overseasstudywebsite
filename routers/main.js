@@ -407,30 +407,49 @@ router.get('/articles',function (req, res) {
 	Abroad_transparent.findById(id).then(function (rs) {
 		if(rs){
 			data.article_name = rs.Abroad_t_name;
-			data.article_hot = rs.Abroad_t_hot;
+			data.article_hot = Number(rs.Abroad_t_hot) + 1;
 			content = rs.Abroad_t_content;
-			return data.article_all = rs;
+			data.article_all = rs;
+			Abroad_transparent.update({
+				_id: id
+			},{
+				Abroad_t_hot: data.article_hot
+			}).then(function () {
+				articleShow();
+			});
 		}
-
 		Abroad_t_title.findById(id).then(function (rs) {
 			if(rs){
 				data.article_name = rs.Abroad_t_title;
-				data.article_hot = rs.Abroad_t_title_hot;
+				data.article_hot = Number(rs.Abroad_t_title_hot) + 1;
 				content = rs.Abroad_t_title_content;
-				return data.article_all = rs;
+				data.article_all = rs;
+				Abroad_t_title.update({
+					_id: id
+				},{
+					Abroad_t_title_hot: data.article_hot
+				}).then(function () {
+					articleShow();
+				});
 			}
-
 			Nav_content.findById(id).then(function (rs) {
 				if(rs){
 					data.article_name = rs.Nav_content_name;
-					data.article_hot = rs.Nav_content_hot;
+					data.article_hot = Number(rs.Nav_content_hot) + 1;
 					content = rs.Nav_content_url;
-					return data.article_all = rs;
+					data.article_all = rs;
+					Nav_content.update({
+						_id: id
+					},{
+						Nav_content_hot: data.article_hot
+					}).then(function () {
+						articleShow();
+					});
 				}
 			});
 		});
-	}).then(function () {
-
+	});
+	function articleShow () {
 		fs.open('views/main/markdown_articles.html','w',function (err, fd) {
 			if(content){
 				var writeBuffer = new Buffer(markdown.toHTML(content));
@@ -446,7 +465,7 @@ router.get('/articles',function (req, res) {
 				res.render('main/articles',data);
 			});
 		});
-	});
+	}
 });
 
 //返回出去给app.js
