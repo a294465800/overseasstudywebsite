@@ -1,0 +1,52 @@
+{% extends 'layout_article.html' %}
+
+{% block title %}
+<title>海外留学官网-文章</title>
+<link rel="stylesheet" href="/public/css/markdown-css.css">
+<link rel="stylesheet" href="/public/css/article_content.css">
+{% endblock %}
+
+{% block article %}
+<!--面包屑导航开始-->
+<nav class="bread_wrap">
+    <div class="bread_content">
+        <span>您现在的位置：</span>
+        <ol>
+            <li><a href="/">英国留学首页</a></li> &gt;
+            <li><span style="color: #666;font-weight: normal">文章</span></li>
+        </ol>
+    </div>
+</nav>
+<!--面包屑导航结束-->
+<section class="article clearfix">
+    <div class="article_bar">
+        <div class="article_list">
+            <h3 class="article_title">{{article_name}}</h3>
+            <p class="second_title"><span>来源：海外留学</span><span>阅读量：{{article_hot || 0}}</span></p>
+            <div class="article_content_part">
+                {%include 'markdown_articles.html'%}
+            </div>
+        </div>
+    </div>
+    <div class="article_sidebar">
+        <div class="article_sidebar_part">
+            <div class="article_sidebar_p">
+                <h3>推荐文章</h3>
+                <ul class="recommend_articles">
+                    {% for content in abroad_contents %}
+                    <li>
+                        <span class="bg">{{loop.index}}</span>
+                        <a href="/Abroad_article/content?id={{content._id.toString()}}" target="_blank" data-id="{{content._id.toString()}}">{{content.Abroad_content_name}}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="article_sidebar_p">
+                <h3>联系我们</h3>
+                <div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -397,5 +397,48 @@ router.get('/Abroad_article/content',function (req, res) {
 	});
 });
 
+/*
+* 总文章页面
+* */
+router.get('/articles',function (req, res) {
+	var id = req.query.id,
+		content;
+
+	Abroad_transparent.findById(id).then(function (rs) {
+		if(rs){
+			data.article_name = rs.Abroad_t_name;
+			data.article_hot = rs.Abroad_t_hot;
+			content = rs.Abroad_t_content;
+			return data.article_all = rs;
+		}
+
+		Abroad_t_title.findById(id).then(function (rs) {
+			if(rs){
+				data.article_name = rs.Abroad_t_title;
+				data.article_hot = rs.Abroad_t_title_hot;
+				content = rs.Abroad_t_title_content;
+				return data.article_all = rs;
+			}
+		})
+	}).then(function () {
+
+		fs.open('views/main/markdown_articles.html','w',function (err, fd) {
+			if(content){
+				var writeBuffer = new Buffer(markdown.toHTML(content));
+			}else {
+				var writeBuffer = new Buffer('<p>该文章内容为空！</p>');
+			}
+			var	bufferPosition = 0,
+				bufferLength = writeBuffer.length,
+				filePosition = null;
+			fs.writeSync(fd,writeBuffer,bufferPosition,bufferLength,filePosition);
+			Abroad_content.find().populate(['abroad','abroad_nav']).sort({Abroad_content_hot: -1}).limit(10).then(function (rs) {
+				data.abroad_contents = rs;
+				res.render('main/articles',data);
+			});
+		});
+	});
+});
+
 //返回出去给app.js
 module.exports = router;

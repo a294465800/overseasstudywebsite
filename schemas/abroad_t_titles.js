@@ -22,5 +22,9 @@ module.exports = new mongoose.Schema({
         type: Number,
         default: 0
     },
-	Abroad_t_title_content: String
+	Abroad_t_title_content: String,
+	Abroad_t_title_hot: {
+    	type: Number,
+		default: 0
+	}
 });

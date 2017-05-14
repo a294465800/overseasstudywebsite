@@ -128,11 +128,11 @@
                 {% for abroad_transparent in abroad_transparents %}
                 {% if loop.last %}
                 <li class="server_part clearfix" style="border: 0">
-                    <a class="server_head clearfix" href="">{{abroad_transparent.Abroad_t_name}}</a>
+                    <a class="server_head clearfix" href="/articles?id={{abroad_transparent._id.toString()}}" target="_blank">{{abroad_transparent.Abroad_t_name}}</a>
                     <ul class="server_list clearfix">
                         {% for abroad_t_title in abroad_t_titles %}
                         {% if abroad_t_title.abroad_transparent.Abroad_t_name == abroad_transparent.Abroad_t_name %}
-                        <li><a href="">{{abroad_t_title.Abroad_t_title}}</a></li>
+                        <li><a href="/articles?id={{abroad_t_title._id.toString()}}" target="_blank">{{abroad_t_title.Abroad_t_title}}</a></li>
                         {% else %}
                         {% endif %}
                         {% endfor %}
@@ -140,11 +140,11 @@
                 </li>
                 {% else %}
                 <li class="server_part clearfix">
-                    <a class="server_head clearfix" href="">{{abroad_transparent.Abroad_t_name}}</a>
+                    <a class="server_head clearfix" href="/articles?id={{abroad_transparent._id.toString()}}" target="_blank">{{abroad_transparent.Abroad_t_name}}</a>
                     <ul class="server_list clearfix">
                         {% for abroad_t_title in abroad_t_titles %}
                         {% if abroad_t_title.abroad_transparent.Abroad_t_name == abroad_transparent.Abroad_t_name %}
-                        <li><a href="">{{abroad_t_title.Abroad_t_title}}</a></li>
+                        <li><a href="/articles?id={{abroad_t_title._id.toString()}}" target="_blank">{{abroad_t_title.Abroad_t_title}}</a></li>
                         {% else %}
                         {% endif %}
                         {% endfor %}
