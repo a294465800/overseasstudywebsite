@@ -1620,26 +1620,26 @@ body{
 
 
 /*
-    电话咨询栏
+    留言咨询栏
 */
 .tel_call{
     position: fixed;
     z-index: 2;
     left: 0;
     top:40%;
-    width: 136px;
-    height: 220px;
+    width: 300px;
+    height: 300px;
     border: 2px solid #337ab7;
     border-left: none;
     background-color: #fff;
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
-    overflow: hidden;
+    padding: 30px 0 20px 10px;
 }
 .tel_call em{
     display: block;
-    position: relative;
-    left: 116px;
+    position: absolute;
+    right: 0;
     top: 0;
     width: 20px;
     height:20px;
@@ -1649,49 +1649,46 @@ body{
     background: none\9;
     filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/public/images/tel_close.png",  sizingMethod="scale")
 }
-.tel_call p{
-    text-align: center;
-    font-size: 18px;
-    color: #666;
-    font-weight: bold;
-    margin: 5px 0;
-    white-space: nowrap;
-}
-.tel_call i{
-    display: block;
-    margin: 5px auto;
-    width:120px;
-    height: 90px;
-    background: url("/public/images/tel.png");
-    background-size: cover;
-    background: none\9;
-    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/public/images/tel.png",  sizingMethod="scale")
-}
-.tel_call input{
+#tel_more {
+    display: none;
+    position: absolute;
     width: 120px;
-    margin: 0 0 0 6px;
-    font-size: 12px;
-    border: 1px solid #337ab7;
-}
-.tel_call input:focus{
-    outline: none;
-    border: 1px solid #259;
-}
-.tel_call .tel_on{
-    width: 100px;
-    height:25px;
-    margin: 10px auto;
+    height: 82px;
+    padding: 12px;
     background-color: #337ab7;
-    font-size: 15px;
-    font-weight: bold;
+    font: normal 16px "Microsoft YaHei";
     color: #fff;
-    line-height: 25px;
+    right: -140px;
+    top: -90px;
+}
+.tel_call em:hover #tel_more {
+    display: block;
+}
+#word {
+    box-sizing: border-box;
+    resize: none;
+    margin: 0 auto;
+    border: 1px solid #337ab7;
+    outline: none;
+    padding: 10px;
+}
+.tel_call input {
+    outline:none;
+    border: 1px solid #337ab7;
+    margin: 10px auto;
     text-align: center;
-    cursor: pointer;
+    padding: 5px;
 }
 
+#submit {
+    display: block;
+    background-color: #337ab7;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
 /*
-    电话图标栏
+    留言图标栏
 */
 .tel_logo{
     position: fixed;
@@ -1710,16 +1707,8 @@ body{
     margin: 5px 0 0;
     text-align: center;
     color: #fff;
-    font-size: 16px;
-    line-height: 18px;
+    font-size: 22px;
+    line-height: 46px;
+    width: 37px;
 }
-.tel_logo i{
-    display: block;
-    width: 30px;
-    height: 36px;
-    background: url("/public/images/tel_logo.png") no-repeat;
-    background-size: cover;
-    margin: 10px auto;
-    background: none\9;
-    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/public/images/tel_logo.png",  sizingMethod="scale")
-}
+

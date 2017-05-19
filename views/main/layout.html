@@ -124,7 +124,7 @@
                         <ul class="nav_list clearfix">
                             {% for nav_content in nav_contents %}
                             {% if nav_content.nav_title._id.toString() == nav_title._id.toString() %}
-                            <li><a href="{{nav_content.Nav_content_url}}">{{nav_content.Nav_content_name}}</a></li>
+                            <li><a href="/articles?id={{nav_content._id.toString()}}" target="_blank">{{nav_content.Nav_content_name}}</a></li>
                             {% else %}
                             {% endif %}
                             {% endfor %}
@@ -248,18 +248,23 @@
 </div>
 <!--友情链接结束-->
 
-<!--电话咨询栏开始-->
+<!--留言咨询栏开始-->
 <div class="tel_call" style="display: none">
-    <em></em>
-    <p>免费电话咨询</p>
-    <i></i>
-    <input type="text" name="number" placeholder="请输入你的电话号码">
-    <div class="tel_on">立即免费通话</div>
+    <em>
+        <div id="tel_more">留言后我们会马上联系您的~</div>
+    </em>
+    <form action="/leave_message" method="post">
+        <textarea name="word" id="word" cols="30" rows="5" placeholder="在这里写下你的问题~" maxlength="200" wrap="hard"></textarea>
+        <label for="name">您的姓名</label>
+        <input type="text" placeholder="请输入您的姓名" id="name">
+        <label for="tel">您的电话</label>
+        <input type="text" placeholder="请输入您的联系方式" id="tel">
+        <input type="submit" id="submit">
+    </form>
 </div>
 <div class="tel_logo">
-    <div class="tel_title">免费通话</div>
-    <i></i>
+    <div class="tel_title">留言</div>
 </div>
-<!--电话咨询栏结束-->
+<!--留言咨询栏结束-->
 </body>
 </html>

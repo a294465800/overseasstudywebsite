@@ -307,12 +307,4 @@ $(function () {
         });
     });
 
-/*
-    //登录后的悬浮列表
-    $username.mouseover(function () {
-        $username.find('#banlist').show();
-    });
-    $username.mouseout(function () {
-        $username.find('#banlist').hide();
-    });*/
 });
