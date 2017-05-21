@@ -1697,7 +1697,7 @@ router.post('/study_abroad/nav/content/edit',function (req, res) {
             Abroad_content_order: abroad_content_order,
             Abroad_content_markdown: abroad_content_markdown
         }).then(function () {
-            data.message = '文章标题修改成功！';
+            data.message = '文章修改成功！';
             data.url = '/admin/study_abroad/nav/content';
             res.render('admin/success',data);
         });
