@@ -307,4 +307,31 @@ $(function () {
         });
     });
 
+    /*
+    * 留言提交
+    * */
+    var $submit = $('#submit'),
+        $tel = $('#tel'),
+        $name = $('#name'),
+        $word = $('#word');
+
+	$submit.on('click',function () {
+        $.ajax({
+            type: 'post',
+            url: '/api/leave_message',
+            data: {
+                word: $word.val(),
+                name: $name.val(),
+                tel: $tel.val()
+            },
+            dataType: 'json',
+            success: function (res) {
+                alert(res.leave_message);
+	            $tel.val('');
+	            $name.val('');
+	            $word.val('');
+            }
+        });
+	});
+
 });

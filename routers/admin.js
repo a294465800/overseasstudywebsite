@@ -26,6 +26,7 @@ var express = require('express'),
     Abroad_transparent = require('../models/Abroad_transparent'),
     Abroad_t_title = require('../models/Abroad_t_title'),
     markdown = require('markdown').markdown,
+    Leave_message = require('../models/Leave_message'),
     data;
 
 /*
@@ -2861,6 +2862,35 @@ router.get('/abroad_transparent/content/delete',function (req, res) {
 			res.render('admin/success',data);
 		});
 	});
+});
+
+/*
+* 获取留言列表
+* */
+router.get('/leave_message',function (req, res) {
+
+	data.page = Number(req.query.page) || 1;
+	//获取数据库中的条数
+	Leave_message.count().then(function (count) {
+		calculatePages(count);
+		Leave_message.find().sort({_id:-1}).limit(data.limit).skip(data.skip).then(function (rs) {
+			data.forPage = 'leave_message';
+			data.leave_messages = rs;
+			res.render('admin/leave_message/leave_message_index', data);
+		});
+	});
+
+});
+
+/*
+* 查看留言
+* */
+router.get('/leave_message/check',function (req, res) {
+    var id = req.query.id;
+    Leave_message.findById(id).then(function (rs) {
+        data.leave_message = rs;
+        res.render('admin/leave_message/leave_message_check',data);
+    })
 });
 
 //返回出去给app.js

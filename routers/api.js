@@ -19,7 +19,8 @@ var User = require('../models/User'),
     School = require('../models/School'),
     Test = require('../models/Test'),
     Training = require('../models/Training'),
-    Training_content = require('../models/Training_content');
+	Leave_message = require('../models/Leave_message'),
+	Training_content = require('../models/Training_content');
 
 //返回统一格式
 var responseData;
@@ -305,6 +306,24 @@ router.post('/Abroad_article',function (req, res) {
 	    });
     }
 });
+
+/*
+ * 获取留言信息
+ * */
+router.post('/leave_message',function (req, res) {
+	var word = req.body.word || '',
+		name = req.body.name,
+		tel = req.body.tel;
+	new Leave_message({
+		name: name,
+		tel: tel,
+		leave_message: word
+	}).save().then(function () {
+		responseData.leave_message = '感谢您的留言！';
+		res.json(responseData);
+	})
+});
+
 
 //返回出去给app.js
 module.exports = router;
