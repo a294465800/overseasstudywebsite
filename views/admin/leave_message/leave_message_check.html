@@ -10,10 +10,11 @@
 
 <form role="form" method="post">
     <div class="form-group">
-        <p style="margin: 30px 0">姓名： {{leave_message.name}}</p>
-        <p style="margin: 30px 0">联系方式： {{leave_message.tel}}</p>
-        <p style="margin: 30px 0">留言： {{leave_message.word || '无'}}</p>
+        <p style="margin: 30px 0"><b>姓名：</b> {{leave_message.name}}</p>
+        <p style="margin: 30px 0"><b>联系方式： </b>{{leave_message.tel}}</p>
+        <p style="margin: 30px 0"><b>留言：</b> {{leave_message.word || '无'}}</p>
     </div>
+    <a href="javascript:window.history.back();">返回</a>
 </form>
 
 {% endblock %}

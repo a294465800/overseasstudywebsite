@@ -2888,9 +2888,37 @@ router.get('/leave_message',function (req, res) {
 router.get('/leave_message/check',function (req, res) {
     var id = req.query.id;
     Leave_message.findById(id).then(function (rs) {
+        if(!rs){
+            data.message = '留言不存在！';
+            res.render('admin/error',data);
+            return ;
+        }
         data.leave_message = rs;
         res.render('admin/leave_message/leave_message_check',data);
     })
+});
+
+/*
+* 删除留言
+* */
+router.get('/leave_message/delete',function (req, res) {
+   var id = req.query.id;
+   Leave_message.findById(id).then(function (rs) {
+	   if(!rs){
+		   data.message = '所要删除的留言不存在！';
+		   res.render('admin/error',data);
+		   return ;
+	   }
+	   Leave_message.remove({
+           _id: id
+       }).then(function () {
+           data.message = '留言删除成功！';
+           data.url = '/admin/leave_message';
+           res.render('admin/success',data);
+	   })
+
+   });
+
 });
 
 //返回出去给app.js

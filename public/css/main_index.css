@@ -1649,6 +1649,11 @@ body{
     background: none\9;
     filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/public/images/tel_close.png",  sizingMethod="scale")
 }
+.message_form {
+    width: 290px;
+    height: 260px;
+}
+
 #tel_more {
     display: none;
     position: absolute;
