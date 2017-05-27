@@ -2,8 +2,8 @@
  * Created by SHINING on 2017/3/19.
  */
 /*
-* 后台路由
-* */
+ * 后台路由
+ * */
 
 var express = require('express'),
     router = express.Router(),
