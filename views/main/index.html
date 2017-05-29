@@ -843,7 +843,6 @@
     <p>他们都在这里，你还要去哪儿学</p>
     <ul class="teacher_part line_1 clearfix">
         {% for teacher in teachers %}
-        {% if loop.index0 < 6 %}
         <li>
             <a href="{{teacher.Teacher_url}}">
                 <i class="teacher_img teacher_1" style="background: url('/public/images/teacher/{{teacher.Teacher_img}}') no-repeat;background-size: cover;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/public/images/teacher/{{teacher.Teacher_img}}',sizingMethod='scale')"></i>
@@ -851,39 +850,8 @@
                 <p>{{teacher.Teacher_intro}}</p>
             </a>
         </li>
-        {% else %}
-        {% endif %}
         {% endfor %}
     </ul>
-    <ul class="teacher_part line_2 clearfix">
-        {% for teacher in teachers %}
-        {% if loop.index0 >= 6 && loop.index0 < 13 %}
-        <li>
-            <a href="{{teacher.Teacher_url}}">
-                <i class="teacher_img teacher_1" style="background: url('/public/images/teacher/{{teacher.Teacher_img}}') no-repeat;background-size: cover;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/public/images/teacher/{{teacher.Teacher_img}}',sizingMethod='scale')"></i>
-                <h3>{{teacher.Teacher_name}}</h3>
-                <p>{{teacher.Teacher_intro}}</p>
-            </a>
-        </li>
-        {% else %}
-        {% endif %}
-        {% endfor %}
-    </ul>
-    <ul class="teacher_part line_1 clearfix">
-        {% for teacher in teachers %}
-        {% if loop.index0 >= 13 %}
-        <li>
-            <a href="{{teacher.Teacher_url}}">
-                <i class="teacher_img teacher_1" style="background: url('/public/images/teacher/{{teacher.Teacher_img}}') no-repeat;background-size: cover;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/public/images/teacher/{{teacher.Teacher_img}}',sizingMethod='scale')"></i>
-                <h3>{{teacher.Teacher_name}}</h3>
-                <p>{{teacher.Teacher_intro}}</p>
-            </a>
-        </li>
-        {% else %}
-        {% endif %}
-        {% endfor %}
-    </ul>
-    <a href="" class="teacher_more">查看更多</a>
 </section>
 <!--教师阵容结束-->
 

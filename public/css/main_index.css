@@ -1402,8 +1402,8 @@ body{
 .teacher .teacher_part .teacher_img{
     display: block;
     margin: 0 auto 0;
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
     border-radius: 100px;
 }
 .teacher ul h3{

@@ -109,7 +109,7 @@ router.use(function (req, res, next) {
     }).then(function (rs) {
         data.training_contents = rs;
     }).then(function () {
-        return Teacher.find({Teacher_order: {$lt: 19}}).sort({Teacher_order: 1});
+        return Teacher.find({Teacher_order: {$lt: 6}}).sort({Teacher_order: 1});
     }).then(function (rs) {
         data.teachers = rs;
 	    next();
